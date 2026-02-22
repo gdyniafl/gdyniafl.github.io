@@ -14,9 +14,72 @@
   <link rel="stylesheet" href="assets/dropdown/css/style.css">
   <link rel="stylesheet" href="assets/socicon/css/styles.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
-  <link rel="preload" href="https://fonts.googleapis.com/css?family=Bebas+Neue:400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bebas+Neue:400&display=swap"></noscript>
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+  
+  <style>
+    /* STYL NOWOCZESNEJ TABELI GFL */
+    .gfl-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .gfl-table thead {
+        background: #000;
+        color: #fff;
+    }
+    .gfl-table th, .gfl-table td {
+        padding: 15px;
+        text-align: center;
+        border-bottom: 1px solid #eee;
+    }
+    .gfl-table th {
+        font-family: 'Bebas Neue', sans-serif; /* Jeśli masz załadowaną, jak nie to systemowa */
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+    .gfl-table tbody tr:hover {
+        background-color: #f1f1f1;
+    }
+    .team-name {
+        text-align: left !important;
+        font-weight: bold;
+    }
+    .rank-col {
+        font-weight: bold;
+        color: #666;
+    }
+    .points-col {
+        font-weight: bold;
+        color: #0d6efd; /* Niebieski GFL */
+        font-size: 1.1rem;
+    }
+    
+    /* TERMINARZ */
+    .match-card {
+        background: #fff;
+        border: 1px solid #eee;
+        border-radius: 10px;
+        padding: 15px;
+        margin-bottom: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: 0.2s;
+    }
+    .match-card:hover {
+        transform: translateY(-2px);
+        border-color: #000;
+    }
+    .match-date {
+        font-size: 0.8rem;
+        color: #999;
+        text-transform: uppercase;
+    }
+  </style>
 </head>
 <body>
 
@@ -64,18 +127,120 @@
     </div>
 </section>
 
-<section class="content1" style="padding: 5rem 0; background-color: #ffffff;">
+<section class="content1" style="padding: 5rem 0; background-color: #f7f7f7;">
     <div class="container">
+        
+        <div class="row justify-content-center mb-4">
+            <div class="col-12 text-center">
+                <h3 class="display-5" style="font-weight: bold;">TABELA LIGOWA</h3>
+                <p class="mb-4">Aktualizacja: Przed sezonem</p>
+            </div>
+        </div>
+
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10">
-                <div class="item-wrapper" style="background: #f8f9fa; border-radius: 20px; padding: 40px; text-align: center;">
-                    <h3 class="mbr-section-title mbr-fonts-style mb-4 display-5"><strong>TABELA & WYNIKI</strong></h3>
-                    <p class="display-7">Sezon startuje w marcu. Tabela pojawi się tutaj po pierwszej kolejce.</p>
-                    <a class="btn btn-primary display-4" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank">DOŁĄCZ DO GRY</a>
+                <div class="table-responsive">
+                    <table class="gfl-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th style="text-align: left;">DRUŻYNA</th>
+                                <th>M</th>
+                                <th>W</th>
+                                <th>R</th>
+                                <th>P</th>
+                                <th>BRAMKI</th>
+                                <th>PKT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background-color: #e8f0fe;">
+                                <td class="rank-col">1</td>
+                                <td class="team-name">Czarodziejskie Lisy</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0:0</td>
+                                <td class="points-col">0</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-col">2</td>
+                                <td class="team-name">ANTD FC</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0:0</td>
+                                <td class="points-col">0</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-col">3</td>
+                                <td class="team-name">GKS Chylonia</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0:0</td>
+                                <td class="points-col">0</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-col">4</td>
+                                <td class="team-name">Kurnik Kasztelanki A</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0:0</td>
+                                <td class="points-col">0</td>
+                            </tr>
+                            <tr>
+                                <td class="rank-col">5</td>
+                                <td class="team-name">FC Karwiny</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0:0</td>
+                                <td class="points-col">0</td>
+                            </tr>
+                             <tr>
+                                <td class="rank-col">6</td>
+                                <td class="team-name">FC Marion Gdynia</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0:0</td>
+                                <td class="points-col">0</td>
+                            </tr>
+                             <tr>
+                                <td class="rank-col">7</td>
+                                <td class="team-name">Q-Stosz</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0:0</td>
+                                <td class="points-col">0</td>
+                            </tr>
+                             <tr>
+                                <td class="rank-col">8</td>
+                                <td class="team-name">J6K Witomino</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0:0</td>
+                                <td class="points-col">0</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>
+
+        </div>
 </section>
 
 <section data-bs-version="5.1" class="footer4 cid-uK1l7aKMna" id="footer04-elite" style="background-color: #232323; padding: 3rem 0;">

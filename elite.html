@@ -16,34 +16,49 @@
   <link rel="stylesheet" href="assets/theme/css/style.css">
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
   
-  <link href="https://fonts.googleapis.com/css?family=Bebas+Neue:400&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
   <style>
-    /* 1. NAPRAWIAMY CZCIONKI */
-    h1, h2, h3, h4, h5, .mbr-section-title, .display-1, .display-2, .display-5 {
+    /* 1. AGRESYWNY FIX CZCIONKI W MENU */
+    /* To wymusza czcionkę Bebas Neue na elementach menu */
+    .nav-link, .nav-item, .navbar-brand, .dropdown-item {
+        font-family: 'Bebas Neue', sans-serif !important;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 1.1rem !important;
+    }
+
+    /* Nagłówki na stronie */
+    h1, h2, h3, h4, h5, .mbr-section-title, .display-1, .display-2 {
         font-family: 'Bebas Neue', sans-serif !important;
         letter-spacing: 1px;
     }
+    
+    /* Reszta tekstów (zwykłe paragrafy) - czytelna czcionka systemowa */
+    p, .mbr-text, .display-7, td, th {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+    }
 
-    /* 2. KONTENER NA TABELĘ (DARK MODE HACK) */
+    /* 2. STYLE DLA WIDGETU (DARK MODE & UKŁAD) */
     .lobster-wrapper {
         width: 100%;
         min-height: 600px;
         overflow: hidden;
         border-radius: 15px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        background: #000; /* Tło pod spodem */
-        margin-bottom: 30px;
-        padding: 20px; /* Margines wewnątrz */
+        background: #000; /* Czarne tło pod widgetem */
+        margin-bottom: 50px;
+        padding: 20px;
         
-        /* MAGICZNY FILTR: Odwraca kolory tabeli z białego na czarny */
-        /* Jeśli tabela będzie zbyt "negatywowa", usuń tę linijkę poniżej */
+        /* MAGICZNY FILTR: Odwraca kolory (Białe tło -> Czarne tło) */
         filter: invert(0.92) hue-rotate(180deg) contrast(1.1); 
     }
-
-    /* Jeśli tabela ma obrazki/herby, spróbujmy je odwrócić z powrotem (może nie działać na skrypcie, ale warto spróbować) */
-    .lobster-wrapper img {
-        filter: invert(1);
+    
+    /* Ukrywamy ewentualne reklamy lub stopki z widgetu jeśli się da */
+    .lobster-wrapper iframe {
+        margin-bottom: -50px; 
     }
   </style>
 </head>
@@ -66,18 +81,18 @@
             </button>
             <div class="collapse navbar-collapse opacityScrollOff" id="navbarSupportedContent">
                 <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
-                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="aktualnosci.html" style="font-family: sans-serif !important;">Aktualności</a></li>
-                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="onas.html" style="font-family: sans-serif !important;">O nas</a></li>
+                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="aktualnosci.html">Aktualności</a></li>
+                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="onas.html">O nas</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link link dropdown-toggle text-black display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false" style="font-family: sans-serif !important;">Rozgrywki</a>
+                        <a class="nav-link link dropdown-toggle text-black display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Rozgrywki</a>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item show text-black text-primary display-4" href="elite.html" style="font-family: sans-serif !important;">Elite League</a>
-                            <a class="dropdown-item show text-black text-primary display-4" href="challenge.html" style="font-family: sans-serif !important;">Challenge League</a>
-                            <a class="dropdown-item show text-black text-primary display-4" href="aspire.html" style="font-family: sans-serif !important;">Aspire League</a>
+                            <a class="dropdown-item show text-black text-primary display-4" href="elite.html">Elite League</a>
+                            <a class="dropdown-item show text-black text-primary display-4" href="challenge.html">Challenge League</a>
+                            <a class="dropdown-item show text-black text-primary display-4" href="aspire.html">Aspire League</a>
                         </div>
                     </li>
-                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="regulamin.html" style="font-family: sans-serif !important;">Regulamin</a></li>
-                    <li class="nav-item"><a class="nav-link link show text-black display-4" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="font-family: sans-serif !important;">Zapisy</a></li>
+                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="regulamin.html">Regulamin</a></li>
+                    <li class="nav-item"><a class="nav-link link show text-black display-4" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank">Zapisy</a></li>
                 </ul>
             </div>
         </div>
@@ -87,28 +102,20 @@
 <section class="header19" style="background-color: #000; padding-top: 8rem; padding-bottom: 4rem;">
     <div class="container text-center">
         <h1 class="mbr-section-title mbr-fonts-style mb-4 display-1" style="color: #ffffff !important;"><strong>ELITE LEAGUE</strong></h1>
-        <p class="mbr-text mbr-fonts-style display-7" style="color: #ffffff; opacity: 0.8; font-family: sans-serif !important;">
+        <p class="mbr-text mbr-fonts-style display-7" style="color: #ffffff; opacity: 0.8;">
             Najwyższy poziom rozgrywkowy. Tutaj walczymy o tytuł Mistrza GFL.
         </p>
     </div>
 </section>
 
-<section class="content1" style="padding: 5rem 0; background-color: #111;">
-    <div class="container">
+<section class="content1" style="padding: 2rem 0; background-color: #111;">
+    <div class="container-fluid" style="max-width: 1400px;"> 
         
-        <div class="row justify-content-center mb-5">
-            <div class="col-12 text-center">
-                <h3 class="display-5 mb-2" style="color: #fff; font-weight: bold;">TABELA & WYNIKI</h3>
-                <p style="color: #999; font-family: sans-serif;">Automatyczna aktualizacja po każdym meczu</p>
-            </div>
-        </div>
-
         <div class="row justify-content-center">
-            <div class="col-12 col-lg-10">
+            <div class="col-12 col-lg-12">
                 <div class="lobster-wrapper">
                     
                     <div id="ll-schedule-embed" data-schedule-id="2576959" data-language-code="pl"></div>
-                    <script type="text/javascript" src="//scheduler.leaguelobster.com/static/embed.js"></script>
                     
                 </div>
             </div>
@@ -117,11 +124,13 @@
     </div>
 </section>
 
+<script type="text/javascript" src="//scheduler.leaguelobster.com/static/embed.js"></script>
+
 <section data-bs-version="5.1" class="footer4 cid-uK1l7aKMna" id="footer04-elite" style="background-color: #232323; padding: 3rem 0;">
     <div class="container text-white"><div class="row align-center text-center">
-        <div class="col-12 col-md-6 mb-4 mb-md-0"><h5 class="display-7"><strong>GDYNIA FOOTBALL LEAGUE</strong></h5><p class="display-7" style="font-family: sans-serif !important;">Profesjonalna liga amatorska dla pasjonatów futbolu w Gdyni. Dołącz do gry!</p></div>
+        <div class="col-12 col-md-6 mb-4 mb-md-0"><h5 class="display-7"><strong>GDYNIA FOOTBALL LEAGUE</strong></h5><p class="display-7">Profesjonalna liga amatorska dla pasjonatów futbolu w Gdyni. Dołącz do gry!</p></div>
         <div class="col-12 col-md-6 mb-4 mb-md-0"><h5><strong>SOCIAL MEDIA</strong></h5><a href="https://instagram.com/gdyniafl" target="_blank" style="color:#fff;"><span class="socicon socicon-instagram"></span> @gdyniafl</a></div>
-        <div class="col-12 mt-4"><p class="display-7" style="opacity: 0.6; font-family: sans-serif !important;">© Copyright 2026 GFL - All Rights Reserved</p></div>
+        <div class="col-12 mt-4"><p class="display-7" style="opacity: 0.6;">© Copyright 2026 GFL - All Rights Reserved</p></div>
     </div></div>
 </section>
 

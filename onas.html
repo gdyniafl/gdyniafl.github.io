@@ -2,58 +2,187 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>O nas - GFL</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
+  <title>O nas - Gdynia Football League</title>
+  
+  <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/socicon/css/styles.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+  
   <style>
-    .feature-box { background: #f8f9fa; padding: 30px; border-radius: 20px; height: 100%; border: 1px solid #eee; transition: 0.3s; }
-    .feature-box:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-    .location-tag { background: #000; color: #fff; padding: 10px 20px; border-radius: 50px; display: inline-block; margin: 5px; font-weight: bold; }
+    /* Dodatkowe style tylko dla tej podstrony */
+    .feature-box { 
+        background: #fff; 
+        padding: 40px 30px; 
+        border-radius: 4px; 
+        height: 100%; 
+        border-left: 5px solid #000; /* Czarny akcent z lewej */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        transition: 0.3s;
+    }
+    .feature-box:hover { 
+        transform: translateY(-5px); 
+        box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+        border-color: #0d6efd; /* Niebieski akcent po najechaniu */
+    }
+    .location-btn {
+        background: #232323;
+        color: #fff;
+        padding: 10px 25px;
+        margin: 5px;
+        border-radius: 50px;
+        font-weight: bold;
+        display: inline-block;
+        transition: 0.3s;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+    }
+    .location-btn:hover {
+        background: #0d6efd;
+        color: #fff;
+        text-decoration: none;
+    }
+    .ezi-photo {
+        width: 180px;
+        height: auto;
+        border-radius: 20px;
+        border: 4px solid #000;
+        box-shadow: 10px 10px 0px #eee;
+    }
   </style>
 </head>
-<body style="background-color: #fff;">
+<body>
 
-<section style="padding: 100px 0;">
+<section data-bs-version="5.1" class="menu menu6 cid-uofyC8wzPD" once="menu" id="menu06-onas">
+    <nav class="navbar navbar-dropdown opacityScrollOff navbar-expand-lg">
+        <div class="container">
+            <div class="navbar-brand">
+                <span class="navbar-logo">
+                    <a href="index.html">
+                        <img src="assets/images/logo-gfl.png-160x160.png" alt="GFL" style="height: 5rem;">
+                    </a>
+                </span>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <div class="hamburger">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+            </button>
+            <div class="collapse navbar-collapse opacityScrollOff" id="navbarSupportedContent">
+                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
+                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="aktualnosci.html">Aktualności</a></li>
+                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="onas.html">O nas</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link link dropdown-toggle text-black display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Rozgrywki</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item show text-black text-primary display-4" href="elite.html">Elite League</a>
+                            <a class="dropdown-item show text-black text-primary display-4" href="challenge.html">Challenge League</a>
+                            <a class="dropdown-item show text-black text-primary display-4" href="aspire.html">Aspire League</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="regulamin.html">Regulamin</a></li>
+                    <li class="nav-item"><a class="nav-link link show text-black display-4" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank">Zapisy</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</section>
+
+<section class="header19" style="background-color: #000; padding: 120px 0 60px 0;">
     <div class="container text-center">
-        <h1 class="display-2 mb-4"><strong>O NAS</strong></h1>
-        <p class="lead mb-5 mx-auto" style="max-width: 800px;">Gdynia Football League to amatorskie rozgrywki stworzone z pasji do futbolu. Tworzymy przestrzeń dla każdego – od ligowych wyjadaczy po niedzielnych pasjonatów.</p>
+        <h1 class="mbr-section-title mbr-fonts-style mb-3 display-2" style="color: #ffffff;"><strong>O NAS</strong></h1>
+        <p class="mbr-text mbr-fonts-style display-7" style="color: #ccc; max-width: 800px; margin: 0 auto;">
+            Tworzymy ligę, w której sami chcielibyśmy grać. Profesjonalna oprawa, luzacka atmosfera i rywalizacja na każdym poziomie.
+        </p>
+    </div>
+</section>
+
+<section style="background-color: #f7f7f7; padding: 80px 0;">
+    <div class="container">
+        <div class="row justify-content-center mb-5">
+            <div class="col-12 col-md-10 text-center">
+                <h4 class="mbr-section-subtitle display-5 mb-4"><strong>CZYM JEST GFL?</strong></h4>
+                <p class="display-7">Gdynia Football League (GFL) to coś więcej niż kopanie piłki. To projekt z pasji do futbolu. Nasza liga to przestrzeń dla drużyn, które chcą rywalizować w zdrowej atmosferze, bez względu na poziom zaawansowania. Gramy na trzech poziomach:</p>
+            </div>
+        </div>
         
-        <div class="row g-4 text-start">
+        <div class="row g-4">
             <div class="col-md-4">
                 <div class="feature-box">
-                    <h3><strong>ELITE</strong></h3>
-                    <p>Najwyższy poziom prestiżu. Tu grają najlepsi, a statystyki są śledzone z największą precyzją.</p>
+                    <h3 class="display-5 mb-3" style="color: #000;"><strong>ELITE</strong></h3>
+                    <p class="display-7">Najwyższy poziom prestiżu. Tu grają najlepsi, walka idzie o każdą piłkę, a statystyki są śledzone z największą precyzją. Mistrz zgarnia wszystko.</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="feature-box">
-                    <h3><strong>CHALLENGE</strong></h3>
-                    <p>Złoty środek. Ambitne drużyny walczące o awans do elity i miano królów strzelców.</p>
+                    <h3 class="display-5 mb-3" style="color: #000;"><strong>CHALLENGE</strong></h3>
+                    <p class="display-7">Złoty środek. Idealne miejsce dla ambitnych ekip walczących o awans do elity. Tutaj rodzą się przyszli mistrzowie.</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="feature-box">
-                    <h3><strong>ASPIRE</strong></h3>
-                    <p>Miejsce na rozwój i czystą radość z gry. Idealne dla nowych ekip i grup znajomych.</p>
+                    <h3 class="display-5 mb-3" style="color: #000;"><strong>ASPIRE</strong></h3>
+                    <p class="display-7">Miejsce na rozwój, debiut i czystą radość z gry. Idealne dla nowych ekip, grup znajomych i firm. Tu zaczyna się przygoda.</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section style="background-color: #f1f1f1; padding: 80px 0;">
+<section style="background-color: #fff; padding: 80px 0;">
     <div class="container text-center">
-        <h2 class="display-5 mb-5"><strong>GDZIE GRAMY?</strong></h2>
-        <div class="d-flex justify-content-center flex-wrap">
-            <div class="location-tag">📍 CHYLONIA</div>
-            <div class="location-tag">📍 WITOMINO</div>
-            <div class="location-tag">📍 OBLUŻE</div>
-            <div class="location-tag">📍 DĄBROWA</div>
-            <div class="location-tag">📍 KARWINY</div>
-            <div class="location-tag">📍 ŚRÓDMIEŚCIE</div>
+        <h2 class="display-2 mb-5"><strong>KTO ZA TYM STOI?</strong></h2>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-md-4 mb-4 mb-md-0">
+                <img src="assets/images/logo-gfl.png-160x160.png" alt="Ezi" class="ezi-photo">
+            </div>
+            <div class="col-md-6 text-md-start text-center">
+                <h3 class="display-5 mb-2"><strong>Ezechiel "Ezi"</strong></h3>
+                <h5 class="text-primary mb-3">ZAŁOŻYCIEL & GŁÓWNY ORGANIZATOR</h5>
+                <p class="display-7 mb-4">"GFL to projekt z pasji. Chcę wyciągnąć ludzi z domów na boiska. Dbam o to, żeby statystyki były aktualne, zdjęcia ostre, a atmosfera na meczach niepowtarzalna. Masz pytania? Pisz śmiało na Insta!"</p>
+                <div>
+                    <a class="btn btn-primary display-7" href="https://www.instagram.com/eziiu/" target="_blank">/eziiu</a>
+                    <a class="btn btn-black display-7" href="https://www.instagram.com/gdyniafl/" target="_blank">/gdyniafl</a>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
+<section style="background-color: #232323; padding: 60px 0; color: #fff;">
+    <div class="container text-center">
+        <h2 class="display-5 mb-4"><strong>GDZIE GRAMY?</strong></h2>
+        <p class="mb-4 display-7" style="opacity: 0.8;">Spotkasz nas na Orlikach w całej Gdyni:</p>
+        <div class="d-flex justify-content-center flex-wrap" style="gap: 10px;">
+            <span class="location-btn">📍 CHYLONIA</span>
+            <span class="location-btn">📍 WITOMINO</span>
+            <span class="location-btn">📍 OBŁUŻE</span>
+            <span class="location-btn">📍 DĄBROWA</span>
+            <span class="location-btn">📍 KARWINY</span>
+            <span class="location-btn">📍 ŚRÓDMIEŚCIE</span>
+        </div>
+    </div>
+</section>
+
+<section data-bs-version="5.1" class="footer4 cid-uK1l7aKMna" id="footer04-onas" style="background-color: #232323; padding: 3rem 0; border-top: 1px solid #333;">
+    <div class="container text-white"><div class="row align-center text-center">
+        <div class="col-12 col-md-6 mb-4 mb-md-0"><h5 class="display-7"><strong>GDYNIA FOOTBALL LEAGUE</strong></h5><p class="display-7">Profesjonalna liga amatorska dla pasjonatów futbolu w Gdyni. Dołącz do gry!</p></div>
+        <div class="col-12 col-md-6 mb-4 mb-md-0"><h5><strong>SOCIAL MEDIA</strong></h5><a href="https://instagram.com/gdyniafl" target="_blank" style="color:#fff;"><span class="socicon socicon-instagram"></span> @gdyniafl</a></div>
+        <div class="col-12 mt-4"><p class="display-7" style="opacity: 0.6;">© Copyright 2026 GFL - All Rights Reserved</p></div>
+    </div></div>
+</section>
+
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/smoothscroll/smooth-scroll.js"></script>
+<script src="assets/dropdown/js/navbar-dropdown.js"></script>
+<script src="assets/theme/js/script.js"></script>
 
 </body>
 </html>

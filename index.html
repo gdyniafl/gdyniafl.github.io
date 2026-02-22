@@ -23,6 +23,10 @@
 </head>
 <body>
   
+<audio id="gflLektor">
+    <source src="assets/voice_preview_eze.mp3" type="audio/mpeg">
+</audio>
+
 <section data-bs-version="5.1" class="menu menu6 cid-uofyC8wzPD" once="menu" id="menu06-2e">
     <nav class="navbar navbar-dropdown opacityScrollOff navbar-expand-lg">
         <div class="container">
@@ -66,7 +70,10 @@
                 <h1 class="mbr-section-title mbr-fonts-style mb-4 display-1" style="color: #ffffff !important;"><strong>GDYNIA FOOTBALL LEAGUE</strong></h1>
                 <h2 class="mbr-section-subtitle mbr-fonts-style mb-4 display-5" style="color: #ffffff !important; opacity: 0.9;">SEZON II - 2026</h2>
                 <div class="mbr-section-btn">
-                    <a class="btn btn-primary display-4" href="aktualnosci.html">AKTUALNOŚCI</a>
+                    <a class="btn btn-primary display-4" href="#" onclick="toggleLektor(event)" id="audioBtn">
+                        <span class="mobi-mbri mobi-mbri-play mbr-iconfont mbr-iconfont-btn" id="audioIcon"></span>
+                        POSŁUCHAJ ZAPOWIEDZI
+                    </a>
                     <a class="btn btn-white-outline display-4" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank">ZAPISZ DRUŻYNĘ</a>
                 </div>
             </div>
@@ -90,7 +97,7 @@
             </div>
             <div class="col-12 col-md-6 col-lg-4 item-mb">
                 <div class="item-wrapper">
-                    <h3 class="count mbr-fonts-style display-1">527</h3>
+                    <h3 class="count mbr-fonts-style display-1">536</h3>
                     <h4 class="card-title mbr-fonts-style display-5"><strong>Zawodników</strong></h4>
                 </div>
             </div>
@@ -127,9 +134,12 @@
             <div class="col-12 col-md-6 col-lg-4 mb-4">
                 <div class="item-wrapper" style="background: #ffffff; border: 2px solid #666; border-radius: 20px; padding: 25px; height: 100%; opacity: 0.85;">
                     <h5 class="mbr-fonts-style display-5 mb-3" style="color: #666; text-align: center;"><strong>SEZON 0</strong></h5>
-                    <p class="mbr-text display-7"><strong>ELITE LEAGUE:</strong><br>🏆 Kasztelanki<br>⚽ Olivier Pleskacz (38 goli)</p>
-                    <p class="mbr-text display-7"><strong>CHALLENGE LEAGUE:</strong><br>🏆 Kurnik Tuchomek<br>⚽ Michał Skoczek (44 goli)</p>
-                    <p class="mbr-text display-7"><strong>ASPIRE:</strong> 🏆 Mistrzovia A<br><strong>AGGRESSIVE:</strong> 🏆 ZKS Zagórzak Rumia</p>
+                    <p class="mbr-text display-7">
+                        <strong>ELITE LEAGUE:</strong><br>🏆 Kasztelanki | ⚽ Olivier Pleskacz (38)<br>
+                        <strong>CHALLENGE LEAGUE:</strong><br>🏆 Kurnik Ruchomej | ⚽ Michał Skoczek (44)<br>
+                        <strong>ASPIRE:</strong> 🏆 Mistrzovia A<br>
+                        <strong>AGGRESSIVE:</strong> 🏆 ZKS Zagórzak Rumia
+                    </p>
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-4 mb-4">
@@ -148,18 +158,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="list1 cid-uK1hjcitkP" id="list01-33" style="background-color: #f7f7f7; padding: 4rem 0;">    
-    <div class="container text-center">
-        <h4 class="mbr-section-title mbr-fonts-style mb-5 display-2"><strong>DLACZEGO MY?</strong></h4>
-        <div class="row justify-content-center"><div class="col-12 col-lg-10 m-auto text-start">
-            <div id="bootstrap-accordion_4" class="panel-group accordionStyles accordion" role="tablist">
-                <div class="card mb-3"><div class="card-header"><a role="button" class="panel-title collapsed" data-toggle="collapse" data-bs-toggle="collapse" href="#collapse1_4"><h6 class="display-5">Jak działa liga i kiedy gramy?</h6></a></div><div id="collapse1_4" class="panel-collapse collapse"><div class="panel-body display-7">🔸 Gramy systemem "Każdy z każdym".<br>🔸 Mecze w <strong>14-dniowych Oknach Meczowych</strong>.<br>🔸 Gospodarz ma 72h na propozycję terminu.</div></div></div>
-                <div class="card mb-3"><div class="card-header"><a role="button" class="panel-title collapsed" data-toggle="collapse" data-bs-toggle="collapse" href="#collapse2_4"><h6 class="display-5">O co gramy? (Nagrody)</h6></a></div><div id="collapse2_4" class="panel-collapse collapse"><div class="panel-body display-7">🔸 Mistrz Elite: Kolejny sezon 100% GRATIS.<br>🔸 Mistrz Challenge: 50% zniżki na awans.<br>🔸 Medale, puchary i statuetki dla Króla Strzelców.</div></div></div>
-            </div>
-        </div></div>
     </div>
 </section>
 
@@ -184,6 +182,27 @@
     </div></div>
 </section>
 
+<script>
+function toggleLektor(event) {
+    event.preventDefault();
+    var audio = document.getElementById('gflLektor');
+    var icon = document.getElementById('audioIcon');
+    var btn = document.getElementById('audioBtn');
+
+    if (audio.paused) {
+        audio.play();
+        icon.classList.remove('mobi-mbri-play');
+        icon.classList.add('mobi-mbri-pause');
+        btn.innerHTML = '<span class="mobi-mbri mobi-mbri-pause mbr-iconfont mbr-iconfont-btn"></span> ZATRZYMAJ';
+    } else {
+        audio.pause();
+        icon.classList.remove('mobi-mbri-pause');
+        icon.classList.add('mobi-mbri-play');
+        btn.innerHTML = '<span class="mobi-mbri mobi-mbri-play mbr-iconfont mbr-iconfont-btn"></span> POSŁUCHAJ ZAPOWIEDZI';
+    }
+}
+</script>
+
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/smoothscroll/smooth-scroll.js"></script>
 <script src="assets/dropdown/js/navbar-dropdown.js"></script>
@@ -191,5 +210,4 @@
 <script src="assets/theme/js/script.js"></script>
 
 </body>
-              </html>
-              
+</html>

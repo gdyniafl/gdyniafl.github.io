@@ -110,7 +110,99 @@
         </div>
     </div>
 </section>
+<section class="match-center-section" style="background-color: #111; padding: 60px 0; border-bottom: 1px solid #222;">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 d-flex justify-content-between align-items-end">
+                <div>
+                    <h4 class="mbr-section-subtitle mbr-fonts-style display-7" style="color: #44b1ff; letter-spacing: 2px; font-family: 'Bebas Neue', sans-serif;">TERMINARZ</h4>
+                    <h2 class="mbr-section-title mbr-fonts-style display-2" style="color: #fff; font-family: 'Bebas Neue', sans-serif;">NADCHODZĄCE MECZE</h2>
+                </div>
+            </div>
+        </div>
 
+        <div class="matches-scroll-container">
+            <div class="d-flex" id="matches-wrapper" style="gap: 20px; overflow-x: auto; padding-bottom: 15px;">
+                <div class="match-card-loading" style="color:#888; font-family: 'Bebas Neue', sans-serif;">Ładowanie terminarza...</div>
+            </div>
+        </div>
+        
+        <div class="row mt-4">
+             <div class="col-12 text-center">
+                 <a href="elite.html" class="btn btn-md btn-primary display-4" style="border-radius: 50px; font-family: 'Bebas Neue', sans-serif;">ZOBACZ PEŁNY TERMINARZ I TABELĘ</a>
+             </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .matches-scroll-container ::-webkit-scrollbar { height: 6px; }
+    .matches-scroll-container ::-webkit-scrollbar-track { background: #111; }
+    .matches-scroll-container ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+
+    .match-card {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 12px;
+        min-width: 260px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: 0.3s;
+    }
+    .match-card:hover { border-color: #44b1ff; transform: translateY(-3px); }
+    .match-info { font-size: 0.8rem; color: #888; margin-bottom: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+    .team-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 1.1rem; font-weight: 600; color: #fff; }
+    .team-score { color: #44b1ff; font-weight: bold; }
+</style>
+
+<script>
+    // 1. LINK DO ZAKŁADKI "MECZE" (CSV) Z ELITE
+    const eliteMatchesUrl = 'TU_WKLEJ_LINK_DO_ZAKLADKI_MECZE_ELITE_CSV';
+
+    async function loadMatchCenter() {
+        try {
+            const response = await fetch(eliteMatchesUrl);
+            const data = await response.text();
+            const rows = data.split('\n').slice(1);
+            const container = document.getElementById('matches-wrapper');
+            container.innerHTML = ''; 
+
+            const today = new Date();
+            today.setHours(0,0,0,0);
+
+            const matchesList = rows.map(row => {
+                const cols = row.trim().split('\t'); // Zakładając wklejenie tabulatorami z Excela lub split(',')
+                if(cols.length < 5) return null;
+                return { home: cols[0], away: cols[1], scoreH: cols[2], scoreA: cols[3], date: cols[4], round: cols[5] };
+            }).filter(m => m !== null && m.date);
+
+            const upcoming = matchesList.filter(m => new Date(m.date) >= today);
+            upcoming.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            let display = upcoming.length > 0 ? upcoming.slice(0, 8) : matchesList.slice(-5).reverse();
+
+            display.forEach(m => {
+                const dateObj = new Date(m.date);
+                const niceDate = dateObj.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long' });
+                const hasScore = (m.scoreH !== '' && m.scoreH !== undefined);
+                
+                let header = hasScore ? `RUNDA ${m.round} | WYNIK` : `RUNDA ${m.round} | DO ${niceDate}`;
+                let sH = hasScore ? m.scoreH : '-';
+                let sA = hasScore ? m.scoreA : '-';
+
+                container.innerHTML += `
+                    <div class="match-card">
+                        <div class="match-info">${header}</div>
+                        <div class="team-row"><span>${m.home}</span><span class="team-score">${sH}</span></div>
+                        <div class="team-row"><span>${m.away}</span><span class="team-score">${sA}</span></div>
+                    </div>`;
+            });
+        } catch (e) { console.error(e); }
+    }
+    loadMatchCenter();
+</script>
 <section class="content1 cid-tiktok-pov" style="background-color: #111; padding: 5rem 0;">
     <div class="container text-center">
         <h2 class="mbr-section-title mbr-fonts-style mb-4 display-2" style="color: #ffffff !important;"><strong>WIDZIMY WSZYSTKO</strong></h2>

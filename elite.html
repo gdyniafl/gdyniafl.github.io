@@ -2,11 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
-  <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
   <title>Elite League - GFL</title>
-  
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
@@ -15,51 +11,65 @@
   <link rel="stylesheet" href="assets/socicon/css/styles.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
   <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-
+  
   <style>
-    /* 1. AGRESYWNY FIX CZCIONKI W MENU */
-    /* To wymusza czcionkę Bebas Neue na elementach menu */
-    .nav-link, .nav-item, .navbar-brand, .dropdown-item {
-        font-family: 'Bebas Neue', sans-serif !important;
+    /* STYL TABELI PRO */
+    body { background-color: #000; color: #fff; }
+    
+    /* Wymuszenie czcionki Bebas w nagłówkach i menu */
+    h1, h2, h3, h4, h5, .display-1, .display-2, .display-4, .nav-link, .table-header { 
+        font-family: 'Bebas Neue', sans-serif !important; 
+        letter-spacing: 1px;
         text-transform: uppercase;
-        letter-spacing: 1px;
-        font-size: 1.1rem !important;
-    }
-
-    /* Nagłówki na stronie */
-    h1, h2, h3, h4, h5, .mbr-section-title, .display-1, .display-2 {
-        font-family: 'Bebas Neue', sans-serif !important;
-        letter-spacing: 1px;
     }
     
-    /* Reszta tekstów (zwykłe paragrafy) - czytelna czcionka systemowa */
-    p, .mbr-text, .display-7, td, th {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-    }
+    .nav-link { font-size: 1.1rem !important; }
 
-    /* 2. STYLE DLA WIDGETU (DARK MODE & UKŁAD) */
-    .lobster-wrapper {
-        width: 100%;
-        min-height: 600px;
-        overflow: hidden;
+    /* Kontener tabeli */
+    .custom-table-container {
+        background: #111;
         border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        background: #000; /* Czarne tło pod widgetem */
-        margin-bottom: 50px;
         padding: 20px;
-        
-        /* MAGICZNY FILTR: Odwraca kolory (Białe tło -> Czarne tło) */
-        filter: invert(0.92) hue-rotate(180deg) contrast(1.1); 
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        overflow-x: auto; 
     }
+
+    /* Sama tabela */
+    .gfl-table {
+        width: 100%;
+        border-collapse: collapse;
+        color: #fff;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    .gfl-table th {
+        background-color: #000;
+        color: #888;
+        padding: 15px;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        border-bottom: 2px solid #333;
+        font-weight: normal;
+    }
+
+    .gfl-table td {
+        padding: 15px;
+        border-bottom: 1px solid #222;
+        text-align: center;
+        vertical-align: middle;
+        font-size: 0.95rem;
+    }
+
+    .gfl-table tr:hover { background-color: #1a1a1a; transition: 0.2s; }
     
-    /* Ukrywamy ewentualne reklamy lub stopki z widgetu jeśli się da */
-    .lobster-wrapper iframe {
-        margin-bottom: -50px; 
-    }
+    /* Kolory i wyróżnienia */
+    .gfl-table tbody tr:first-child td { color: #44b1ff; font-weight: bold; } /* Lider */
+    .gfl-table tbody tr:nth-child(2) td, 
+    .gfl-table tbody tr:nth-child(3) td { color: #fff; } /* Podium */
+    
+    .team-col { text-align: left !important; font-weight: 600; color: #fff; font-size: 1rem; }
+    .pts-col { font-weight: bold; font-size: 1.1rem; color: #44b1ff; }
   </style>
 </head>
 <body>
@@ -99,32 +109,41 @@
     </nav>
 </section>
 
-<section class="header19" style="background-color: #000; padding-top: 8rem; padding-bottom: 4rem;">
-    <div class="container text-center">
-        <h1 class="mbr-section-title mbr-fonts-style mb-4 display-1" style="color: #ffffff !important;"><strong>ELITE LEAGUE</strong></h1>
-        <p class="mbr-text mbr-fonts-style display-7" style="color: #ffffff; opacity: 0.8;">
-            Najwyższy poziom rozgrywkowy. Tutaj walczymy o tytuł Mistrza GFL.
-        </p>
-    </div>
-</section>
-
-<section class="content1" style="padding: 2rem 0; background-color: #111;">
-    <div class="container-fluid" style="max-width: 1400px;"> 
+<section style="padding: 120px 0 80px 0;">
+    <div class="container">
+        <h1 class="text-center mb-5" style="font-size: 4rem;">ELITE LEAGUE</h1>
         
         <div class="row justify-content-center">
-            <div class="col-12 col-lg-12">
-                <div class="lobster-wrapper">
+            <div class="col-lg-10">
+                <div class="custom-table-container">
+                    <h3 class="table-header mb-4 text-center">TABELA LIGOWA</h3>
                     
-                    <div id="ll-schedule-embed" data-schedule-id="2576959" data-language-code="pl"></div>
+                    <table class="gfl-table" id="leagueTable">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th style="text-align: left;">DRUŻYNA</th>
+                                <th>M</th>
+                                <th>W</th>
+                                <th>R</th>
+                                <th>P</th>
+                                <th>BRAMKI</th>
+                                <th>PKT</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <tr><td colspan="8" class="text-center" style="padding: 40px;">Ładowanie tabeli...</td></tr>
+                        </tbody>
+                    </table>
                     
+                    <p class="text-center mt-4" style="color: #666; font-size: 0.8rem;">
+                        Aktualizacja automatyczna po wprowadzeniu wyników.
+                    </p>
                 </div>
             </div>
         </div>
-
     </div>
 </section>
-
-<script type="text/javascript" src="//scheduler.leaguelobster.com/static/embed.js"></script>
 
 <section data-bs-version="5.1" class="footer4 cid-uK1l7aKMna" id="footer04-elite" style="background-color: #232323; padding: 3rem 0;">
     <div class="container text-white"><div class="row align-center text-center">
@@ -133,6 +152,50 @@
         <div class="col-12 mt-4"><p class="display-7" style="opacity: 0.6;">© Copyright 2026 GFL - All Rights Reserved</p></div>
     </div></div>
 </section>
+
+<script>
+    // TWÓJ LINK CSV
+    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?output=csv';
+
+    async function loadTable() {
+        try {
+            const response = await fetch(sheetUrl);
+            const data = await response.text();
+            
+            const rows = data.split('\n').slice(1); // Pomijamy nagłówek
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = ''; 
+
+            rows.forEach(row => {
+                // Czyścimy i dzielimy po przecinkach
+                const cols = row.trim().split(',');
+                
+                // Sprawdzamy czy wiersz ma dane (Twoja tabela ma ok 10 kolumn)
+                if (cols.length >= 8) { 
+                    const tr = document.createElement('tr');
+                    
+                    // Układ Twojego Excela:
+                    // 0:Poz, 1:Drużyna, 2:Mecze(GP), 3:W, 4:L(Przegrane), 5:D(Remisy), 6:GF, 7:GA, 8:GD, 9:PTS
+                    // Uwaga: W Excelu Remisy(D) masz w kolumnie F (index 5), a Przegrane(L) w kolumnie E (index 4)
+                    // Na stronie chcemy kolejność: W - R - P
+                    
+                    tr.innerHTML = `
+                        <td>${cols[0]}</td>
+                        <td class="team-col">${cols[1]}</td>
+                        <td>${cols[2]}</td>
+                        <td>${cols[3]}</td>
+                        <td>${cols[5]}</td>                 <td>${cols[4]}</td>                 <td>${cols[6]}:${cols[7]}</td>      <td class="pts-col">${cols[9]}</td> `;
+                    tbody.appendChild(tr);
+                }
+            });
+        } catch (error) {
+            console.error('Błąd:', error);
+            document.getElementById('tableBody').innerHTML = '<tr><td colspan="8">Błąd ładowania danych.</td></tr>';
+        }
+    }
+
+    loadTable();
+</script>
 
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/smoothscroll/smooth-scroll.js"></script>

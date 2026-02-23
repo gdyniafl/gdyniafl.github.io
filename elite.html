@@ -16,13 +16,18 @@
   <style>
     body { background-color: #000; color: #fff; }
 
-    /* MENU I FONTY */
-    .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4, h1, h2, h3, .table-header, .round-header {
+    /* --- FIX MENU (TERAZ JEST IDENTYCZNE JAK INDEX) --- */
+    .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4 {
         font-family: 'Bebas Neue', sans-serif !important;
         text-transform: uppercase !important;
-        letter-spacing: 1px;
+        letter-spacing: 1px !important;
+        font-size: 1.2rem !important; /* Wymuszenie tej samej wielkości co index */
     }
-    .nav-link { font-size: 1.1rem !important; }
+    h1, h2, h3, h4, h5, .display-1, .display-2, .table-header, .round-header { 
+        font-family: 'Bebas Neue', sans-serif !important; 
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
 
     /* TABELA */
     .custom-table-container {
@@ -50,12 +55,9 @@
     .match-row:hover { background-color: #0a0a0a; }
     
     .match-date { width: 25%; font-size: 0.8rem; color: #666; text-transform: uppercase; }
-    
-    /* KOLORY MECZÓW */
     .match-duel { width: 50%; display: flex; justify-content: center; align-items: center; gap: 15px; font-weight: 600; font-size: 1rem; color: #ffffff !important; }
     .match-duel span { color: #ffffff !important; }
     .vs-sign { color: #444 !important; font-size: 0.8rem; margin: 0 5px; }
-    
     .match-score { width: 25%; text-align: right; font-weight: bold; font-size: 1.2rem; color: #44b1ff; }
 
     @media (max-width: 768px) {
@@ -144,16 +146,13 @@
 <script src="assets/theme/js/script.js"></script>
 
 <script>
-    // --- LINKI CSV (Twoje!) ---
-    // 1. Link do TABELI (z zakładki WWW)
+    // --- LINKI CSV ---
     const tableUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=1101831234&single=true&output=csv';
-    
-    // 2. Link do TERMINARZA (z zakładki MECZE)
     const scheduleUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv';
 
     async function loadEliteData() {
         try {
-            // --- ŁADOWANIE TABELI ---
+            // --- TABELA ---
             const resTable = await fetch(tableUrl);
             const dataTable = await resTable.text();
             const tableRows = dataTable.split('\n').slice(1);
@@ -164,7 +163,6 @@
                 let cols = row.trim().split(',');
                 if (cols.length < 2) cols = row.trim().split(';');
                 
-                // Sprawdzenie poprawności wiersza (czy to dane tabeli)
                 if (cols.length >= 8) { 
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
@@ -177,7 +175,7 @@
                 }
             });
 
-            // --- ŁADOWANIE TERMINARZA ---
+            // --- TERMINARZ ---
             const resSchedule = await fetch(scheduleUrl);
             const dataSchedule = await resSchedule.text();
             const schedRows = dataSchedule.split('\n').slice(1);
@@ -188,18 +186,14 @@
             schedRows.forEach(row => {
                 let c = row.trim().split(',');
                 if (c.length < 2) c = row.trim().split(';');
-                
-                // Szukamy wierszy z datą (kolumna 4) i rundą (kolumna 5)
                 if (c.length < 6 || !c[4] || c[4].length < 4) return;
 
-                const r = c[5]; // Numer Kolejki
+                const r = c[5]; // Kolejka
                 if (!rounds[r]) rounds[r] = [];
                 rounds[r].push({ h: c[0], a: c[1], sH: c[2], sA: c[3], date: c[4] });
             });
 
-            // Sortowanie po numerze kolejki
             Object.keys(rounds).sort((a,b) => a - b).forEach(r => {
-                // Data z pierwszego meczu
                 const dObj = new Date(rounds[r][0].date);
                 const niceDate = dObj.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long' });
 

@@ -12,18 +12,16 @@
     body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
     h1, h2, .nav-link, .dropdown-item, .table-title { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* --- NAWIGACJA (BIAŁE MENU I DROPDOWN) --- */
+    /* --- NAWIGACJA (BIAŁY HAMBURGER) --- */
     .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
     .navbar-brand img { height: 4.5rem !important; }
-    .navbar-nav { display: flex !important; align-items: center !important; flex-direction: row !important; }
+    .navbar-nav { display: flex !important; align-items: center !important; }
     .nav-item { list-style: none !important; margin-left: 20px !important; }
     .nav-link { color: #fff !important; font-size: 1.1rem !important; }
-    .nav-link:hover { color: #44b1ff !important; }
-
-    /* WYMUSZENIE BIAŁYCH KRESEK MENU */
+    
     .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
     .navbar-toggler-icon { 
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
     }
 
     .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
@@ -33,7 +31,7 @@
     /* --- NAGŁÓWEK --- */
     .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
 
-    /* --- TABELA (PRZYPIĘTA I WĄSKA NA TEL) --- */
+    /* --- TABELA (ULTRA-KOMPAKTOWA) --- */
     .table-container-main { padding: 40px 0 60px 0; }
     .gfl-card { background: #080808; border-radius: 20px; border: 1px solid #222; overflow: hidden; max-width: 1000px; margin: 0 auto; }
     .table-responsive-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
@@ -41,25 +39,46 @@
     .gfl-table { width: 100%; border-collapse: separate; border-spacing: 0; color: #fff; }
     .gfl-table thead th { background: #000; color: #666; padding: 15px 10px; font-size: 1rem; border-bottom: 1px solid #222; text-align: center; }
 
-    /* STICKY COLUMN */
+    /* STICKY COLUMN - PRZYPIĘCIE POZYCJI I DRUŻYNY */
     .sticky-pos { position: sticky !important; left: 0; background: #080808 !important; z-index: 5; width: 40px; }
     .sticky-team { position: sticky !important; left: 40px; background: #080808 !important; z-index: 5; text-align: left !important; min-width: 140px; border-right: 1px solid #222; }
 
     .gfl-table tbody td { padding: 15px 10px; border-bottom: 1px solid #141414; text-align: center; }
-    .col-highlight { color: #44b1ff; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.2rem; }
+    .col-highlight { color: #44b1ff !important; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.2rem; }
     .gfl-table tr:hover td { background: #111 !important; }
+
+    /* Klasy sterujące szerokością kolumn statystyk */
+    .col-stat { width: 45px; }
+    .col-goals { min-width: 80px; }
+    .col-pkt { width: 50px; }
 
     .footer { padding: 40px 0; border-top: 1px solid #111; text-align: center; color: #444; }
 
-    /* RESPONSYWNOŚĆ - ABY WIDZIEĆ WIĘCEJ KOLUMN */
+    /* --- POPRAWKI MOBILNE (UCIĘCIE SZPAR) --- */
     @media (max-width: 991px) {
         .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; display: none; }
         .navbar-nav.show { display: flex !important; }
         .nav-item { margin: 10px 0 !important; }
         
-        .gfl-table { min-width: 500px !important; font-size: 0.8rem !important; }
-        .sticky-team { min-width: 100px !important; max-width: 110px !important; white-space: normal !important; font-size: 0.75rem !important; }
-        .gfl-table td, .gfl-table th { padding: 10px 5px !important; }
+        /* Tabela ultra-wąska */
+        .gfl-table { min-width: 440px !important; font-size: 0.75rem !important; }
+        .gfl-table td, .gfl-table th { padding: 8px 2px !important; } /* Minimalny padding ucinający szpary */
+        
+        .sticky-pos { width: 28px !important; }
+        .sticky-team { 
+            left: 28px !important; 
+            min-width: 90px !important; 
+            max-width: 100px !important; 
+            white-space: normal !important; 
+            font-size: 0.7rem !important;
+            padding-left: 4px !important;
+        }
+
+        .col-stat { width: 28px !important; } /* Bardzo wąskie kolumny M, W, R, P */
+        .col-goals { min-width: 60px !important; } /* Węższe bramki */
+        .col-pkt { width: 35px !important; } /* Węższe punkty */
+        
+        .table-title { font-size: 1.4rem !important; }
     }
   </style>
 </head>
@@ -106,7 +125,12 @@
                         <tr>
                             <th class="sticky-pos">#</th>
                             <th class="sticky-team">DRUŻYNA</th>
-                            <th>M</th><th>W</th><th>R</th><th>P</th><th>BRAMKI</th><th>PKT</th>
+                            <th class="col-stat">M</th>
+                            <th class="col-stat">W</th>
+                            <th class="col-stat">R</th>
+                            <th class="col-stat">P</th>
+                            <th class="col-goals">BRAMKI</th>
+                            <th class="col-pkt">PKT</th>
                         </tr>
                     </thead>
                     <tbody id="table-data"></tbody>
@@ -135,13 +159,16 @@
                 html += `<tr>
                     <td class="sticky-pos" style="color:#44b1ff;">${col[0]}</td>
                     <td class="sticky-team">${col[1]}</td>
-                    <td>${col[2]}</td><td>${col[3]}</td><td>${col[5]}</td><td>${col[4]}</td>
-                    <td>${col[6]}:${col[7]}</td>
-                    <td class="col-highlight">${col[9]}</td>
+                    <td class="col-stat">${col[2]}</td>
+                    <td class="col-stat">${col[3]}</td>
+                    <td class="col-stat">${col[5]}</td>
+                    <td class="col-stat">${col[4]}</td>
+                    <td class="col-goals">${col[6]}:${col[7]}</td>
+                    <td class="col-highlight col-pkt">${col[9]}</td>
                 </tr>`;
             });
             document.getElementById('table-data').innerHTML = html;
-        } catch (e) { console.error("Błąd"); }
+        } catch (e) { console.error("Błąd ładowania danych."); }
     }
     loadData();
 </script>

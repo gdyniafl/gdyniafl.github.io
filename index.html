@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Gdynia Football League - Strona Główna</title>
+  <title>Elite League - GFL</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
   
@@ -16,85 +16,59 @@
   <style>
     body { background-color: #000; color: #fff; }
 
-    /* --- FONTY I MENU (SPÓJNE Z ELITE) --- */
-    .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4, .btn {
+    /* MENU I FONTY */
+    .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4, h1, h2, h3, .table-header, .round-header {
         font-family: 'Bebas Neue', sans-serif !important;
         text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-    }
-    h1, h2, h3, h4, h5, .display-1, .display-2, .display-5, .display-7 { 
-        font-family: 'Bebas Neue', sans-serif !important; 
         letter-spacing: 1px;
-        text-transform: uppercase;
     }
-    
-    /* --- HERO SECTION --- */
-    .header-section {
-        background-image: url('assets/images/background-gfl.jpg'); /* Tu wstaw swoje tło jeśli masz */
-        background-size: cover;
-        background-position: center;
-        background-color: #000; /* Fallback */
-        padding: 150px 0 100px 0;
-        text-align: center;
-        position: relative;
-    }
-    /* Przyciemnienie tła */
-    .header-overlay {
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.7);
-        z-index: 1;
-    }
-    .header-content {
-        position: relative;
-        z-index: 2;
-    }
+    .nav-link { font-size: 1.1rem !important; }
 
-    /* --- MATCH CENTER (WIDGET) --- */
-    .match-center-section {
-        background-color: #111;
-        padding: 60px 0;
-        border-bottom: 1px solid #222;
-        border-top: 1px solid #222;
+    /* TABELA */
+    .custom-table-container {
+        background: #111; border-radius: 15px; padding: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow-x: auto; position: relative; margin-bottom: 60px;
     }
-    .matches-scroll-container {
-        width: 100%;
-        overflow-x: auto;
-        padding-bottom: 20px;
-        /* Ukrywanie paska scrolla, ale zachowanie funkcji */
-        scrollbar-width: thin;
-        scrollbar-color: #333 #111;
-    }
-    .match-card {
-        background: #1a1a1a;
-        border: 1px solid #333;
-        border-radius: 12px;
-        min-width: 280px;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        transition: 0.3s;
-    }
-    .match-card:hover { border-color: #44b1ff; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(68, 177, 255, 0.1); }
-    
-    .match-info { font-size: 0.8rem; color: #888; margin-bottom: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-    .team-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 1.1rem; font-weight: 600; color: #fff; }
-    .team-score { color: #44b1ff; font-weight: bold; }
-    
-    /* --- SEKCJA O NAS --- */
-    .features-section { padding: 80px 0; background-color: #000; }
-    .card-wrapper { background: #111; padding: 30px; border-radius: 10px; height: 100%; border: 1px solid #222; transition: 0.3s; }
-    .card-wrapper:hover { border-color: #44b1ff; }
-    .card-box h4 { margin-bottom: 15px; color: #fff; }
-    .card-box p { color: #aaa; font-family: sans-serif !important; text-transform: none; letter-spacing: 0; line-height: 1.5; }
-    .mbr-iconfont { font-size: 3rem; color: #44b1ff; margin-bottom: 20px; }
+    .gfl-table { width: 100%; border-collapse: separate; border-spacing: 0; white-space: nowrap; font-family: sans-serif; }
+    .gfl-table th { background: #000; color: #888; padding: 15px; border-bottom: 2px solid #333; }
+    .gfl-table td { padding: 15px; border-bottom: 1px solid #222; text-align: center; color: #fff; }
+    .gfl-table tr:hover td { background-color: #1a1a1a; }
+    .gfl-table tbody tr:first-child td { color: #44b1ff; font-weight: bold; }
+    .pts-col { font-weight: bold; color: #44b1ff; font-size: 1.1rem; }
+    .sticky-col { position: sticky; left: 0; background: #111; z-index: 10; border-right: 1px solid #333; text-align: left !important; font-weight: 600; color: #fff; }
 
+    /* TERMINARZ - FIX WIDOCZNOŚCI */
+    .schedule-container { max-width: 900px; margin: 0 auto; }
+    .round-header {
+        background: #1a1a1a; color: #44b1ff; padding: 15px; margin-top: 40px; margin-bottom: 15px;
+        border-radius: 8px; text-align: center; border: 1px solid #333; font-size: 1.5rem;
+    }
+    .match-row {
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 15px 10px; border-bottom: 1px solid #222; transition: 0.2s; font-family: sans-serif;
+    }
+    .match-row:hover { background-color: #0a0a0a; }
+    
+    .match-date { width: 25%; font-size: 0.8rem; color: #666; text-transform: uppercase; }
+    
+    /* TU JEST FIX KOLORÓW - WYMUSZENIE BIAŁEGO */
+    .match-duel { width: 50%; display: flex; justify-content: center; align-items: center; gap: 15px; font-weight: 600; font-size: 1rem; color: #ffffff !important; }
+    .match-duel span { color: #ffffff !important; }
+    .vs-sign { color: #444 !important; font-size: 0.8rem; margin: 0 5px; }
+    
+    .match-score { width: 25%; text-align: right; font-weight: bold; font-size: 1.2rem; color: #44b1ff; }
+
+    @media (max-width: 768px) {
+        .custom-table-container { padding: 10px; }
+        .gfl-table th, .gfl-table td { padding: 10px 6px; font-size: 0.8rem; }
+        .match-row { flex-direction: column; text-align: center; gap: 8px; }
+        .match-date, .match-duel, .match-score { width: 100%; text-align: center; }
+    }
   </style>
 </head>
 <body>
 
-<section data-bs-version="5.1" class="menu menu6 cid-uofyC8wzPD" once="menu" id="menu06-index">
+<section data-bs-version="5.1" class="menu menu6 cid-uofyC8wzPD" once="menu" id="menu06-elite">
     <nav class="navbar navbar-dropdown opacityScrollOff navbar-expand-lg">
         <div class="container">
             <div class="navbar-brand">
@@ -102,7 +76,7 @@
                     <a href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL" style="height: 5rem;"></a>
                 </span>
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="hamburger"><span></span><span></span><span></span><span></span></div>
             </button>
             <div class="collapse navbar-collapse opacityScrollOff" id="navbarSupportedContent">
@@ -125,88 +99,31 @@
     </nav>
 </section>
 
-<section class="header-section">
-    <div class="header-overlay"></div>
-    <div class="container header-content">
-        <div class="row justify-content-center">
-            <div class="col-12 col-lg-8">
-                <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>GDYNIA FOOTBALL LEAGUE</strong></h1>
-                <p class="mbr-text mbr-fonts-style display-5 mb-4" style="color: #ccc;">
-                    Więcej niż piłka. Profesjonalne rozgrywki amatorskie.
-                </p>
-                <div class="mbr-section-btn mt-3">
-                    <a class="btn btn-primary display-4" href="elite.html">ZOBACZ TABELE</a>
-                    <a class="btn btn-white-outline display-4" href="onas.html">O NAS</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="match-center-section">
+<section style="padding: 120px 0 80px 0;">
     <div class="container">
-        <div class="row mb-4">
-            <div class="col-12 d-flex justify-content-between align-items-end">
-                <div>
-                    <h4 class="mbr-section-subtitle mbr-fonts-style display-7" style="color: #44b1ff; letter-spacing: 2px;">ELITE LEAGUE</h4>
-                    <h2 class="mbr-section-title mbr-fonts-style display-2">MECZE</h2>
-                </div>
-                <div class="d-none d-md-block">
-                     <a href="elite.html" class="btn btn-sm btn-warning display-4" style="border-radius: 50px;">PEŁNY TERMINARZ ></a>
-                </div>
-            </div>
-        </div>
-
-        <div class="matches-scroll-container">
-            <div class="d-flex" id="matches-wrapper" style="gap: 20px;">
-                <div class="match-card-loading" style="color:#888; font-family: 'Bebas Neue', sans-serif; padding: 20px;">
-                    Ładowanie meczów...
-                </div>
-            </div>
-        </div>
+        <h1 class="text-center mb-3" style="font-size: 4rem;">ELITE LEAGUE</h1>
+        <p class="text-center mb-5" style="color: #ccc;">Najwyższy poziom rozgrywkowy. Tutaj walczymy o tytuł Mistrza GFL.</p>
         
-        <div class="row mt-4 d-md-none">
-             <div class="col-12 text-center">
-                 <a href="elite.html" class="btn btn-sm btn-warning display-4" style="border-radius: 50px;">ZOBACZ TABELĘ</a>
-             </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="custom-table-container">
+                    <h3 class="table-header mb-4 text-center">TABELA LIGOWA</h3>
+                    <table class="gfl-table">
+                        <thead>
+                            <tr><th>#</th><th class="sticky-col">DRUŻYNA</th><th>M</th><th>W</th><th>R</th><th>P</th><th>BRAMKI</th><th>PKT</th></tr>
+                        </thead>
+                        <tbody id="tableBody"><tr><td colspan="8" style="padding:30px;">Ładowanie tabeli...</td></tr></tbody>
+                    </table>
+                    <p class="text-center mt-3 d-block d-md-none" style="color: #666; font-size: 0.7rem;">Przesuń tabelę w prawo</p>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
 
-<section class="features-section">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card-wrapper">
-                    <div class="card-box">
-                        <span class="mbr-iconfont mobi-mbri-users mobi-mbri"></span>
-                        <h4 class="card-title mbr-fonts-style display-5">SPOŁECZNOŚĆ</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            GFL to nie tylko mecze. To setki zawodników, pasjonatów i kibiców tworzących wyjątkową atmosferę.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card-wrapper">
-                    <div class="card-box">
-                        <span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
-                        <h4 class="card-title mbr-fonts-style display-5">PROFESJONALIZM</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            Obsługa sędziowska, statystyki online, relacje foto i wideo. Dbamy o każdy detal rozgrywek.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card-wrapper">
-                    <div class="card-box">
-                        <span class="mbr-iconfont mobi-mbri-trophy mobi-mbri"></span>
-                        <h4 class="card-title mbr-fonts-style display-5">RYWALIZACJA</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            Trzy poziomy rozgrywkowe: Elite, Challenge i Aspire. Walcz o awans i tytuł Mistrza Gdyni.
-                        </p>
-                    </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h3 class="table-header text-center" style="border-top: 1px solid #333; padding-top: 50px;">TERMINARZ ROZGRYWEK</h3>
+                <div id="full-schedule-container" class="schedule-container">
+                    <div class="text-center" style="color: #666; margin-top:20px;">Ładowanie terminarza...</div>
                 </div>
             </div>
         </div>
@@ -215,23 +132,8 @@
 
 <section class="footer4 cid-uK1l7aKMna" style="background-color: #232323; padding: 3rem 0;">
     <div class="container text-white text-center">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-6 mb-4">
-                <h5 class="display-7 mb-3"><strong>GDYNIA FOOTBALL LEAGUE</strong></h5>
-                <p class="small text-muted" style="font-family: sans-serif;">Profesjonalna liga amatorska dla pasjonatów futbolu w Gdyni. Dołącz do gry!</p>
-            </div>
-            <div class="col-12 col-md-6 mb-4">
-                <h5 class="display-7 mb-3"><strong>SOCIAL MEDIA</strong></h5>
-                <a href="https://instagram.com/gdyniafl" target="_blank" style="color:#fff; text-decoration: none; font-size: 1.2rem;">
-                    <span class="socicon socicon-instagram"></span> @gdyniafl
-                </a>
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col-12">
-                <p class="small text-muted" style="font-family: sans-serif;">© Copyright 2026 GFL - All Rights Reserved</p>
-            </div>
-        </div>
+        <h5 class="mb-2">GDYNIA FOOTBALL LEAGUE</h5>
+        <p class="small text-muted">© 2026 GFL</p>
     </div>
 </section>
 
@@ -242,77 +144,91 @@
 <script src="assets/theme/js/script.js"></script>
 
 <script>
-    // --- SKRYPT MATCH CENTER ---
-    // Link do zakładki MECZE w Twoim Google Sheet (nowy link)
-    const matchesUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv';
+    // -------------------------------------------------------------------------
+    // !!! WAŻNE: TU MUSZĄ BYĆ DWA RÓŻNE LINKI !!!
+    // -------------------------------------------------------------------------
+    
+    // 1. LINK DO TABELI (Zakładka WWW - tam gdzie masz posortowane drużyny)
+    // Jeśli tabela jest pusta, to znaczy, że tu jest zły link (np. do zakładki Mecze)
+    const tableUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?output=csv';
+    
+    // 2. LINK DO TERMINARZA (Zakładka MECZE - tam gdzie masz listę spotkań)
+    const scheduleUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv';
 
-    async function loadMatchCenter() {
+    async function loadEliteData() {
         try {
-            const response = await fetch(matchesUrl);
-            const data = await response.text();
-            const rows = data.split('\n').slice(1);
-            const container = document.getElementById('matches-wrapper');
-            container.innerHTML = ''; 
+            // --- TABELA ---
+            const resTable = await fetch(tableUrl);
+            const dataTable = await resTable.text();
+            const tableRows = dataTable.split('\n').slice(1);
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = ''; 
 
-            const today = new Date();
-            today.setHours(0,0,0,0);
-
-            const matchesList = rows.map(row => {
-                const cols = row.trim().split(',');
-                // Układ: 0:Gosp, 1:Gość, 2:GH, 3:GA, 4:Deadline, 5:Runda
-                if(cols.length < 5) return null;
-                return { 
-                    home: cols[0], 
-                    away: cols[1], 
-                    scoreH: cols[2], 
-                    scoreA: cols[3], 
-                    date: cols[4], 
-                    round: cols[5] 
-                };
-            }).filter(m => m !== null && m.date);
-
-            // 1. Filtrujemy mecze, których deadline jest w przyszłości lub dzisiaj
-            const upcoming = matchesList.filter(m => {
-                const deadline = new Date(m.date);
-                return deadline >= today;
-            });
-            
-            // 2. Sortujemy od najbliższej daty
-            upcoming.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-            // 3. Jeśli nie ma przyszłych, pokaż 5 ostatnich z wynikami
-            let display = upcoming.length > 0 ? upcoming.slice(0, 10) : matchesList.filter(m => m.scoreH).slice(-5).reverse();
-
-            if (display.length === 0) {
-                 container.innerHTML = '<div style="color:#666; padding:20px;">Brak zaplanowanych meczów.</div>';
-                 return;
-            }
-
-            display.forEach(m => {
-                const dateObj = new Date(m.date);
-                const niceDate = dateObj.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long' });
-                const hasScore = (m.scoreH !== '' && m.scoreH !== undefined);
+            tableRows.forEach(row => {
+                let cols = row.trim().split(',');
+                if (cols.length < 2) cols = row.trim().split(';'); // Obsługa polskich Exceli
                 
-                let header = hasScore ? `RUNDA ${m.round} | WYNIK` : `RUNDA ${m.round} | DO ${niceDate}`;
-                let sH = hasScore ? m.scoreH : '-';
-                let sA = hasScore ? m.scoreA : '-';
-
-                // Kolorowanie wyniku (jeśli jest)
-                let scoreColor = hasScore ? 'color:#44b1ff;' : 'color:#555;';
-
-                container.innerHTML += `
-                    <div class="match-card">
-                        <div class="match-info">${header}</div>
-                        <div class="team-row"><span>${m.home}</span><span class="team-score" style="${scoreColor}">${sH}</span></div>
-                        <div class="team-row"><span>${m.away}</span><span class="team-score" style="${scoreColor}">${sA}</span></div>
-                    </div>`;
+                // Jeśli wiersz ma za mało danych (np. puste wiersze), pomiń
+                if (cols.length >= 8) { 
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${cols[0]}</td>
+                        <td class="sticky-col">${cols[1]}</td>
+                        <td>${cols[2]}</td><td>${cols[3]}</td><td>${cols[5]}</td><td>${cols[4]}</td>
+                        <td>${cols[6]}:${cols[7]}</td>
+                        <td class="pts-col">${cols[9]}</td>`;
+                    tbody.appendChild(tr);
+                }
             });
-        } catch (e) { 
-            console.error(e); 
-            document.getElementById('matches-wrapper').innerHTML = 'Błąd wczytywania.';
-        }
+
+            // --- TERMINARZ ---
+            const resSchedule = await fetch(scheduleUrl);
+            const dataSchedule = await resSchedule.text();
+            const schedRows = dataSchedule.split('\n').slice(1);
+            const schedContainer = document.getElementById('full-schedule-container');
+            schedContainer.innerHTML = '';
+
+            let rounds = {};
+            schedRows.forEach(row => {
+                let c = row.trim().split(',');
+                if (c.length < 2) c = row.trim().split(';');
+                
+                // Ignorujemy wiersze, które nie mają daty (kolumna 4)
+                if (c.length < 6 || !c[4] || c[4].length < 4) return;
+
+                const r = c[5]; // Numer kolejki
+                if (!rounds[r]) rounds[r] = [];
+                rounds[r].push({ h: c[0], a: c[1], sH: c[2], sA: c[3], date: c[4] });
+            });
+
+            Object.keys(rounds).sort((a,b) => a - b).forEach(r => {
+                const dObj = new Date(rounds[r][0].date);
+                const niceDate = dObj.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long' });
+
+                const rDiv = document.createElement('div');
+                rDiv.className = 'round-header';
+                rDiv.innerHTML = `KOLEJKA ${r} <span style="font-size:0.8rem; display:block; margin-top:5px; opacity:0.7;">DO ${niceDate}</span>`;
+                schedContainer.appendChild(rDiv);
+
+                rounds[r].forEach(m => {
+                    const hasScore = (m.sH && m.sH.trim() !== '');
+                    let scoreHtml = hasScore ? `<span style="color:#44b1ff;">${m.sH}:${m.sA}</span>` : `<span class="score-empty">-:-</span>`;
+
+                    const mDiv = document.createElement('div');
+                    mDiv.className = 'match-row';
+                    mDiv.innerHTML = `
+                        <div class="match-date">DO: ${m.date}</div>
+                        <div class="match-duel">
+                            <span>${m.h}</span><span class="vs-sign">v</span><span>${m.a}</span>
+                        </div>
+                        <div class="match-score">${scoreHtml}</div>`;
+                    schedContainer.appendChild(mDiv);
+                });
+            });
+
+        } catch (error) { console.error('Błąd:', error); }
     }
-    loadMatchCenter();
+    loadEliteData();
 </script>
 
 </body>

@@ -15,108 +15,291 @@
   
   <style>
     body { background-color: #000; color: #fff; }
-    .nav-link, .navbar-brand, .display-4, h1, h2, h3, .table-header, .round-header {
+
+    /* --- MENU I FONTY --- */
+    .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4 {
         font-family: 'Bebas Neue', sans-serif !important;
-        text-transform: uppercase;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        font-size: 1.1rem !important;
+    }
+    h1, h2, h3, h4, h5, .display-1, .display-2, .table-header, .round-header { 
+        font-family: 'Bebas Neue', sans-serif !important; 
         letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+    
+    /* --- TABELA --- */
+    .custom-table-container {
+        background: #111;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        overflow-x: auto;
+        position: relative;
+        margin-bottom: 60px;
+    }
+    .gfl-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        color: #fff;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        white-space: nowrap;
+    }
+    .gfl-table th {
+        background-color: #000;
+        color: #888;
+        padding: 15px;
+        font-size: 0.85rem;
+        border-bottom: 2px solid #333;
+    }
+    .gfl-table td {
+        padding: 15px;
+        border-bottom: 1px solid #222;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .gfl-table tr:hover td { background-color: #1a1a1a; }
+    
+    /* Kolory tabeli */
+    .gfl-table tbody tr:first-child td { color: #44b1ff; font-weight: bold; }
+    .pts-col { font-weight: bold; font-size: 1.1rem; color: #44b1ff; }
+
+    /* Sticky Column (Nazwa drużyny przyklejona) */
+    .sticky-col {
+        position: sticky;
+        left: 0;
+        background-color: #111;
+        z-index: 10;
+        border-right: 1px solid #333;
+        text-align: left !important;
+        font-weight: 600;
+        color: #fff;
     }
 
-    /* TABELA */
-    .custom-table-container { background: #111; border-radius: 15px; padding: 20px; margin-bottom: 50px; overflow-x: auto; }
-    .gfl-table { width: 100%; border-collapse: separate; border-spacing: 0; white-space: nowrap; font-family: sans-serif; }
-    .gfl-table th { background: #000; color: #888; padding: 15px; font-size: 0.8rem; border-bottom: 2px solid #333; }
-    .gfl-table td { padding: 15px; border-bottom: 1px solid #222; text-align: center; }
-    .sticky-col { position: sticky; left: 0; background: #111; z-index: 5; text-align: left !important; font-weight: bold; border-right: 1px solid #333; }
-    .pts-col { font-weight: bold; color: #44b1ff; font-size: 1.1rem; }
-
-    /* TERMINARZ */
-    .round-header { background: #1a1a1a; color: #44b1ff; padding: 15px; margin: 40px 0 15px; border-radius: 8px; text-align: center; border: 1px solid #333; font-size: 1.6rem; }
-    .match-row { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: 1px solid #222; font-family: sans-serif; }
-    .match-date { width: 20%; color: #666; font-size: 0.8rem; }
-    .match-duel { width: 60%; display: flex; justify-content: center; gap: 15px; font-weight: bold; }
-    .match-score { width: 20%; text-align: right; font-weight: bold; color: #44b1ff; }
+    /* --- TERMINARZ --- */
+    .schedule-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    .round-header {
+        background-color: #1a1a1a;
+        color: #44b1ff;
+        padding: 15px;
+        margin-top: 40px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        text-align: center;
+        border: 1px solid #333;
+        font-size: 1.5rem;
+    }
+    .match-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 10px;
+        border-bottom: 1px solid #222;
+        transition: 0.2s;
+        font-family: sans-serif;
+    }
+    .match-row:hover { background-color: #0a0a0a; }
+    
+    .match-date { width: 25%; font-size: 0.8rem; color: #666; text-transform: uppercase; }
+    .match-duel { width: 50%; display: flex; justify-content: center; align-items: center; gap: 15px; font-weight: 600; font-size: 1rem; }
+    .match-score { width: 25%; text-align: right; font-weight: bold; font-size: 1.2rem; color: #44b1ff; }
+    .score-empty { color: #333; font-size: 1rem; }
 
     @media (max-width: 768px) {
-        .match-row { flex-direction: column; text-align: center; gap: 5px; }
-        .match-duel { flex-direction: column; gap: 2px; }
+        .custom-table-container { padding: 10px; }
+        .gfl-table th, .gfl-table td { padding: 10px 6px; font-size: 0.8rem; }
+        .match-row { flex-direction: column; text-align: center; gap: 8px; padding: 20px 10px; }
         .match-date, .match-duel, .match-score { width: 100%; text-align: center; }
     }
   </style>
 </head>
 <body>
 
-<section style="padding: 120px 0 60px 0;">
+<section data-bs-version="5.1" class="menu menu6 cid-uofyC8wzPD" once="menu" id="menu06-elite">
+    <nav class="navbar navbar-dropdown opacityScrollOff navbar-expand-lg">
+        <div class="container">
+            <div class="navbar-brand">
+                <span class="navbar-logo">
+                    <a href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL" style="height: 5rem;"></a>
+                </span>
+            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <div class="hamburger"><span></span><span></span><span></span><span></span></div>
+            </button>
+            <div class="collapse navbar-collapse opacityScrollOff" id="navbarSupportedContent">
+                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
+                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="aktualnosci.html">Aktualności</a></li>
+                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="onas.html">O nas</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link link dropdown-toggle text-black display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" aria-expanded="false">Rozgrywki</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item show text-black text-primary display-4" href="elite.html">Elite League</a>
+                            <a class="dropdown-item show text-black text-primary display-4" href="challenge.html">Challenge League</a>
+                            <a class="dropdown-item show text-black text-primary display-4" href="aspire.html">Aspire League</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="regulamin.html">Regulamin</a></li>
+                    <li class="nav-item"><a class="nav-link link show text-black display-4" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank">Zapisy</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</section>
+
+<section style="padding: 120px 0 80px 0;">
     <div class="container">
-        <h1 class="text-center mb-5" style="font-size: 4rem;">ELITE LEAGUE</h1>
+        <h1 class="text-center mb-3" style="font-size: 4rem;">ELITE LEAGUE</h1>
+        <p class="text-center mb-5" style="color: #ccc;">Najwyższy poziom rozgrywkowy. Tutaj walczymy o tytuł Mistrza GFL.</p>
         
-        <div class="custom-table-container">
-            <h3 class="table-header mb-4 text-center">TABELA LIGOWA</h3>
-            <table class="gfl-table">
-                <thead>
-                    <tr><th>#</th><th class="sticky-col">DRUŻYNA</th><th>M</th><th>W</th><th>R</th><th>P</th><th>BRAMKI</th><th>PKT</th></tr>
-                </thead>
-                <tbody id="tableBody"><tr><td colspan="8">Ładowanie...</td></tr></tbody>
-            </table>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="custom-table-container">
+                    <h3 class="table-header mb-4 text-center">TABELA LIGOWA</h3>
+                    <table class="gfl-table">
+                        <thead>
+                            <tr>
+                                <th>#</th> 
+                                <th class="sticky-col">DRUŻYNA</th> 
+                                <th>M</th> <th>W</th> <th>R</th> <th>P</th> <th>BRAMKI</th> <th>PKT</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <tr><td colspan="8" class="text-center" style="padding: 30px;">Ładowanie danych...</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="text-center mt-3 d-block d-md-none" style="color: #666; font-size: 0.7rem;">
+                        <span class="mobirise-iconfont mbri-right" style="font-size: 1rem;"></span> Przesuń tabelę w prawo
+                    </p>
+                </div>
+            </div>
         </div>
 
-        <div id="full-schedule-container">
-            <h3 class="table-header text-center">TERMINARZ</h3>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <h3 class="table-header text-center" style="border-top: 1px solid #333; padding-top: 50px;">TERMINARZ ROZGRYWEK</h3>
+                <div id="full-schedule-container" class="schedule-container">
+                    <div class="text-center" style="color: #666; margin-top:20px;">Ładowanie terminarza...</div>
+                </div>
             </div>
+        </div>
+
     </div>
 </section>
 
-<script>
-    // 1. LINKI DO TWOICH ARKUSZY
-    const urlWWW = 'TU_WKLEJ_LINK_DO_ARKUSZA_WWW_CSV'; // Do Tabeli (posortowany)
-    const urlMECZE = 'TU_WKLEJ_LINK_DO_ARKUSZA_MECZE_CSV'; // Do Terminarza
-
-    async function loadElitePage() {
-        try {
-            // Ładowanie Tabeli
-            const resTable = await fetch(urlWWW);
-            const dataTable = await resTable.text();
-            const tableRows = dataTable.split('\n').slice(1);
-            const tbody = document.getElementById('tableBody');
-            tbody.innerHTML = '';
-            tableRows.forEach(row => {
-                const c = row.trim().split(',');
-                if(c.length >= 8) {
-                    tbody.innerHTML += `<tr><td>${c[0]}</td><td class="sticky-col">${c[1]}</td><td>${c[2]}</td><td>${c[3]}</td><td>${c[5]}</td><td>${c[4]}</td><td>${c[6]}:${c[7]}</td><td class="pts-col">${c[9]}</td></tr>`;
-                }
-            });
-
-            // Ładowanie Terminarza
-            const resMatches = await fetch(urlMECZE);
-            const dataMatches = await resMatches.text();
-            const matchRows = dataMatches.split('\n').slice(1);
-            const scheduleContainer = document.getElementById('full-schedule-container');
-            
-            let rounds = {};
-            matchRows.forEach(row => {
-                const c = row.trim().split(',');
-                if(c.length < 6) return;
-                if(!rounds[c[5]]) rounds[c[5]] = [];
-                rounds[c[5]].push({ h: c[0], a: c[1], sH: c[2], sA: c[3], d: c[4] });
-            });
-
-            Object.keys(rounds).sort((a,b)=>a-b).forEach(r => {
-                const date = new Date(rounds[r][0].d).toLocaleDateString('pl-PL', {day:'numeric', month:'long'});
-                scheduleContainer.innerHTML += `<div class="round-header">RUNDA ${r} <span style="font-size:0.8rem; opacity:0.5; display:block;">DO ${date}</span></div>`;
-                rounds[r].forEach(m => {
-                    let score = m.sH !== '' ? `${m.sH}:${m.sA}` : '-:-';
-                    scheduleContainer.innerHTML += `<div class="match-row"><div class="match-date">DO: ${m.d}</div><div class="match-duel"><span>${m.h}</span><span>v</span><span>${m.a}</span></div><div class="match-score">${score}</div></div>`;
-                });
-            });
-        } catch(e) { console.error(e); }
-    }
-    loadElitePage();
-</script>
+<section class="footer4 cid-uK1l7aKMna" style="background-color: #232323; padding: 3rem 0;">
+    <div class="container text-white text-center">
+        <h5 class="mb-2">GDYNIA FOOTBALL LEAGUE</h5>
+        <p class="small text-muted">© 2026 GFL</p>
+    </div>
+</section>
 
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/smoothscroll/smooth-scroll.js"></script>
 <script src="assets/dropdown/js/navbar-dropdown.js"></script>
 <script src="assets/theme/js/script.js"></script>
+
+<script>
+    // --- LINKI PODPIĘTE PRZEZ SYSTEM ---
+    
+    // 1. Tabela (Zakładka główna/WWW) - stary link, który działał
+    const tableUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?output=csv';
+    
+    // 2. Terminarz (Zakładka MECZE) - Twój nowy link
+    const scheduleUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv';
+
+    async function loadEliteData() {
+        try {
+            // --- ŁADOWANIE TABELI ---
+            const resTable = await fetch(tableUrl);
+            const dataTable = await resTable.text();
+            const tableRows = dataTable.split('\n').slice(1);
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = ''; 
+
+            tableRows.forEach(row => {
+                const cols = row.trim().split(',');
+                if (cols.length >= 8) { 
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${cols[0]}</td>
+                        <td class="sticky-col">${cols[1]}</td>
+                        <td>${cols[2]}</td>
+                        <td>${cols[3]}</td>
+                        <td>${cols[5]}</td>
+                        <td>${cols[4]}</td>
+                        <td>${cols[6]}:${cols[7]}</td>
+                        <td class="pts-col">${cols[9]}</td>
+                    `;
+                    tbody.appendChild(tr);
+                }
+            });
+
+            // --- ŁADOWANIE TERMINARZA ---
+            const resSchedule = await fetch(scheduleUrl);
+            const dataSchedule = await resSchedule.text();
+            const schedRows = dataSchedule.split('\n').slice(1);
+            const schedContainer = document.getElementById('full-schedule-container');
+            schedContainer.innerHTML = '';
+
+            let rounds = {};
+            
+            schedRows.forEach(row => {
+                const c = row.trim().split(',');
+                // Układ MECZE: 0:Home, 1:Away, 2:GH, 3:GA, 4:Data, 5:Runda
+                if (c.length < 5) return;
+                
+                // Jeśli to przypadkiem wiersz z tabeli, to go pomijamy (szukamy daty w kolumnie 4)
+                if (!c[4] || c[4].length < 4) return; 
+
+                const r = c[5]; // Runda
+                if (!rounds[r]) rounds[r] = [];
+                rounds[r].push({ h: c[0], a: c[1], sH: c[2], sA: c[3], date: c[4] });
+            });
+
+            // Sortowanie i wyświetlanie rund
+            Object.keys(rounds).sort((a,b) => a - b).forEach(r => {
+                // Data "DO" pobrana z pierwszego meczu rundy
+                const dObj = new Date(rounds[r][0].date);
+                const niceDate = dObj.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long' });
+
+                const rDiv = document.createElement('div');
+                rDiv.className = 'round-header';
+                rDiv.innerHTML = `RUNDA ${r} <span style="font-size:0.8rem; display:block; margin-top:5px; opacity:0.7;">DO ${niceDate}</span>`;
+                schedContainer.appendChild(rDiv);
+
+                rounds[r].forEach(m => {
+                    const hasScore = (m.sH !== '' && m.sH !== undefined);
+                    let scoreHtml = hasScore 
+                        ? `<span style="color:#44b1ff;">${m.sH}:${m.sA}</span>` 
+                        : `<span class="score-empty">-:-</span>`;
+
+                    const mDiv = document.createElement('div');
+                    mDiv.className = 'match-row';
+                    mDiv.innerHTML = `
+                        <div class="match-date">DO: ${m.date}</div>
+                        <div class="match-duel">
+                            <span>${m.h}</span>
+                            <span style="color:#444; font-size:0.8rem;">v</span>
+                            <span>${m.a}</span>
+                        </div>
+                        <div class="match-score">${scoreHtml}</div>
+                    `;
+                    schedContainer.appendChild(mDiv);
+                });
+            });
+
+        } catch (error) { 
+            console.error('Błąd:', error); 
+        }
+    }
+    loadEliteData();
+</script>
 
 </body>
 </html>

@@ -16,104 +16,52 @@
   <style>
     body { background-color: #000; color: #fff; }
 
-    /* --- MENU I FONTY --- */
-    .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4 {
+    /* MENU I FONTY */
+    .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4, h1, h2, h3, .table-header, .round-header {
         font-family: 'Bebas Neue', sans-serif !important;
         text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-        font-size: 1.1rem !important;
-    }
-    h1, h2, h3, h4, h5, .display-1, .display-2, .table-header, .round-header { 
-        font-family: 'Bebas Neue', sans-serif !important; 
         letter-spacing: 1px;
-        text-transform: uppercase;
     }
-    
-    /* --- TABELA --- */
+    .nav-link { font-size: 1.1rem !important; }
+
+    /* TABELA */
     .custom-table-container {
-        background: #111;
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        overflow-x: auto;
-        position: relative;
-        margin-bottom: 60px;
+        background: #111; border-radius: 15px; padding: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow-x: auto; position: relative; margin-bottom: 60px;
     }
-    .gfl-table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        color: #fff;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-        white-space: nowrap;
-    }
-    .gfl-table th {
-        background-color: #000;
-        color: #888;
-        padding: 15px;
-        font-size: 0.85rem;
-        border-bottom: 2px solid #333;
-    }
-    .gfl-table td {
-        padding: 15px;
-        border-bottom: 1px solid #222;
-        text-align: center;
-        vertical-align: middle;
-    }
+    .gfl-table { width: 100%; border-collapse: separate; border-spacing: 0; white-space: nowrap; font-family: sans-serif; }
+    .gfl-table th { background: #000; color: #888; padding: 15px; border-bottom: 2px solid #333; }
+    .gfl-table td { padding: 15px; border-bottom: 1px solid #222; text-align: center; color: #fff; }
     .gfl-table tr:hover td { background-color: #1a1a1a; }
-    
-    /* Kolory tabeli */
     .gfl-table tbody tr:first-child td { color: #44b1ff; font-weight: bold; }
-    .pts-col { font-weight: bold; font-size: 1.1rem; color: #44b1ff; }
+    .pts-col { font-weight: bold; color: #44b1ff; font-size: 1.1rem; }
+    .sticky-col { position: sticky; left: 0; background: #111; z-index: 10; border-right: 1px solid #333; text-align: left !important; font-weight: 600; color: #fff; }
 
-    /* Sticky Column (Nazwa drużyny przyklejona) */
-    .sticky-col {
-        position: sticky;
-        left: 0;
-        background-color: #111;
-        z-index: 10;
-        border-right: 1px solid #333;
-        text-align: left !important;
-        font-weight: 600;
-        color: #fff;
-    }
-
-    /* --- TERMINARZ --- */
-    .schedule-container {
-        max-width: 900px;
-        margin: 0 auto;
-    }
+    /* TERMINARZ - FIX WIDOCZNOŚCI */
+    .schedule-container { max-width: 900px; margin: 0 auto; }
     .round-header {
-        background-color: #1a1a1a;
-        color: #44b1ff;
-        padding: 15px;
-        margin-top: 40px;
-        margin-bottom: 15px;
-        border-radius: 8px;
-        text-align: center;
-        border: 1px solid #333;
-        font-size: 1.5rem;
+        background: #1a1a1a; color: #44b1ff; padding: 15px; margin-top: 40px; margin-bottom: 15px;
+        border-radius: 8px; text-align: center; border: 1px solid #333; font-size: 1.5rem;
     }
     .match-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 10px;
-        border-bottom: 1px solid #222;
-        transition: 0.2s;
-        font-family: sans-serif;
+        display: flex; justify-content: space-between; align-items: center;
+        padding: 15px 10px; border-bottom: 1px solid #222; transition: 0.2s; font-family: sans-serif;
     }
     .match-row:hover { background-color: #0a0a0a; }
     
     .match-date { width: 25%; font-size: 0.8rem; color: #666; text-transform: uppercase; }
-    .match-duel { width: 50%; display: flex; justify-content: center; align-items: center; gap: 15px; font-weight: 600; font-size: 1rem; }
+    
+    /* TU JEST FIX KOLORÓW - WYMUSZENIE BIAŁEGO */
+    .match-duel { width: 50%; display: flex; justify-content: center; align-items: center; gap: 15px; font-weight: 600; font-size: 1rem; color: #ffffff !important; }
+    .match-duel span { color: #ffffff !important; }
+    .vs-sign { color: #444 !important; font-size: 0.8rem; margin: 0 5px; }
+    
     .match-score { width: 25%; text-align: right; font-weight: bold; font-size: 1.2rem; color: #44b1ff; }
-    .score-empty { color: #333; font-size: 1rem; }
 
     @media (max-width: 768px) {
         .custom-table-container { padding: 10px; }
         .gfl-table th, .gfl-table td { padding: 10px 6px; font-size: 0.8rem; }
-        .match-row { flex-direction: column; text-align: center; gap: 8px; padding: 20px 10px; }
+        .match-row { flex-direction: column; text-align: center; gap: 8px; }
         .match-date, .match-duel, .match-score { width: 100%; text-align: center; }
     }
   </style>
@@ -128,7 +76,7 @@
                     <a href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL" style="height: 5rem;"></a>
                 </span>
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="hamburger"><span></span><span></span><span></span><span></span></div>
             </button>
             <div class="collapse navbar-collapse opacityScrollOff" id="navbarSupportedContent">
@@ -162,19 +110,11 @@
                     <h3 class="table-header mb-4 text-center">TABELA LIGOWA</h3>
                     <table class="gfl-table">
                         <thead>
-                            <tr>
-                                <th>#</th> 
-                                <th class="sticky-col">DRUŻYNA</th> 
-                                <th>M</th> <th>W</th> <th>R</th> <th>P</th> <th>BRAMKI</th> <th>PKT</th>
-                            </tr>
+                            <tr><th>#</th><th class="sticky-col">DRUŻYNA</th><th>M</th><th>W</th><th>R</th><th>P</th><th>BRAMKI</th><th>PKT</th></tr>
                         </thead>
-                        <tbody id="tableBody">
-                            <tr><td colspan="8" class="text-center" style="padding: 30px;">Ładowanie danych...</td></tr>
-                        </tbody>
+                        <tbody id="tableBody"><tr><td colspan="8" style="padding:30px;">Ładowanie tabeli...</td></tr></tbody>
                     </table>
-                    <p class="text-center mt-3 d-block d-md-none" style="color: #666; font-size: 0.7rem;">
-                        <span class="mobirise-iconfont mbri-right" style="font-size: 1rem;"></span> Przesuń tabelę w prawo
-                    </p>
+                    <p class="text-center mt-3 d-block d-md-none" style="color: #666; font-size: 0.7rem;">Przesuń tabelę w prawo</p>
                 </div>
             </div>
         </div>
@@ -187,7 +127,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 
@@ -205,17 +144,20 @@
 <script src="assets/theme/js/script.js"></script>
 
 <script>
-    // --- LINKI PODPIĘTE PRZEZ SYSTEM ---
+    // -------------------------------------------------------------------------
+    // !!! WAŻNE: TU MUSZĄ BYĆ DWA RÓŻNE LINKI !!!
+    // -------------------------------------------------------------------------
     
-    // 1. Tabela (Zakładka główna/WWW) - stary link, który działał
+    // 1. LINK DO TABELI (Zakładka WWW - tam gdzie masz posortowane drużyny)
+    // Jeśli tabela jest pusta, to znaczy, że tu jest zły link (np. do zakładki Mecze)
     const tableUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?output=csv';
     
-    // 2. Terminarz (Zakładka MECZE) - Twój nowy link
+    // 2. LINK DO TERMINARZA (Zakładka MECZE - tam gdzie masz listę spotkań)
     const scheduleUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv';
 
     async function loadEliteData() {
         try {
-            // --- ŁADOWANIE TABELI ---
+            // --- TABELA ---
             const resTable = await fetch(tableUrl);
             const dataTable = await resTable.text();
             const tableRows = dataTable.split('\n').slice(1);
@@ -223,24 +165,23 @@
             tbody.innerHTML = ''; 
 
             tableRows.forEach(row => {
-                const cols = row.trim().split(',');
+                let cols = row.trim().split(',');
+                if (cols.length < 2) cols = row.trim().split(';'); // Obsługa polskich Exceli
+                
+                // Jeśli wiersz ma za mało danych (np. puste wiersze), pomiń
                 if (cols.length >= 8) { 
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
                         <td>${cols[0]}</td>
                         <td class="sticky-col">${cols[1]}</td>
-                        <td>${cols[2]}</td>
-                        <td>${cols[3]}</td>
-                        <td>${cols[5]}</td>
-                        <td>${cols[4]}</td>
+                        <td>${cols[2]}</td><td>${cols[3]}</td><td>${cols[5]}</td><td>${cols[4]}</td>
                         <td>${cols[6]}:${cols[7]}</td>
-                        <td class="pts-col">${cols[9]}</td>
-                    `;
+                        <td class="pts-col">${cols[9]}</td>`;
                     tbody.appendChild(tr);
                 }
             });
 
-            // --- ŁADOWANIE TERMINARZA ---
+            // --- TERMINARZ ---
             const resSchedule = await fetch(scheduleUrl);
             const dataSchedule = await resSchedule.text();
             const schedRows = dataSchedule.split('\n').slice(1);
@@ -248,55 +189,44 @@
             schedContainer.innerHTML = '';
 
             let rounds = {};
-            
             schedRows.forEach(row => {
-                const c = row.trim().split(',');
-                // Układ MECZE: 0:Home, 1:Away, 2:GH, 3:GA, 4:Data, 5:Runda
-                if (c.length < 5) return;
+                let c = row.trim().split(',');
+                if (c.length < 2) c = row.trim().split(';');
                 
-                // Jeśli to przypadkiem wiersz z tabeli, to go pomijamy (szukamy daty w kolumnie 4)
-                if (!c[4] || c[4].length < 4) return; 
+                // Ignorujemy wiersze, które nie mają daty (kolumna 4)
+                if (c.length < 6 || !c[4] || c[4].length < 4) return;
 
-                const r = c[5]; // Runda
+                const r = c[5]; // Numer kolejki
                 if (!rounds[r]) rounds[r] = [];
                 rounds[r].push({ h: c[0], a: c[1], sH: c[2], sA: c[3], date: c[4] });
             });
 
-            // Sortowanie i wyświetlanie rund
             Object.keys(rounds).sort((a,b) => a - b).forEach(r => {
-                // Data "DO" pobrana z pierwszego meczu rundy
                 const dObj = new Date(rounds[r][0].date);
                 const niceDate = dObj.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long' });
 
                 const rDiv = document.createElement('div');
                 rDiv.className = 'round-header';
-                rDiv.innerHTML = `RUNDA ${r} <span style="font-size:0.8rem; display:block; margin-top:5px; opacity:0.7;">DO ${niceDate}</span>`;
+                rDiv.innerHTML = `KOLEJKA ${r} <span style="font-size:0.8rem; display:block; margin-top:5px; opacity:0.7;">DO ${niceDate}</span>`;
                 schedContainer.appendChild(rDiv);
 
                 rounds[r].forEach(m => {
-                    const hasScore = (m.sH !== '' && m.sH !== undefined);
-                    let scoreHtml = hasScore 
-                        ? `<span style="color:#44b1ff;">${m.sH}:${m.sA}</span>` 
-                        : `<span class="score-empty">-:-</span>`;
+                    const hasScore = (m.sH && m.sH.trim() !== '');
+                    let scoreHtml = hasScore ? `<span style="color:#44b1ff;">${m.sH}:${m.sA}</span>` : `<span class="score-empty">-:-</span>`;
 
                     const mDiv = document.createElement('div');
                     mDiv.className = 'match-row';
                     mDiv.innerHTML = `
                         <div class="match-date">DO: ${m.date}</div>
                         <div class="match-duel">
-                            <span>${m.h}</span>
-                            <span style="color:#444; font-size:0.8rem;">v</span>
-                            <span>${m.a}</span>
+                            <span>${m.h}</span><span class="vs-sign">v</span><span>${m.a}</span>
                         </div>
-                        <div class="match-score">${scoreHtml}</div>
-                    `;
+                        <div class="match-score">${scoreHtml}</div>`;
                     schedContainer.appendChild(mDiv);
                 });
             });
 
-        } catch (error) { 
-            console.error('Błąd:', error); 
-        }
+        } catch (error) { console.error('Błąd:', error); }
     }
     loadEliteData();
 </script>

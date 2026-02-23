@@ -12,7 +12,7 @@
     body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
     h1, h2, .nav-link, .table-title { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* --- NAWIGACJA (Ta sama co w onas.html) --- */
+    /* --- NAWIGACJA --- */
     .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
     .navbar-brand img { height: 4.5rem !important; }
     .navbar-nav { display: flex !important; align-items: center !important; flex-direction: row !important; }
@@ -20,29 +20,30 @@
     .nav-link { color: #fff !important; font-size: 1.1rem !important; text-decoration: none !important; }
     .nav-link:hover { color: #44b1ff !important; }
 
-    /* --- STYLIZACJA TABELI (Zgodna z image_ac5e23.png) --- */
+    /* --- STYLIZACJA TABELI --- */
     .table-container-main { padding: 140px 0 60px 0; }
     
     .gfl-card { 
         background: #080808; 
         border-radius: 20px; 
         border: 1px solid #222; 
-        padding: 0;
         overflow: hidden;
         box-shadow: 0 20px 40px rgba(0,0,0,0.6);
     }
 
-    .gfl-card-header {
-        background: #111;
-        padding: 25px;
-        text-align: center;
-        border-bottom: 1px solid #222;
-    }
-
+    .gfl-card-header { background: #111; padding: 20px; text-align: center; border-bottom: 1px solid #222; }
     .table-title { font-size: 2.5rem; margin: 0; color: #fff; }
+
+    /* Klucz do responsywności: overflow-x */
+    .table-responsive-wrapper {
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 
     .gfl-table { 
         width: 100%; 
+        min-width: 600px; /* Wymusza przewijanie na bardzo małych telefonach, żeby dane się nie ścisnęły */
         border-collapse: collapse; 
         color: #fff; 
         font-size: 1rem;
@@ -52,32 +53,36 @@
         background: #000;
         color: #666;
         font-family: 'Bebas Neue';
-        padding: 18px;
+        padding: 15px;
         text-transform: uppercase;
         font-weight: normal;
         font-size: 1.1rem;
         border-bottom: 1px solid #222;
+        text-align: center;
     }
 
     .gfl-table tbody td {
-        padding: 18px 15px;
+        padding: 15px 10px;
         border-bottom: 1px solid #141414;
         text-align: center;
         vertical-align: middle;
     }
 
-    /* Akcenty kolorystyczne z Twojego screena */
-    .col-pos { color: #44b1ff; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.2rem; width: 60px; }
-    .col-team { text-align: left !important; font-weight: bold; width: 40%; }
+    .col-pos { color: #44b1ff; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.2rem; width: 50px; }
+    .col-team { text-align: left !important; font-weight: bold; min-width: 200px; }
     .col-highlight { color: #44b1ff; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.3rem; }
     
     .gfl-table tr:hover { background: #111; }
-    .gfl-table tr:last-child td { border-bottom: none; }
 
     .loader { text-align: center; padding: 50px; color: #44b1ff; font-family: 'Bebas Neue'; font-size: 1.8rem; }
-
-    /* STOPKA */
     .footer { padding: 40px 0; border-top: 1px solid #111; text-align: center; color: #444; }
+
+    @media (max-width: 767px) {
+        .table-title { font-size: 1.8rem; }
+        .table-container-main { padding-top: 110px; }
+        .navbar-brand img { height: 3.5rem !important; }
+        .gfl-table thead th, .gfl-table tbody td { padding: 10px 5px; font-size: 0.85rem; }
+    }
   </style>
 </head>
 <body>
@@ -107,27 +112,28 @@
     <div class="container">
         <div class="gfl-card">
             <div class="gfl-card-header">
-                <h2 class="table-title">TABELA LIGOWA ELITE</h2>
+                <h2 class="table-title">TABELA ELITE LEAGUE</h2>
             </div>
             
             <div id="loading" class="loader">POBIERANIE WYNIKÓW...</div>
             
-            <table class="gfl-table" id="league-table" style="display: none;">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th style="text-align: left;">DRUŻYNA</th>
-                        <th>M</th>
-                        <th>W</th>
-                        <th>R</th>
-                        <th>P</th>
-                        <th>BRAMKI</th>
-                        <th>PKT</th>
-                    </tr>
-                </thead>
-                <tbody id="table-data">
-                    </tbody>
-            </table>
+            <div class="table-responsive-wrapper">
+                <table class="gfl-table" id="league-table" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th style="text-align: left;">DRUŻYNA</th>
+                            <th>M</th>
+                            <th>W</th>
+                            <th>R</th>
+                            <th>P</th>
+                            <th>BRAMKI</th>
+                            <th>PKT</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-data"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
@@ -140,21 +146,19 @@
 </footer>
 
 <script>
-    // TWOJE DANE Z EXCELA (LINK CSV)
     const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=1101831234&single=true&output=csv';
 
     async function loadData() {
         try {
             const response = await fetch(csvUrl);
             const data = await response.text();
-            const rows = data.split('\n').slice(1); // Omijamy nagłówek arkusza
+            const rows = data.split('\n').slice(1);
             
             let html = '';
             rows.forEach(row => {
                 const col = row.split(','); 
                 if (col.length < 8) return; 
 
-                // BUDOWANIE WIERSZA (Styl z image_ac5e23.png)
                 html += `
                     <tr>
                         <td class="col-pos">${col[0]}</td>
@@ -177,7 +181,6 @@
             document.getElementById('loading').innerHTML = "BŁĄD DANYCH";
         }
     }
-
     loadData();
 </script>
 

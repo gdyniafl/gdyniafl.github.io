@@ -16,24 +16,23 @@
   <style>
     body { background-color: #000; color: #fff; }
 
+    /* --- FONTY I MENU (SPÓJNE Z ELITE) --- */
     .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4, .btn {
         font-family: 'Bebas Neue', sans-serif !important;
         text-transform: uppercase !important;
         letter-spacing: 1px !important;
-        font-size: 1.2rem !important; /* Ujednolicony rozmiar */
+        font-size: 1.2rem !important;
     }
     h1, h2, h3, h4, h5, .display-1, .display-2, .display-5, .display-7 { 
         font-family: 'Bebas Neue', sans-serif !important; 
         letter-spacing: 1px;
         text-transform: uppercase;
     }
-    p, .mbr-text {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
+    p, .mbr-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     
     /* --- HERO --- */
     .header-section {
-        background-image: url('assets/images/background-gfl.jpg'); /* Twoje tło */
+        background-image: url('assets/images/background-gfl.jpg');
         background-size: cover; background-position: center; background-color: #000;
         padding: 180px 0 120px 0; text-align: center; position: relative;
     }
@@ -54,11 +53,15 @@
 
     /* --- HALL OF FAME --- */
     .hall-of-fame-section { background: #111; padding: 80px 0; text-align: center; border-bottom: 1px solid #222; }
-    .hof-card { background: #000; border: 1px solid #C9A050; padding: 30px; border-radius: 10px; margin-bottom: 20px; transition: 0.3s; }
+    .hof-card { 
+        background: #000; border: 1px solid #C9A050; padding: 30px; 
+        border-radius: 10px; margin-bottom: 20px; transition: 0.3s; 
+    }
     .hof-card:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(201, 160, 80, 0.3); }
     .hof-icon { font-size: 3rem; color: #C9A050; margin-bottom: 15px; }
     .hof-title { color: #C9A050; font-size: 1.5rem; margin-bottom: 10px; }
-    .hof-name { font-size: 2rem; color: #fff; }
+    .hof-name { font-size: 2rem; color: #fff; line-height: 1.1; text-transform: uppercase; }
+    .hof-sub { color: #888; font-size: 0.9rem; margin-top: 5px; font-family: sans-serif; }
 
     /* --- COMING SOON --- */
     .coming-soon-section {
@@ -116,11 +119,12 @@
         <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>GDYNIA FOOTBALL LEAGUE</strong></h1>
         <p class="mbr-text mbr-fonts-style display-5 mb-4" style="color: #ccc;">Więcej niż piłka.</p>
         <div class="mbr-section-btn mt-3">
-            <a class="btn btn-warning display-4" href="assets/zapowiedz.mp3" target="_blank">
+            <button class="btn btn-warning display-4" onclick="playAudio()">
                 <span class="mobi-mbri mobi-mbri-volume-up mbr-iconfont mbr-iconfont-btn"></span> ZAPOWIEDŹ
-            </a>
+            </button>
             <a class="btn btn-white-outline display-4" href="onas.html">O NAS</a>
         </div>
+        <p id="audio-status" style="display:none; color:#44b1ff; margin-top:10px; font-size:0.9rem;">Odtwarzanie...</p>
     </div>
 </section>
 
@@ -136,7 +140,7 @@
         </div>
         <div class="matches-scroll-container">
             <div class="d-flex" id="matches-wrapper" style="gap: 20px;">
-                <div class="match-card-loading" style="color:#888; font-family: 'Bebas Neue', sans-serif; padding: 20px;">Ładowanie...</div>
+                <div class="match-card-loading" style="color:#888; font-family: 'Bebas Neue', sans-serif; padding: 20px;">Ładowanie terminarza...</div>
             </div>
         </div>
     </div>
@@ -150,21 +154,24 @@
                 <div class="hof-card">
                     <div class="hof-icon">🏆</div>
                     <h4 class="hof-title mbr-fonts-style display-7">MISTRZ ELITE</h4>
-                    <div class="hof-name mbr-fonts-style display-5">J6K WITOMINO</div>
+                    <div class="hof-name mbr-fonts-style display-5">CZARODZIEJSKIE LISY</div>
+                    <div class="hof-sub">MISTRZ SEZONU I</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="hof-card">
                     <div class="hof-icon">⚽</div>
                     <h4 class="hof-title mbr-fonts-style display-7">KRÓL STRZELCÓW</h4>
-                    <div class="hof-name mbr-fonts-style display-5">KOWALSKI</div>
+                    <div class="hof-name mbr-fonts-style display-5">OLIVIER PLESKACZ</div>
+                    <div class="hof-sub">REKORD: 38 GOLI (SEZON 0)</div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="hof-card">
-                    <div class="hof-icon">⭐</div>
-                    <h4 class="hof-title mbr-fonts-style display-7">MVP SEZONU</h4>
-                    <div class="hof-name mbr-fonts-style display-5">NOWAK</div>
+                    <div class="hof-icon">🔥</div>
+                    <h4 class="hof-title mbr-fonts-style display-7">MISTRZ CHALLENGE</h4>
+                    <div class="hof-name mbr-fonts-style display-5">COCCOLINO FRESH</div>
+                    <div class="hof-sub">MISTRZ SEZONU I</div>
                 </div>
             </div>
         </div>
@@ -217,7 +224,24 @@
 <script src="assets/theme/js/script.js"></script>
 
 <script>
-    // Link do TERMINARZA (MECZE)
+    // --- SKRYPT AUDIO (ODTWARZANIE W TLE) ---
+    function playAudio() {
+        // Upewnij się, że plik nazywa się dokładnie tak i jest w tym folderze:
+        var audio = new Audio('assets/audio/zapowiedz.mp3');
+        audio.volume = 0.6;
+        
+        var promise = audio.play();
+        if (promise !== undefined) {
+            promise.then(_ => {
+                document.getElementById('audio-status').style.display = 'block';
+                setTimeout(() => { document.getElementById('audio-status').style.display = 'none'; }, 3000);
+            }).catch(error => {
+                alert("Błąd: Nie znaleziono pliku assets/audio/zapowiedz.mp3");
+            });
+        }
+    }
+
+    // --- SKRYPT MATCH CENTER ---
     const matchesUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv';
 
     async function loadMatchCenter() {

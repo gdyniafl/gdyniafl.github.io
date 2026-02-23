@@ -16,54 +16,64 @@
   <style>
     body { background-color: #000; color: #fff; }
 
-    /* FONTY I MENU */
     .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4, .btn {
         font-family: 'Bebas Neue', sans-serif !important;
         text-transform: uppercase !important;
         letter-spacing: 1px !important;
+        font-size: 1.2rem !important; /* Ujednolicony rozmiar */
     }
     h1, h2, h3, h4, h5, .display-1, .display-2, .display-5, .display-7 { 
         font-family: 'Bebas Neue', sans-serif !important; 
         letter-spacing: 1px;
         text-transform: uppercase;
     }
+    p, .mbr-text {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
     
-    /* HERO */
+    /* --- HERO --- */
     .header-section {
-        background-image: url('assets/images/background-gfl.jpg'); /* Tu wstaw swoje tło */
-        background-size: cover;
-        background-position: center;
-        background-color: #000;
-        padding: 160px 0 100px 0;
-        text-align: center;
-        position: relative;
+        background-image: url('assets/images/background-gfl.jpg'); /* Twoje tło */
+        background-size: cover; background-position: center; background-color: #000;
+        padding: 180px 0 120px 0; text-align: center; position: relative;
     }
-    .header-overlay {
-        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.7); z-index: 1;
-    }
+    .header-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1; }
     .header-content { position: relative; z-index: 2; }
 
-    /* MEDIA SECTION (WIDEO/AUDIO) */
-    .media-section { background: #000; padding: 60px 0; border-bottom: 1px solid #222; }
-    
-    /* COUNTER SECTION (LICZBY) */
-    .counters-section { background: #111; padding: 80px 0; border-top: 1px solid #222; }
-    .counter-box { text-align: center; padding: 20px; }
-    .counter-number { font-size: 4rem; color: #44b1ff; font-family: 'Bebas Neue', sans-serif; line-height: 1; }
-    .counter-text { font-size: 1.2rem; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; opacity: 0.8; }
-
-    /* MATCH CENTER */
-    .match-center-section { background-color: #0a0a0a; padding: 60px 0; }
+    /* --- MATCH CENTER --- */
+    .match-center-section { background-color: #0a0a0a; padding: 60px 0; border-bottom: 1px solid #222; }
     .matches-scroll-container { width: 100%; overflow-x: auto; padding-bottom: 20px; scrollbar-width: thin; scrollbar-color: #333 #111; }
     .match-card {
         background: #1a1a1a; border: 1px solid #333; border-radius: 12px;
         min-width: 280px; padding: 20px; display: flex; flex-direction: column; justify-content: center; transition: 0.3s;
     }
-    .match-card:hover { border-color: #44b1ff; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(68, 177, 255, 0.1); }
-    .match-info { font-size: 0.8rem; color: #888; margin-bottom: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+    .match-card:hover { border-color: #44b1ff; transform: translateY(-5px); }
+    .match-info { font-size: 0.8rem; color: #888; margin-bottom: 12px; font-weight: bold; text-transform: uppercase; }
     .team-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 1.1rem; font-weight: 600; color: #fff; }
     .team-score { color: #44b1ff; font-weight: bold; }
+
+    /* --- HALL OF FAME --- */
+    .hall-of-fame-section { background: #111; padding: 80px 0; text-align: center; border-bottom: 1px solid #222; }
+    .hof-card { background: #000; border: 1px solid #C9A050; padding: 30px; border-radius: 10px; margin-bottom: 20px; transition: 0.3s; }
+    .hof-card:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(201, 160, 80, 0.3); }
+    .hof-icon { font-size: 3rem; color: #C9A050; margin-bottom: 15px; }
+    .hof-title { color: #C9A050; font-size: 1.5rem; margin-bottom: 10px; }
+    .hof-name { font-size: 2rem; color: #fff; }
+
+    /* --- COMING SOON --- */
+    .coming-soon-section {
+        background: url('assets/images/camera-bg.jpg') no-repeat center center;
+        background-size: cover; background-color: #000;
+        padding: 100px 0; text-align: center; position: relative;
+    }
+    .cs-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); }
+    .cs-content { position: relative; z-index: 2; }
+    
+    /* --- STATYSTYKI --- */
+    .counters-section { background: #000; padding: 60px 0; }
+    .counter-box { text-align: center; padding: 20px; }
+    .counter-number { font-size: 4rem; color: #44b1ff; font-family: 'Bebas Neue', sans-serif; line-height: 1; }
+    .counter-text { font-size: 1.2rem; color: #888; text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; }
 
   </style>
 </head>
@@ -106,22 +116,10 @@
         <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>GDYNIA FOOTBALL LEAGUE</strong></h1>
         <p class="mbr-text mbr-fonts-style display-5 mb-4" style="color: #ccc;">Więcej niż piłka.</p>
         <div class="mbr-section-btn mt-3">
-            <a class="btn btn-primary display-4" href="elite.html">ZOBACZ TABELE</a>
-            <a class="btn btn-white-outline display-4" href="onas.html">DOŁĄCZ DO NAS</a>
-        </div>
-    </div>
-</section>
-
-<section class="media-section">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-10 text-center">
-                <h3 class="mbr-section-subtitle display-5 mb-4" style="color:#44b1ff;">ZAPOWIEDŹ KOLEJKI</h3>
-                <div style="background: #111; padding: 100px 20px; border: 1px dashed #333; border-radius: 10px;">
-                    <h4 class="display-7" style="color: #666;">TU POJAWI SIĘ WIDEO ZAPOWIEDŹ</h4>
-                    <p style="color: #444;">(Wstaw kod embed YouTube w pliku HTML)</p>
-                </div>
-            </div>
+            <a class="btn btn-warning display-4" href="assets/zapowiedz.mp3" target="_blank">
+                <span class="mobi-mbri mobi-mbri-volume-up mbr-iconfont mbr-iconfont-btn"></span> ZAPOWIEDŹ
+            </a>
+            <a class="btn btn-white-outline display-4" href="onas.html">O NAS</a>
         </div>
     </div>
 </section>
@@ -139,6 +137,48 @@
         <div class="matches-scroll-container">
             <div class="d-flex" id="matches-wrapper" style="gap: 20px;">
                 <div class="match-card-loading" style="color:#888; font-family: 'Bebas Neue', sans-serif; padding: 20px;">Ładowanie...</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="hall-of-fame-section">
+    <div class="container">
+        <h2 class="mbr-section-title mbr-fonts-style display-2 mb-5" style="color: #C9A050;">HALL OF FAME</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="hof-card">
+                    <div class="hof-icon">🏆</div>
+                    <h4 class="hof-title mbr-fonts-style display-7">MISTRZ ELITE</h4>
+                    <div class="hof-name mbr-fonts-style display-5">J6K WITOMINO</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="hof-card">
+                    <div class="hof-icon">⚽</div>
+                    <h4 class="hof-title mbr-fonts-style display-7">KRÓL STRZELCÓW</h4>
+                    <div class="hof-name mbr-fonts-style display-5">KOWALSKI</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="hof-card">
+                    <div class="hof-icon">⭐</div>
+                    <h4 class="hof-title mbr-fonts-style display-7">MVP SEZONU</h4>
+                    <div class="hof-name mbr-fonts-style display-5">NOWAK</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="coming-soon-section">
+    <div class="cs-overlay"></div>
+    <div class="container cs-content">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h2 class="mbr-section-title mbr-fonts-style display-2 mb-3">WIDZIMY WSZYSTKO</h2>
+                <p class="mbr-text mbr-fonts-style display-5" style="color: #44b1ff;">VAR · STATYSTYKI · RELACJE</p>
+                <h3 class="mbr-section-subtitle mbr-fonts-style display-1 mt-4" style="color: #fff; letter-spacing: 5px;">COMING SOON</h3>
             </div>
         </div>
     </div>
@@ -177,7 +217,7 @@
 <script src="assets/theme/js/script.js"></script>
 
 <script>
-    // LINK DO ZAKŁADKI MECZE (Żeby widget działał)
+    // Link do TERMINARZA (MECZE)
     const matchesUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv';
 
     async function loadMatchCenter() {
@@ -190,11 +230,9 @@
 
             const today = new Date(); today.setHours(0,0,0,0);
             
-            // Obsługa separatora (przecinek lub średnik - zależnie od regionu Excela)
             const matchesList = rows.map(row => {
                 let cols = row.split(',');
-                if (cols.length < 2) cols = row.split(';'); // Fallback dla polskich Exceli
-                
+                if (cols.length < 2) cols = row.split(';');
                 if(cols.length < 5) return null;
                 return { home: cols[0], away: cols[1], scoreH: cols[2], scoreA: cols[3], date: cols[4], round: cols[5] };
             }).filter(m => m !== null && m.date);

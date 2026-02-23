@@ -5,63 +5,48 @@
   <title>O Nas | Gdynia Football League</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
-  
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   
   <style>
-    /* RESET I FONT */
     body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
     h1, h2, h3, .nav-link, .dropdown-item { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* --- PANCERNA NAWIGACJA (Naprawa pionowych liter) --- */
+    /* --- NAWIGACJA --- */
     .navbar { 
-        background: rgba(10, 10, 10, 0.95) !important; 
+        background: #0a0a0a !important; 
         border-bottom: 1px solid #222;
-        padding: 15px 0 !important;
+        padding: 10px 0 !important;
     }
-    .navbar-brand img { height: 4rem; }
+
+    /* POPRAWKA LOGA */
+    .navbar-brand img { 
+        height: 5rem !important; /* Zwiększyłem z 4rem na 5rem */
+        width: auto;
+        display: block;
+        /* Jeśli Twoje logo jest czarne, poniższa linia je "wybielli": */
+        /* filter: brightness(0) invert(1); */ 
+    }
     
-    .navbar-nav { 
-        display: flex !important; 
-        flex-direction: row !important; /* Wymusza poziom w wersji desktop */
-        align-items: center !important;
-    }
-    .nav-item { 
-        list-style: none !important; 
-        margin-left: 25px !important; 
-    }
-    .nav-link { 
-        color: #fff !important; 
-        font-size: 1.2rem !important; 
-        white-space: nowrap !important; /* Blokuje łamanie tekstu do pionu */
-        padding: 5px 0 !important;
-    }
+    .navbar-nav { display: flex !important; align-items: center !important; }
+    .nav-item { list-style: none !important; margin-left: 25px !important; }
+    .nav-link { color: #fff !important; font-size: 1.2rem !important; white-space: nowrap !important; }
     .nav-link:hover { color: #44b1ff !important; }
 
-    /* Dropdown menu */
-    .dropdown-menu { background: #111 !important; border: 1px solid #333 !important; padding: 10px !important; }
-    .dropdown-item { color: #fff !important; font-size: 1.1rem !important; padding: 8px 20px !important; }
+    .dropdown-menu { background: #111 !important; border: 1px solid #333 !important; }
+    .dropdown-item { color: #fff !important; font-size: 1.1rem !important; }
     .dropdown-item:hover { background: #44b1ff !important; color: #000 !important; }
 
-    /* --- TREŚĆ STRONY --- */
+    /* --- TREŚĆ --- */
     .page-header { padding: 160px 0 60px 0; text-align: center; background: #0a0a0a; }
     .content-body { padding: 60px 0; line-height: 1.8; color: #ccc; font-size: 1.1rem; }
     .highlight-card { border-left: 4px solid #44b1ff; background: #0f0f0f; padding: 30px; border-radius: 0 15px 15px 0; margin: 40px 0; }
-    
-    /* STOPKA */
     .footer { padding: 40px 0; border-top: 1px solid #111; text-align: center; color: #666; font-size: 0.9rem; }
 
-    /* MOBILNE (hamburger) */
     @media (max-width: 991px) {
-        .navbar-nav { 
-            flex-direction: column !important; 
-            background: #000; 
-            padding: 20px; 
-            width: 100%;
-        }
-        .nav-item { margin: 10px 0 !important; text-align: center; }
-        .navbar-toggler { border-color: #44b1ff !important; }
+        .navbar-brand img { height: 3.5rem !important; }
+        .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; }
+        .nav-item { margin: 10px 0 !important; }
     }
   </style>
 </head>
@@ -73,7 +58,7 @@
             <img src="assets/images/logo-gfl.png-160x160.png" alt="GFL">
         </a>
         
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav" aria-controls="gflNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav" style="border-color: #44b1ff;">
             <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
         </button>
 
@@ -82,15 +67,18 @@
                 <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
                 <li class="nav-item"><a class="nav-link" href="onas.html" style="color: #44b1ff !important;">O nas</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="rozgrywkiDrop" role="button" data-bs-toggle="dropdown" aria-expanded="false">Rozgrywki</a>
-                    <ul class="dropdown-menu" aria-labelledby="rozgrywkiDrop">
+                    <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
+                    <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
                         <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
                         <li><a class="dropdown-item" href="aspire.html">Aspire League</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
-                <li class="nav-item"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px;">Zapisy</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" 
+                       style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px; margin-left: 10px;">Zapisy</a>
+                </li>
             </ul>
         </div>
     </div>
@@ -129,7 +117,6 @@
     <div class="container">
         <h5 style="color: #fff; margin-bottom: 10px;">GDYNIA FOOTBALL LEAGUE</h5>
         <p>© 2026 GFL | Organizator: Ezi</p>
-        <p style="font-size: 0.7rem; opacity: 0.5;">Strona edytowana ręcznie. Wszystkie prawa zastrzeżone.</p>
     </div>
 </footer>
 

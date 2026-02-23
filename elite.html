@@ -12,53 +12,38 @@
     body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
     h1, h2, .nav-link, .dropdown-item, .table-title { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* --- NAWIGACJA (NAPRAWA DROPDOWN) --- */
+    /* --- NAWIGACJA (BIAŁE MENU I DROPDOWN) --- */
     .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
     .navbar-brand img { height: 4.5rem !important; }
     .navbar-nav { display: flex !important; align-items: center !important; flex-direction: row !important; }
     .nav-item { list-style: none !important; margin-left: 20px !important; }
     .nav-link { color: #fff !important; font-size: 1.1rem !important; }
     .nav-link:hover { color: #44b1ff !important; }
-    /* --- NAPRAWA HAMBURGERA (Białe kreski) --- */
-.navbar-toggler {
-    border-color: rgba(255,255,255,0.5) !important;
-}
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-}
 
-/* --- NAPRAWA DROPDOWN (Widoczność tekstów) --- */
-.dropdown-menu { 
-    background-color: #111 !important; 
-    border: 1px solid #333 !important; 
-}
-.dropdown-item { 
-    color: #fff !important; 
-    font-family: 'Bebas Neue', sans-serif !important;
-    font-size: 1.1rem !important;
-}
-.dropdown-item:hover { 
-    background-color: #44b1ff !important; 
-    color: #000 !important; 
-}
-    .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; margin-top: 0; }
-    .dropdown-item { color: #fff !important; padding: 10px 20px !important; font-size: 1rem !important; }
+    /* WYMUSZENIE BIAŁYCH KRESEK MENU */
+    .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
+    .navbar-toggler-icon { 
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    }
+
+    .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
+    .dropdown-item { color: #fff !important; padding: 10px 20px !important; }
     .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
 
-    /* --- NAGŁÓWEK (DODANIE NIEBIESKIEGO DOPISKU) --- */
+    /* --- NAGŁÓWEK --- */
     .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
 
-    /* --- TABELA (PRZYPIĘTA KOLUMNA) --- */
+    /* --- TABELA (PRZYPIĘTA I WĄSKA NA TEL) --- */
     .table-container-main { padding: 40px 0 60px 0; }
-    .gfl-card { background: #080808; border-radius: 20px; border: 1px solid #222; overflow: hidden; max-width: 1000px; margin: 0 auto; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+    .gfl-card { background: #080808; border-radius: 20px; border: 1px solid #222; overflow: hidden; max-width: 1000px; margin: 0 auto; }
     .table-responsive-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
     .gfl-table { width: 100%; border-collapse: separate; border-spacing: 0; color: #fff; }
     .gfl-table thead th { background: #000; color: #666; padding: 15px 10px; font-size: 1rem; border-bottom: 1px solid #222; text-align: center; }
 
-    /* STICKY COLUMN LOGIC */
+    /* STICKY COLUMN */
     .sticky-pos { position: sticky !important; left: 0; background: #080808 !important; z-index: 5; width: 40px; }
-    .sticky-team { position: sticky !important; left: 40px; background: #080808 !important; z-index: 5; text-align: left !important; min-width: 160px; border-right: 1px solid #222; }
+    .sticky-team { position: sticky !important; left: 40px; background: #080808 !important; z-index: 5; text-align: left !important; min-width: 140px; border-right: 1px solid #222; }
 
     .gfl-table tbody td { padding: 15px 10px; border-bottom: 1px solid #141414; text-align: center; }
     .col-highlight { color: #44b1ff; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.2rem; }
@@ -66,41 +51,16 @@
 
     .footer { padding: 40px 0; border-top: 1px solid #111; text-align: center; color: #444; }
 
+    /* RESPONSYWNOŚĆ - ABY WIDZIEĆ WIĘCEJ KOLUMN */
     @media (max-width: 991px) {
-    /* Menu mobilne */
-    .navbar-nav { 
-        flex-direction: column !important; 
-        background: #000; 
-        padding: 20px; 
-        width: 100%; 
-        position: absolute; 
-        top: 100%; 
-        left: 0; 
-        display: none; 
+        .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; display: none; }
+        .navbar-nav.show { display: flex !important; }
+        .nav-item { margin: 10px 0 !important; }
+        
+        .gfl-table { min-width: 500px !important; font-size: 0.8rem !important; }
+        .sticky-team { min-width: 100px !important; max-width: 110px !important; white-space: normal !important; font-size: 0.75rem !important; }
+        .gfl-table td, .gfl-table th { padding: 10px 5px !important; }
     }
-    .navbar-nav.show { display: flex !important; }
-    .nav-item { margin: 10px 0 !important; }
-
-    /* --- OPTYMALIZACJA TABELI NA TELEFON --- */
-    .gfl-table { 
-        font-size: 0.75rem !important; /* Mniejsza czcionka dla większej ilości danych */
-        min-width: 450px !important; /* Zmniejszone, by nie wymuszać wielkiego skrolla */
-    }
-    .gfl-table thead th, .gfl-table tbody td { 
-        padding: 8px 4px !important; /* Bardziej upakowane dane */
-    }
-    .sticky-pos { 
-        width: 30px !important; /* Węższa kolumna z numerem */
-    }
-    .sticky-team { 
-        left: 30px !important; /* Przesunięcie o szerokość kolumny # */
-        min-width: 100px !important; /* Znacznie węższa kolumna drużyny */
-        max-width: 120px !important;
-        white-space: normal !important; /* Pozwala na łamanie nazwy drużyny do 2 linii */
-        font-size: 0.7rem !important;
-    }
-    .table-title { font-size: 1.4rem !important; }
-}
   </style>
 </head>
 <body>
@@ -108,7 +68,9 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav" style="border-color:#44b1ff;"><span class="navbar-toggler-icon" style="filter:invert(1);"></span></button>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse justify-content-end" id="gflNav">
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
@@ -144,16 +106,10 @@
                         <tr>
                             <th class="sticky-pos">#</th>
                             <th class="sticky-team">DRUŻYNA</th>
-                            <th>M</th>
-                            <th>W</th>
-                            <th>R</th>
-                            <th>P</th>
-                            <th>BRAMKI</th>
-                            <th>PKT</th>
+                            <th>M</th><th>W</th><th>R</th><th>P</th><th>BRAMKI</th><th>PKT</th>
                         </tr>
                     </thead>
-                    <tbody id="table-data">
-                        </tbody>
+                    <tbody id="table-data"></tbody>
                 </table>
             </div>
         </div>
@@ -164,33 +120,30 @@
     <div class="container"><h5>GDYNIA FOOTBALL LEAGUE</h5><p>© 2026 GFL | Organizator: Ezi</p></div>
 </footer>
 
+<script src="assets/web/assets/jquery/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
     const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=1101831234&single=true&output=csv';
-
     async function loadData() {
         try {
             const r = await fetch(csvUrl);
             const d = await r.text();
-            const rows = d.split('\n').slice(1);
             let html = '';
-            rows.forEach(row => {
+            d.split('\n').slice(1).forEach(row => {
                 const col = row.split(',');
                 if (col.length < 8) return;
                 html += `<tr>
-                    <td class="sticky-pos col-highlight" style="color:#44b1ff;">${col[0]}</td>
-                    <td class="sticky-team" style="font-weight:bold;">${col[1]}</td>
+                    <td class="sticky-pos" style="color:#44b1ff;">${col[0]}</td>
+                    <td class="sticky-team">${col[1]}</td>
                     <td>${col[2]}</td><td>${col[3]}</td><td>${col[5]}</td><td>${col[4]}</td>
                     <td>${col[6]}:${col[7]}</td>
                     <td class="col-highlight">${col[9]}</td>
                 </tr>`;
             });
             document.getElementById('table-data').innerHTML = html;
-        } catch (e) { console.error("Błąd ładowania"); }
+        } catch (e) { console.error("Błąd"); }
     }
     loadData();
 </script>
-
-<script src="assets/web/assets/jquery/jquery.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

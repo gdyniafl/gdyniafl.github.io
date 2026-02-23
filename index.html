@@ -16,7 +16,7 @@
   <style>
     body { background-color: #000; color: #fff; }
 
-    /* --- TYPOGRAFIA PREMIUM --- */
+    /* --- TYPOGRAFIA --- */
     .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4, .btn {
         font-family: 'Bebas Neue', sans-serif !important;
         text-transform: uppercase !important;
@@ -30,7 +30,7 @@
     }
     p, .mbr-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     
-    /* --- HERO SECTION --- */
+    /* --- HERO --- */
     .header-section {
         background-image: url('assets/images/background-gfl.jpg');
         background-size: cover; background-position: center; background-color: #000;
@@ -51,16 +51,16 @@
     .team-row { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 1.1rem; font-weight: 500; color: #eee; }
     .team-score { color: #44b1ff; font-weight: bold; }
 
-    /* --- HALL OF FAME (GOLDEN ERA) --- */
+    /* --- HALL OF FAME --- */
     .hall-of-fame-section { background: #000; padding: 80px 0; text-align: center; }
-    .season-title { color: #fff; font-size: 2.5rem; margin: 40px 0 30px 0; border-bottom: 1px solid #222; display: inline-block; padding-bottom: 10px; }
+    .season-title { color: #fff; font-size: 2.5rem; margin: 50px 0 30px 0; border-bottom: 1px solid #222; display: inline-block; padding-bottom: 10px; }
     
     .hof-card { 
-        background: #080808; border: 1px solid #333; padding: 25px; 
+        background: #080808; border: 1px solid #333; padding: 20px; 
         border-radius: 6px; margin-bottom: 20px; transition: 0.3s; height: 100%;
         display: flex; flex-direction: column; justify-content: center; align-items: center;
     }
-    .hof-card.gold { border-color: #C9A050; } /* Styl dla Mistrzów */
+    .hof-card.gold { border-color: #C9A050; } 
     .hof-card:hover { transform: scale(1.02); box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
     
     .hof-icon { font-size: 1.8rem; margin-bottom: 10px; }
@@ -68,16 +68,16 @@
     .hof-name { font-size: 1.4rem; color: #fff; line-height: 1.1; text-transform: uppercase; font-weight: bold; }
     .hof-stat { color: #44b1ff; font-size: 0.9rem; margin-top: 5px; font-family: sans-serif; font-weight: bold; }
 
-    /* --- MEDIA / COMING SOON --- */
-    .media-hero {
+    /* --- WIDZIMY WSZYSTKO (POV STYLE) --- */
+    .coming-soon-section {
         background: url('assets/images/camera-bg.jpg') no-repeat center center;
         background-size: cover; background-color: #000;
-        padding: 100px 0; text-align: center; position: relative;
+        padding: 140px 0; text-align: center; position: relative;
         border-top: 1px solid #222;
     }
-    .media-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.85); }
-    .media-content { position: relative; z-index: 2; }
-    .tiktok-icon { font-size: 3rem; margin-bottom: 15px; color: #fff; text-shadow: 2px 2px #ff0050, -2px -2px #00f2ea; }
+    .cs-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.85); }
+    .cs-content { position: relative; z-index: 2; }
+    .tiktok-icon { font-size: 4rem; color: #fff; text-shadow: 2px 2px #ff0050, -2px -2px #00f2ea; margin-bottom: 15px; }
 
     /* --- STATYSTYKI --- */
     .stats-bar { background: #0a0a0a; padding: 50px 0; border-top: 1px solid #222; }
@@ -180,6 +180,29 @@
                 </div>
             </div>
         </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4">
+                <div class="hof-card">
+                    <div class="hof-label">KRÓL ELITE (S1)</div>
+                    <div class="hof-name">ADAM WINNICKI</div>
+                    <div class="hof-stat">41 GOLI</div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="hof-card">
+                    <div class="hof-label">KRÓL CHALLENGE (S1)</div>
+                    <div class="hof-name">PATRYK KLINKUSZ</div>
+                    <div class="hof-stat">39 GOLI</div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="hof-card">
+                    <div class="hof-label">KRÓL ASPIRE (S1)</div>
+                    <div class="hof-name">ARTUR ELIASZ</div>
+                    <div class="hof-stat">48 GOLI</div>
+                </div>
+            </div>
+        </div>
 
         <h3 class="season-title">SEZON 0</h3>
         <div class="row justify-content-center">
@@ -192,33 +215,35 @@
             <div class="col-6 col-md-3 mb-4">
                 <div class="hof-card">
                     <div class="hof-label">MISTRZ CHALLENGE</div>
-                    <div class="hof-name" style="font-size:1.1rem;">KURNIK RUCHOMEJ</div>
+                    <div class="hof-name" style="font-size:1.1rem;">KURNIK TUCHOMEK</div>
                 </div>
             </div>
             <div class="col-6 col-md-3 mb-4">
                 <div class="hof-card">
                     <div class="hof-label">MISTRZ ASPIRE</div>
-                    <div class="hof-name" style="font-size:1.1rem;">MISTRZOVIA A</div>
+                    <div class="hof-name" style="font-size:1.1rem;">MISTRZOVIA GDYNIA A</div>
                 </div>
             </div>
             <div class="col-6 col-md-3 mb-4">
                 <div class="hof-card">
                     <div class="hof-label">MISTRZ AGGRESSIVE</div>
-                    <div class="hof-name" style="font-size:1.1rem;">ZKS ZAGÓRZAK</div>
+                    <div class="hof-name" style="font-size:1.1rem;">ZKS ZAGÓRZAK RUMIA</div>
                 </div>
             </div>
         </div>
         <div class="row justify-content-center">
              <div class="col-md-4 mb-4">
                 <div class="hof-card">
-                    <div class="hof-label">KRÓL STRZELCÓW (ELITE)</div>
+                    <div class="hof-icon" style="font-size:1.5rem;">⚽</div>
+                    <div class="hof-label">KRÓL ELITE (S0)</div>
                     <div class="hof-name">OLIVIER PLESKACZ</div>
                     <div class="hof-stat">38 GOLI</div>
                 </div>
             </div>
             <div class="col-md-4 mb-4">
                 <div class="hof-card">
-                    <div class="hof-label">KRÓL STRZELCÓW (CHALLENGE)</div>
+                    <div class="hof-icon" style="font-size:1.5rem;">⚽</div>
+                    <div class="hof-label">KRÓL CHALLENGE (S0)</div>
                     <div class="hof-name">MICHAŁ SKOCZEK</div>
                     <div class="hof-stat">44 GOLE</div>
                 </div>
@@ -228,15 +253,15 @@
     </div>
 </section>
 
-<section class="media-hero">
-    <div class="media-overlay"></div>
-    <div class="container media-content">
+<section class="coming-soon-section">
+    <div class="cs-overlay"></div>
+    <div class="container cs-content">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="tiktok-icon"><span class="socicon socicon-tiktok"></span></div>
-                <h2 class="mbr-section-title mbr-fonts-style display-2 mb-2">@GDYNIAFL</h2>
-                <h3 class="mbr-section-subtitle mbr-fonts-style display-1 mt-4" style="color: #fff; letter-spacing: 5px;">COMING SOON</h3>
-                <p class="mbr-text mbr-fonts-style display-7 mt-3" style="color: #aaa;">VAR · STATYSTYKI · SKRÓTY WIDEO</p>
+                <h2 class="mbr-section-title mbr-fonts-style display-2 mb-2">WIDZIMY WSZYSTKO</h2>
+                <h3 class="mbr-section-subtitle mbr-fonts-style display-1 mt-4" style="color: #fff; letter-spacing: 5px;">@GDYNIAFL</h3>
+                <p class="mbr-text mbr-fonts-style display-7 mt-3" style="color: #ccc;">POV PLAYER · SKRÓTY · LIFESTYLE</p>
             </div>
         </div>
     </div>

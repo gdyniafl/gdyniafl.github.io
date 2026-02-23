@@ -16,12 +16,12 @@
   <style>
     body { background-color: #000; color: #fff; }
 
-    /* --- FIX MENU (TERAZ JEST IDENTYCZNE JAK INDEX) --- */
+    /* MENU SPÓJNE Z INDEXEM */
     .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4 {
         font-family: 'Bebas Neue', sans-serif !important;
         text-transform: uppercase !important;
         letter-spacing: 1px !important;
-        font-size: 1.2rem !important; /* Wymuszenie tej samej wielkości co index */
+        font-size: 1.2rem !important;
     }
     h1, h2, h3, h4, h5, .display-1, .display-2, .table-header, .round-header { 
         font-family: 'Bebas Neue', sans-serif !important; 
@@ -53,7 +53,6 @@
         padding: 15px 10px; border-bottom: 1px solid #222; transition: 0.2s; font-family: sans-serif;
     }
     .match-row:hover { background-color: #0a0a0a; }
-    
     .match-date { width: 25%; font-size: 0.8rem; color: #666; text-transform: uppercase; }
     .match-duel { width: 50%; display: flex; justify-content: center; align-items: center; gap: 15px; font-weight: 600; font-size: 1rem; color: #ffffff !important; }
     .match-duel span { color: #ffffff !important; }
@@ -132,7 +131,7 @@
     </div>
 </section>
 
-<section class="footer4 cid-uK1l7aKMna" style="background-color: #232323; padding: 3rem 0;">
+<section class="footer4 cid-uK1l7aKMna" style="background-color: #000; padding: 3rem 0; border-top: 1px solid #111;">
     <div class="container text-white text-center">
         <h5 class="mb-2">GDYNIA FOOTBALL LEAGUE</h5>
         <p class="small text-muted">© 2026 GFL</p>
@@ -146,13 +145,12 @@
 <script src="assets/theme/js/script.js"></script>
 
 <script>
-    // --- LINKI CSV ---
     const tableUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=1101831234&single=true&output=csv';
     const scheduleUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv';
 
     async function loadEliteData() {
         try {
-            // --- TABELA ---
+            // TABELA
             const resTable = await fetch(tableUrl);
             const dataTable = await resTable.text();
             const tableRows = dataTable.split('\n').slice(1);
@@ -162,7 +160,6 @@
             tableRows.forEach(row => {
                 let cols = row.trim().split(',');
                 if (cols.length < 2) cols = row.trim().split(';');
-                
                 if (cols.length >= 8) { 
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
@@ -175,7 +172,7 @@
                 }
             });
 
-            // --- TERMINARZ ---
+            // TERMINARZ
             const resSchedule = await fetch(scheduleUrl);
             const dataSchedule = await resSchedule.text();
             const schedRows = dataSchedule.split('\n').slice(1);
@@ -188,7 +185,7 @@
                 if (c.length < 2) c = row.trim().split(';');
                 if (c.length < 6 || !c[4] || c[4].length < 4) return;
 
-                const r = c[5]; // Kolejka
+                const r = c[5]; 
                 if (!rounds[r]) rounds[r] = [];
                 rounds[r].push({ h: c[0], a: c[1], sH: c[2], sA: c[3], date: c[4] });
             });

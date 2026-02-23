@@ -1,275 +1,113 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Gdynia Football League</title>
+  <title>Gdynia Football League | Oficjalna Strona</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
-  
-  <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/dropdown/css/style.css">
-  <link rel="stylesheet" href="assets/theme/css/style.css">
-  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   
   <style>
-    body { background-color: #000; color: #fff; }
+    body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
+    h1, h2, h3, .nav-link, .stat-num, .hof-name { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* --- GLOBALNE STYLE (SPÓJNOŚĆ) --- */
-    .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4, .btn {
-        font-family: 'Bebas Neue', sans-serif !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-        font-size: 1.2rem !important;
-    }
-    h1, h2, h3, h4, h5, .display-1, .display-2, .display-5, .display-7 { 
-        font-family: 'Bebas Neue', sans-serif !important; 
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
-    p, .mbr-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-    
-    /* --- HERO --- */
-    .header-section {
-        background-image: url('assets/images/background-gfl.jpg');
-        background-size: cover; background-position: center; background-color: #000;
-        padding: 200px 0 140px 0; text-align: center; position: relative;
-    }
-    .header-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1; }
-    .header-content { position: relative; z-index: 2; }
+    /* --- NAWIGACJA (SPÓJNA) --- */
+    .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
+    .navbar-brand img { height: 4.5rem !important; }
+    .navbar-nav { display: flex !important; align-items: center !important; flex-direction: row !important; }
+    .nav-item { list-style: none !important; margin-left: 20px !important; }
+    .nav-link { color: #fff !important; font-size: 1.1rem !important; text-decoration: none !important; }
+    .nav-link:hover { color: #44b1ff !important; }
 
-    /* --- MATCH SLIDER --- */
-    .match-center-section { background-color: #0a0a0a; padding: 60px 0; border-bottom: 1px solid #1a1a1a; }
-    .matches-scroll-container { width: 100%; overflow-x: auto; padding-bottom: 20px; scrollbar-width: thin; scrollbar-color: #333 #0a0a0a; }
-    .match-card {
-        background: #141414; border: 1px solid #222; border-radius: 8px;
-        min-width: 260px; padding: 20px; display: flex; flex-direction: column; justify-content: center; transition: 0.3s;
+    /* --- HERO SECTION --- */
+    .hero-section { 
+        padding: 180px 0 120px 0; 
+        text-align: center; 
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('assets/images/background-gfl.jpg'); 
+        background-size: cover; background-position: center;
     }
-    .match-card:hover { border-color: #44b1ff; transform: translateY(-3px); }
-    .match-info { font-size: 0.75rem; color: #666; margin-bottom: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-    .team-row { display: flex; justify-content: space-between; margin-bottom: 5px; font-size: 1.1rem; font-weight: 500; color: #eee; }
-    .team-score { color: #44b1ff; font-weight: bold; }
+    .hero-title { font-size: 5rem; line-height: 1; }
+    .btn-audio { background: #ffc107; color: #000; font-weight: bold; border: none; padding: 12px 30px; border-radius: 5px; margin-top: 20px; }
+
+    /* --- MATCH CENTER --- */
+    .match-center { padding: 60px 0; background: #050505; }
+    .match-scroll { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 20px; }
+    .match-card { 
+        min-width: 300px; background: #0f0f0f; border: 1px solid #222; border-radius: 10px; padding: 20px; 
+        transition: 0.3s; 
+    }
+    .match-card:hover { border-color: #44b1ff; transform: translateY(-5px); }
+    .league-tag { font-size: 0.7rem; color: #44b1ff; font-weight: bold; letter-spacing: 1px; }
+    .team-row { display: flex; justify-content: space-between; font-weight: bold; margin: 5px 0; }
+    .score-box { color: #44b1ff; font-family: 'Bebas Neue'; font-size: 1.4rem; }
+
+    /* --- STATS BAR --- */
+    .stats-bar { background: #0a0a0a; padding: 50px 0; border-top: 1px solid #111; border-bottom: 1px solid #111; }
+    .stat-box { text-align: center; }
+    .stat-num { font-size: 3.5rem; color: #44b1ff; line-height: 1; }
+    .stat-label { color: #666; font-size: 0.9rem; text-transform: uppercase; }
 
     /* --- HALL OF FAME --- */
-    .hall-of-fame-section { background: #000; padding: 80px 0; text-align: center; }
-    .season-title { color: #fff; font-size: 2.5rem; margin: 50px 0 30px 0; border-bottom: 1px solid #222; display: inline-block; padding-bottom: 10px; }
-    
-    .hof-card { 
-        background: #080808; border: 1px solid #333; padding: 20px; 
-        border-radius: 6px; margin-bottom: 20px; transition: 0.3s; height: 100%;
-        display: flex; flex-direction: column; justify-content: center; align-items: center;
+    .hof-section { padding: 80px 0; text-align: center; }
+    .hof-card { background: #080808; border: 1px solid #333; padding: 25px; border-radius: 10px; margin-bottom: 20px; height: 100%; }
+    .hof-card.gold { border-color: #C9A050; }
+    .hof-name { font-size: 1.5rem; color: #fff; margin: 10px 0; }
+    .hof-label { color: #666; font-size: 0.8rem; }
+
+    /* STOPKA */
+    .footer { padding: 40px 0; border-top: 1px solid #111; text-align: center; color: #444; }
+
+    @media (max-width: 767px) {
+        .hero-title { font-size: 3rem; }
+        .navbar-brand img { height: 3.5rem !important; }
     }
-    .hof-card.gold { border-color: #C9A050; } 
-    .hof-card:hover { transform: scale(1.02); box-shadow: 0 5px 20px rgba(0,0,0,0.5); }
-    
-    .hof-icon { font-size: 1.8rem; margin-bottom: 10px; }
-    .hof-label { color: #666; font-size: 0.8rem; letter-spacing: 1px; margin-bottom: 5px; font-family: sans-serif; text-transform: uppercase; }
-    .hof-name { font-size: 1.4rem; color: #fff; line-height: 1.1; text-transform: uppercase; font-weight: bold; }
-    .hof-stat { color: #44b1ff; font-size: 0.9rem; margin-top: 5px; font-family: sans-serif; font-weight: bold; }
-
-    /* --- POV SECTION --- */
-    .coming-soon-section {
-        background: url('assets/images/camera-bg.jpg') no-repeat center center;
-        background-size: cover; background-color: #000;
-        padding: 140px 0; text-align: center; position: relative;
-        border-top: 1px solid #222;
-    }
-    .cs-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.85); }
-    .cs-content { position: relative; z-index: 2; }
-    .tiktok-icon { font-size: 4rem; color: #fff; text-shadow: 2px 2px #ff0050, -2px -2px #00f2ea; margin-bottom: 15px; }
-
-    /* --- STATS --- */
-    .stats-bar { background: #0a0a0a; padding: 50px 0; border-top: 1px solid #222; }
-    .stat-box { text-align: center; }
-    .stat-num { font-size: 3.5rem; color: #44b1ff; font-family: 'Bebas Neue', sans-serif; line-height: 1; }
-    .stat-label { font-size: 1rem; color: #666; text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; }
-
   </style>
 </head>
 <body>
 
-<section data-bs-version="5.1" class="menu menu6 cid-uofyC8wzPD" once="menu" id="menu06-index">
-    <nav class="navbar navbar-dropdown opacityScrollOff navbar-expand-lg">
-        <div class="container">
-            <div class="navbar-brand">
-                <span class="navbar-logo">
-                    <a href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL" style="height: 5rem;"></a>
-                </span>
-            </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <div class="hamburger"><span></span><span></span><span></span><span></span></div>
-            </button>
-            <div class="collapse navbar-collapse opacityScrollOff" id="navbarSupportedContent">
-                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
-                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="aktualnosci.html">Aktualności</a></li>
-                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="onas.html">O nas</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link link dropdown-toggle text-black display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" aria-expanded="false">Rozgrywki</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item show text-black text-primary display-4" href="elite.html">Elite League</a>
-                            <a class="dropdown-item show text-black text-primary display-4" href="challenge.html">Challenge League</a>
-                            <a class="dropdown-item show text-black text-primary display-4" href="aspire.html">Aspire League</a>
-                        </div>
-                    </li>
-                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="regulamin.html">Regulamin</a></li>
-                    <li class="nav-item"><a class="nav-link link show text-black display-4" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank">Zapisy</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</section>
-
-<section class="header-section">
-    <div class="header-overlay"></div>
-    <div class="container header-content">
-        <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>GDYNIA FOOTBALL LEAGUE</strong></h1>
-        <p class="mbr-text mbr-fonts-style display-5 mb-5" style="color: #ccc; letter-spacing: 2px;">WIĘCEJ NIŻ PIŁKA</p>
-        <div class="mbr-section-btn">
-            <button class="btn btn-warning display-4" onclick="playAudio()">
-                <span class="mobi-mbri mobi-mbri-play mbr-iconfont mbr-iconfont-btn"></span> ODSŁUCHAJ ZAPOWIEDŹ
-            </button>
-            <a class="btn btn-white-outline display-4" href="elite.html">TABELE I WYNIKI</a>
-        </div>
-        <p id="audio-status" style="display:none; color:#44b1ff; font-size:0.8rem; margin-top:15px; font-family:sans-serif;">ODTWARZANIE W TLE...</p>
-    </div>
-</section>
-
-<section class="match-center-section">
+<nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-        <div class="row mb-4">
-            <div class="col-12">
-                <h4 class="mbr-section-subtitle mbr-fonts-style display-7" style="color: #44b1ff; letter-spacing: 2px;">TERMINARZ</h4>
-                <h2 class="mbr-section-title mbr-fonts-style display-2">NADCHODZĄCE MECZE</h2>
-            </div>
-        </div>
-        <div class="matches-scroll-container">
-            <div class="d-flex" id="matches-wrapper" style="gap: 15px;">
-                <div class="match-card-loading" style="color:#666; padding: 20px;">Ładowanie danych...</div>
-            </div>
+        <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
+        <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
+                <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Rozgrywki</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
+                        <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
+                        <li><a class="dropdown-item" href="aspire.html">Aspire League</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px;">Zapisy</a></li>
+            </ul>
         </div>
     </div>
-</section>
+</nav>
 
-<section class="hall-of-fame-section">
+<section class="hero-section">
     <div class="container">
-        <h2 class="mbr-section-title mbr-fonts-style display-2 mb-2" style="color: #C9A050;">HALL OF FAME</h2>
-        <p style="color: #666; font-family: sans-serif; text-transform: uppercase; letter-spacing: 2px;">Historia pisze się na boisku</p>
-        
-        <h3 class="season-title">SEZON I</h3>
-        <div class="row justify-content-center">
-            <div class="col-md-4 mb-4">
-                <div class="hof-card gold">
-                    <div class="hof-icon" style="color: #C9A050;">🏆</div>
-                    <div class="hof-label">MISTRZ ELITE</div>
-                    <div class="hof-name">CZARODZIEJSKIE LISY</div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="hof-card">
-                    <div class="hof-icon" style="color: #ccc;">🥈</div>
-                    <div class="hof-label">MISTRZ CHALLENGE</div>
-                    <div class="hof-name">COCCOLINO FRESH</div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="hof-card">
-                    <div class="hof-icon" style="color: #cd7f32;">🥉</div>
-                    <div class="hof-label">MISTRZ ASPIRE</div>
-                    <div class="hof-name">OGARNIJ SIĘ FC</div>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-4 mb-4">
-                <div class="hof-card">
-                    <div class="hof-label">KRÓL ELITE (S1)</div>
-                    <div class="hof-name">ADAM WINNICKI</div>
-                    <div class="hof-stat">41 GOLI</div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="hof-card">
-                    <div class="hof-label">KRÓL CHALLENGE (S1)</div>
-                    <div class="hof-name">PATRYK KLINKUSZ</div>
-                    <div class="hof-stat">39 GOLI</div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="hof-card">
-                    <div class="hof-label">KRÓL ASPIRE (S1)</div>
-                    <div class="hof-name">ARTUR ELIASZ</div>
-                    <div class="hof-stat">48 GOLI</div>
-                </div>
-            </div>
-        </div>
-
-        <h3 class="season-title">SEZON 0</h3>
-        <div class="row justify-content-center">
-            <div class="col-6 col-md-3 mb-4">
-                <div class="hof-card gold">
-                    <div class="hof-label">MISTRZ ELITE</div>
-                    <div class="hof-name" style="font-size:1.1rem;">KASZTELANKI</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mb-4">
-                <div class="hof-card">
-                    <div class="hof-label">MISTRZ CHALLENGE</div>
-                    <div class="hof-name" style="font-size:1.1rem;">KURNIK TUCHOMEK</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mb-4">
-                <div class="hof-card">
-                    <div class="hof-label">MISTRZ ASPIRE</div>
-                    <div class="hof-name" style="font-size:1.1rem;">MISTRZOVIA GDYNIA A</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mb-4">
-                <div class="hof-card">
-                    <div class="hof-label">MISTRZ AGGRESSIVE</div>
-                    <div class="hof-name" style="font-size:1.1rem;">ZKS ZAGÓRZAK RUMIA</div>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-             <div class="col-md-4 mb-4">
-                <div class="hof-card">
-                    <div class="hof-icon" style="font-size:1.5rem;">⚽</div>
-                    <div class="hof-label">KRÓL ELITE (S0)</div>
-                    <div class="hof-name">OLIVIER PLESKACZ</div>
-                    <div class="hof-stat">38 GOLI</div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="hof-card">
-                    <div class="hof-icon" style="font-size:1.5rem;">⚽</div>
-                    <div class="hof-label">KRÓL CHALLENGE (S0)</div>
-                    <div class="hof-name">MICHAŁ SKOCZEK</div>
-                    <div class="hof-stat">44 GOLE</div>
-                </div>
-            </div>
-        </div>
-
+        <h1 class="hero-title">GDYNIA FOOTBALL LEAGUE</h1>
+        <p style="letter-spacing: 5px; color: #ccc;">WIĘCEJ NIŻ PIŁKA</p>
+        <button class="btn-audio" onclick="playAudio()">ODSŁUCHAJ ZAPOWIEDŹ</button>
     </div>
 </section>
 
-<section class="coming-soon-section">
-    <div class="cs-overlay"></div>
-    <div class="container cs-content">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="tiktok-icon"><span class="socicon socicon-tiktok"></span></div>
-                <h2 class="mbr-section-title mbr-fonts-style display-2 mb-2">WIDZIMY WSZYSTKO</h2>
-                <h3 class="mbr-section-subtitle mbr-fonts-style display-1 mt-4" style="color: #fff; letter-spacing: 5px;">@GDYNIAFL</h3>
-                <p class="mbr-text mbr-fonts-style display-7 mt-3" style="color: #ccc;">POV PLAYER · SKRÓTY · LIFESTYLE</p>
-            </div>
+<section class="match-center">
+    <div class="container">
+        <h2 class="mb-4">AKTUALNA KOLEJKA</h2>
+        <div class="match-scroll" id="match-center-wrapper">
+            <div class="loader" style="padding: 20px;">POBIERANIE MECZÓW...</div>
         </div>
     </div>
 </section>
 
 <section class="stats-bar">
     <div class="container">
-        <div class="row justify-content-center">
+        <div class="row">
             <div class="col-4 stat-box">
                 <div class="stat-num">3</div>
                 <div class="stat-label">Ligi</div>
@@ -286,75 +124,98 @@
     </div>
 </section>
 
-<section class="footer4 cid-uK1l7aKMna" style="background-color: #000; padding: 3rem 0; border-top: 1px solid #111;">
-    <div class="container text-white text-center">
-        <h5 class="mb-2">GDYNIA FOOTBALL LEAGUE</h5>
-        <p class="small text-muted">© 2026 GFL</p>
+<section class="hof-section">
+    <div class="container">
+        <h2 style="color: #C9A050; font-size: 3rem; margin-bottom: 40px;">HALL OF FAME</h2>
+        <h3 class="mb-4" style="color: #666;">SEZON I</h3>
+        <div class="row justify-content-center">
+            <div class="col-md-4 mb-4">
+                <div class="hof-card gold">
+                    <div class="hof-label">MISTRZ ELITE</div>
+                    <div class="hof-name">CZARODZIEJSKIE LISY</div>
+                    <div style="font-size: 2rem;">🏆</div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="hof-card">
+                    <div class="hof-label">MISTRZ CHALLENGE</div>
+                    <div class="hof-name">COCCOLINO FRESH</div>
+                    <div style="font-size: 2rem;">🥈</div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="hof-card">
+                    <div class="hof-label">MISTRZ ASPIRE</div>
+                    <div class="hof-name">OGARNIJ SIĘ FC</div>
+                    <div style="font-size: 2rem;">🥉</div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 
-<script src="assets/web/assets/jquery/jquery.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/smoothscroll/smooth-scroll.js"></script>
-<script src="assets/dropdown/js/navbar-dropdown.js"></script>
-<script src="assets/theme/js/script.js"></script>
+<footer class="footer">
+    <div class="container">
+        <h5>GDYNIA FOOTBALL LEAGUE</h5>
+        <p>© 2026 GFL | Organizator: Ezi</p>
+    </div>
+</footer>
 
 <script>
     // AUDIO PLAYER
     function playAudio() {
-        var audio = new Audio('assets/zapowiedz.mp3');
-        audio.volume = 0.7;
-        audio.play().then(() => {
-            document.getElementById('audio-status').style.display = 'block';
-            setTimeout(() => { document.getElementById('audio-status').style.display = 'none'; }, 3000);
-        }).catch(err => {
-            alert("Upewnij się, że plik assets/zapowiedz.mp3 istnieje!");
-        });
+        new Audio('assets/zapowiedz.mp3').play().catch(() => alert("Dodaj plik zapowiedz.mp3 do folderu assets!"));
     }
 
-    // MATCH CENTER FETCH
-    const matchesUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv';
+    // MATCH CENTER LOGIC
+    const links = [
+        { name: 'ELITE', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv' },
+        { name: 'CHALLENGE', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3/pub?gid=682329859&single=true&output=csv' },
+        { name: 'ASPIRE', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf/pub?gid=682329859&single=true&output=csv' }
+    ];
 
-    async function loadMatchCenter() {
+    async function loadMatches() {
+        const wrapper = document.getElementById('match-center-wrapper');
+        const today = new Date();
+        let allMatchesHtml = '';
+
         try {
-            const response = await fetch(matchesUrl);
-            const data = await response.text();
-            const rows = data.split('\n').slice(1);
-            const container = document.getElementById('matches-wrapper');
-            container.innerHTML = ''; 
-
-            const today = new Date(); today.setHours(0,0,0,0);
+            const results = await Promise.all(links.map(l => fetch(l.url).then(r => r.text())));
             
-            const matchesList = rows.map(row => {
-                let cols = row.split(',');
-                if (cols.length < 2) cols = row.split(';');
-                if(cols.length < 5) return null;
-                return { home: cols[0], away: cols[1], scoreH: cols[2], scoreA: cols[3], date: cols[4], round: cols[5] };
-            }).filter(m => m !== null && m.date);
+            results.forEach((csv, index) => {
+                const rows = csv.split('\n').slice(1);
+                rows.forEach(row => {
+                    const col = row.split(',');
+                    if (col.length < 5) return;
 
-            const upcoming = matchesList.filter(m => new Date(m.date) >= today);
-            upcoming.sort((a, b) => new Date(a.date) - new Date(b.date));
-            let display = upcoming.length > 0 ? upcoming.slice(0, 10) : matchesList.slice(-5).reverse();
+                    const matchDate = new Date(col[4]);
+                    // LOGIKA FILTROWANIA: Pokazuj tylko mecze, których deadline jest w przyszłości lub max 7 dni temu (aktualna kolejka)
+                    const diffDays = (matchDate - today) / (1000 * 60 * 60 * 24);
 
-            display.forEach(m => {
-                const dateObj = new Date(m.date);
-                const niceDate = dateObj.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long' });
-                const hasScore = (m.scoreH && m.scoreH.trim() !== '');
-                
-                let header = hasScore ? `KOLEJKA ${m.round} | WYNIK` : `KOLEJKA ${m.round} | DO ${niceDate}`;
-                let sH = hasScore ? m.scoreH : '-'; let sA = hasScore ? m.scoreA : '-';
-                let sColor = hasScore ? 'color:#44b1ff;' : 'color:#555;';
-
-                container.innerHTML += `
-                    <div class="match-card">
-                        <div class="match-info">${header}</div>
-                        <div class="team-row"><span>${m.home}</span><span class="team-score" style="${sColor}">${sH}</span></div>
-                        <div class="team-row"><span>${m.away}</span><span class="team-score" style="${sColor}">${sA}</span></div>
-                    </div>`;
+                    if (diffDays > -7 && diffDays < 14) {
+                        const scoreH = col[2] || '-';
+                        const scoreA = col[3] || '-';
+                        
+                        allMatchesHtml += `
+                            <div class="match-card">
+                                <div class="league-tag">${links[index].name} | KOLEJKA ${col[5]}</div>
+                                <div style="font-size: 0.7rem; color: #444; margin-bottom: 10px;">DEADLINE: ${col[4]}</div>
+                                <div class="team-row"><span>${col[0]}</span><span class="score-box">${scoreH}</span></div>
+                                <div class="team-row"><span>${col[1]}</span><span class="score-box">${scoreA}</span></div>
+                            </div>`;
+                    }
+                });
             });
-        } catch (e) { console.error(e); }
+
+            wrapper.innerHTML = allMatchesHtml || '<div style="padding:20px;">Brak meczów w bieżącej kolejce.</div>';
+        } catch (e) {
+            wrapper.innerHTML = "Błąd pobierania terminarza.";
+        }
     }
-    loadMatchCenter();
+    loadMatches();
 </script>
+
+<script src="assets/web/assets/jquery/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

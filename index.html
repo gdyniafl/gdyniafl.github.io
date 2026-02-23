@@ -2,53 +2,142 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="generator" content="Mobirise v6.0.1, mobirise.com">
+  <title>Elite League - GFL</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
-  <meta name="description" content="Gdynia Football League - Amatorskie rozgrywki piłkarskie w Gdyni.">
   
-  <title>Gdynia Football League - Strona Główna</title>
   <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
-  <link rel="stylesheet" href="assets/animatecss/animate.css">
   <link rel="stylesheet" href="assets/dropdown/css/style.css">
-  <link rel="stylesheet" href="assets/socicon/css/styles.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
-  <link rel="preload" href="https://fonts.googleapis.com/css?family=Bebas+Neue:400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Bebas+Neue:400&display=swap"></noscript>
-  <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css?v=tqKeSz"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css?v=tqKeSz" type="text/css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  
+  <style>
+    body { background-color: #000; color: #fff; }
+
+    /* --- MENU I FONTY --- */
+    .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4 {
+        font-family: 'Bebas Neue', sans-serif !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        font-size: 1.1rem !important;
+    }
+    h1, h2, h3, h4, h5, .display-1, .display-2, .table-header, .round-header { 
+        font-family: 'Bebas Neue', sans-serif !important; 
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+    
+    /* --- TABELA --- */
+    .custom-table-container {
+        background: #111;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        overflow-x: auto;
+        position: relative;
+        margin-bottom: 60px;
+    }
+    .gfl-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        color: #fff;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+        white-space: nowrap;
+    }
+    .gfl-table th {
+        background-color: #000;
+        color: #888;
+        padding: 15px;
+        font-size: 0.85rem;
+        border-bottom: 2px solid #333;
+    }
+    .gfl-table td {
+        padding: 15px;
+        border-bottom: 1px solid #222;
+        text-align: center;
+        vertical-align: middle;
+    }
+    .gfl-table tr:hover td { background-color: #1a1a1a; }
+    
+    /* Kolory tabeli */
+    .gfl-table tbody tr:first-child td { color: #44b1ff; font-weight: bold; }
+    .pts-col { font-weight: bold; font-size: 1.1rem; color: #44b1ff; }
+
+    /* Sticky Column (Nazwa drużyny przyklejona) */
+    .sticky-col {
+        position: sticky;
+        left: 0;
+        background-color: #111;
+        z-index: 10;
+        border-right: 1px solid #333;
+        text-align: left !important;
+        font-weight: 600;
+        color: #fff;
+    }
+
+    /* --- TERMINARZ --- */
+    .schedule-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    .round-header {
+        background-color: #1a1a1a;
+        color: #44b1ff;
+        padding: 15px;
+        margin-top: 40px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        text-align: center;
+        border: 1px solid #333;
+        font-size: 1.5rem;
+    }
+    .match-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 10px;
+        border-bottom: 1px solid #222;
+        transition: 0.2s;
+        font-family: sans-serif;
+    }
+    .match-row:hover { background-color: #0a0a0a; }
+    
+    .match-date { width: 25%; font-size: 0.8rem; color: #666; text-transform: uppercase; }
+    .match-duel { width: 50%; display: flex; justify-content: center; align-items: center; gap: 15px; font-weight: 600; font-size: 1rem; }
+    .match-score { width: 25%; text-align: right; font-weight: bold; font-size: 1.2rem; color: #44b1ff; }
+    .score-empty { color: #333; font-size: 1rem; }
+
+    @media (max-width: 768px) {
+        .custom-table-container { padding: 10px; }
+        .gfl-table th, .gfl-table td { padding: 10px 6px; font-size: 0.8rem; }
+        .match-row { flex-direction: column; text-align: center; gap: 8px; padding: 20px 10px; }
+        .match-date, .match-duel, .match-score { width: 100%; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-  
-<audio id="gflLektor">
-    <source src="assets/voice_preview_eze.mp3" type="audio/mpeg">
-</audio>
 
-<section data-bs-version="5.1" class="menu menu6 cid-uofyC8wzPD" once="menu" id="menu06-2e">
+<section data-bs-version="5.1" class="menu menu6 cid-uofyC8wzPD" once="menu" id="menu06-elite">
     <nav class="navbar navbar-dropdown opacityScrollOff navbar-expand-lg">
         <div class="container">
             <div class="navbar-brand">
                 <span class="navbar-logo">
-                    <a href="index.html">
-                        <img src="assets/images/logo-gfl.png-160x160.png" alt="GFL" style="height: 5rem;">
-                    </a>
+                    <a href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL" style="height: 5rem;"></a>
                 </span>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <div class="hamburger">
-                    <span></span><span></span><span></span><span></span>
-                </div>
+                <div class="hamburger"><span></span><span></span><span></span><span></span></div>
             </button>
             <div class="collapse navbar-collapse opacityScrollOff" id="navbarSupportedContent">
                 <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
                     <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="aktualnosci.html">Aktualności</a></li>
                     <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="onas.html">O nas</a></li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link link dropdown-toggle text-black display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">Rozgrywki</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown-885">
+                        <a class="nav-link link dropdown-toggle text-black display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" aria-expanded="false">Rozgrywki</a>
+                        <div class="dropdown-menu">
                             <a class="dropdown-item show text-black text-primary display-4" href="elite.html">Elite League</a>
                             <a class="dropdown-item show text-black text-primary display-4" href="challenge.html">Challenge League</a>
                             <a class="dropdown-item show text-black text-primary display-4" href="aspire.html">Aspire League</a>
@@ -62,275 +151,162 @@
     </nav>
 </section>
 
-<section data-bs-version="5.1" class="header19 cid-uofq6ylH49" id="header19-modern" style="background-color: #000; min-height: 80vh; display: flex; align-items: center;">
-    <div class="container text-center">
-        <div class="row justify-content-center">
-            <div class="col-12 col-md-10">
-                <img src="assets/images/logo-gfl.png-160x160.png" alt="GFL" style="height: 10rem; margin-bottom: 2rem;">
-                <h1 class="mbr-section-title mbr-fonts-style mb-4 display-1" style="color: #ffffff !important;"><strong>GDYNIA FOOTBALL LEAGUE</strong></h1>
-                <h2 class="mbr-section-subtitle mbr-fonts-style mb-4 display-5" style="color: #ffffff !important; opacity: 0.9;">SEZON II - 2026</h2>
-                <div class="mbr-section-btn">
-                    <a class="btn btn-primary display-4" href="#" onclick="toggleLektor(event)" id="audioBtn">
-                        <span class="mobi-mbri mobi-mbri-play mbr-iconfont mbr-iconfont-btn" id="audioIcon"></span>
-                        POSŁUCHAJ ZAPOWIEDZI
-                    </a>
-                    <a class="btn btn-white-outline display-4" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank">ZAPISZ DRUŻYNĘ</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section data-bs-version="5.1" class="counter1 counters cid-uofvLkQQPJ" id="counter1-23">
-    <div class="container-fluid">
-        <div class="row justify-content-center text-center">
-            <div class="col-12 content-head mb-5">
-                <h4 class="mbr-section-title mbr-fonts-style mb-0 display-2"><strong>Trochę liczb...</strong></h4>
-            </div>
-        </div>
-        <div class="row content-row mt-4 text-center">
-            <div class="col-12 col-md-6 col-lg-4 item-mb">
-                <div class="item-wrapper">
-                    <h3 class="count mbr-fonts-style display-1">36</h3>
-                    <h4 class="card-title mbr-fonts-style display-5"><strong>Zespołów</strong></h4>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 item-mb">
-                <div class="item-wrapper">
-                    <h3 class="count mbr-fonts-style display-1">536</h3>
-                    <h4 class="card-title mbr-fonts-style display-5"><strong>Zawodników</strong></h4>
-                </div>
-            </div>
-            <div class="col-12 col-md-6 col-lg-4 item-mb">
-                <div class="item-wrapper">
-                    <h3 class="count mbr-fonts-style display-1">3</h3>
-                    <h4 class="card-title mbr-fonts-style display-5"><strong>Ligi</strong></h4>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="match-center-section" style="background-color: #111; padding: 60px 0; border-bottom: 1px solid #222;">
+<section style="padding: 120px 0 80px 0;">
     <div class="container">
-        <div class="row mb-4">
-            <div class="col-12 d-flex justify-content-between align-items-end">
-                <div>
-                    <h4 class="mbr-section-subtitle mbr-fonts-style display-7" style="color: #44b1ff; letter-spacing: 2px; font-family: 'Bebas Neue', sans-serif;">TERMINARZ</h4>
-                    <h2 class="mbr-section-title mbr-fonts-style display-2" style="color: #fff; font-family: 'Bebas Neue', sans-serif;">NADCHODZĄCE MECZE</h2>
-                </div>
-            </div>
-        </div>
-
-        <div class="matches-scroll-container">
-            <div class="d-flex" id="matches-wrapper" style="gap: 20px; overflow-x: auto; padding-bottom: 15px;">
-                <div class="match-card-loading" style="color:#888; font-family: 'Bebas Neue', sans-serif;">Ładowanie terminarza...</div>
-            </div>
-        </div>
+        <h1 class="text-center mb-3" style="font-size: 4rem;">ELITE LEAGUE</h1>
+        <p class="text-center mb-5" style="color: #ccc;">Najwyższy poziom rozgrywkowy. Tutaj walczymy o tytuł Mistrza GFL.</p>
         
-        <div class="row mt-4">
-             <div class="col-12 text-center">
-                 <a href="elite.html" class="btn btn-md btn-primary display-4" style="border-radius: 50px; font-family: 'Bebas Neue', sans-serif;">ZOBACZ PEŁNY TERMINARZ I TABELĘ</a>
-             </div>
-        </div>
-    </div>
-</section>
-
-<style>
-    .matches-scroll-container ::-webkit-scrollbar { height: 6px; }
-    .matches-scroll-container ::-webkit-scrollbar-track { background: #111; }
-    .matches-scroll-container ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-
-    .match-card {
-        background: #1a1a1a;
-        border: 1px solid #333;
-        border-radius: 12px;
-        min-width: 260px;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        transition: 0.3s;
-    }
-    .match-card:hover { border-color: #44b1ff; transform: translateY(-3px); }
-    .match-info { font-size: 0.8rem; color: #888; margin-bottom: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
-    .team-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 1.1rem; font-weight: 600; color: #fff; }
-    .team-score { color: #44b1ff; font-weight: bold; }
-</style>
-
-<script>
-    // 1. LINK DO ZAKŁADKI "MECZE" (CSV) Z ELITE
-    const eliteMatchesUrl = 'TU_WKLEJ_LINK_DO_ZAKLADKI_MECZE_ELITE_CSV';
-
-    async function loadMatchCenter() {
-        try {
-            const response = await fetch(eliteMatchesUrl);
-            const data = await response.text();
-            const rows = data.split('\n').slice(1);
-            const container = document.getElementById('matches-wrapper');
-            container.innerHTML = ''; 
-
-            const today = new Date();
-            today.setHours(0,0,0,0);
-
-            const matchesList = rows.map(row => {
-                const cols = row.trim().split('\t'); // Zakładając wklejenie tabulatorami z Excela lub split(',')
-                if(cols.length < 5) return null;
-                return { home: cols[0], away: cols[1], scoreH: cols[2], scoreA: cols[3], date: cols[4], round: cols[5] };
-            }).filter(m => m !== null && m.date);
-
-            const upcoming = matchesList.filter(m => new Date(m.date) >= today);
-            upcoming.sort((a, b) => new Date(a.date) - new Date(b.date));
-
-            let display = upcoming.length > 0 ? upcoming.slice(0, 8) : matchesList.slice(-5).reverse();
-
-            display.forEach(m => {
-                const dateObj = new Date(m.date);
-                const niceDate = dateObj.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long' });
-                const hasScore = (m.scoreH !== '' && m.scoreH !== undefined);
-                
-                let header = hasScore ? `RUNDA ${m.round} | WYNIK` : `RUNDA ${m.round} | DO ${niceDate}`;
-                let sH = hasScore ? m.scoreH : '-';
-                let sA = hasScore ? m.scoreA : '-';
-
-                container.innerHTML += `
-                    <div class="match-card">
-                        <div class="match-info">${header}</div>
-                        <div class="team-row"><span>${m.home}</span><span class="team-score">${sH}</span></div>
-                        <div class="team-row"><span>${m.away}</span><span class="team-score">${sA}</span></div>
-                    </div>`;
-            });
-        } catch (e) { console.error(e); }
-    }
-    loadMatchCenter();
-</script>
-<section class="content1 cid-tiktok-pov" style="background-color: #111; padding: 5rem 0;">
-    <div class="container text-center">
-        <h2 class="mbr-section-title mbr-fonts-style mb-4 display-2" style="color: #ffffff !important;"><strong>WIDZIMY WSZYSTKO</strong></h2>
-        <p class="mbr-text mbr-fonts-style mb-5 display-7" style="color: #ffffff !important;">Dajemy kamerki POV zawodnikom. Zobacz ligę z perspektywy boiska na naszym TikToku.</p>
         <div class="row justify-content-center">
-            <div class="col-12 col-md-4">
-                <div style="background: #1a1a1a; height: 400px; border-radius: 20px; border: 1px solid #333; display: flex; align-items: center; justify-content: center;">
-                    <span style="color: #666; font-weight: bold;">@GDYNIAFL POV <br> COMING SOON</span>
+            <div class="col-lg-10">
+                <div class="custom-table-container">
+                    <h3 class="table-header mb-4 text-center">TABELA LIGOWA</h3>
+                    <table class="gfl-table">
+                        <thead>
+                            <tr>
+                                <th>#</th> 
+                                <th class="sticky-col">DRUŻYNA</th> 
+                                <th>M</th> <th>W</th> <th>R</th> <th>P</th> <th>BRAMKI</th> <th>PKT</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                            <tr><td colspan="8" class="text-center" style="padding: 30px;">Ładowanie danych...</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="text-center mt-3 d-block d-md-none" style="color: #666; font-size: 0.7rem;">
+                        <span class="mobirise-iconfont mbri-right" style="font-size: 1rem;"></span> Przesuń tabelę w prawo
+                    </p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
 
-<section class="content1 cid-history-gfl" id="history-section" style="padding-top: 5rem; padding-bottom: 5rem; background-color: #ffffff;">
-    <div class="container text-center text-md-start">
-        <div class="mbr-section-head mb-5 text-center">
-            <h3 class="mbr-section-title mbr-fonts-style mb-0 display-2"><strong>HALL OF FAME 🏆</strong></h3>
-        </div>
         <div class="row justify-content-center">
-            
-            <div class="col-12 col-md-6 col-lg-4 mb-4">
-                <div class="item-wrapper" style="background: #ffffff; border: 2px solid #666; border-radius: 20px; padding: 25px; height: 100%; opacity: 0.85;">
-                    <h5 class="mbr-fonts-style display-5 mb-3" style="color: #666; text-align: center;"><strong>SEZON 0</strong></h5>
-                    <p class="mbr-text display-7">
-                        <strong>ELITE LEAGUE:</strong><br>
-                        🏆 Mistrz: Kasztelanki<br>
-                        ⚽ Król: Olivier Pleskacz (38 goli)
-                    </p>
-                    <p class="mbr-text display-7">
-                        <strong>CHALLENGE LEAGUE:</strong><br>
-                        🏆 Mistrz: Kurnik Ruchomej<br>
-                        ⚽ Król: Michał Skoczek (44 goli)
-                    </p>
-                    <p class="mbr-text display-7">
-                        <strong>ASPIRE LEAGUE:</strong><br>
-                        🏆 Mistrz: Mistrzovia A<br>
-                        <small style="color: #999;">*Statystyki strzelców nie były prowadzone</small>
-                    </p>
-                    <p class="mbr-text display-7">
-                        <strong>AGGRESSIVE LEAGUE:</strong><br>
-                        🏆 Mistrz: ZKS Zagórzak Rumia<br>
-                        <small style="color: #999;">*Statystyki strzelców nie były prowadzone</small>
-                    </p>
+            <div class="col-lg-10">
+                <h3 class="table-header text-center" style="border-top: 1px solid #333; padding-top: 50px;">TERMINARZ ROZGRYWEK</h3>
+                <div id="full-schedule-container" class="schedule-container">
+                    <div class="text-center" style="color: #666; margin-top:20px;">Ładowanie terminarza...</div>
                 </div>
             </div>
-
-            <div class="col-12 col-md-6 col-lg-4 mb-4">
-                <div class="item-wrapper" style="background: #f8f9fa; border: 2px solid #2b4598; border-radius: 20px; padding: 25px; height: 100%;">
-                    <h5 class="mbr-fonts-style display-5 mb-3" style="color: #2b4598; text-align: center;"><strong>SEZON I</strong></h5>
-                    <p class="mbr-text display-7">
-                        <strong>ELITE LEAGUE:</strong><br>
-                        🏆 Mistrz: Czarodziejskie Lisy<br>
-                        ⚽ Król: Adam Winnicki (41 goli)
-                    </p>
-                    <p class="mbr-text display-7">
-                        <strong>CHALLENGE LEAGUE:</strong><br>
-                        🏆 Mistrz: Coccolino Fresh<br>
-                        ⚽ Król: Patryk Klinkusz (39 goli)
-                    </p>
-                    <p class="mbr-text display-7">
-                        <strong>ASPIRE LEAGUE:</strong><br>
-                        🏆 Mistrz: Ogarnij się fc<br>
-                        ⚽ Król: Artur Eliasz (48 goli)
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-4 mb-4 text-center">
-                <div class="item-wrapper" style="background: #232323; border: 2px solid #232323; border-radius: 20px; padding: 25px; height: 100%; color: white;">
-                    <h5 class="mbr-fonts-style display-5 mb-3"><strong>SEZON II</strong></h5>
-                    <p class="mbr-text display-7" style="color: #44b1ff;"><strong>W TRAKCIE</strong></p>
-                    <p class="mbr-text display-7">Aktualnie 536 zawodników walczy o miejsce w tej galerii!</p>
-                    <a class="btn btn-primary btn-sm display-4 mt-3" href="https://forms.gle/GBsXaMQieoRt8oqYA">ZAPISZ SIĘ</a>
-                </div>
-            </div>
-
         </div>
+
     </div>
 </section>
 
-<section class="team1 cid-organizer" id="team1-ezi-modern" style="padding: 5rem 0; background-color: #ffffff;">
-    <div class="container text-center">
-        <h3 class="mbr-section-title mbr-fonts-style mb-5 display-2"><strong>KTO ZA TYM STOI?</strong></h3>
-        <div class="image-wrapper mb-4 d-flex justify-content-center"><img src="assets/images/logo-gfl.png-160x160.png" alt="Ezi" style="width: 160px; height: auto; border: 3px solid #000; padding: 5px; border-radius: 20px;"></div>
-        <h4 class="card-title mbr-fonts-style mb-2 display-5"><strong>Ezechiel "Ezi"</strong></h4>
-        <p class="mbr-text display-7 mb-4 mx-auto" style="max-width: 600px;">GFL to projekt z pasji. Chcę wyciągnąć ludzi z domów na boiska. Masz pytania? Pisz śmiało!</p>
-        <div class="d-flex justify-content-center flex-wrap" style="gap: 10px;">
-            <a class="btn btn-primary display-7" href="https://www.instagram.com/eziiu/" target="_blank">/eziiu</a>
-            <a class="btn btn-black display-7" href="https://www.instagram.com/gdyniafl/" target="_blank" style="background-color:#000; color:#fff;">/gdyniafl</a>
-        </div>
+<section class="footer4 cid-uK1l7aKMna" style="background-color: #232323; padding: 3rem 0;">
+    <div class="container text-white text-center">
+        <h5 class="mb-2">GDYNIA FOOTBALL LEAGUE</h5>
+        <p class="small text-muted">© 2026 GFL</p>
     </div>
 </section>
 
-<section data-bs-version="5.1" class="footer4 cid-uK1l7aKMna" id="footer04-38" style="background-color: #232323; padding: 3rem 0;">
-    <div class="container text-white"><div class="row align-center text-center">
-        <div class="col-12 col-md-6 mb-4 mb-md-0"><h5 class="display-7"><strong>GDYNIA FOOTBALL LEAGUE</strong></h5><p class="display-7">Profesjonalna liga amatorska dla pasjonatów futbolu w Gdyni. Dołącz do gry!</p></div>
-        <div class="col-12 col-md-6 mb-4 mb-md-0"><h5><strong>SOCIAL MEDIA</strong></h5><a href="https://instagram.com/gdyniafl" target="_blank" style="color:#fff;"><span class="socicon socicon-instagram"></span> @gdyniafl</a></div>
-        <div class="col-12 mt-4"><p class="display-7" style="opacity: 0.6;">© Copyright 2026 GFL - All Rights Reserved</p></div>
-    </div></div>
-</section>
-
-<script>
-function toggleLektor(event) {
-    event.preventDefault();
-    var audio = document.getElementById('gflLektor');
-    var icon = document.getElementById('audioIcon');
-    var btn = document.getElementById('audioBtn');
-
-    if (audio.paused) {
-        audio.play();
-        icon.classList.remove('mobi-mbri-play');
-        icon.classList.add('mobi-mbri-pause');
-        btn.innerHTML = '<span class="mobi-mbri mobi-mbri-pause mbr-iconfont mbr-iconfont-btn"></span> ZATRZYMAJ';
-    } else {
-        audio.pause();
-        icon.classList.remove('mobi-mbri-pause');
-        icon.classList.add('mobi-mbri-play');
-        btn.innerHTML = '<span class="mobi-mbri mobi-mbri-play mbr-iconfont mbr-iconfont-btn"></span> POSŁUCHAJ ZAPOWIEDZI';
-    }
-}
-</script>
-
+<script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="assets/smoothscroll/smooth-scroll.js"></script>
 <script src="assets/dropdown/js/navbar-dropdown.js"></script>
-<script src="assets/viewportchecker/viewportchecker.js"></script>
 <script src="assets/theme/js/script.js"></script>
+
+<script>
+    // -----------------------------------------------------------------------
+    // !!! WAŻNE LINKI DO CSV !!!
+    // Jeśli tabela lub terminarz nie działa, musisz wygenerować osobne linki
+    // dla zakładki "WWW" i zakładki "MECZE" w Google Sheets.
+    // -----------------------------------------------------------------------
+    
+    // 1. Link do zakładki WWW (Posortowana Tabela)
+    const tableUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?output=csv';
+    
+    // 2. Link do zakładki MECZE (Terminarz)
+    // UWAGA: Jeśli to ten sam link co wyżej, a masz osobne zakładki, to nie zadziała!
+    // Musisz podmienić ten link na link do zakładki "MECZE" jeśli dane się nie wyświetlą.
+    const scheduleUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?output=csv';
+
+    async function loadEliteData() {
+        try {
+            // --- ŁADOWANIE TABELI ---
+            const resTable = await fetch(tableUrl);
+            const dataTable = await resTable.text();
+            const tableRows = dataTable.split('\n').slice(1);
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = ''; 
+
+            tableRows.forEach(row => {
+                const cols = row.trim().split(',');
+                // Sprawdzamy czy to wiersz tabeli (ma ok 10 kolumn)
+                if (cols.length >= 8) { 
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${cols[0]}</td>
+                        <td class="sticky-col">${cols[1]}</td>
+                        <td>${cols[2]}</td>
+                        <td>${cols[3]}</td>
+                        <td>${cols[5]}</td>
+                        <td>${cols[4]}</td>
+                        <td>${cols[6]}:${cols[7]}</td>
+                        <td class="pts-col">${cols[9]}</td>
+                    `;
+                    tbody.appendChild(tr);
+                }
+            });
+
+            // --- ŁADOWANIE TERMINARZA ---
+            const resSchedule = await fetch(scheduleUrl);
+            const dataSchedule = await resSchedule.text();
+            const schedRows = dataSchedule.split('\n').slice(1);
+            const schedContainer = document.getElementById('full-schedule-container');
+            schedContainer.innerHTML = '';
+
+            let rounds = {};
+            
+            schedRows.forEach(row => {
+                const c = row.trim().split(',');
+                // Układ MECZE: 0:Home, 1:Away, 2:GH, 3:GA, 4:Data, 5:Runda
+                if (c.length < 5) return;
+                
+                // Zabezpieczenie: jeśli to wiersz z Tabeli (pomyłka linków), pomiń go
+                if (!c[4] || c[4].length < 4) return; 
+
+                const r = c[5]; // Runda
+                if (!rounds[r]) rounds[r] = [];
+                rounds[r].push({ h: c[0], a: c[1], sH: c[2], sA: c[3], date: c[4] });
+            });
+
+            // Sortowanie i wyświetlanie rund
+            Object.keys(rounds).sort((a,b) => a - b).forEach(r => {
+                // Data "DO" pobrana z pierwszego meczu rundy
+                const dObj = new Date(rounds[r][0].date);
+                const niceDate = dObj.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long' });
+
+                const rDiv = document.createElement('div');
+                rDiv.className = 'round-header';
+                rDiv.innerHTML = `RUNDA ${r} <span style="font-size:0.8rem; display:block; margin-top:5px; opacity:0.7;">DO ${niceDate}</span>`;
+                schedContainer.appendChild(rDiv);
+
+                rounds[r].forEach(m => {
+                    const hasScore = (m.sH !== '' && m.sH !== undefined);
+                    let scoreHtml = hasScore 
+                        ? `<span style="color:#44b1ff;">${m.sH}:${m.sA}</span>` 
+                        : `<span class="score-empty">-:-</span>`;
+
+                    const mDiv = document.createElement('div');
+                    mDiv.className = 'match-row';
+                    mDiv.innerHTML = `
+                        <div class="match-date">DO: ${m.date}</div>
+                        <div class="match-duel">
+                            <span>${m.h}</span>
+                            <span style="color:#444; font-size:0.8rem;">v</span>
+                            <span>${m.a}</span>
+                        </div>
+                        <div class="match-score">${scoreHtml}</div>
+                    `;
+                    schedContainer.appendChild(mDiv);
+                });
+            });
+
+        } catch (error) { 
+            console.error('Błąd:', error); 
+        }
+    }
+    loadEliteData();
+</script>
 
 </body>
 </html>

@@ -17,10 +17,10 @@
     .navbar-brand img { height: 4.5rem !important; }
     .navbar-nav { display: flex !important; align-items: center !important; flex-direction: row !important; }
     .nav-item { list-style: none !important; margin-left: 20px !important; }
-    .nav-link { color: #fff !important; font-size: 1.1rem !important; text-decoration: none !important; }
+    .nav-link { color: #fff !important; font-size: 1.1rem !important; white-space: nowrap !important; }
     .nav-link:hover { color: #44b1ff !important; }
 
-    /* --- STYLIZACJA TABELI (KOMPAKTOWA) --- */
+    /* --- STYLIZACJA TABELI --- */
     .table-container-main { padding: 140px 0 60px 0; }
     
     .gfl-card { 
@@ -29,13 +29,14 @@
         border: 1px solid #222; 
         overflow: hidden;
         box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-        max-width: 1000px; /* Zmniejszona szerokość na kompie */
+        max-width: 1000px;
         margin: 0 auto;
     }
 
     .gfl-card-header { background: #111; padding: 20px; text-align: center; border-bottom: 1px solid #222; }
     .table-title { font-size: 2.2rem; margin: 0; color: #fff; }
 
+    /* WRAPPER DLA PRZEWIJANIA */
     .table-responsive-wrapper {
         width: 100%;
         overflow-x: auto;
@@ -44,48 +45,65 @@
 
     .gfl-table { 
         width: 100%; 
-        border-collapse: collapse; 
+        border-collapse: separate; /* Wymagane dla sticky */
+        border-spacing: 0;
         color: #fff; 
         font-size: 0.95rem;
     }
 
+    /* --- NAGŁÓWKI --- */
     .gfl-table thead th {
         background: #000;
         color: #666;
         font-family: 'Bebas Neue';
-        padding: 12px 8px;
+        padding: 15px 10px;
         text-transform: uppercase;
         font-weight: normal;
         font-size: 1rem;
         border-bottom: 1px solid #222;
         text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    /* --- PRZYPIĘTE KOLUMNY (Sticky) --- */
+    .sticky-col-1 {
+        position: sticky !important;
+        left: 0;
+        background: #080808 !important; /* Tło musi być pełne, by inne dane pod spodem nie prześwitywały */
+        z-index: 2 !important;
+        width: 40px;
+    }
+    .sticky-col-2 {
+        position: sticky !important;
+        left: 40px; /* Szerokość pierwszej kolumny */
+        background: #080808 !important;
+        z-index: 2 !important;
+        text-align: left !important;
+        border-right: 1px solid #222;
     }
 
     .gfl-table tbody td {
-        padding: 12px 8px;
+        padding: 15px 10px;
         border-bottom: 1px solid #141414;
         text-align: center;
         vertical-align: middle;
     }
 
-    .col-pos { color: #44b1ff; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.1rem; width: 40px; }
-    .col-team { text-align: left !important; font-weight: bold; min-width: 140px; }
+    .col-pos { color: #44b1ff; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.1rem; }
+    .col-team { font-weight: bold; min-width: 180px; color: #fff; }
     .col-highlight { color: #44b1ff; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.2rem; }
     
-    .gfl-table tr:hover { background: #111; }
+    .gfl-table tr:hover td { background: #111 !important; }
 
     .loader { text-align: center; padding: 50px; color: #44b1ff; font-family: 'Bebas Neue'; font-size: 1.8rem; }
     .footer { padding: 40px 0; border-top: 1px solid #111; text-align: center; color: #444; }
 
-    /* OPTYMALIZACJA POD TELEFON */
     @media (max-width: 767px) {
+        .gfl-table { min-width: 700px; } /* Gwarantuje, że będzie co przewijać w bok */
         .table-title { font-size: 1.6rem; }
-        .table-container-main { padding-top: 110px; }
         .navbar-brand img { height: 3.5rem !important; }
-        .gfl-table { font-size: 0.8rem; }
-        .gfl-table thead th, .gfl-table tbody td { padding: 8px 4px; }
-        .col-team { min-width: 110px; }
-        .col-pos { width: 30px; }
     }
   </style>
 </head>
@@ -116,7 +134,7 @@
     <div class="container">
         <div class="gfl-card">
             <div class="gfl-card-header">
-                <h2 class="table-title">TABELA ELITE LEAGUE</h2>
+                <h2 class="table-title">TABELA LIGOWA ELITE</h2>
             </div>
             
             <div id="loading" class="loader">POBIERANIE WYNIKÓW...</div>
@@ -125,8 +143,8 @@
                 <table class="gfl-table" id="league-table" style="display: none;">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th style="text-align: left;">DRUŻYNA</th>
+                            <th class="sticky-col-1">#</th>
+                            <th class="sticky-col-2">DRUŻYNA</th>
                             <th>M</th>
                             <th>W</th>
                             <th>R</th>
@@ -162,8 +180,8 @@
 
                 html += `
                     <tr>
-                        <td class="col-pos">${col[0]}</td>
-                        <td class="col-team">${col[1]}</td>
+                        <td class="col-pos sticky-col-1">${col[0]}</td>
+                        <td class="col-team sticky-col-2">${col[1]}</td>
                         <td>${col[2]}</td>
                         <td>${col[3]}</td>
                         <td>${col[5]}</td>

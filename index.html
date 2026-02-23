@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Elite League - GFL</title>
+  <title>Gdynia Football League - Strona Główna</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
   
@@ -16,59 +16,60 @@
   <style>
     body { background-color: #000; color: #fff; }
 
-    /* MENU I FONTY */
-    .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4, h1, h2, h3, .table-header, .round-header {
+    /* FONTY I MENU */
+    .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4, .btn {
         font-family: 'Bebas Neue', sans-serif !important;
         text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+    }
+    h1, h2, h3, h4, h5, .display-1, .display-2, .display-5, .display-7 { 
+        font-family: 'Bebas Neue', sans-serif !important; 
         letter-spacing: 1px;
+        text-transform: uppercase;
     }
-    .nav-link { font-size: 1.1rem !important; }
-
-    /* TABELA */
-    .custom-table-container {
-        background: #111; border-radius: 15px; padding: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow-x: auto; position: relative; margin-bottom: 60px;
-    }
-    .gfl-table { width: 100%; border-collapse: separate; border-spacing: 0; white-space: nowrap; font-family: sans-serif; }
-    .gfl-table th { background: #000; color: #888; padding: 15px; border-bottom: 2px solid #333; }
-    .gfl-table td { padding: 15px; border-bottom: 1px solid #222; text-align: center; color: #fff; }
-    .gfl-table tr:hover td { background-color: #1a1a1a; }
-    .gfl-table tbody tr:first-child td { color: #44b1ff; font-weight: bold; }
-    .pts-col { font-weight: bold; color: #44b1ff; font-size: 1.1rem; }
-    .sticky-col { position: sticky; left: 0; background: #111; z-index: 10; border-right: 1px solid #333; text-align: left !important; font-weight: 600; color: #fff; }
-
-    /* TERMINARZ - FIX WIDOCZNOŚCI */
-    .schedule-container { max-width: 900px; margin: 0 auto; }
-    .round-header {
-        background: #1a1a1a; color: #44b1ff; padding: 15px; margin-top: 40px; margin-bottom: 15px;
-        border-radius: 8px; text-align: center; border: 1px solid #333; font-size: 1.5rem;
-    }
-    .match-row {
-        display: flex; justify-content: space-between; align-items: center;
-        padding: 15px 10px; border-bottom: 1px solid #222; transition: 0.2s; font-family: sans-serif;
-    }
-    .match-row:hover { background-color: #0a0a0a; }
     
-    .match-date { width: 25%; font-size: 0.8rem; color: #666; text-transform: uppercase; }
-    
-    /* TU JEST FIX KOLORÓW - WYMUSZENIE BIAŁEGO */
-    .match-duel { width: 50%; display: flex; justify-content: center; align-items: center; gap: 15px; font-weight: 600; font-size: 1rem; color: #ffffff !important; }
-    .match-duel span { color: #ffffff !important; }
-    .vs-sign { color: #444 !important; font-size: 0.8rem; margin: 0 5px; }
-    
-    .match-score { width: 25%; text-align: right; font-weight: bold; font-size: 1.2rem; color: #44b1ff; }
-
-    @media (max-width: 768px) {
-        .custom-table-container { padding: 10px; }
-        .gfl-table th, .gfl-table td { padding: 10px 6px; font-size: 0.8rem; }
-        .match-row { flex-direction: column; text-align: center; gap: 8px; }
-        .match-date, .match-duel, .match-score { width: 100%; text-align: center; }
+    /* HERO */
+    .header-section {
+        background-image: url('assets/images/background-gfl.jpg'); /* Tu wstaw swoje tło */
+        background-size: cover;
+        background-position: center;
+        background-color: #000;
+        padding: 160px 0 100px 0;
+        text-align: center;
+        position: relative;
     }
+    .header-overlay {
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0,0,0,0.7); z-index: 1;
+    }
+    .header-content { position: relative; z-index: 2; }
+
+    /* MEDIA SECTION (WIDEO/AUDIO) */
+    .media-section { background: #000; padding: 60px 0; border-bottom: 1px solid #222; }
+    
+    /* COUNTER SECTION (LICZBY) */
+    .counters-section { background: #111; padding: 80px 0; border-top: 1px solid #222; }
+    .counter-box { text-align: center; padding: 20px; }
+    .counter-number { font-size: 4rem; color: #44b1ff; font-family: 'Bebas Neue', sans-serif; line-height: 1; }
+    .counter-text { font-size: 1.2rem; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin-top: 10px; opacity: 0.8; }
+
+    /* MATCH CENTER */
+    .match-center-section { background-color: #0a0a0a; padding: 60px 0; }
+    .matches-scroll-container { width: 100%; overflow-x: auto; padding-bottom: 20px; scrollbar-width: thin; scrollbar-color: #333 #111; }
+    .match-card {
+        background: #1a1a1a; border: 1px solid #333; border-radius: 12px;
+        min-width: 280px; padding: 20px; display: flex; flex-direction: column; justify-content: center; transition: 0.3s;
+    }
+    .match-card:hover { border-color: #44b1ff; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(68, 177, 255, 0.1); }
+    .match-info { font-size: 0.8rem; color: #888; margin-bottom: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+    .team-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 1.1rem; font-weight: 600; color: #fff; }
+    .team-score { color: #44b1ff; font-weight: bold; }
+
   </style>
 </head>
 <body>
 
-<section data-bs-version="5.1" class="menu menu6 cid-uofyC8wzPD" once="menu" id="menu06-elite">
+<section data-bs-version="5.1" class="menu menu6 cid-uofyC8wzPD" once="menu" id="menu06-index">
     <nav class="navbar navbar-dropdown opacityScrollOff navbar-expand-lg">
         <div class="container">
             <div class="navbar-brand">
@@ -99,32 +100,64 @@
     </nav>
 </section>
 
-<section style="padding: 120px 0 80px 0;">
+<section class="header-section">
+    <div class="header-overlay"></div>
+    <div class="container header-content">
+        <h1 class="mbr-section-title mbr-fonts-style mb-3 display-1"><strong>GDYNIA FOOTBALL LEAGUE</strong></h1>
+        <p class="mbr-text mbr-fonts-style display-5 mb-4" style="color: #ccc;">Więcej niż piłka.</p>
+        <div class="mbr-section-btn mt-3">
+            <a class="btn btn-primary display-4" href="elite.html">ZOBACZ TABELE</a>
+            <a class="btn btn-white-outline display-4" href="onas.html">DOŁĄCZ DO NAS</a>
+        </div>
+    </div>
+</section>
+
+<section class="media-section">
     <div class="container">
-        <h1 class="text-center mb-3" style="font-size: 4rem;">ELITE LEAGUE</h1>
-        <p class="text-center mb-5" style="color: #ccc;">Najwyższy poziom rozgrywkowy. Tutaj walczymy o tytuł Mistrza GFL.</p>
-        
         <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="custom-table-container">
-                    <h3 class="table-header mb-4 text-center">TABELA LIGOWA</h3>
-                    <table class="gfl-table">
-                        <thead>
-                            <tr><th>#</th><th class="sticky-col">DRUŻYNA</th><th>M</th><th>W</th><th>R</th><th>P</th><th>BRAMKI</th><th>PKT</th></tr>
-                        </thead>
-                        <tbody id="tableBody"><tr><td colspan="8" style="padding:30px;">Ładowanie tabeli...</td></tr></tbody>
-                    </table>
-                    <p class="text-center mt-3 d-block d-md-none" style="color: #666; font-size: 0.7rem;">Przesuń tabelę w prawo</p>
+            <div class="col-12 col-md-10 text-center">
+                <h3 class="mbr-section-subtitle display-5 mb-4" style="color:#44b1ff;">ZAPOWIEDŹ KOLEJKI</h3>
+                <div style="background: #111; padding: 100px 20px; border: 1px dashed #333; border-radius: 10px;">
+                    <h4 class="display-7" style="color: #666;">TU POJAWI SIĘ WIDEO ZAPOWIEDŹ</h4>
+                    <p style="color: #444;">(Wstaw kod embed YouTube w pliku HTML)</p>
                 </div>
             </div>
         </div>
+    </div>
+</section>
 
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <h3 class="table-header text-center" style="border-top: 1px solid #333; padding-top: 50px;">TERMINARZ ROZGRYWEK</h3>
-                <div id="full-schedule-container" class="schedule-container">
-                    <div class="text-center" style="color: #666; margin-top:20px;">Ładowanie terminarza...</div>
+<section class="match-center-section">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 d-flex justify-content-between align-items-end">
+                <div>
+                    <h4 class="mbr-section-subtitle mbr-fonts-style display-7" style="color: #44b1ff; letter-spacing: 2px;">TERMINARZ</h4>
+                    <h2 class="mbr-section-title mbr-fonts-style display-2">NAJBLIŻSZE MECZE</h2>
                 </div>
+            </div>
+        </div>
+        <div class="matches-scroll-container">
+            <div class="d-flex" id="matches-wrapper" style="gap: 20px;">
+                <div class="match-card-loading" style="color:#888; font-family: 'Bebas Neue', sans-serif; padding: 20px;">Ładowanie...</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="counters-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4 counter-box">
+                <div class="counter-number">3</div>
+                <div class="counter-text">Ligi</div>
+            </div>
+            <div class="col-md-4 counter-box">
+                <div class="counter-number">36</div>
+                <div class="counter-text">Drużyn</div>
+            </div>
+            <div class="col-md-4 counter-box">
+                <div class="counter-number">537</div>
+                <div class="counter-text">Zawodników</div>
             </div>
         </div>
     </div>
@@ -144,92 +177,51 @@
 <script src="assets/theme/js/script.js"></script>
 
 <script>
-    // -------------------------------------------------------------------------
-    // !!! WAŻNE: TU MUSZĄ BYĆ DWA RÓŻNE LINKI !!!
-    // -------------------------------------------------------------------------
-    
-    // 1. LINK DO TABELI (Zakładka WWW - tam gdzie masz posortowane drużyny)
-    // Jeśli tabela jest pusta, to znaczy, że tu jest zły link (np. do zakładki Mecze)
-    const tableUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?output=csv';
-    
-    // 2. LINK DO TERMINARZA (Zakładka MECZE - tam gdzie masz listę spotkań)
-    const scheduleUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv';
+    // LINK DO ZAKŁADKI MECZE (Żeby widget działał)
+    const matchesUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv';
 
-    async function loadEliteData() {
+    async function loadMatchCenter() {
         try {
-            // --- TABELA ---
-            const resTable = await fetch(tableUrl);
-            const dataTable = await resTable.text();
-            const tableRows = dataTable.split('\n').slice(1);
-            const tbody = document.getElementById('tableBody');
-            tbody.innerHTML = ''; 
+            const response = await fetch(matchesUrl);
+            const data = await response.text();
+            const rows = data.split('\n').slice(1);
+            const container = document.getElementById('matches-wrapper');
+            container.innerHTML = ''; 
 
-            tableRows.forEach(row => {
-                let cols = row.trim().split(',');
-                if (cols.length < 2) cols = row.trim().split(';'); // Obsługa polskich Exceli
+            const today = new Date(); today.setHours(0,0,0,0);
+            
+            // Obsługa separatora (przecinek lub średnik - zależnie od regionu Excela)
+            const matchesList = rows.map(row => {
+                let cols = row.split(',');
+                if (cols.length < 2) cols = row.split(';'); // Fallback dla polskich Exceli
                 
-                // Jeśli wiersz ma za mało danych (np. puste wiersze), pomiń
-                if (cols.length >= 8) { 
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>${cols[0]}</td>
-                        <td class="sticky-col">${cols[1]}</td>
-                        <td>${cols[2]}</td><td>${cols[3]}</td><td>${cols[5]}</td><td>${cols[4]}</td>
-                        <td>${cols[6]}:${cols[7]}</td>
-                        <td class="pts-col">${cols[9]}</td>`;
-                    tbody.appendChild(tr);
-                }
-            });
+                if(cols.length < 5) return null;
+                return { home: cols[0], away: cols[1], scoreH: cols[2], scoreA: cols[3], date: cols[4], round: cols[5] };
+            }).filter(m => m !== null && m.date);
 
-            // --- TERMINARZ ---
-            const resSchedule = await fetch(scheduleUrl);
-            const dataSchedule = await resSchedule.text();
-            const schedRows = dataSchedule.split('\n').slice(1);
-            const schedContainer = document.getElementById('full-schedule-container');
-            schedContainer.innerHTML = '';
+            const upcoming = matchesList.filter(m => new Date(m.date) >= today);
+            upcoming.sort((a, b) => new Date(a.date) - new Date(b.date));
+            let display = upcoming.length > 0 ? upcoming.slice(0, 10) : matchesList.slice(-5).reverse();
 
-            let rounds = {};
-            schedRows.forEach(row => {
-                let c = row.trim().split(',');
-                if (c.length < 2) c = row.trim().split(';');
+            display.forEach(m => {
+                const dateObj = new Date(m.date);
+                const niceDate = dateObj.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long' });
+                const hasScore = (m.scoreH && m.scoreH.trim() !== '');
                 
-                // Ignorujemy wiersze, które nie mają daty (kolumna 4)
-                if (c.length < 6 || !c[4] || c[4].length < 4) return;
+                let header = hasScore ? `KOLEJKA ${m.round} | WYNIK` : `KOLEJKA ${m.round} | DO ${niceDate}`;
+                let sH = hasScore ? m.scoreH : '-'; let sA = hasScore ? m.scoreA : '-';
+                let sColor = hasScore ? 'color:#44b1ff;' : 'color:#555;';
 
-                const r = c[5]; // Numer kolejki
-                if (!rounds[r]) rounds[r] = [];
-                rounds[r].push({ h: c[0], a: c[1], sH: c[2], sA: c[3], date: c[4] });
+                container.innerHTML += `
+                    <div class="match-card">
+                        <div class="match-info">${header}</div>
+                        <div class="team-row"><span>${m.home}</span><span class="team-score" style="${sColor}">${sH}</span></div>
+                        <div class="team-row"><span>${m.away}</span><span class="team-score" style="${sColor}">${sA}</span></div>
+                    </div>`;
             });
-
-            Object.keys(rounds).sort((a,b) => a - b).forEach(r => {
-                const dObj = new Date(rounds[r][0].date);
-                const niceDate = dObj.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long' });
-
-                const rDiv = document.createElement('div');
-                rDiv.className = 'round-header';
-                rDiv.innerHTML = `KOLEJKA ${r} <span style="font-size:0.8rem; display:block; margin-top:5px; opacity:0.7;">DO ${niceDate}</span>`;
-                schedContainer.appendChild(rDiv);
-
-                rounds[r].forEach(m => {
-                    const hasScore = (m.sH && m.sH.trim() !== '');
-                    let scoreHtml = hasScore ? `<span style="color:#44b1ff;">${m.sH}:${m.sA}</span>` : `<span class="score-empty">-:-</span>`;
-
-                    const mDiv = document.createElement('div');
-                    mDiv.className = 'match-row';
-                    mDiv.innerHTML = `
-                        <div class="match-date">DO: ${m.date}</div>
-                        <div class="match-duel">
-                            <span>${m.h}</span><span class="vs-sign">v</span><span>${m.a}</span>
-                        </div>
-                        <div class="match-score">${scoreHtml}</div>`;
-                    schedContainer.appendChild(mDiv);
-                });
-            });
-
-        } catch (error) { console.error('Błąd:', error); }
+        } catch (e) { console.error(e); }
     }
-    loadEliteData();
+    loadMatchCenter();
 </script>
-
 </body>
 </html>

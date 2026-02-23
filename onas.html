@@ -16,33 +16,43 @@
     .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
     .navbar-brand img { height: 4.5rem !important; }
     
-    .navbar-nav { display: flex !important; align-items: center !important; flex-direction: row !important; }
-    .nav-item { list-style: none !important; margin-left: 20px !important; }
+    /* Podstawowy układ - bez !important dla kierunku, by mobile mógł to zmienić */
+    .navbar-nav { display: flex !important; align-items: center; }
+    .nav-item { list-style: none; margin-left: 20px; }
     .nav-link { color: #fff !important; font-size: 1.1rem !important; text-decoration: none !important; }
     .nav-link:hover { color: #44b1ff !important; }
 
     /* BIAŁY HAMBURGER */
     .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
     .navbar-toggler-icon { 
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
     }
 
     /* DROPDOWN */
     .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
-    .dropdown-item { color: #fff !important; font-family: 'Bebas Neue', sans-serif !important; font-size: 1.1rem !important; }
+    .dropdown-item { color: #fff !important; font-family: 'Bebas Neue' !important; font-size: 1.1rem !important; }
     .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
 
     /* --- TREŚĆ --- */
-    .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; }
+    .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
     .content-body { padding: 60px 0; line-height: 1.8; color: #ccc; font-size: 1.1rem; }
     .highlight-card { border-left: 4px solid #44b1ff; background: #0f0f0f; padding: 30px; border-radius: 0 15px 15px 0; margin: 40px 0; }
     
     .footer { padding: 40px 0; border-top: 1px solid #111; text-align: center; color: #444; font-size: 0.9rem; }
 
+    /* --- POPRAWKA MOBILNA --- */
     @media (max-width: 991px) {
-        .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; display: none !important; }
-        .navbar-nav.show { display: flex !important; }
-        .nav-item { margin: 10px 0 !important; }
+        .navbar-nav { 
+            flex-direction: column !important; 
+            background: #000; 
+            padding: 20px; 
+            width: 100%; 
+        }
+        /* Ukrywamy kontener collapse, dopóki nie dostanie klasy .show od Bootstrapa */
+        .collapse:not(.show) .navbar-nav { 
+            display: none !important; 
+        }
+        .nav-item { margin: 10px 0 !important; margin-left: 0 !important; }
         .navbar-brand img { height: 3.5rem !important; }
     }
   </style>
@@ -62,8 +72,8 @@
                 <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
                 <li class="nav-item"><a class="nav-link" href="onas.html" style="color: #44b1ff !important;">O nas</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
-                    <ul class="dropdown-menu">
+                    <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown" aria-expanded="false">Rozgrywki</a>
+                    <ul class="dropdown-menu" aria-labelledby="rozDrop">
                         <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
                         <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
                         <li><a class="dropdown-item" href="aspire.html">Aspire League</a></li>

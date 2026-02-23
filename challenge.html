@@ -1,197 +1,74 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Challenge League - GFL</title>
+  <title>Challenge League | Gdynia Football League</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
-  
-  <link rel="stylesheet" href="assets/web/assets/mobirise-icons2/mobirise2.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/dropdown/css/style.css">
-  <link rel="stylesheet" href="assets/theme/css/style.css">
-  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-  
   <style>
-    body { background-color: #000; color: #fff; }
-
-    /* MENU I NAGŁÓWKI */
-    .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4 {
-        font-family: 'Bebas Neue', sans-serif !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-        font-size: 1.1rem !important;
-    }
-    h1, h2, h3, h4, h5, .display-1, .display-2, .table-header { 
-        font-family: 'Bebas Neue', sans-serif !important; 
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
-    
-    /* TABELA */
-    .custom-table-container {
-        background: #111;
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        overflow-x: auto;
-        position: relative;
-    }
-    .gfl-table {
-        width: 100%;
-        border-collapse: separate;
-        border-spacing: 0;
-        color: #fff;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-        white-space: nowrap;
-    }
-    .gfl-table th {
-        background-color: #000;
-        color: #888;
-        padding: 15px;
-        font-size: 0.85rem;
-        border-bottom: 2px solid #333;
-    }
-    .gfl-table td {
-        padding: 15px;
-        border-bottom: 1px solid #222;
-        text-align: center;
-        vertical-align: middle;
-    }
-    .gfl-table tr:hover td { background-color: #1a1a1a; }
-    
-    .gfl-table tbody tr:first-child td { color: #44b1ff; font-weight: bold; }
-    .pts-col { font-weight: bold; font-size: 1.1rem; color: #44b1ff; }
-
-    /* STICKY COLUMN (MOBILE) */
-    .sticky-col {
-        position: sticky;
-        left: 0;
-        background-color: #111;
-        z-index: 10;
-        border-right: 1px solid #333;
-        text-align: left !important;
-        font-weight: 600;
-        color: #fff;
-    }
-    
-    @media (max-width: 768px) {
-        .custom-table-container { padding: 10px; }
-        .gfl-table th, .gfl-table td { padding: 10px 6px; font-size: 0.8rem; }
-        .sticky-col { background-color: #111; }
-    }
+    body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
+    h1, h2, h3, .nav-link, .dropdown-item { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
+    .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
+    .navbar-brand img { height: 5rem !important; }
+    .navbar-nav { display: flex !important; align-items: center !important; }
+    .nav-item { list-style: none !important; margin-left: 25px !important; }
+    .nav-link { color: #fff !important; font-size: 1.2rem !important; white-space: nowrap !important; }
+    .nav-link:hover { color: #44b1ff !important; }
+    .dropdown-menu { background: #111 !important; border: 1px solid #333 !important; }
+    .dropdown-item { color: #fff !important; font-size: 1.1rem !important; }
+    .dropdown-item:hover { background: #44b1ff !important; color: #000 !important; }
+    .page-header { padding: 160px 0 40px 0; text-align: center; background: #0a0a0a; }
+    .iframe-container { background: #fff; border-radius: 10px; overflow: hidden; margin: 40px 0; position: relative; padding-bottom: 100%; height: 0; border: 1px solid #333; }
+    .iframe-container iframe { position: absolute; top:0; left: 0; width: 100%; height: 100%; border:0; }
+    .footer { padding: 40px 0; border-top: 1px solid #111; text-align: center; color: #666; font-size: 0.9rem; }
+    @media (max-width: 991px) { .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; } .nav-item { margin: 10px 0 !important; } .navbar-brand img { height: 3.5rem !important; } }
   </style>
 </head>
 <body>
 
-<section data-bs-version="5.1" class="menu menu6 cid-uofyC8wzPD" once="menu" id="menu06-challenge">
-    <nav class="navbar navbar-dropdown opacityScrollOff navbar-expand-lg">
-        <div class="container">
-            <div class="navbar-brand">
-                <span class="navbar-logo">
-                    <a href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL" style="height: 5rem;"></a>
-                </span>
-            </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <div class="hamburger"><span></span><span></span><span></span><span></span></div>
-            </button>
-            <div class="collapse navbar-collapse opacityScrollOff" id="navbarSupportedContent">
-                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true">
-                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="aktualnosci.html">Aktualności</a></li>
-                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="onas.html">O nas</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link link dropdown-toggle text-black display-4" href="#" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" aria-expanded="false">Rozgrywki</a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item show text-black text-primary display-4" href="elite.html">Elite League</a>
-                            <a class="dropdown-item show text-black text-primary display-4" href="challenge.html">Challenge League</a>
-                            <a class="dropdown-item show text-black text-primary display-4" href="aspire.html">Aspire League</a>
-                        </div>
-                    </li>
-                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="regulamin.html">Regulamin</a></li>
-                    <li class="nav-item"><a class="nav-link link show text-black display-4" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank">Zapisy</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-</section>
-
-<section style="padding: 120px 0 80px 0;">
+<nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
-        <h1 class="text-center mb-3" style="font-size: 4rem;">CHALLENGE LEAGUE</h1>
-        <p class="text-center mb-5" style="color: #ccc;">Przedsionek Elity. Tu toczy się zażarta walka o awans na szczyt.</p>
-        
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="custom-table-container">
-                    <h3 class="table-header mb-4 text-center">TABELA LIGOWA</h3>
-                    <table class="gfl-table">
-                        <thead>
-                            <tr>
-                                <th>#</th> 
-                                <th class="sticky-col">DRUŻYNA</th> 
-                                <th>M</th> <th>W</th> <th>R</th> <th>P</th> <th>BRAMKI</th> <th>PKT</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody">
-                            <tr><td colspan="8" class="text-center" style="padding: 30px;">Ładowanie danych...</td></tr>
-                        </tbody>
-                    </table>
-                    <p class="text-center mt-3 d-block d-md-none" style="color: #666; font-size: 0.7rem;">
-                        <span class="mobirise-iconfont mbri-right" style="font-size: 1rem;"></span> Przesuń tabelę w prawo, aby zobaczyć więcej
-                    </p>
-                </div>
-            </div>
+        <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav" style="border-color: #44b1ff;"><span class="navbar-toggler-icon" style="filter: invert(1);"></span></button>
+        <div class="collapse navbar-collapse justify-content-end" id="gflNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
+                <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown" style="color: #44b1ff !important;">Rozgrywki</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
+                        <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
+                        <li><a class="dropdown-item" href="aspire.html">Aspire League</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px;">Zapisy</a></li>
+            </ul>
         </div>
+    </div>
+</nav>
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="display-1" style="color: #44b1ff;">CHALLENGE LEAGUE</h1>
+        <p style="color: #888; letter-spacing: 2px;">TABELA I TERMINARZ SEZONU II</p>
     </div>
 </section>
 
-<section class="footer4 cid-uK1l7aKMna" style="background-color: #232323; padding: 3rem 0;">
-    <div class="container text-white text-center">
-        <h5 class="mb-2">GDYNIA FOOTBALL LEAGUE</h5>
-        <p class="small text-muted">© 2026 GFL</p>
+<section class="container">
+    <div class="iframe-container">
+        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3/pubhtml?gid=1101831234&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
     </div>
 </section>
+
+<footer class="footer">
+    <div class="container"><h5>GDYNIA FOOTBALL LEAGUE</h5><p>© 2026 GFL | Org: Ezi</p></div>
+</footer>
 
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/smoothscroll/smooth-scroll.js"></script>
-<script src="assets/dropdown/js/navbar-dropdown.js"></script>
-<script src="assets/theme/js/script.js"></script>
-
-<script>
-    // LINK DO ARKUSZA CHALLENGE
-    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3/pub?gid=1101831234&single=true&output=csv';
-
-    async function loadTable() {
-        try {
-            const response = await fetch(sheetUrl);
-            const data = await response.text();
-            const rows = data.split('\n').slice(1);
-            const tbody = document.getElementById('tableBody');
-            tbody.innerHTML = ''; 
-
-            rows.forEach(row => {
-                const cols = row.trim().split(',');
-                if (cols.length >= 8) { 
-                    const tr = document.createElement('tr');
-                    tr.innerHTML = `
-                        <td>${cols[0]}</td>
-                        <td class="sticky-col">${cols[1]}</td>
-                        <td>${cols[2]}</td>
-                        <td>${cols[3]}</td>
-                        <td>${cols[5]}</td>
-                        <td>${cols[4]}</td>
-                        <td>${cols[6]}:${cols[7]}</td>
-                        <td class="pts-col">${cols[9]}</td>
-                    `;
-                    tbody.appendChild(tr);
-                }
-            });
-        } catch (error) { console.error(error); }
-    }
-    loadTable();
-</script>
-
 </body>
 </html>

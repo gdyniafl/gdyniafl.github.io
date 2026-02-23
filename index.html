@@ -12,15 +12,17 @@
     body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
     h1, h2, h3, h4, .nav-link, .stat-num, .hof-name { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* --- NAWIGACJA (SPÓJNA) --- */
+    /* --- NAWIGACJA --- */
     .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
     .navbar-brand img { height: 4.5rem !important; }
     .navbar-nav { display: flex !important; align-items: center !important; flex-direction: row !important; }
     .nav-item { list-style: none !important; margin-left: 20px !important; }
     .nav-link { color: #fff !important; font-size: 1.1rem !important; text-decoration: none !important; }
     .nav-link:hover { color: #44b1ff !important; }
+    .dropdown-menu { background: #111 !important; border: 1px solid #333 !important; }
+    .dropdown-item { color: #fff !important; font-family: 'Bebas Neue', sans-serif !important; }
 
-    /* --- HERO SECTION --- */
+    /* --- HERO --- */
     .hero-section { 
         padding: 180px 0 120px 0; 
         text-align: center; 
@@ -33,14 +35,12 @@
     /* --- MATCH CENTER --- */
     .match-center { padding: 60px 0; background: #050505; }
     .match-scroll { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 20px; -webkit-overflow-scrolling: touch; }
-    .match-card { 
-        min-width: 300px; background: #0f0f0f; border: 1px solid #222; border-radius: 10px; padding: 20px; 
-    }
+    .match-card { min-width: 300px; background: #0f0f0f; border: 1px solid #222; border-radius: 10px; padding: 20px; }
     .league-tag { font-size: 0.7rem; color: #44b1ff; font-weight: bold; letter-spacing: 1px; }
     .team-row { display: flex; justify-content: space-between; font-weight: bold; margin: 5px 0; }
     .score-box { color: #44b1ff; font-family: 'Bebas Neue'; font-size: 1.4rem; }
 
-    /* --- STATS BAR --- */
+    /* --- STATS --- */
     .stats-bar { background: #0a0a0a; padding: 50px 0; border-top: 1px solid #111; border-bottom: 1px solid #111; }
     .stat-box { text-align: center; }
     .stat-num { font-size: 3.5rem; color: #44b1ff; line-height: 1; }
@@ -56,15 +56,12 @@
     .hof-label { color: #666; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-family: sans-serif; }
     .hof-stat { color: #44b1ff; font-weight: bold; font-size: 0.9rem; margin-top: 5px; }
 
-    /* STOPKA */
     .footer { padding: 40px 0; border-top: 1px solid #111; text-align: center; color: #444; }
 
     @media (max-width: 991px) {
-        .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; display: none !important; }
-        .navbar-nav.show { display: flex !important; }
+        .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; }
         .nav-item { margin: 10px 0 !important; }
         .hero-title { font-size: 3rem; }
-        .navbar-brand img { height: 3.5rem !important; }
     }
   </style>
 </head>
@@ -79,7 +76,7 @@
                 <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
                 <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Rozgrywki</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
                         <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
@@ -105,7 +102,7 @@
     <div class="container">
         <h2 class="mb-4">AKTUALNA KOLEJKA</h2>
         <div class="match-scroll" id="match-center-wrapper">
-            <div class="loader" style="padding: 20px;">POBIERANIE MECZÓW...</div>
+            <div style="padding: 20px; color: #44b1ff;">ŁADOWANIE TERMINARZA...</div>
         </div>
     </div>
 </section>
@@ -113,18 +110,9 @@
 <section class="stats-bar">
     <div class="container">
         <div class="row">
-            <div class="col-4 stat-box">
-                <div class="stat-num">3</div>
-                <div class="stat-label">Ligi</div>
-            </div>
-            <div class="col-4 stat-box">
-                <div class="stat-num">36</div>
-                <div class="stat-label">Drużyn</div>
-            </div>
-            <div class="col-4 stat-box">
-                <div class="stat-num">537</div>
-                <div class="stat-label">Graczy</div>
-            </div>
+            <div class="col-4 stat-box"><div class="stat-num">3</div><div class="stat-label">Ligi</div></div>
+            <div class="col-4 stat-box"><div class="stat-num">36</div><div class="stat-label">Drużyn</div></div>
+            <div class="col-4 stat-box"><div class="stat-num">537</div><div class="stat-label">Graczy</div></div>
         </div>
     </div>
 </section>
@@ -132,109 +120,35 @@
 <section class="hof-section">
     <div class="container">
         <h2 style="color: #C9A050; font-size: 3.5rem;">HALL OF FAME</h2>
-        <p style="color: #444; letter-spacing: 2px;">HISTORIA PISZE SIĘ NA BOISKU</p>
-
+        
         <h3 class="season-title">SEZON I</h3>
         <div class="row justify-content-center">
-            <div class="col-6 col-md-4 mb-4">
-                <div class="hof-card gold">
-                    <div class="hof-label">MISTRZ ELITE</div>
-                    <div class="hof-name">CZARODZIEJSKIE LISY</div>
-                    <div style="font-size: 1.5rem;">🏆</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 mb-4">
-                <div class="hof-card">
-                    <div class="hof-label">MISTRZ CHALLENGE</div>
-                    <div class="hof-name">COCCOLINO FRESH</div>
-                    <div style="font-size: 1.5rem;">🥈</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 mb-4">
-                <div class="hof-card">
-                    <div class="hof-label">MISTRZ ASPIRE</div>
-                    <div class="hof-name">OGARNIJ SIĘ FC</div>
-                    <div style="font-size: 1.5rem;">🥉</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 mb-4">
-                <div class="hof-card">
-                    <div class="hof-label">KRÓL ELITE (S1)</div>
-                    <div class="hof-name">ADAM WINNICKI</div>
-                    <div class="hof-stat">41 GOLI ⚽</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 mb-4">
-                <div class="hof-card">
-                    <div class="hof-label">KRÓL CHALLENGE (S1)</div>
-                    <div class="hof-name">PATRYK KLINKUSZ</div>
-                    <div class="hof-stat">39 GOLI ⚽</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 mb-4">
-                <div class="hof-card">
-                    <div class="hof-label">KRÓL ASPIRE (S1)</div>
-                    <div class="hof-name">ARTUR ELIASZ</div>
-                    <div class="hof-stat">48 GOLI ⚽</div>
-                </div>
-            </div>
+            <div class="col-6 col-md-4 mb-4"><div class="hof-card gold"><div class="hof-label">MISTRZ ELITE</div><div class="hof-name">CZARODZIEJSKIE LISY</div>🏆</div></div>
+            <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">MISTRZ CHALLENGE</div><div class="hof-name">COCCOLINO FRESH</div>🥈</div></div>
+            <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">MISTRZ ASPIRE</div><div class="hof-name">OGARNIJ SIĘ FC</div>🥉</div></div>
+            <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL ELITE (S1)</div><div class="hof-name">ADAM WINNICKI</div><div class="hof-stat">41 GOLI ⚽</div></div></div>
+            <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL CHALLENGE (S1)</div><div class="hof-name">PATRYK KLINKUSZ</div><div class="hof-stat">39 GOLI ⚽</div></div></div>
+            <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL ASPIRE (S1)</div><div class="hof-name">ARTUR ELIASZ</div><div class="hof-stat">48 GOLI ⚽</div></div></div>
         </div>
 
         <h3 class="season-title">SEZON 0</h3>
         <div class="row justify-content-center">
-            <div class="col-6 col-md-3 mb-4">
-                <div class="hof-card gold">
-                    <div class="hof-label">MISTRZ ELITE</div>
-                    <div class="hof-name">KASZTELANKI</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mb-4">
-                <div class="hof-card">
-                    <div class="hof-label">MISTRZ CHALLENGE</div>
-                    <div class="hof-name">KURNIK TUCHOMEK</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mb-4">
-                <div class="hof-card">
-                    <div class="hof-label">MISTRZ ASPIRE</div>
-                    <div class="hof-name">MISTRZOVIA GDYNIA A</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-3 mb-4">
-                <div class="hof-card">
-                    <div class="hof-label">MISTRZ AGGRESSIVE</div>
-                    <div class="hof-name">ZKS ZAGÓRZAK RUMIA</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 mb-4 offset-md-0">
-                <div class="hof-card">
-                    <div class="hof-label">KRÓL ELITE (S0)</div>
-                    <div class="hof-name">OLIVIER PLESKACZ</div>
-                    <div class="hof-stat">38 GOLI ⚽</div>
-                </div>
-            </div>
-            <div class="col-6 col-md-4 mb-4">
-                <div class="hof-card">
-                    <div class="hof-label">KRÓL CHALLENGE (S0)</div>
-                    <div class="hof-name">MICHAŁ SKOCZEK</div>
-                    <div class="hof-stat">44 GOLE ⚽</div>
-                </div>
-            </div>
+            <div class="col-6 col-md-3 mb-4"><div class="hof-card gold"><div class="hof-label">MISTRZ ELITE</div><div class="hof-name">KASZTELANKI</div></div></div>
+            <div class="col-6 col-md-3 mb-4"><div class="hof-card"><div class="hof-label">MISTRZ CHALLENGE</div><div class="hof-name">KURNIK TUCHOMEK</div></div></div>
+            <div class="col-6 col-md-3 mb-4"><div class="hof-card"><div class="hof-label">MISTRZ ASPIRE</div><div class="hof-name">MISTRZOVIA GDYNIA A</div></div></div>
+            <div class="col-6 col-md-3 mb-4"><div class="hof-card"><div class="hof-label">MISTRZ AGGRESSIVE</div><div class="hof-name">ZKS ZAGÓRZAK RUMIA</div></div></div>
+            <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL ELITE (S0)</div><div class="hof-name">OLIVIER PLESKACZ</div><div class="hof-stat">38 GOLI ⚽</div></div></div>
+            <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL CHALLENGE (S0)</div><div class="hof-name">MICHAŁ SKOCZEK</div><div class="hof-stat">44 GOLE ⚽</div></div></div>
         </div>
     </div>
 </section>
 
 <footer class="footer">
-    <div class="container">
-        <h5>GDYNIA FOOTBALL LEAGUE</h5>
-        <p>© 2026 GFL | Organizator: Ezi</p>
-    </div>
+    <div class="container"><h5>GDYNIA FOOTBALL LEAGUE</h5><p>© 2026 GFL | Org: Ezi</p></div>
 </footer>
 
 <script>
-    function playAudio() {
-        new Audio('assets/zapowiedz.mp3').play().catch(() => alert("Upewnij się, że plik assets/zapowiedz.mp3 istnieje!"));
-    }
+    function playAudio() { new Audio('assets/zapowiedz.mp3').play().catch(() => alert("Błąd audio.")); }
 
     const links = [
         { name: 'ELITE', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv' },
@@ -245,31 +159,28 @@
     async function loadMatches() {
         const wrapper = document.getElementById('match-center-wrapper');
         const today = new Date();
-        let allMatchesHtml = '';
+        let html = '';
 
         try {
             const results = await Promise.all(links.map(l => fetch(l.url).then(r => r.text())));
-            results.forEach((csv, index) => {
-                const rows = csv.split('\n').slice(1);
-                rows.forEach(row => {
+            results.forEach((csv, idx) => {
+                csv.split('\n').slice(1).forEach(row => {
                     const col = row.split(',');
                     if (col.length < 5) return;
-                    const matchDate = new Date(col[4]);
-                    const diffDays = (matchDate - today) / (1000 * 60 * 60 * 24);
-
-                    // POKAZUJ MECZE Z AKTUALNEJ KOLEJKI (2 tyg)
-                    if (diffDays > -7 && diffDays < 14) {
-                        allMatchesHtml += `
-                            <div class="match-card">
-                                <div class="league-tag">${links[index].name} | KOLEJKA ${col[5]}</div>
-                                <div style="font-size: 0.7rem; color: #444; margin-bottom: 10px;">DEADLINE: ${col[4]}</div>
-                                <div class="team-row"><span>${col[0]}</span><span class="score-box">${col[2] || '-'}</span></div>
-                                <div class="team-row"><span>${col[1]}</span><span class="score-box">${col[3] || '-'}</span></div>
-                            </div>`;
+                    const deadline = new Date(col[4]);
+                    const diff = (deadline - today) / (1000 * 3600 * 24);
+                    
+                    if (diff > -7 && diff < 14) { // Wyświetla mecze z okna 2-tygodniowego
+                        html += `<div class="match-card">
+                            <div class="league-tag">${links[idx].name} | KOLEJKA ${col[5]}</div>
+                            <div style="font-size:0.7rem; color:#444; margin-bottom:10px;">DEADLINE: ${col[4]}</div>
+                            <div class="team-row"><span>${col[0]}</span><span class="score-box">${col[2] || '-'}</span></div>
+                            <div class="team-row"><span>${col[1]}</span><span class="score-box">${col[3] || '-'}</span></div>
+                        </div>`;
                     }
                 });
             });
-            wrapper.innerHTML = allMatchesHtml || '<div style="padding:20px;">Brak meczów w bieżącej kolejce.</div>';
+            wrapper.innerHTML = html || '<div style="padding:20px;">Brak meczów w bieżącej kolejce.</div>';
         } catch (e) { wrapper.innerHTML = "Błąd danych."; }
     }
     loadMatches();

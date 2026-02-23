@@ -24,7 +24,28 @@
     .nav-item { list-style: none !important; margin-left: 20px !important; }
     .nav-link { color: #fff !important; font-size: 1.1rem !important; white-space: nowrap !important; }
     .nav-link:hover { color: #44b1ff !important; }
+    /* --- NAPRAWA HAMBURGERA (Białe kreski) --- */
+.navbar-toggler {
+    border-color: rgba(255,255,255,0.5) !important;
+}
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
 
+/* --- NAPRAWA DROPDOWN (Widoczność tekstów) --- */
+.dropdown-menu { 
+    background-color: #111 !important; 
+    border: 1px solid #333 !important; 
+}
+.dropdown-item { 
+    color: #fff !important; 
+    font-family: 'Bebas Neue', sans-serif !important;
+    font-size: 1.1rem !important;
+}
+.dropdown-item:hover { 
+    background-color: #44b1ff !important; 
+    color: #000 !important; 
+}
     .navbar-toggler-icon { filter: invert(1) brightness(100) !important; }
     .dropdown-menu { background: #111 !important; border: 1px solid #333 !important; }
     .dropdown-item { color: #fff !important; font-size: 1rem !important; }

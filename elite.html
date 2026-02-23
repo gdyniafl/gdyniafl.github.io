@@ -47,11 +47,40 @@
     .footer { padding: 40px 0; border-top: 1px solid #111; text-align: center; color: #444; }
 
     @media (max-width: 991px) {
-        .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; display: none; }
-        .navbar-nav.show { display: flex !important; }
-        .nav-item { margin: 10px 0 !important; }
-        .gfl-table { min-width: 650px; } /* Wymusza przewijanie w poziomie */
+    /* Menu mobilne */
+    .navbar-nav { 
+        flex-direction: column !important; 
+        background: #000; 
+        padding: 20px; 
+        width: 100%; 
+        position: absolute; 
+        top: 100%; 
+        left: 0; 
+        display: none; 
     }
+    .navbar-nav.show { display: flex !important; }
+    .nav-item { margin: 10px 0 !important; }
+
+    /* --- OPTYMALIZACJA TABELI NA TELEFON --- */
+    .gfl-table { 
+        font-size: 0.75rem !important; /* Mniejsza czcionka dla większej ilości danych */
+        min-width: 450px !important; /* Zmniejszone, by nie wymuszać wielkiego skrolla */
+    }
+    .gfl-table thead th, .gfl-table tbody td { 
+        padding: 8px 4px !important; /* Bardziej upakowane dane */
+    }
+    .sticky-pos { 
+        width: 30px !important; /* Węższa kolumna z numerem */
+    }
+    .sticky-team { 
+        left: 30px !important; /* Przesunięcie o szerokość kolumny # */
+        min-width: 100px !important; /* Znacznie węższa kolumna drużyny */
+        max-width: 120px !important;
+        white-space: normal !important; /* Pozwala na łamanie nazwy drużyny do 2 linii */
+        font-size: 0.7rem !important;
+    }
+    .table-title { font-size: 1.4rem !important; }
+}
   </style>
 </head>
 <body>

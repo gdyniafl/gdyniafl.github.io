@@ -2,28 +2,69 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Elite League | Gdynia Football League</title>
+  <title>Elite League | GFL</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  
   <style>
     body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
-    h1, h2, h3, .nav-link, .dropdown-item { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
+    h1, .display-1, .nav-link, .table-header-title { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
+
+    /* --- NAWIGACJA --- */
     .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
     .navbar-brand img { height: 5rem !important; }
     .navbar-nav { display: flex !important; align-items: center !important; }
     .nav-item { list-style: none !important; margin-left: 25px !important; }
     .nav-link { color: #fff !important; font-size: 1.2rem !important; white-space: nowrap !important; }
     .nav-link:hover { color: #44b1ff !important; }
-    .dropdown-menu { background: #111 !important; border: 1px solid #333 !important; }
-    .dropdown-item { color: #fff !important; font-size: 1.1rem !important; }
-    .dropdown-item:hover { background: #44b1ff !important; color: #000 !important; }
-    .page-header { padding: 160px 0 40px 0; text-align: center; background: #0a0a0a; }
-    .iframe-container { background: #fff; border-radius: 10px; overflow: hidden; margin: 40px 0; position: relative; padding-bottom: 100%; height: 0; border: 1px solid #333; }
-    .iframe-container iframe { position: absolute; top:0; left: 0; width: 100%; height: 100%; border:0; }
+
+    /* --- NOWY STYL TABELI (ZGODNY Z TWOIM ZDJĘCIEM) --- */
+    .table-section { padding: 120px 0 60px 0; }
+    .league-card { 
+        background: #0a0a0a; 
+        border-radius: 15px; 
+        border: 1px solid #222; 
+        overflow: hidden; 
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .table-header-box { 
+        background: #111; 
+        padding: 20px; 
+        text-align: center; 
+        border-bottom: 2px solid #222; 
+    }
+    .table-header-title { font-size: 2.5rem; color: #fff; margin: 0; }
+
+    .gfl-table { 
+        width: 100%; 
+        border-collapse: collapse; 
+        background: #0a0a0a; 
+        color: #ddd; 
+        font-size: 0.95rem;
+    }
+    .gfl-table th { 
+        background: #111; 
+        color: #666; 
+        font-family: 'Bebas Neue', sans-serif; 
+        font-weight: normal; 
+        padding: 15px; 
+        text-align: center; 
+        text-transform: uppercase; 
+        letter-spacing: 1px;
+    }
+    .gfl-table td { padding: 15px; text-align: center; border-bottom: 1px solid #161616; }
+    .gfl-table tr:hover { background: #111; }
+    
+    .col-team { text-align: left !important; font-weight: bold; color: #fff; }
+    .col-pos { color: #44b1ff; font-weight: bold; width: 50px; }
+    .col-pkt { color: #44b1ff; font-weight: bold; font-size: 1.1rem; }
+
+    .loader { text-align: center; padding: 40px; color: #44b1ff; font-family: 'Bebas Neue'; font-size: 1.5rem; }
+
+    /* STOPKA */
     .footer { padding: 40px 0; border-top: 1px solid #111; text-align: center; color: #666; font-size: 0.9rem; }
-    @media (max-width: 991px) { .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; } .nav-item { margin: 10px 0 !important; } .navbar-brand img { height: 3.5rem !important; } }
   </style>
 </head>
 <body>
@@ -31,19 +72,11 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav" style="border-color: #44b1ff;"><span class="navbar-toggler-icon" style="filter: invert(1);"></span></button>
-        <div class="collapse navbar-collapse justify-content-end" id="gflNav">
+        <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
                 <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown" style="color: #44b1ff !important;">Rozgrywki</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
-                        <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
-                        <li><a class="dropdown-item" href="aspire.html">Aspire League</a></li>
-                    </ul>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="elite.html" style="color: #44b1ff !important;">Rozgrywki</a></li>
                 <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
                 <li class="nav-item"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px;">Zapisy</a></li>
             </ul>
@@ -51,22 +84,76 @@
     </div>
 </nav>
 
-<section class="page-header">
+<section class="table-section">
     <div class="container">
-        <h1 class="display-1" style="color: #44b1ff;">ELITE LEAGUE</h1>
-        <p style="color: #888; letter-spacing: 2px;">TABELA I TERMINARZ SEZONU II</p>
-    </div>
-</section>
-
-<section class="container">
-    <div class="iframe-container">
-        <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pubhtml?gid=1101831234&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+        <div class="league-card">
+            <div class="table-header-box">
+                <h2 class="table-header-title">TABELA ELITE LEAGUE</h2>
+            </div>
+            <div id="table-loader" class="loader">POBIERANIE DANYCH Z ARKUSZA...</div>
+            <table class="gfl-table" id="data-table" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th style="text-align: left;">DRUŻYNA</th>
+                        <th>M</th>
+                        <th>W</th>
+                        <th>R</th>
+                        <th>P</th>
+                        <th>BRAMKI</th>
+                        <th>PKT</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                    </tbody>
+            </table>
+        </div>
     </div>
 </section>
 
 <footer class="footer">
     <div class="container"><h5>GDYNIA FOOTBALL LEAGUE</h5><p>© 2026 GFL | Org: Ezi</p></div>
 </footer>
+
+<script>
+    // TWOJE LINKI CSV
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=1101831234&single=true&output=csv';
+
+    async function fetchTable() {
+        try {
+            const response = await fetch(csvUrl);
+            const data = await response.text();
+            const rows = data.split('\n').slice(1); // Pomijamy nagłówek Excela
+            
+            let html = '';
+            rows.forEach(row => {
+                const cols = row.split(','); // Rozdzielamy przecinkami
+                if(cols.length < 8) return; // Pomijamy puste wiersze
+
+                // Mapowanie kolumn z Twojego Excela:
+                // cols[0]=Pos, cols[1]=Team, cols[2]=M, cols[3]=W, cols[4]=P, cols[5]=R, cols[6]=B+, cols[7]=B-, cols[8]=Bilans, cols[9]=Pkt
+                html += `<tr>
+                    <td class="col-pos">${cols[0]}</td>
+                    <td class="col-team">${cols[1]}</td>
+                    <td>${cols[2]}</td>
+                    <td>${cols[3]}</td>
+                    <td>${cols[5]}</td>
+                    <td>${cols[4]}</td>
+                    <td>${cols[6]}:${cols[7]}</td>
+                    <td class="col-pkt">${cols[9]}</td>
+                </tr>`;
+            });
+
+            document.getElementById('table-body').innerHTML = html;
+            document.getElementById('table-loader').style.display = 'none';
+            document.getElementById('data-table').style.display = 'table';
+        } catch (error) {
+            document.getElementById('table-loader').innerHTML = "BŁĄD ŁADOWANIA DANYCH.";
+        }
+    }
+
+    fetchTable();
+</script>
 
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>

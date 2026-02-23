@@ -16,7 +16,7 @@
   <style>
     body { background-color: #000; color: #fff; }
 
-    /* FONTY I MENU */
+    /* FONTY */
     .nav-link, .nav-item, .navbar-brand, .dropdown-item, .display-4, .btn {
         font-family: 'Bebas Neue', sans-serif !important;
         text-transform: uppercase !important;
@@ -28,7 +28,7 @@
         letter-spacing: 1px;
         text-transform: uppercase;
     }
-    p, .mbr-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    p, .mbr-text, .qa-answer { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
     
     /* HERO */
     .header-section {
@@ -39,45 +39,48 @@
     .header-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1; }
     .header-content { position: relative; z-index: 2; }
 
-    /* MATCH CENTER (SLIDER) */
+    /* MATCH CENTER */
     .match-center-section { background-color: #0a0a0a; padding: 60px 0; border-bottom: 1px solid #222; }
     .matches-scroll-container { width: 100%; overflow-x: auto; padding-bottom: 20px; scrollbar-width: thin; scrollbar-color: #333 #111; }
     .match-card {
         background: #1a1a1a; border: 1px solid #333; border-radius: 12px;
         min-width: 280px; padding: 20px; display: flex; flex-direction: column; justify-content: center; transition: 0.3s;
     }
-    .match-card:hover { border-color: #44b1ff; transform: translateY(-5px); border-color: #44b1ff; }
+    .match-card:hover { border-color: #44b1ff; transform: translateY(-5px); }
     .match-info { font-size: 0.8rem; color: #888; margin-bottom: 12px; font-weight: bold; text-transform: uppercase; }
     .team-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 1.1rem; font-weight: 600; color: #fff; }
     .team-score { color: #44b1ff; font-weight: bold; }
 
-    /* DLACZEGO MY */
-    .features-section { padding: 80px 0; background-color: #000; border-bottom: 1px solid #222; }
-    .card-wrapper { background: #111; padding: 30px; border-radius: 10px; height: 100%; border: 1px solid #222; }
-    .mbr-iconfont { font-size: 3rem; color: #44b1ff; margin-bottom: 20px; }
+    /* Q&A SECTION (ZAMIAST IKONEK) */
+    .qa-section { background: #000; padding: 80px 0; border-bottom: 1px solid #222; }
+    .qa-box { margin-bottom: 30px; border-left: 2px solid #44b1ff; padding-left: 20px; }
+    .qa-question { color: #fff; font-size: 1.5rem; margin-bottom: 10px; }
+    .qa-answer { color: #aaa; font-size: 1rem; line-height: 1.6; }
 
-    /* HALL OF FAME */
+    /* HALL OF FAME - UPDATED */
     .hall-of-fame-section { background: #111; padding: 80px 0; text-align: center; border-bottom: 1px solid #222; }
+    .season-header { color: #fff; font-size: 2.5rem; margin: 50px 0 30px 0; border-bottom: 1px solid #333; display: inline-block; padding-bottom: 10px; }
     .hof-card { 
-        background: #000; border: 1px solid #C9A050; padding: 30px; 
-        border-radius: 10px; margin-bottom: 20px; transition: 0.3s; height: 100%;
+        background: #000; border: 1px solid #C9A050; padding: 20px; 
+        border-radius: 8px; margin-bottom: 20px; transition: 0.3s; height: 100%;
+        display: flex; flex-direction: column; justify-content: center; align-items: center;
     }
-    .hof-card:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(201, 160, 80, 0.3); }
-    .hof-icon { font-size: 3rem; color: #C9A050; margin-bottom: 15px; }
-    .hof-title { color: #C9A050; font-size: 1.5rem; margin-bottom: 10px; }
-    .hof-name { font-size: 2rem; color: #fff; line-height: 1.1; text-transform: uppercase; margin-bottom: 5px; }
-    .hof-sub { color: #888; font-size: 0.9rem; font-family: sans-serif; text-transform: uppercase; }
+    .hof-card:hover { transform: scale(1.03); box-shadow: 0 0 15px rgba(201, 160, 80, 0.2); }
+    .hof-icon { font-size: 2rem; color: #C9A050; margin-bottom: 10px; }
+    .hof-title { color: #C9A050; font-size: 1.1rem; margin-bottom: 5px; opacity: 0.8; }
+    .hof-name { font-size: 1.4rem; color: #fff; line-height: 1.1; text-transform: uppercase; font-weight: bold; }
+    .hof-sub { color: #666; font-size: 0.8rem; margin-top: 5px; font-family: sans-serif; }
 
-    /* WIDZIMY WSZYSTKO (COMING SOON) */
+    /* WIDZIMY WSZYSTKO (TIKTOK STYLE) */
     .coming-soon-section {
         background: url('assets/images/camera-bg.jpg') no-repeat center center;
         background-size: cover; background-color: #000;
-        padding: 100px 0; text-align: center; position: relative;
+        padding: 120px 0; text-align: center; position: relative;
     }
-    .cs-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.8); }
+    .cs-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.85); }
     .cs-content { position: relative; z-index: 2; }
     
-    /* LICZBY (STATYCZNE) */
+    /* LICZBY */
     .counters-section { background: #000; padding: 60px 0; border-top: 1px solid #222; }
     .counter-box { text-align: center; padding: 20px; }
     .counter-number { font-size: 5rem; color: #44b1ff; font-family: 'Bebas Neue', sans-serif; line-height: 1; }
@@ -125,9 +128,9 @@
         <p class="mbr-text mbr-fonts-style display-5 mb-4" style="color: #ccc;">Więcej niż piłka.</p>
         <div class="mbr-section-btn mt-3">
             <button class="btn btn-warning display-4" onclick="playAudio()">
-                <span class="mobi-mbri mobi-mbri-volume-up mbr-iconfont mbr-iconfont-btn"></span> ZAPOWIEDŹ (AUDIO)
+                <span class="mobi-mbri mobi-mbri-play mbr-iconfont mbr-iconfont-btn"></span> ODSŁUCHAJ ZAPOWIEDŹ
             </button>
-            <a class="btn btn-white-outline display-4" href="onas.html">O NAS</a>
+            <a class="btn btn-white-outline display-4" href="elite.html">TABELA I WYNIKI</a>
         </div>
     </div>
 </section>
@@ -138,7 +141,7 @@
             <div class="col-12 d-flex justify-content-between align-items-end">
                 <div>
                     <h4 class="mbr-section-subtitle mbr-fonts-style display-7" style="color: #44b1ff; letter-spacing: 2px;">TERMINARZ</h4>
-                    <h2 class="mbr-section-title mbr-fonts-style display-2">NADCHODZĄCE MECZE</h2>
+                    <h2 class="mbr-section-title mbr-fonts-style display-2">NAJBLIŻSZE MECZE</h2>
                 </div>
             </div>
         </div>
@@ -150,40 +153,32 @@
     </div>
 </section>
 
-<section class="features-section">
+<section class="qa-section">
     <div class="container">
+        <h2 class="mbr-section-title mbr-fonts-style display-2 mb-5 text-center">DLACZEGO GFL?</h2>
         <div class="row">
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card-wrapper">
-                    <div class="card-box">
-                        <span class="mbr-iconfont mobi-mbri-users mobi-mbri"></span>
-                        <h4 class="card-title mbr-fonts-style display-5">SPOŁECZNOŚĆ</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            GFL to nie tylko mecze. To setki zawodników, pasjonatów i kibiców tworzących wyjątkową atmosferę.
-                        </p>
-                    </div>
+            <div class="col-md-6">
+                <div class="qa-box">
+                    <h4 class="qa-question">CZY TO LIGA DLA AMATORÓW?</h4>
+                    <p class="qa-answer">Tak! Mamy 3 poziomy rozgrywkowe. Elite dla najlepszych, Challenge dla średniozaawansowanych i Aspire dla tych, którzy zaczynają przygodę lub grają 4fun.</p>
                 </div>
             </div>
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card-wrapper">
-                    <div class="card-box">
-                        <span class="mbr-iconfont mobi-mbri-star mobi-mbri"></span>
-                        <h4 class="card-title mbr-fonts-style display-5">PROFESJONALIZM</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            Obsługa sędziowska, statystyki online, relacje foto i wideo. Dbamy o każdy detal rozgrywek.
-                        </p>
-                    </div>
+            <div class="col-md-6">
+                <div class="qa-box">
+                    <h4 class="qa-question">GDZIE I KIEDY GRAMY?</h4>
+                    <p class="qa-answer">Mecze odbywają się na nowoczesnych boiskach w Gdyni (Witomino/Chylonia). Gramy głównie w weekendy, a terminarz jest znany z góry.</p>
                 </div>
             </div>
-            <div class="col-12 col-md-4 mb-4">
-                <div class="card-wrapper">
-                    <div class="card-box">
-                        <span class="mbr-iconfont mobi-mbri-trophy mobi-mbri"></span>
-                        <h4 class="card-title mbr-fonts-style display-5">RYWALIZACJA</h4>
-                        <p class="mbr-text mbr-fonts-style display-7">
-                            Trzy poziomy rozgrywkowe: Elite, Challenge i Aspire. Walcz o awans i tytuł Mistrza Gdyni.
-                        </p>
-                    </div>
+            <div class="col-md-6">
+                <div class="qa-box">
+                    <h4 class="qa-question">CO ZAPEWNIACIE?</h4>
+                    <p class="qa-answer">Profesjonalną obsługę sędziowską, wodę na meczach, relacje foto/wideo, statystyki online i nagrody dla najlepszych na koniec sezonu.</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="qa-box">
+                    <h4 class="qa-question">JAK ZGŁOSIĆ DRUŻYNĘ?</h4>
+                    <p class="qa-answer">Wystarczy wypełnić formularz zgłoszeniowy dostępny w menu "Zapisy". Nabór trwa zazwyczaj przed startem każdej rundy (wiosna/jesień).</p>
                 </div>
             </div>
         </div>
@@ -192,33 +187,91 @@
 
 <section class="hall-of-fame-section">
     <div class="container">
-        <h2 class="mbr-section-title mbr-fonts-style display-2 mb-5" style="color: #C9A050;">HALL OF FAME</h2>
-        <div class="row">
-            <div class="col-md-4">
+        <h2 class="mbr-section-title mbr-fonts-style display-2 mb-2" style="color: #C9A050;">HALL OF FAME</h2>
+        <p class="mb-5" style="color: #666;">HISTORIA MISTRZÓW</p>
+        
+        <h3 class="season-header">SEZON I</h3>
+        <div class="row justify-content-center">
+            <div class="col-md-3">
                 <div class="hof-card">
                     <div class="hof-icon">🏆</div>
-                    <h4 class="hof-title mbr-fonts-style display-7">MISTRZ ELITE</h4>
-                    <div class="hof-name mbr-fonts-style display-5">CZARODZIEJSKIE LISY</div>
-                    <div class="hof-sub">OBROŃCA TYTUŁU</div>
+                    <div class="hof-title">MISTRZ ELITE</div>
+                    <div class="hof-name">CZARODZIEJSKIE LISY</div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <div class="hof-card">
+                    <div class="hof-icon">🥈</div>
+                    <div class="hof-title">MISTRZ CHALLENGE</div>
+                    <div class="hof-name">COCCOLINO FRESH</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="hof-card">
+                    <div class="hof-icon">🥉</div>
+                    <div class="hof-title">MISTRZ ASPIRE</div>
+                    <div class="hof-name">OGARNIJ SIĘ FC</div>
+                </div>
+            </div>
+            <div class="col-md-3">
                 <div class="hof-card">
                     <div class="hof-icon">⚽</div>
-                    <h4 class="hof-title mbr-fonts-style display-7">KRÓL STRZELCÓW</h4>
-                    <div class="hof-name mbr-fonts-style display-5">OLIVIER PLESKACZ</div>
-                    <div class="hof-sub">REKORD: 38 GOLI (SEZON 0)</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="hof-card">
-                    <div class="hof-icon">🔥</div>
-                    <h4 class="hof-title mbr-fonts-style display-7">MISTRZ CHALLENGE</h4>
-                    <div class="hof-name mbr-fonts-style display-5">COCCOLINO FRESH</div>
-                    <div class="hof-sub">MISTRZ SEZONU I</div>
+                    <div class="hof-title">KRÓLOWIE STRZELCÓW</div>
+                    <div class="hof-name" style="font-size:1.2rem; color:#888;">(DO UZUPEŁNIENIA)</div>
                 </div>
             </div>
         </div>
+
+        <h3 class="season-header">SEZON 0</h3>
+        <div class="row justify-content-center">
+            <div class="col-md-3 mb-4">
+                <div class="hof-card">
+                    <div class="hof-icon">🏆</div>
+                    <div class="hof-title">MISTRZ ELITE</div>
+                    <div class="hof-name">KASZTELANKI</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="hof-card">
+                    <div class="hof-icon">🥈</div>
+                    <div class="hof-title">MISTRZ CHALLENGE</div>
+                    <div class="hof-name">KURNIK RUCHOMEJ</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="hof-card">
+                    <div class="hof-icon">🥉</div>
+                    <div class="hof-title">MISTRZ ASPIRE</div>
+                    <div class="hof-name">MISTRZOVIA A</div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-4">
+                <div class="hof-card">
+                    <div class="hof-icon">⚔️</div>
+                    <div class="hof-title">MISTRZ AGGRESSIVE</div>
+                    <div class="hof-name">ZKS ZAGÓRZAK RUMIA</div>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="hof-card" style="border-color: #444;">
+                    <div class="hof-icon" style="color: #444;">⚽</div>
+                    <div class="hof-title" style="color: #888;">KRÓL ELITE (S0)</div>
+                    <div class="hof-name">OLIVIER PLESKACZ</div>
+                    <div class="hof-sub">38 GOLI</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="hof-card" style="border-color: #444;">
+                    <div class="hof-icon" style="color: #444;">⚽</div>
+                    <div class="hof-title" style="color: #888;">KRÓL CHALLENGE (S0)</div>
+                    <div class="hof-name">MICHAŁ SKOCZEK</div>
+                    <div class="hof-sub">44 GOLE</div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </section>
 
@@ -227,9 +280,12 @@
     <div class="container cs-content">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <h2 class="mbr-section-title mbr-fonts-style display-2 mb-3">WIDZIMY WSZYSTKO</h2>
-                <p class="mbr-text mbr-fonts-style display-5" style="color: #44b1ff;">VAR · STATYSTYKI · RELACJE</p>
+                <div style="font-size: 3rem; margin-bottom: 20px;">
+                    <span class="socicon socicon-tiktok" style="color: white; text-shadow: 2px 2px #ff0050, -2px -2px #00f2ea;"></span>
+                </div>
+                <h2 class="mbr-section-title mbr-fonts-style display-2 mb-2">@GDYNIAFL</h2>
                 <h3 class="mbr-section-subtitle mbr-fonts-style display-1 mt-4" style="color: #fff; letter-spacing: 5px;">COMING SOON</h3>
+                <p class="mbr-text mbr-fonts-style display-7 mt-3" style="color: #ccc;">Obserwuj nas, żeby nic nie przegapić.</p>
             </div>
         </div>
     </div>
@@ -270,8 +326,7 @@
 <script>
     // --- SKRYPT AUDIO ---
     function playAudio() {
-        // Upewnij się, że plik jest w assets/zapowiedz.mp3
-        var audio = new Audio('assets/zapowiedz.mp3');
+        var audio = new Audio('assets/zapowiedz.mp3'); // Pamiętaj o pliku w folderze assets
         audio.volume = 0.7;
         audio.play().catch(function(error) {
             alert("Nie znaleziono pliku assets/zapowiedz.mp3");
@@ -279,7 +334,6 @@
     }
 
     // --- SKRYPT MATCH CENTER ---
-    // Pobiera dane z Twojego arkusza MECZE (gid=682329859)
     const matchesUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv';
 
     async function loadMatchCenter() {

@@ -12,73 +12,72 @@
     body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
     h1, h2, .nav-link, .dropdown-item, .table-title { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* --- NAWIGACJA (BIAŁY HAMBURGER) --- */
+    /* --- NAWIGACJA (BIAŁY HAMBURGER I DROPDOWN) --- */
     .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
     .navbar-brand img { height: 4.5rem !important; }
-    .navbar-nav { display: flex !important; align-items: center !important; }
-    .nav-item { list-style: none !important; margin-left: 20px !important; }
+    .navbar-nav { display: flex !important; align-items: center; }
+    .nav-item { list-style: none; margin-left: 20px; }
     .nav-link { color: #fff !important; font-size: 1.1rem !important; }
     
+    /* Naprawa Hamburgera - Gwarantowana biel */
     .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
     .navbar-toggler-icon { 
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
     }
 
     .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
-    .dropdown-item { color: #fff !important; padding: 10px 20px !important; }
+    .dropdown-item { color: #fff !important; font-family: 'Bebas Neue' !important; font-size: 1.1rem !important; }
     .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
 
     /* --- NAGŁÓWEK --- */
     .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
 
-    /* --- TABELA (ULTRA-KOMPAKTOWA) --- */
+    /* --- TABELA (PRZYPIĘTA I ULTRA-WĄSKA) --- */
     .table-container-main { padding: 40px 0 60px 0; }
-    .gfl-card { background: #080808; border-radius: 20px; border: 1px solid #222; overflow: hidden; max-width: 1000px; margin: 0 auto; }
+    .gfl-card { background: #080808; border-radius: 20px; border: 1px solid #222; overflow: hidden; max-width: 1000px; margin: 0 auto; box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
     .table-responsive-wrapper { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
     .gfl-table { width: 100%; border-collapse: separate; border-spacing: 0; color: #fff; }
-    .gfl-table thead th { background: #000; color: #666; padding: 15px 10px; font-size: 1rem; border-bottom: 1px solid #222; text-align: center; }
+    .gfl-table thead th { background: #000; color: #666; padding: 15px 5px; font-size: 0.9rem; border-bottom: 1px solid #222; text-align: center; }
 
-    /* STICKY COLUMN - PRZYPIĘCIE POZYCJI I DRUŻYNY */
-    .sticky-pos { position: sticky !important; left: 0; background: #080808 !important; z-index: 5; width: 40px; }
-    .sticky-team { position: sticky !important; left: 40px; background: #080808 !important; z-index: 5; text-align: left !important; min-width: 140px; border-right: 1px solid #222; }
+    /* STICKY COLUMN LOGIC */
+    .sticky-pos { position: sticky !important; left: 0; background: #080808 !important; z-index: 5; width: 35px; }
+    .sticky-team { position: sticky !important; left: 35px; background: #080808 !important; z-index: 5; text-align: left !important; min-width: 130px; border-right: 1px solid #222; }
 
-    .gfl-table tbody td { padding: 15px 10px; border-bottom: 1px solid #141414; text-align: center; }
-    .col-highlight { color: #44b1ff !important; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.2rem; }
-    .gfl-table tr:hover td { background: #111 !important; }
-
-    /* Klasy sterujące szerokością kolumn statystyk */
-    .col-stat { width: 45px; }
-    .col-goals { min-width: 80px; }
-    .col-pkt { width: 50px; }
+    .gfl-table tbody td { padding: 12px 5px; border-bottom: 1px solid #141414; text-align: center; }
+    .col-highlight { color: #44b1ff !important; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.1rem; }
+    
+    /* SZEROKOŚCI KOLUMN STATYSTYK */
+    .col-stat { width: 40px; }
+    .col-goals { min-width: 70px; }
+    .col-pkt { width: 45px; }
 
     .footer { padding: 40px 0; border-top: 1px solid #111; text-align: center; color: #444; }
 
-    /* --- POPRAWKI MOBILNE (UCIĘCIE SZPAR) --- */
-    @media (max-width: 991px) {
-        .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; display: none; }
-        .navbar-nav.show { display: flex !important; }
-        .nav-item { margin: 10px 0 !important; }
+    /* --- OPTYMALIZACJA MOBILNA (UCIĘCIE SZPAR) --- */
+    @media (max-width: 767px) {
+        .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; }
+        .collapse:not(.show) .navbar-nav { display: none !important; }
+        .nav-item { margin: 10px 0 !important; margin-left: 0 !important; }
+        .navbar-brand img { height: 3.5rem !important; }
+
+        /* Tabela "zgnieciona" dla lepszej widoczności */
+        .gfl-table { min-width: 380px !important; font-size: 0.7rem !important; }
+        .gfl-table td, .gfl-table th { padding: 8px 2px !important; } 
         
-        /* Tabela ultra-wąska */
-        .gfl-table { min-width: 440px !important; font-size: 0.75rem !important; }
-        .gfl-table td, .gfl-table th { padding: 8px 2px !important; } /* Minimalny padding ucinający szpary */
-        
-        .sticky-pos { width: 28px !important; }
+        .sticky-pos { width: 25px !important; }
         .sticky-team { 
-            left: 28px !important; 
-            min-width: 90px !important; 
-            max-width: 100px !important; 
-            white-space: normal !important; 
+            left: 25px !important; 
+            min-width: 85px !important; 
+            max-width: 95px !important; 
+            white-space: normal !important; /* Nazwa w 2 liniach */
             font-size: 0.7rem !important;
-            padding-left: 4px !important;
+            padding-left: 3px !important;
         }
 
-        .col-stat { width: 28px !important; } /* Bardzo wąskie kolumny M, W, R, P */
-        .col-goals { min-width: 60px !important; } /* Węższe bramki */
-        .col-pkt { width: 35px !important; } /* Węższe punkty */
-        
-        .table-title { font-size: 1.4rem !important; }
+        .col-stat { width: 25px !important; } 
+        .col-goals { min-width: 55px !important; }
+        .col-pkt { width: 30px !important; }
     }
   </style>
 </head>
@@ -95,7 +94,7 @@
                 <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
                 <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown" style="color:#44b1ff !important;">Rozgrywki</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
                         <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
@@ -157,8 +156,8 @@
                 const col = row.split(',');
                 if (col.length < 8) return;
                 html += `<tr>
-                    <td class="sticky-pos" style="color:#44b1ff;">${col[0]}</td>
-                    <td class="sticky-team">${col[1]}</td>
+                    <td class="sticky-pos col-highlight">${col[0]}</td>
+                    <td class="sticky-team" style="font-weight:bold;">${col[1]}</td>
                     <td class="col-stat">${col[2]}</td>
                     <td class="col-stat">${col[3]}</td>
                     <td class="col-stat">${col[5]}</td>
@@ -168,7 +167,7 @@
                 </tr>`;
             });
             document.getElementById('table-data').innerHTML = html;
-        } catch (e) { console.error("Błąd ładowania danych."); }
+        } catch (e) { console.error("Błąd"); }
     }
     loadData();
 </script>

@@ -37,7 +37,7 @@
     .pts-col { font-weight: bold; color: #44b1ff; font-size: 1.1rem; }
     .sticky-col { position: sticky; left: 0; background: #111; z-index: 10; border-right: 1px solid #333; text-align: left !important; font-weight: 600; color: #fff; }
 
-    /* TERMINARZ - FIX WIDOCZNOŚCI */
+    /* TERMINARZ */
     .schedule-container { max-width: 900px; margin: 0 auto; }
     .round-header {
         background: #1a1a1a; color: #44b1ff; padding: 15px; margin-top: 40px; margin-bottom: 15px;
@@ -51,7 +51,7 @@
     
     .match-date { width: 25%; font-size: 0.8rem; color: #666; text-transform: uppercase; }
     
-    /* TU JEST FIX KOLORÓW - WYMUSZENIE BIAŁEGO */
+    /* KOLORY MECZÓW */
     .match-duel { width: 50%; display: flex; justify-content: center; align-items: center; gap: 15px; font-weight: 600; font-size: 1rem; color: #ffffff !important; }
     .match-duel span { color: #ffffff !important; }
     .vs-sign { color: #444 !important; font-size: 0.8rem; margin: 0 5px; }
@@ -144,20 +144,16 @@
 <script src="assets/theme/js/script.js"></script>
 
 <script>
-    // -------------------------------------------------------------------------
-    // !!! WAŻNE: TU MUSZĄ BYĆ DWA RÓŻNE LINKI !!!
-    // -------------------------------------------------------------------------
+    // --- LINKI CSV (Twoje!) ---
+    // 1. Link do TABELI (z zakładki WWW)
+    const tableUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=1101831234&single=true&output=csv';
     
-    // 1. LINK DO TABELI (Zakładka WWW - tam gdzie masz posortowane drużyny)
-    // Jeśli tabela jest pusta, to znaczy, że tu jest zły link (np. do zakładki Mecze)
-    const tableUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?output=csv';
-    
-    // 2. LINK DO TERMINARZA (Zakładka MECZE - tam gdzie masz listę spotkań)
+    // 2. Link do TERMINARZA (z zakładki MECZE)
     const scheduleUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv';
 
     async function loadEliteData() {
         try {
-            // --- TABELA ---
+            // --- ŁADOWANIE TABELI ---
             const resTable = await fetch(tableUrl);
             const dataTable = await resTable.text();
             const tableRows = dataTable.split('\n').slice(1);
@@ -166,9 +162,9 @@
 
             tableRows.forEach(row => {
                 let cols = row.trim().split(',');
-                if (cols.length < 2) cols = row.trim().split(';'); // Obsługa polskich Exceli
+                if (cols.length < 2) cols = row.trim().split(';');
                 
-                // Jeśli wiersz ma za mało danych (np. puste wiersze), pomiń
+                // Sprawdzenie poprawności wiersza (czy to dane tabeli)
                 if (cols.length >= 8) { 
                     const tr = document.createElement('tr');
                     tr.innerHTML = `
@@ -181,7 +177,7 @@
                 }
             });
 
-            // --- TERMINARZ ---
+            // --- ŁADOWANIE TERMINARZA ---
             const resSchedule = await fetch(scheduleUrl);
             const dataSchedule = await resSchedule.text();
             const schedRows = dataSchedule.split('\n').slice(1);
@@ -193,15 +189,17 @@
                 let c = row.trim().split(',');
                 if (c.length < 2) c = row.trim().split(';');
                 
-                // Ignorujemy wiersze, które nie mają daty (kolumna 4)
+                // Szukamy wierszy z datą (kolumna 4) i rundą (kolumna 5)
                 if (c.length < 6 || !c[4] || c[4].length < 4) return;
 
-                const r = c[5]; // Numer kolejki
+                const r = c[5]; // Numer Kolejki
                 if (!rounds[r]) rounds[r] = [];
                 rounds[r].push({ h: c[0], a: c[1], sH: c[2], sA: c[3], date: c[4] });
             });
 
+            // Sortowanie po numerze kolejki
             Object.keys(rounds).sort((a,b) => a - b).forEach(r => {
+                // Data z pierwszego meczu
                 const dObj = new Date(rounds[r][0].date);
                 const niceDate = dObj.toLocaleDateString('pl-PL', { day: 'numeric', month: 'long' });
 

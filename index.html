@@ -114,7 +114,18 @@
         border-color: #44b1ff; 
         color: #000; 
     }
-    
+    /* --- FIX DLA PRZYCISKU KONTAKT --- */
+    /* Normalny stan przycisku kontaktu (niebieski obrys i tekst) */
+    .social-btn.btn-contact {
+        border-color: #44b1ff !important;
+        color: #44b1ff !important;
+    }
+
+    /* Stan po najechaniu (tło niebieskie, TEKST BIAŁY) */
+    .social-btn.btn-contact:hover {
+        background-color: #44b1ff !important;
+        color: #fff !important; /* To jest kluczowa zmiana */
+    }
     .copyright-row {
         margin-top: 40px;
         padding-top: 20px;
@@ -253,7 +264,7 @@
             
             <div class="col-lg-4 col-md-6 mb-4">
                 <h5>GDYNIA FOOTBALL LEAGUE</h5>
-                <p>Największa amatorska liga szóstek piłkarskich w Gdyni. Tworzymy przestrzeń dla pasjonatów futbolu, łącząc sportową rywalizację z profesjonalną oprawą medialną.</p>
+                <p>Największa amatorska liga piłkarska w Gdyni. Tworzymy przestrzeń dla pasjonatów futbolu, łącząc sportową rywalizację z profesjonalną oprawą medialną.</p>
                 <p style="color: #444;">📍 Gdynia, Polska</p>
             </div>
 
@@ -275,9 +286,9 @@
                         OBSERWUJ NA INSTAGRAMIE ↗
                     </a>
                     <a href="https://www.tiktok.com/@gdyniafl" target="_blank" class="social-btn">
-                        ZOBACZ TIKTOK POV ↗
+                        OBSERWUJ NA TIKTOK ↗
                     </a>
-                    <a href="mailto:gdyniafootballleague@gmail.com" class="social-btn" style="border-color: #44b1ff; color: #44b1ff;">
+                    <a href="mailto:gdyniafootballleague@gmail.com" class="social-btn btn-contact">
                         WSPÓŁPRACA / KONTAKT ✉
                     </a>
                 </div>

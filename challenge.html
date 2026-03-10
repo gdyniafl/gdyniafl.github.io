@@ -9,26 +9,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   
   <style>
-    /* --- GLOBALNE --- */
+    /* Twoje style */
     html { overflow-y: scroll; }
     body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
     h1, h2, h5, .nav-link, .dropdown-item, .table-title { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
-
-    /* --- NAWIGACJA --- */
     .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
     .navbar-brand img { height: 4.5rem !important; }
-    .navbar-nav { display: flex !important; align-items: center; }
-    .nav-item { list-style: none; margin-left: 20px; }
     .nav-link { color: #fff !important; font-size: 1.1rem !important; }
-    .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
     .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
     .dropdown-item { color: #fff !important; font-size: 1.1rem !important; }
     .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
-
-    /* --- NAGŁÓWEK --- */
     .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
-
-    /* --- TABELA --- */
     .table-container-main { padding: 40px 0 30px 0; }
     .gfl-card { background: #080808; border-radius: 20px; border: 1px solid #222; overflow: hidden; max-width: 1000px; margin: 0 auto; }
     .table-responsive-wrapper { width: 100%; overflow-x: auto; }
@@ -38,30 +29,18 @@
     .sticky-team { position: sticky !important; left: 35px; background: #080808 !important; z-index: 5; text-align: left !important; min-width: 130px; border-right: 1px solid #222; }
     .gfl-table tbody td { padding: 12px 5px; border-bottom: 1px solid #141414; text-align: center; }
     .col-highlight { color: #44b1ff !important; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.1rem; }
-
-    /* --- HARMONIJKA TERMINARZA --- */
     .schedule-section { padding: 40px 0 80px 0; }
     .accordion-item { background-color: #080808 !important; border: 1px solid #222 !important; margin-bottom: 10px; border-radius: 10px !important; overflow: hidden; }
     .accordion-button { background-color: #0f0f0f !important; color: #fff !important; font-family: 'Bebas Neue' !important; font-size: 1.2rem; letter-spacing: 1px; box-shadow: none !important; }
     .accordion-button:not(.collapsed) { color: #44b1ff !important; border-bottom: 1px solid #222; }
     .accordion-button::after { filter: invert(1); }
     .accordion-body { background-color: #050505; padding: 0; }
-    
     .match-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #111; font-size: 0.9rem; }
-    .match-row:last-child { border-bottom: none; }
     .team-name { width: 40%; font-weight: 500; }
     .score-box { width: 20%; text-align: center; font-family: 'Bebas Neue'; font-size: 1.2rem; color: #44b1ff; line-height: 1.1; }
     .match-details { display: block; color: #666; font-size: 0.7rem; font-family: sans-serif; margin-top: 4px; letter-spacing: 0; }
-
-    /* --- STOPKA --- */
     .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; }
     .copyright-row { margin-top: 40px; padding-top: 20px; border-top: 1px solid #111; text-align: center; font-size: 0.8rem; }
-
-    @media (max-width: 767px) {
-        .navbar-brand img { height: 3.5rem !important; }
-        .team-name { font-size: 0.8rem; }
-        .gfl-table { min-width: 380px !important; font-size: 0.7rem !important; }
-    }
   </style>
 </head>
 <body>
@@ -69,9 +48,6 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse justify-content-end" id="gflNav">
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
@@ -84,7 +60,6 @@
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
-                <li class="nav-item"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border:1px solid #44b1ff; padding:5px 15px !important; border-radius:5px;">Zapisy</a></li>
             </ul>
         </div>
     </div>
@@ -132,9 +107,7 @@
 
 <footer class="footer">
     <div class="container text-center">
-        <div class="copyright-row">
-            &copy; 2026 Gdynia Football League. Design & Code: Ezi
-        </div>
+        <div class="copyright-row">&copy; 2026 Gdynia Football League. Design & Code: Ezi</div>
     </div>
 </footer>
 
@@ -142,15 +115,14 @@
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // Link do tabeli Challenge (już go miałeś)
+    // LINKI DO TWOJEGO ARKUSZA CHALLENGE
     const tableCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3/pub?gid=1101831234&single=true&output=csv';
-    
-    // Link do zakładki MECZE Challenge (Wklej tu link z gid swojej zakładki Mecze w Challenge!)
-    const matchesCsvUrl = 'TUTAJ_WKLEJ_LINK_DO_ZAKLADKI_MECZE_CHALLENGE';
+    // Generujemy link do zakładki "MECZE" na podstawie ID Challenge i GID-u z Elite
+    const matchesCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3/pub?gid=682329859&single=true&output=csv';
 
     async function loadData() {
         try {
-            // 1. ŁADOWANIE TABELI
+            // 1. TABELA
             const resTable = await fetch(tableCsvUrl);
             const dataTable = await resTable.text();
             let tableHtml = '';
@@ -160,17 +132,14 @@
                 tableHtml += `<tr>
                     <td class="sticky-pos col-highlight">${col[0]}</td>
                     <td class="sticky-team" style="font-weight:bold;">${col[1]}</td>
-                    <td class="col-stat">${col[2]}</td>
-                    <td class="col-stat">${col[3]}</td>
-                    <td class="col-stat">${col[5]}</td>
-                    <td class="col-stat">${col[4]}</td>
+                    <td class="col-stat">${col[2]}</td><td class="col-stat">${col[3]}</td><td class="col-stat">${col[5]}</td><td class="col-stat">${col[4]}</td>
                     <td class="col-goals">${col[6]}:${col[7]}</td>
                     <td class="col-highlight col-pkt">${col[9]}</td>
                 </tr>`;
             });
             document.getElementById('table-data').innerHTML = tableHtml;
 
-            // 2. ŁADOWANIE TERMINARZA
+            // 2. TERMINARZ
             const resMatches = await fetch(matchesCsvUrl);
             const dataMatches = await resMatches.text();
             const rounds = {};
@@ -178,57 +147,35 @@
             dataMatches.split('\n').slice(1).forEach(row => {
                 const col = row.split(',');
                 if (col.length < 8) return;
-
-                const team1 = col[0];    // GOSPODARZ (A)
-                const team2 = col[1];    // GOŚĆ (B)
-                const goal1 = col[2];    // GOLE GOSPODARZ (C)
-                const goal2 = col[3];    // GOLE GOŚĆ (D)
-                const roundNum = col[5]; // RUNDA (F)
-                const matchTime = col[6];// DATA/GODZINA (G)
-                const stadium = col[7];  // BOISKO (H)
-
+                const roundNum = col[5]; // F (RUNDA)
                 if (!rounds[roundNum]) rounds[roundNum] = [];
 
-                const score = (goal1 !== "" && goal2 !== "") ? `${goal1} : ${goal2}` : "vs";
-                const info = (matchTime && matchTime !== "Brak rezerwacji") ? `${matchTime} | ${stadium || ''}` : "Termin do ustalenia";
+                const score = (col[2] !== "" && col[3] !== "") ? `${col[2]} : ${col[3]}` : "vs";
+                const info = (col[6] && col[6] !== "Brak rezerwacji") ? `${col[6]} | ${col[7] || ''}` : "Termin do ustalenia";
 
                 rounds[roundNum].push(`
                     <div class="match-row">
-                        <span class="team-name text-end">${team1}</span>
-                        <span class="score-box">
-                            ${score}
-                            <span class="match-details">${info}</span>
-                        </span>
-                        <span class="team-name">${team2}</span>
+                        <span class="team-name text-end">${col[0]}</span>
+                        <span class="score-box">${score}<span class="match-details">${info}</span></span>
+                        <span class="team-name">${col[1]}</span>
                     </div>
                 `);
             });
 
             let accordionHtml = '';
-            const sortedRounds = Object.keys(rounds).sort((a, b) => parseInt(a) - parseInt(b));
-
-            sortedRounds.forEach((r, index) => {
+            Object.keys(rounds).sort((a, b) => parseInt(a) - parseInt(b)).forEach((r, index) => {
                 const isOpen = index === 0 ? 'show' : '';
                 const isCollapsed = index === 0 ? '' : 'collapsed';
-                
                 accordionHtml += `
                     <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button ${isCollapsed}" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">
-                                KOLEJKA ${r}
-                            </button>
-                        </h2>
+                        <h2 class="accordion-header"><button class="accordion-button ${isCollapsed}" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">KOLEJKA ${r}</button></h2>
                         <div id="k${r}" class="accordion-collapse collapse ${isOpen}" data-bs-parent="#scheduleAccordion">
-                            <div class="accordion-body">
-                                ${rounds[r].join('')}
-                            </div>
+                            <div class="accordion-body">${rounds[r].join('')}</div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
             document.getElementById('scheduleAccordion').innerHTML = accordionHtml;
-
-        } catch (e) { console.error("Błąd ładowania danych Challenge:", e); }
+        } catch (e) { console.error("Błąd ładowania Challenge:", e); }
     }
     loadData();
 </script>

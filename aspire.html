@@ -17,11 +17,7 @@
     /* --- NAWIGACJA --- */
     .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
     .navbar-brand img { height: 4.5rem !important; }
-    .navbar-nav { display: flex !important; align-items: center; }
-    .nav-item { list-style: none; margin-left: 20px; }
     .nav-link { color: #fff !important; font-size: 1.1rem !important; }
-    .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
-    .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important; }
     .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
     .dropdown-item { color: #fff !important; font-size: 1.1rem !important; }
     .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
@@ -40,7 +36,7 @@
     .gfl-table tbody td { padding: 12px 5px; border-bottom: 1px solid #141414; text-align: center; }
     .col-highlight { color: #44b1ff !important; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.1rem; }
 
-    /* --- HARMONIJKA TERMINARZA (ACCORDION) --- */
+    /* --- HARMONIJKA TERMINARZA --- */
     .schedule-section { padding: 40px 0 80px 0; }
     .accordion-item { background-color: #080808 !important; border: 1px solid #222 !important; margin-bottom: 10px; border-radius: 10px !important; overflow: hidden; }
     .accordion-button { background-color: #0f0f0f !important; color: #fff !important; font-family: 'Bebas Neue' !important; font-size: 1.2rem; letter-spacing: 1px; box-shadow: none !important; }
@@ -48,23 +44,13 @@
     .accordion-button::after { filter: invert(1); }
     .accordion-body { background-color: #050505; padding: 0; }
     
-    .match-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 20px; border-bottom: 1px solid #111; font-size: 0.9rem; }
-    .match-row:last-child { border-bottom: none; }
+    .match-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #111; font-size: 0.9rem; }
     .team-name { width: 40%; font-weight: 500; }
-    .score-box { width: 20%; text-align: center; font-family: 'Bebas Neue'; font-size: 1.2rem; color: #44b1ff; }
-    .match-row:hover { background: #0a0a0a; }
+    .score-box { width: 20%; text-align: center; font-family: 'Bebas Neue'; font-size: 1.2rem; color: #44b1ff; line-height: 1.1; }
+    .match-details { display: block; color: #666; font-size: 0.7rem; font-family: sans-serif; margin-top: 4px; letter-spacing: 0; }
 
     /* --- STOPKA --- */
     .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; }
-    .footer h5 { color: #fff; margin-bottom: 20px; }
-    .footer-links { list-style: none; padding: 0; }
-    .footer-links li { margin-bottom: 10px; }
-    .footer-links a { color: #888; text-decoration: none; transition: 0.3s; text-transform: uppercase; font-size: 0.85rem; }
-    .footer-links a:hover { color: #44b1ff; padding-left: 5px; }
-    .social-btn { display: inline-block; padding: 8px 16px; margin-bottom: 10px; border: 1px solid #333; border-radius: 5px; color: #fff; text-decoration: none; font-family: 'Bebas Neue'; font-size: 1rem; transition: 0.3s; width: 100%; text-align: center; }
-    .social-btn:hover { background: #44b1ff; border-color: #44b1ff; color: #000; }
-    .social-btn.btn-contact { border-color: #44b1ff !important; color: #44b1ff !important; }
-    .social-btn.btn-contact:hover { background-color: #44b1ff !important; color: #fff !important; }
     .copyright-row { margin-top: 40px; padding-top: 20px; border-top: 1px solid #111; text-align: center; font-size: 0.8rem; }
 
     @media (max-width: 767px) {
@@ -79,13 +65,9 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse justify-content-end" id="gflNav">
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
-                <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
                     <ul class="dropdown-menu">
@@ -136,257 +118,39 @@
     <div class="container">
         <h2 class="text-center mb-4">PEŁNY TERMINARZ</h2>
         <div class="accordion" id="scheduleAccordion">
-
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#k1">
-                        KOLEJKA 1 — (02.03.2026 - 15.03.2026)
-                    </button>
-                </h2>
-                <div id="k1" class="accordion-collapse collapse show" data-bs-parent="#scheduleAccordion">
-                    <div class="accordion-body">
-                        <div class="match-row"><span class="team-name text-end">KURNIK KASZTELANKI B</span><span class="score-box">vs</span><span class="team-name">AC MISTRZOVIA GDYNIA B</span></div>
-                        <div class="match-row"><span class="team-name text-end">UKS AC MATERACE</span><span class="score-box">vs</span><span class="team-name">FC BARANKI</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC KOKONUT</span><span class="score-box">vs</span><span class="team-name">FC SIÓDEMKA7 C</span></div>
-                        <div class="match-row"><span class="team-name text-end">SUVIK GDYNIA</span><span class="score-box">vs</span><span class="team-name">MORDA BUŁA</span></div>
-                        <div class="match-row"><span class="team-name text-end">CISOVIA FC</span><span class="score-box">vs</span><span class="team-name">WICZLINSKIE DZIKI</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC DĘBOGÓRZE</span><span class="score-box">vs</span><span class="team-name">INAZUMA ELEVEN 2025</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#k2">
-                        KOLEJKA 2 — (16.03.2026 - 29.03.2026)
-                    </button>
-                </h2>
-                <div id="k2" class="accordion-collapse collapse" data-bs-parent="#scheduleAccordion">
-                    <div class="accordion-body">
-                        <div class="match-row"><span class="team-name text-end">INAZUMA ELEVEN 2025</span><span class="score-box">vs</span><span class="team-name">FC BARANKI</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC KOKONUT</span><span class="score-box">vs</span><span class="team-name">CISOVIA FC</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC SIÓDEMKA7 C</span><span class="score-box">vs</span><span class="team-name">FC DĘBOGÓRZE</span></div>
-                        <div class="match-row"><span class="team-name text-end">MORDA BUŁA</span><span class="score-box">vs</span><span class="team-name">UKS AC MATERACE</span></div>
-                        <div class="match-row"><span class="team-name text-end">AC MISTRZOVIA GDYNIA B</span><span class="score-box">vs</span><span class="team-name">SUVIK GDYNIA</span></div>
-                        <div class="match-row"><span class="team-name text-end">WICZLINSKIE DZIKI</span><span class="score-box">vs</span><span class="team-name">KURNIK KASZTELANKI B</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#k3">
-                        KOLEJKA 3 — (30.03.2026 - 12.04.2026)
-                    </button>
-                </h2>
-                <div id="k3" class="accordion-collapse collapse" data-bs-parent="#scheduleAccordion">
-                    <div class="accordion-body">
-                        <div class="match-row"><span class="team-name text-end">FC BARANKI</span><span class="score-box">vs</span><span class="team-name">FC SIÓDEMKA7 C</span></div>
-                        <div class="match-row"><span class="team-name text-end">MORDA BUŁA</span><span class="score-box">vs</span><span class="team-name">AC MISTRZOVIA GDYNIA B</span></div>
-                        <div class="match-row"><span class="team-name text-end">SUVIK GDYNIA</span><span class="score-box">vs</span><span class="team-name">WICZLINSKIE DZIKI</span></div>
-                        <div class="match-row"><span class="team-name text-end">CISOVIA FC</span><span class="score-box">vs</span><span class="team-name">FC DĘBOGÓRZE</span></div>
-                        <div class="match-row"><span class="team-name text-end">UKS AC MATERACE</span><span class="score-box">vs</span><span class="team-name">INAZUMA ELEVEN 2025</span></div>
-                        <div class="match-row"><span class="team-name text-end">KURNIK KASZTELANKI B</span><span class="score-box">vs</span><span class="team-name">FC KOKONUT</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#k4">
-                        KOLEJKA 4 — (13.04.2026 - 26.04.2026)
-                    </button>
-                </h2>
-                <div id="k4" class="accordion-collapse collapse" data-bs-parent="#scheduleAccordion">
-                    <div class="accordion-body">
-                        <div class="match-row"><span class="team-name text-end">FC DĘBOGÓRZE</span><span class="score-box">vs</span><span class="team-name">KURNIK KASZTELANKI B</span></div>
-                        <div class="match-row"><span class="team-name text-end">AC MISTRZOVIA GDYNIA B</span><span class="score-box">vs</span><span class="team-name">UKS AC MATERACE</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC KOKONUT</span><span class="score-box">vs</span><span class="team-name">SUVIK GDYNIA</span></div>
-                        <div class="match-row"><span class="team-name text-end">WICZLINSKIE DZIKI</span><span class="score-box">vs</span><span class="team-name">MORDA BUŁA</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC BARANKI</span><span class="score-box">vs</span><span class="team-name">CISOVIA FC</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC SIÓDEMKA7 C</span><span class="score-box">vs</span><span class="team-name">INAZUMA ELEVEN 2025</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#k5">
-                        KOLEJKA 5 — (27.04.2026 - 10.05.2026)
-                    </button>
-                </h2>
-                <div id="k5" class="accordion-collapse collapse" data-bs-parent="#scheduleAccordion">
-                    <div class="accordion-body">
-                        <div class="match-row"><span class="team-name text-end">SUVIK GDYNIA</span><span class="score-box">vs</span><span class="team-name">FC DĘBOGÓRZE</span></div>
-                        <div class="match-row"><span class="team-name text-end">CISOVIA FC</span><span class="score-box">vs</span><span class="team-name">INAZUMA ELEVEN 2025</span></div>
-                        <div class="match-row"><span class="team-name text-end">UKS AC MATERACE</span><span class="score-box">vs</span><span class="team-name">FC SIÓDEMKA7 C</span></div>
-                        <div class="match-row"><span class="team-name text-end">MORDA BUŁA</span><span class="score-box">vs</span><span class="team-name">FC KOKONUT</span></div>
-                        <div class="match-row"><span class="team-name text-end">AC MISTRZOVIA GDYNIA B</span><span class="score-box">vs</span><span class="team-name">WICZLINSKIE DZIKI</span></div>
-                        <div class="match-row"><span class="team-name text-end">KURNIK KASZTELANKI B</span><span class="score-box">vs</span><span class="team-name">FC BARANKI</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#k6">
-                        KOLEJKA 6 — (11.05.2026 - 24.05.2026)
-                    </button>
-                </h2>
-                <div id="k6" class="accordion-collapse collapse" data-bs-parent="#scheduleAccordion">
-                    <div class="accordion-body">
-                        <div class="match-row"><span class="team-name text-end">FC DĘBOGÓRZE</span><span class="score-box">vs</span><span class="team-name">MORDA BUŁA</span></div>
-                        <div class="match-row"><span class="team-name text-end">WICZLINSKIE DZIKI</span><span class="score-box">vs</span><span class="team-name">UKS AC MATERACE</span></div>
-                        <div class="match-row"><span class="team-name text-end">INAZUMA ELEVEN 2025</span><span class="score-box">vs</span><span class="team-name">KURNIK KASZTELANKI B</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC BARANKI</span><span class="score-box">vs</span><span class="team-name">SUVIK GDYNIA</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC KOKONUT</span><span class="score-box">vs</span><span class="team-name">AC MISTRZOVIA GDYNIA B</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC SIÓDEMKA7 C</span><span class="score-box">vs</span><span class="team-name">CISOVIA FC</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#k7">
-                        KOLEJKA 7 — (25.05.2026 - 07.06.2026)
-                    </button>
-                </h2>
-                <div id="k7" class="accordion-collapse collapse" data-bs-parent="#scheduleAccordion">
-                    <div class="accordion-body">
-                        <div class="match-row"><span class="team-name text-end">WICZLINSKIE DZIKI</span><span class="score-box">vs</span><span class="team-name">FC KOKONUT</span></div>
-                        <div class="match-row"><span class="team-name text-end">KURNIK KASZTELANKI B</span><span class="score-box">vs</span><span class="team-name">FC SIÓDEMKA7 C</span></div>
-                        <div class="match-row"><span class="team-name text-end">MORDA BUŁA</span><span class="score-box">vs</span><span class="team-name">FC BARANKI</span></div>
-                        <div class="match-row"><span class="team-name text-end">CISOVIA FC</span><span class="score-box">vs</span><span class="team-name">UKS AC MATERACE</span></div>
-                        <div class="match-row"><span class="team-name text-end">SUVIK GDYNIA</span><span class="score-box">vs</span><span class="team-name">INAZUMA ELEVEN 2025</span></div>
-                        <div class="match-row"><span class="team-name text-end">AC MISTRZOVIA GDYNIA B</span><span class="score-box">vs</span><span class="team-name">FC DĘBOGÓRZE</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#k8">
-                        KOLEJKA 8 — (08.06.2026 - 21.06.2026)
-                    </button>
-                </h2>
-                <div id="k8" class="accordion-collapse collapse" data-bs-parent="#scheduleAccordion">
-                    <div class="accordion-body">
-                        <div class="match-row"><span class="team-name text-end">UKS AC MATERACE</span><span class="score-box">vs</span><span class="team-name">FC KOKONUT</span></div>
-                        <div class="match-row"><span class="team-name text-end">INAZUMA ELEVEN 2025</span><span class="score-box">vs</span><span class="team-name">MORDA BUŁA</span></div>
-                        <div class="match-row"><span class="team-name text-end">CISOVIA FC</span><span class="score-box">vs</span><span class="team-name">KURNIK KASZTELANKI B</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC BARANKI</span><span class="score-box">vs</span><span class="team-name">AC MISTRZOVIA GDYNIA B</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC DĘBOGÓRZE</span><span class="score-box">vs</span><span class="team-name">WICZLINSKIE DZIKI</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC SIÓDEMKA7 C</span><span class="score-box">vs</span><span class="team-name">SUVIK GDYNIA</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#k9">
-                        KOLEJKA 9 — (22.06.2026 - 05.07.2026)
-                    </button>
-                </h2>
-                <div id="k9" class="accordion-collapse collapse" data-bs-parent="#scheduleAccordion">
-                    <div class="accordion-body">
-                        <div class="match-row"><span class="team-name text-end">AC MISTRZOVIA GDYNIA B</span><span class="score-box">vs</span><span class="team-name">INAZUMA ELEVEN 2025</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC KOKONUT</span><span class="score-box">vs</span><span class="team-name">FC DĘBOGÓRZE</span></div>
-                        <div class="match-row"><span class="team-name text-end">WICZLINSKIE DZIKI</span><span class="score-box">vs</span><span class="team-name">FC BARANKI</span></div>
-                        <div class="match-row"><span class="team-name text-end">SUVIK GDYNIA</span><span class="score-box">vs</span><span class="team-name">CISOVIA FC</span></div>
-                        <div class="match-row"><span class="team-name text-end">MORDA BUŁA</span><span class="score-box">vs</span><span class="team-name">FC SIÓDEMKA7 C</span></div>
-                        <div class="match-row"><span class="team-name text-end">KURNIK KASZTELANKI B</span><span class="score-box">vs</span><span class="team-name">UKS AC MATERACE</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#k10">
-                        KOLEJKA 10 — (06.07.2026 - 19.07.2026)
-                    </button>
-                </h2>
-                <div id="k10" class="accordion-collapse collapse" data-bs-parent="#scheduleAccordion">
-                    <div class="accordion-body">
-                        <div class="match-row"><span class="team-name text-end">INAZUMA ELEVEN 2025</span><span class="score-box">vs</span><span class="team-name">WICZLINSKIE DZIKI</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC SIÓDEMKA7 C</span><span class="score-box">vs</span><span class="team-name">AC MISTRZOVIA GDYNIA B</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC BARANKI</span><span class="score-box">vs</span><span class="team-name">FC KOKONUT</span></div>
-                        <div class="match-row"><span class="team-name text-end">CISOVIA FC</span><span class="score-box">vs</span><span class="team-name">MORDA BUŁA</span></div>
-                        <div class="match-row"><span class="team-name text-end">KURNIK KASZTELANKI B</span><span class="score-box">vs</span><span class="team-name">SUVIK GDYNIA</span></div>
-                        <div class="match-row"><span class="team-name text-end">UKS AC MATERACE</span><span class="score-box">vs</span><span class="team-name">FC DĘBOGÓRZE</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#k11">
-                        KOLEJKA 11 — (20.07.2026 - 02.08.2026)
-                    </button>
-                </h2>
-                <div id="k11" class="accordion-collapse collapse" data-bs-parent="#scheduleAccordion">
-                    <div class="accordion-body">
-                        <div class="match-row"><span class="team-name text-end">FC DĘBOGÓRZE</span><span class="score-box">vs</span><span class="team-name">FC BARANKI</span></div>
-                        <div class="match-row"><span class="team-name text-end">SUVIK GDYNIA</span><span class="score-box">vs</span><span class="team-name">UKS AC MATERACE</span></div>
-                        <div class="match-row"><span class="team-name text-end">FC KOKONUT</span><span class="score-box">vs</span><span class="team-name">INAZUMA ELEVEN 2025</span></div>
-                        <div class="match-row"><span class="team-name text-end">WICZLINSKIE DZIKI</span><span class="score-box">vs</span><span class="team-name">FC SIÓDEMKA7 C</span></div>
-                        <div class="match-row"><span class="team-name text-end">MORDA BUŁA</span><span class="score-box">vs</span><span class="team-name">KURNIK KASZTELANKI B</span></div>
-                        <div class="match-row"><span class="team-name text-end">AC MISTRZOVIA GDYNIA B</span><span class="score-box">vs</span><span class="team-name">CISOVIA FC</span></div>
-                    </div>
-                </div>
-            </div>
-
+            <p class="text-center">Ładowanie terminarza...</p>
         </div>
     </div>
 </section>
 
 <footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4">
-                <h5>GDYNIA FOOTBALL LEAGUE</h5>
-                <p>Największa amatorska liga piłkarska w Gdyni. Tworzymy przestrzeń dla pasjonatów futbolu, łącząc sportową rywalizację z profesjonalną oprawą medialną.</p>
-                <p style="color: #444;">📍 Gdynia, Polska</p>
-            </div>
-            <div class="col-lg-4 col-md-6 mb-4">
-                <h5>NA SKRÓTY</h5>
-                <ul class="footer-links">
-                    <li><a href="index.html">Strona Główna</a></li>
-                    <li><a href="aktualnosci.html">Aktualności</a></li>
-                    <li><a href="regulamin.html">Regulamin Ligi</a></li>
-                    <li><a href="onas.html">O Nas</a></li>
-                    <li><a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank">Formularz Zgłoszeniowy</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-4 col-md-12">
-                <h5>ŚLEDŹ NAS</h5>
-                <div class="d-flex flex-column align-items-start">
-                    <a href="https://www.instagram.com/gdyniafl/" target="_blank" class="social-btn">OBSERWUJ NA INSTAGRAMIE ↗</a>
-                    <a href="https://www.tiktok.com/@gdyniafl" target="_blank" class="social-btn">ZOBSERWUJ NA TIKTOK ↗</a>
-                    <a href="mailto:gdyniafootballleague@gmail.com" class="social-btn btn-contact">WSPÓŁPRACA / KONTAKT ✉</a>
-                </div>
-            </div>
-        </div>
+    <div class="container text-center">
         <div class="copyright-row">
-            &copy; 2026 Gdynia Football League. Wszystkie prawa zastrzeżone.<br>
-            Design & Code: Ezi
+            &copy; 2026 Gdynia Football League. Design & Code: Ezi
         </div>
     </div>
 </footer>
 
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 <script>
-    /* PAMIĘTAJ: Zaktualizowany link dla Aspire League */
-    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf/pub?gid=1101831234&single=true&output=csv';
+    // Link do tabeli Aspire
+    const tableCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf/pub?gid=1101831234&single=true&output=csv';
+    
+    // Link do zakładki MECZE Aspire (WKLEJ TU LINK DO CSV SWOJEJ ZAKŁADKI MECZE)
+    const matchesCsvUrl = 'TUTAJ_WKLEJ_LINK_DO_ZAKLADKI_MECZE_ASPIRE_CSV';
+
     async function loadData() {
         try {
-            const r = await fetch(csvUrl);
-            const d = await r.text();
-            let html = '';
-            d.split('\n').slice(1).forEach(row => {
+            // 1. ŁADOWANIE TABELI
+            const resTable = await fetch(tableCsvUrl);
+            const dataTable = await resTable.text();
+            let tableHtml = '';
+            dataTable.split('\n').slice(1).forEach(row => {
                 const col = row.split(',');
                 if (col.length < 8) return;
-                html += `<tr>
+                tableHtml += `<tr>
                     <td class="sticky-pos col-highlight">${col[0]}</td>
                     <td class="sticky-team" style="font-weight:bold;">${col[1]}</td>
                     <td class="col-stat">${col[2]}</td>
@@ -397,8 +161,67 @@
                     <td class="col-highlight col-pkt">${col[9]}</td>
                 </tr>`;
             });
-            document.getElementById('table-data').innerHTML = html;
-        } catch (e) { console.error("Błąd ładowania danych tabeli Aspire"); }
+            document.getElementById('table-data').innerHTML = tableHtml;
+
+            // 2. ŁADOWANIE TERMINARZA
+            const resMatches = await fetch(matchesCsvUrl);
+            const dataMatches = await resMatches.text();
+            const rounds = {};
+
+            dataMatches.split('\n').slice(1).forEach(row => {
+                const col = row.split(',');
+                if (col.length < 8) return;
+
+                const team1 = col[0];    // A
+                const team2 = col[1];    // B
+                const goal1 = col[2];    // C
+                const goal2 = col[3];    // D
+                const roundNum = col[5]; // F (RUNDA)
+                const matchTime = col[6];// G (DATA/GODZINA)
+                const stadium = col[7];  // H (BOISKO)
+
+                if (!rounds[roundNum]) rounds[roundNum] = [];
+
+                const score = (goal1 !== "" && goal2 !== "") ? `${goal1} : ${goal2}` : "vs";
+                const info = (matchTime && matchTime !== "Brak rezerwacji") ? `${matchTime} | ${stadium || ''}` : "Termin do ustalenia";
+
+                rounds[roundNum].push(`
+                    <div class="match-row">
+                        <span class="team-name text-end">${team1}</span>
+                        <span class="score-box">
+                            ${score}
+                            <span class="match-details">${info}</span>
+                        </span>
+                        <span class="team-name">${team2}</span>
+                    </div>
+                `);
+            });
+
+            let accordionHtml = '';
+            const sortedRounds = Object.keys(rounds).sort((a, b) => parseInt(a) - parseInt(b));
+
+            sortedRounds.forEach((r, index) => {
+                const isOpen = index === 0 ? 'show' : '';
+                const isCollapsed = index === 0 ? '' : 'collapsed';
+                
+                accordionHtml += `
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button ${isCollapsed}" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">
+                                KOLEJKA ${r}
+                            </button>
+                        </h2>
+                        <div id="k${r}" class="accordion-collapse collapse ${isOpen}" data-bs-parent="#scheduleAccordion">
+                            <div class="accordion-body">
+                                ${rounds[r].join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            document.getElementById('scheduleAccordion').innerHTML = accordionHtml;
+
+        } catch (e) { console.error("Błąd ładowania danych Aspire:", e); }
     }
     loadData();
 </script>

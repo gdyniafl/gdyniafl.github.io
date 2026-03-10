@@ -8,26 +8,25 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
-        /* --- GLOBALNE --- */
-        html { overflow-y: scroll; }
         body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
-        h1, h2, h5, .nav-link, .dropdown-item, .table-title { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
+        h1, h2, h5, .nav-link, .table-title { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- NAWIGACJA --- */
+        /* --- NAWIGACJA Z INDEX.HTML --- */
         .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
         .navbar-brand img { height: 4.5rem !important; }
+        .navbar-nav { display: flex !important; align-items: center !important; }
+        .nav-item { list-style: none !important; margin-left: 20px !important; }
         .nav-link { color: #fff !important; font-size: 1.1rem !important; }
         .nav-link:hover { color: #44b1ff !important; }
-        .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; }
+        .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
         .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important; }
         .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
-        .dropdown-item { color: #fff !important; font-size: 1.1rem !important; }
+        .dropdown-item { color: #fff !important; font-family: 'Bebas Neue' !important; font-size: 1.1rem !important; }
         .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
 
-        /* --- NAGŁÓWEK --- */
         .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
 
-        /* --- TABELA --- */
+        /* --- TABELA I TERMINARZ --- */
         .table-container-main { padding: 40px 0 30px 0; }
         .gfl-card { background: #080808; border-radius: 20px; border: 1px solid #222; overflow: hidden; max-width: 1000px; margin: 0 auto; }
         .table-responsive-wrapper { width: 100%; overflow-x: auto; }
@@ -37,8 +36,6 @@
         .sticky-team { position: sticky !important; left: 35px; background: #080808 !important; z-index: 5; text-align: left !important; min-width: 130px; border-right: 1px solid #222; }
         .gfl-table tbody td { padding: 12px 5px; border-bottom: 1px solid #141414; text-align: center; }
         .col-highlight { color: #44b1ff !important; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.1rem; }
-
-        /* --- HARMONIJKA TERMINARZA --- */
         .schedule-section { padding: 40px 0 80px 0; }
         .accordion-item { background-color: #080808 !important; border: 1px solid #222 !important; margin-bottom: 10px; border-radius: 10px !important; overflow: hidden; }
         .accordion-button { background-color: #0f0f0f !important; color: #fff !important; font-family: 'Bebas Neue' !important; font-size: 1.2rem; letter-spacing: 1px; box-shadow: none !important; }
@@ -47,21 +44,27 @@
         .accordion-body { background-color: #050505; padding: 0; }
         .match-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #111; font-size: 0.9rem; }
         .team-name { width: 40%; font-weight: 500; }
-        .score-box { width: 20%; text-align: center; font-family: 'Bebas Neue'; font-size: 1.2rem; color: #44b1ff; line-height: 1.1; }
+        .score-box { width: 20%; text-align: center; font-family: 'Bebas Neue'; font-size: 1.4rem; color: #44b1ff; line-height: 1.1; }
         .match-details { display: block; color: #666; font-size: 0.7rem; font-family: sans-serif; margin-top: 4px; }
 
-        /* --- STOPKA --- */
+        /* --- STOPKA Z INDEX.HTML --- */
         .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; }
         .footer h5 { color: #fff; margin-bottom: 20px; }
         .footer-links { list-style: none; padding: 0; }
         .footer-links li { margin-bottom: 10px; }
-        .footer-links a { color: #888; text-decoration: none; transition: 0.3s; text-transform: uppercase; font-size: 0.85rem; }
+        .footer-links a { color: #888; text-decoration: none; transition: 0.3s; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
         .footer-links a:hover { color: #44b1ff; padding-left: 5px; }
         .social-btn { display: inline-block; padding: 8px 16px; margin-bottom: 10px; border: 1px solid #333; border-radius: 5px; color: #fff; text-decoration: none; font-family: 'Bebas Neue'; font-size: 1rem; transition: 0.3s; width: 100%; text-align: center; }
         .social-btn:hover { background: #44b1ff; border-color: #44b1ff; color: #000; }
+        .social-btn.btn-contact { border-color: #44b1ff !important; color: #44b1ff !important; }
+        .social-btn.btn-contact:hover { background-color: #44b1ff !important; color: #fff !important; }
         .copyright-row { margin-top: 40px; padding-top: 20px; border-top: 1px solid #111; text-align: center; font-size: 0.8rem; }
 
-        @media (max-width: 991px) { .navbar-brand img { height: 3.5rem !important; } }
+        @media (max-width: 991px) {
+            .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; display: none; }
+            .navbar-nav.show { display: flex !important; }
+            .nav-item { margin: 10px 0 !important; margin-left: 0 !important; }
+        }
     </style>
 </head>
 <body>
@@ -73,10 +76,10 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="gflNav">
-            <ul class="navbar-nav align-items-center">
-                <li class="nav-item ms-lg-4"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
-                <li class="nav-item ms-lg-4"><a class="nav-link" href="onas.html">O nas</a></li>
-                <li class="nav-item dropdown ms-lg-4">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
+                <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
@@ -84,8 +87,8 @@
                         <li><a class="dropdown-item" href="aspire.html">Aspire League</a></li>
                     </ul>
                 </li>
-                <li class="nav-item ms-lg-4"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
-                <li class="nav-item ms-lg-4"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px;">Zapisy</a></li>
+                <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px;">Zapisy</a></li>
             </ul>
         </div>
     </div>
@@ -99,32 +102,16 @@
 </section>
 
 <div class="table-container-main">
-    <div class="container">
-        <div class="gfl-card">
-            <div class="table-responsive-wrapper">
-                <table class="gfl-table">
-                    <thead>
-                        <tr>
-                            <th class="sticky-pos">#</th>
-                            <th class="sticky-team">DRUŻYNA</th>
-                            <th class="col-stat">M</th><th class="col-stat">W</th><th class="col-stat">R</th><th class="col-stat">P</th>
-                            <th class="col-goals">BRAMKI</th><th class="col-pkt">PKT</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-data"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    <div class="container"><div class="gfl-card"><div class="table-responsive-wrapper">
+        <table class="gfl-table">
+            <thead><tr><th class="sticky-pos">#</th><th class="sticky-team">DRUŻYNA</th><th class="col-stat">M</th><th class="col-stat">W</th><th class="col-stat">R</th><th class="col-stat">P</th><th class="col-goals">BRAMKI</th><th class="col-pkt">PKT</th></tr></thead>
+            <tbody id="table-data"></tbody>
+        </table>
+    </div></div></div>
 </div>
 
 <section class="schedule-section">
-    <div class="container">
-        <h2 class="text-center mb-4">PEŁNY TERMINARZ</h2>
-        <div class="accordion" id="scheduleAccordion">
-            <p class="text-center">Ładowanie terminarza...</p>
-        </div>
-    </div>
+    <div class="container"><h2 class="text-center mb-4">PEŁNY TERMINARZ</h2><div class="accordion" id="scheduleAccordion"></div></div>
 </section>
 
 <footer class="footer">
@@ -132,7 +119,8 @@
         <div class="row">
             <div class="col-lg-4 col-md-6 mb-4">
                 <h5>GDYNIA FOOTBALL LEAGUE</h5>
-                <p>Największa amatorska liga piłkarska w Gdyni. Rywalizacja, pasja i profesjonalna oprawa.</p>
+                <p>Największa amatorska liga piłkarska w Gdyni. Tworzymy przestrzeń dla pasjonatów futbolu, łącząc sportową rywalizację z profesjonalną oprawą medialną.</p>
+                <p style="color: #444;">📍 Gdynia, Polska</p>
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
                 <h5>NA SKRÓTY</h5>
@@ -140,12 +128,17 @@
                     <li><a href="index.html">Strona Główna</a></li>
                     <li><a href="aktualnosci.html">Aktualności</a></li>
                     <li><a href="regulamin.html">Regulamin Ligi</a></li>
+                    <li><a href="onas.html">O Nas</a></li>
+                    <li><a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank">Formularz Zgłoszeniowy</a></li>
                 </ul>
             </div>
             <div class="col-lg-4 col-md-12">
                 <h5>ŚLEDŹ NAS</h5>
-                <a href="https://www.instagram.com/gdyniafl/" target="_blank" class="social-btn">INSTAGRAM ↗</a>
-                <a href="https://www.tiktok.com/@gdyniafl" target="_blank" class="social-btn">TIKTOK ↗</a>
+                <div class="d-flex flex-column align-items-start">
+                    <a href="https://www.instagram.com/gdyniafl/" target="_blank" class="social-btn">OBSERWUJ NA INSTAGRAMIE ↗</a>
+                    <a href="https://www.tiktok.com/@gdyniafl" target="_blank" class="social-btn">OBSERWUJ NA TIKTOK ↗</a>
+                    <a href="mailto:gdyniafootballleague@gmail.com" class="social-btn btn-contact">WSPÓŁPRACA / KONTAKT ✉</a>
+                </div>
             </div>
         </div>
         <div class="copyright-row">&copy; 2026 Gdynia Football League. Design & Code: Ezi</div>
@@ -158,34 +151,23 @@
     const tableCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=1101831234&single=true&output=csv';
     const matchesCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv';
 
-    function parseCSV(text) {
-        const rows = text.split(/\r?\n/);
-        return rows.map(row => {
-            const parts = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-            return parts.map(p => p.replace(/^"|"$/g, '').trim());
-        });
-    }
-
     async function loadData() {
         try {
             const resTable = await fetch(tableCsvUrl);
             const dataTable = await resTable.text();
             let tableHtml = '';
-            parseCSV(dataTable).slice(1).forEach(col => {
+            dataTable.split('\n').slice(1).forEach(row => {
+                const col = row.split(',');
                 if (col.length < 8) return;
-                tableHtml += `<tr>
-                    <td class="sticky-pos col-highlight">${col[0]}</td>
-                    <td class="sticky-team" style="font-weight:bold;">${col[1]}</td>
-                    <td class="col-stat">${col[2]}</td><td class="col-stat">${col[3]}</td><td class="col-stat">${col[5]}</td><td class="col-stat">${col[4]}</td>
-                    <td class="col-goals">${col[6]}:${col[7]}</td><td class="col-highlight col-pkt">${col[9]}</td>
-                </tr>`;
+                tableHtml += `<tr><td class="sticky-pos col-highlight">${col[0]}</td><td class="sticky-team" style="font-weight:bold;">${col[1]}</td><td class="col-stat">${col[2]}</td><td class="col-stat">${col[3]}</td><td class="col-stat">${col[5]}</td><td class="col-stat">${col[4]}</td><td class="col-goals">${col[6]}:${col[7]}</td><td class="col-highlight col-pkt">${col[9]}</td></tr>`;
             });
             document.getElementById('table-data').innerHTML = tableHtml;
 
             const resMatches = await fetch(matchesCsvUrl);
             const dataMatches = await resMatches.text();
             const rounds = {};
-            parseCSV(dataMatches).slice(1).forEach(col => {
+            dataMatches.split('\n').slice(1).forEach(row => {
+                const col = row.split(',');
                 if (col.length < 8) return;
                 const roundNum = col[5];
                 if (!rounds[roundNum]) rounds[roundNum] = [];
@@ -196,13 +178,14 @@
 
             let accordionHtml = '';
             Object.keys(rounds).sort((a,b) => parseInt(a)-parseInt(b)).forEach((r, index) => {
-                const isOpen = index === 0 ? 'show' : '';
-                accordionHtml += `<div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">KOLEJKA ${r}</button></h2><div id="k${r}" class="accordion-collapse collapse ${isOpen}" data-bs-parent="#scheduleAccordion"><div class="accordion-body">${rounds[r].join('')}</div></div></div>`;
+                accordionHtml += `<div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">KOLEJKA ${r}</button></h2><div id="k${r}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" data-bs-parent="#scheduleAccordion"><div class="accordion-body">${rounds[r].join('')}</div></div></div>`;
             });
             document.getElementById('scheduleAccordion').innerHTML = accordionHtml;
         } catch (e) { console.error(e); }
     }
     loadData();
+    // Skrypt mobilny do menu
+    $('.navbar-toggler').on('click', function() { $('#gflNav').toggleClass('show'); });
 </script>
 </body>
 </html>

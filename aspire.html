@@ -9,23 +9,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   
   <style>
-    /* --- GLOBALNE --- */
+    /* --- TWOJE STYLE (IDENTYCZNE JAK W ELITE) --- */
     html { overflow-y: scroll; }
     body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
     h1, h2, h5, .nav-link, .dropdown-item, .table-title { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* --- NAWIGACJA --- */
     .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
     .navbar-brand img { height: 4.5rem !important; }
     .nav-link { color: #fff !important; font-size: 1.1rem !important; }
+    .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
     .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
     .dropdown-item { color: #fff !important; font-size: 1.1rem !important; }
     .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
 
-    /* --- NAGŁÓWEK --- */
     .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
 
-    /* --- TABELA --- */
     .table-container-main { padding: 40px 0 30px 0; }
     .gfl-card { background: #080808; border-radius: 20px; border: 1px solid #222; overflow: hidden; max-width: 1000px; margin: 0 auto; }
     .table-responsive-wrapper { width: 100%; overflow-x: auto; }
@@ -36,7 +34,6 @@
     .gfl-table tbody td { padding: 12px 5px; border-bottom: 1px solid #141414; text-align: center; }
     .col-highlight { color: #44b1ff !important; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.1rem; }
 
-    /* --- HARMONIJKA TERMINARZA --- */
     .schedule-section { padding: 40px 0 80px 0; }
     .accordion-item { background-color: #080808 !important; border: 1px solid #222 !important; margin-bottom: 10px; border-radius: 10px !important; overflow: hidden; }
     .accordion-button { background-color: #0f0f0f !important; color: #fff !important; font-family: 'Bebas Neue' !important; font-size: 1.2rem; letter-spacing: 1px; box-shadow: none !important; }
@@ -45,11 +42,11 @@
     .accordion-body { background-color: #050505; padding: 0; }
     
     .match-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid #111; font-size: 0.9rem; }
+    .match-row:last-child { border-bottom: none; }
     .team-name { width: 40%; font-weight: 500; }
     .score-box { width: 20%; text-align: center; font-family: 'Bebas Neue'; font-size: 1.2rem; color: #44b1ff; line-height: 1.1; }
     .match-details { display: block; color: #666; font-size: 0.7rem; font-family: sans-serif; margin-top: 4px; letter-spacing: 0; }
 
-    /* --- STOPKA --- */
     .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; }
     .copyright-row { margin-top: 40px; padding-top: 20px; border-top: 1px solid #111; text-align: center; font-size: 0.8rem; }
 
@@ -65,6 +62,9 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse justify-content-end" id="gflNav">
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
@@ -77,7 +77,6 @@
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
-                <li class="nav-item"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border:1px solid #44b1ff; padding:5px 15px !important; border-radius:5px;">Zapisy</a></li>
             </ul>
         </div>
     </div>
@@ -135,15 +134,13 @@
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // Link do tabeli Aspire
+    // Linki Aspire
     const tableCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf/pub?gid=1101831234&single=true&output=csv';
-    
-    // Link do zakładki MECZE Aspire (WKLEJ TU LINK DO CSV SWOJEJ ZAKŁADKI MECZE)
-    const matchesCsvUrl = 'TUTAJ_WKLEJ_LINK_DO_ZAKLADKI_MECZE_ASPIRE_CSV';
+    const matchesCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf/pub?gid=682329859&single=true&output=csv';
 
     async function loadData() {
         try {
-            // 1. ŁADOWANIE TABELI
+            // 1. TABELA
             const resTable = await fetch(tableCsvUrl);
             const dataTable = await resTable.text();
             let tableHtml = '';
@@ -163,7 +160,7 @@
             });
             document.getElementById('table-data').innerHTML = tableHtml;
 
-            // 2. ŁADOWANIE TERMINARZA
+            // 2. TERMINARZ
             const resMatches = await fetch(matchesCsvUrl);
             const dataMatches = await resMatches.text();
             const rounds = {};
@@ -221,7 +218,9 @@
             });
             document.getElementById('scheduleAccordion').innerHTML = accordionHtml;
 
-        } catch (e) { console.error("Błąd ładowania danych Aspire:", e); }
+        } catch (e) { 
+            console.error("Błąd Aspire:", e);
+        }
     }
     loadData();
 </script>

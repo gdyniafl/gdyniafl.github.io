@@ -8,12 +8,10 @@
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
     <style>
-        /* --- GLOBALNE --- */
         html { overflow-y: scroll; }
         body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
         h1, h2, h5, .nav-link, .dropdown-item { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- NAWIGACJA --- */
         .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
         .navbar-brand img { height: 4.5rem !important; }
         .nav-link { color: #fff !important; font-size: 1.1rem !important; }
@@ -24,19 +22,18 @@
         .dropdown-item { color: #fff !important; font-size: 1.1rem !important; }
         .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
 
-        /* --- NAGŁÓWEK --- */
         .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
 
-        /* --- KARTY AKTUALNOŚCI --- */
         .news-section { padding: 60px 0; }
-        .news-card { background: #0f0f0f; border: 1px solid #222; border-radius: 15px; overflow: hidden; height: 100%; transition: 0.3s; }
+        .news-card { background: #0f0f0f; border: 1px solid #222; border-radius: 15px; overflow: hidden; height: 100%; transition: 0.3s; display: flex; flex-direction: column; }
         .news-card:hover { border-color: #44b1ff; transform: translateY(-5px); }
         .news-img { width: 100%; height: 250px; object-fit: cover; border-bottom: 1px solid #222; }
-        .news-content { padding: 20px; }
-        .btn-ig { display: inline-block; padding: 8px 20px; border: 1px solid #44b1ff; color: #44b1ff; text-decoration: none; border-radius: 5px; font-family: 'Bebas Neue'; font-size: 1.1rem; transition: 0.3s; }
+        .news-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .news-title { font-size: 1.6rem; color: #fff; margin-bottom: 10px; }
+        .news-desc { color: #888; font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; flex-grow: 1; }
+        .btn-ig { display: inline-block; padding: 10px 20px; border: 1px solid #44b1ff; color: #44b1ff; text-decoration: none !important; border-radius: 5px; font-family: 'Bebas Neue'; font-size: 1.1rem; transition: 0.3s; text-align: center; align-self: flex-start; }
         .btn-ig:hover { background: #44b1ff; color: #000; }
 
-        /* --- STOPKA --- */
         .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; }
         .footer h5 { color: #fff; margin-bottom: 20px; }
         .footer-links { list-style: none; padding: 0; }
@@ -45,13 +42,9 @@
         .footer-links a:hover { color: #44b1ff; padding-left: 5px; }
         .social-btn { display: inline-block; padding: 8px 16px; margin-bottom: 10px; border: 1px solid #333; border-radius: 5px; color: #fff; text-decoration: none; font-family: 'Bebas Neue'; font-size: 1rem; transition: 0.3s; width: 100%; text-align: center; }
         .social-btn:hover { background: #44b1ff; border-color: #44b1ff; color: #000; }
-        .social-btn.btn-contact { border-color: #44b1ff !important; color: #44b1ff !important; }
-        .social-btn.btn-contact:hover { background-color: #44b1ff !important; color: #fff !important; }
         .copyright-row { margin-top: 40px; padding-top: 20px; border-top: 1px solid #111; text-align: center; font-size: 0.8rem; }
 
-        @media (max-width: 991px) {
-            .navbar-brand img { height: 3.5rem !important; }
-        }
+        @media (max-width: 991px) { .navbar-brand img { height: 3.5rem !important; } }
     </style>
 </head>
 <body>
@@ -91,7 +84,7 @@
 <section class="news-section">
     <div class="container">
         <div class="row" id="news-container">
-            <p class="text-center">Ładowanie informacji z boisk...</p>
+            <p class="text-center">Synchronizacja z redakcją GFL...</p>
         </div>
     </div>
 </section>
@@ -102,7 +95,6 @@
             <div class="col-lg-4 col-md-6 mb-4">
                 <h5>GDYNIA FOOTBALL LEAGUE</h5>
                 <p>Największa amatorska liga piłkarska w Gdyni. Tworzymy przestrzeń dla pasjonatów futbolu, łącząc sportową rywalizację z profesjonalną oprawą medialną.</p>
-                <p style="color: #444;">📍 Gdynia, Polska</p>
             </div>
             <div class="col-lg-4 col-md-6 mb-4">
                 <h5>NA SKRÓTY</h5>
@@ -113,13 +105,10 @@
                     <li><a href="onas.html">O Nas</a></li>
                 </ul>
             </div>
-            <div class="col-lg-4 col-md-12">
+            <div class="col-lg-4 col-md-12 text-center text-lg-start">
                 <h5>ŚLEDŹ NAS</h5>
-                <div class="d-flex flex-column align-items-start">
-                    <a href="https://www.instagram.com/gdyniafl/" target="_blank" class="social-btn">OBSERWUJ NA INSTAGRAMIE ↗</a>
-                    <a href="https://www.tiktok.com/@gdyniafl" target="_blank" class="social-btn">OBSERWUJ NA TIKTOK ↗</a>
-                    <a href="mailto:gdyniafootballleague@gmail.com" class="social-btn btn-contact">KONTAKT ✉</a>
-                </div>
+                <a href="https://www.instagram.com/gdyniafl/" target="_blank" class="social-btn">INSTAGRAM ↗</a>
+                <a href="https://www.tiktok.com/@gdyniafl" target="_blank" class="social-btn">TIKTOK ↗</a>
             </div>
         </div>
         <div class="copyright-row">
@@ -134,11 +123,13 @@
 <script>
     const newsCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb/pub?gid=1840446675&single=true&output=csv';
 
+    // NOWA, LEPSZA FUNKCJA CZYTANIA PLIKÓW CSV (ignoruje spacje, dzieli tylko po przecinku)
     function parseCSV(text) {
-        const lines = text.split(/\r?\n/);
-        return lines.map(line => {
-            const matches = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
-            return matches ? matches.map(m => m.replace(/^"|"$/g, '').trim()) : [];
+        const rows = text.split(/\r?\n/);
+        return rows.map(row => {
+            // Ten regex dzieli tylko po przecinkach, które nie są wewnątrz cudzysłowu
+            const parts = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+            return parts.map(p => p.replace(/^"|"$/g, '').trim());
         });
     }
 
@@ -146,25 +137,32 @@
         try {
             const response = await fetch(newsCsvUrl);
             const text = await response.text();
-            const rows = parseCSV(text).slice(1);
+            const dataRows = parseCSV(text).slice(1);
             let html = '';
-            rows.forEach(col => {
-                if (col.length < 4) return;
+
+            dataRows.forEach(col => {
+                if (col.length < 4 || col[0] === "") return;
+                
+                const title = col[0];
+                const desc = col[1];
+                const img = col[2];
+                const link = col[3];
+
                 html += `
                     <div class="col-md-4 mb-4">
                         <div class="news-card">
-                            <img src="${col[2]}" class="news-img" alt="${col[0]}" onerror="this.src='assets/images/logo-gfl.png-160x160.png'">
+                            <img src="${img}" class="news-img" alt="${title}" onerror="this.src='assets/images/logo-gfl.png-160x160.png'">
                             <div class="news-content">
-                                <h5 class="news-title">${col[0]}</h5>
-                                <p style="color:#888; font-size:0.9rem;">${col[1]}</p>
-                                <a href="${col[3]}" class="btn-ig">CZYTAJ WIĘCEJ ></a>
+                                <h5 class="news-title">${title}</h5>
+                                <p class="news-desc">${desc}</p>
+                                <a href="${link}" class="btn-ig">ZOBACZ SZCZEGÓŁY ></a>
                             </div>
                         </div>
                     </div>`;
             });
             document.getElementById('news-container').innerHTML = html || '<p class="text-center">Brak nowych aktualności.</p>';
         } catch (e) {
-            document.getElementById('news-container').innerHTML = '<p class="text-center">Serwis niedostępny.</p>';
+            document.getElementById('news-container').innerHTML = '<p class="text-center">Błąd połączenia z bazą newsów.</p>';
         }
     }
     loadNews();

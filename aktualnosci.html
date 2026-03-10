@@ -2,40 +2,19 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>Aktualności | Gdynia Football League</title>
+  <title>Aktualności | GFL</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <style>
-    /* --- 1. GLOBALNY FIX NA PRZESUWANIE TREŚCI --- */
-    html { overflow-y: scroll; } 
+    /* Twoje oryginalne style */
+    html { overflow-y: scroll; }
     body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
     h1, h2, h5, .nav-link, .dropdown-item { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
-
-    /* --- 2. UNIFIKACJA NAWIGACJI --- */
     .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
-    .navbar-brand img { height: 4.5rem !important; transition: 0.3s; }
-    .navbar-nav { display: flex !important; align-items: center; }
-    .nav-item { list-style: none !important; margin-left: 20px !important; }
-    .nav-link { color: #fff !important; font-size: 1.1rem !important; text-decoration: none !important; }
-    .nav-link:hover { color: #44b1ff !important; }
-
-    /* BIAŁY HAMBURGER */
-    .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
-    .navbar-toggler-icon { 
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-    }
-
-    /* DROPDOWN */
-    .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
-    .dropdown-item { color: #fff !important; font-size: 1.1rem !important; }
-    .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
-
-    /* --- 3. UJEDNOLICONY NAGŁÓWEK --- */
+    .navbar-brand img { height: 4.5rem !important; }
     .page-header { padding: 140px 0 40px 0 !important; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
-
-    /* --- 4. KARTY AKTUALNOŚCI (PRZYWRÓCONE) --- */
     .news-section { padding: 60px 0; }
     .news-card { background: #0f0f0f; border: 1px solid #222; border-radius: 15px; overflow: hidden; height: 100%; transition: 0.3s; }
     .news-card:hover { border-color: #44b1ff; transform: translateY(-5px); }
@@ -43,82 +22,7 @@
     .news-content { padding: 20px; }
     .btn-ig { display: inline-block; padding: 8px 20px; border: 1px solid #44b1ff; color: #44b1ff; text-decoration: none; border-radius: 5px; font-family: 'Bebas Neue'; font-size: 1.1rem; transition: 0.3s; }
     .btn-ig:hover { background: #44b1ff; color: #000; }
-    
-    .footer { 
-        background-color: #050505; 
-        border-top: 1px solid #222; 
-        padding: 60px 0 30px 0; 
-        color: #888; 
-        font-size: 0.9rem;
-    }
-    
-    .footer h5 {
-        color: #fff;
-        font-family: 'Bebas Neue', sans-serif;
-        font-size: 1.4rem;
-        letter-spacing: 1px;
-        margin-bottom: 20px;
-    }
-
-    .footer p { line-height: 1.6; }
-
-    .footer-links { list-style: none; padding: 0; }
-    .footer-links li { margin-bottom: 10px; }
-    .footer-links a { 
-        color: #888; 
-        text-decoration: none; 
-        transition: 0.3s; 
-        text-transform: uppercase;
-        font-size: 0.85rem;
-        letter-spacing: 1px;
-    }
-    .footer-links a:hover { color: #44b1ff; padding-left: 5px; }
-
-    .social-btn {
-        display: inline-block;
-        padding: 8px 16px;
-        margin-bottom: 10px;
-        border: 1px solid #333;
-        border-radius: 5px;
-        color: #fff;
-        text-decoration: none;
-        font-family: 'Bebas Neue';
-        font-size: 1rem;
-        transition: 0.3s;
-        width: 100%; /* Rozciągnij na szerokość kolumny na telefonie */
-        text-align: center;
-    }
-    .social-btn:hover { 
-        background: #44b1ff; 
-        border-color: #44b1ff; 
-        color: #000; 
-    }
-    /* --- FIX DLA PRZYCISKU KONTAKT --- */
-    /* Normalny stan przycisku kontaktu (niebieski obrys i tekst) */
-    .social-btn.btn-contact {
-        border-color: #44b1ff !important;
-        color: #44b1ff !important;
-    }
-
-    /* Stan po najechaniu (tło niebieskie, TEKST BIAŁY) */
-    .social-btn.btn-contact:hover {
-        background-color: #44b1ff !important;
-        color: #fff !important; /* To jest kluczowa zmiana */
-    }
-    .copyright-row {
-        margin-top: 40px;
-        padding-top: 20px;
-        border-top: 1px solid #111;
-        text-align: center;
-        font-size: 0.8rem;
-    }
-    
-    @media (max-width: 991px) {
-        .navbar-brand img { height: 3.5rem !important; }
-        .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; }
-        .collapse:not(.show) .navbar-nav { display: none !important; }
-        .nav-item { margin: 10px 0 !important; margin-left: 0 !important; }
-    }
+    .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; text-align: center; }
   </style>
 </head>
 <body>
@@ -126,23 +30,11 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="gflNav">
+        <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="aktualnosci.html" style="color: #44b1ff !important;">Aktualności</a></li>
                 <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
-                        <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
-                        <li><a class="dropdown-item" href="aspire.html">Aspire League</a></li>
-                    </ul>
-                </li>
                 <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
-                <li class="nav-item"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px;">Zapisy</a></li>
             </ul>
         </div>
     </div>
@@ -157,89 +49,71 @@
 
 <section class="news-section">
     <div class="container">
-        <div class="row">
-            <div class="col-md-4 mb-4">
-                <div class="news-card">
-                    <img src="assets/images/3.png-816x816.png" class="news-img" alt="Tabela">
-                    <div class="news-content">
-                        <h5 class="news-title">SEZON II - TABELA</h5>
-                        <p style="color:#888; font-size:0.9rem;">Sprawdź aktualny układ sił w tabeli po pierwszej kolejce Sezonu II.</p>
-                        <a href="https://www.instagram.com/gdyniafl/p/DU-VmkljZH6/" target="_blank" class="btn-ig">ZOBACZ NA IG ></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="news-card">
-                    <img src="assets/images/2.png-816x816.png" class="news-img" alt="Finał">
-                    <div class="news-content">
-                        <h5 class="news-title">MROŹNY FINAŁ, GORĄCE SERDUCHA!</h5>
-                        <p style="color:#888; font-size:0.9rem;">Podsumowanie emocji, które towarzyszyły nam podczas zimowego finału.</p>
-                        <a href="https://www.instagram.com/p/DTVgaRmCBoR/" target="_blank" class="btn-ig">ZOBACZ NA IG ></a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="news-card">
-                    <img src="assets/images/1.png-816x816.png" class="news-img" alt="S1">
-                    <div class="news-content">
-                        <h5 class="news-title">FINAŁ SEZONU I</h5>
-                        <p style="color:#888; font-size:0.9rem;">Wspomnienie wielkiego finału pierwszego sezonu Gdynia Football League.</p>
-                        <a href="https://www.instagram.com/p/DSZa40fDZp7/" target="_blank" class="btn-ig">ZOBACZ NA IG ></a>
-                    </div>
-                </div>
-            </div>
+        <div class="row" id="news-container">
+            <p class="text-center">Ładowanie informacji z boisk...</p>
         </div>
     </div>
 </section>
 
 <footer class="footer">
     <div class="container">
-        <div class="row">
-            
-            <div class="col-lg-4 col-md-6 mb-4">
-                <h5>GDYNIA FOOTBALL LEAGUE</h5>
-                <p>Największa amatorska liga piłkarska w Gdyni. Tworzymy przestrzeń dla pasjonatów futbolu, łącząc sportową rywalizację z profesjonalną oprawą medialną.</p>
-                <p style="color: #444;">📍 Gdynia, Polska</p>
-            </div>
-
-            <div class="col-lg-4 col-md-6 mb-4">
-                <h5>NA SKRÓTY</h5>
-                <ul class="footer-links">
-                    <li><a href="index.html">Strona Główna</a></li>
-                    <li><a href="aktualnosci.html">Aktualności</a></li>
-                    <li><a href="regulamin.html">Regulamin Ligi</a></li>
-                    <li><a href="onas.html">O Nas</a></li>
-                    <li><a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank">Formularz Zgłoszeniowy</a></li>
-                </ul>
-            </div>
-
-            <div class="col-lg-4 col-md-12">
-                <h5>ŚLEDŹ NAS</h5>
-                <div class="d-flex flex-column align-items-start">
-                    <a href="https://www.instagram.com/gdyniafl/" target="_blank" class="social-btn">
-                        OBSERWUJ NA INSTAGRAMIE ↗
-                    </a>
-                    <a href="https://www.tiktok.com/@gdyniafl" target="_blank" class="social-btn">
-                        OBSERWUJ NA TIKTOK ↗
-                    </a>
-                    <a href="mailto:gdyniafootballleague@gmail.com" class="social-btn btn-contact">
-                        WSPÓŁPRACA / KONTAKT ✉
-                    </a>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="copyright-row">
-            &copy; 2026 Gdynia Football League. Wszystkie prawa zastrzeżone.<br>
-            Design & Code: Ezi
-        </div>
+        &copy; 2026 Gdynia Football League. Design & Code: Ezi
     </div>
 </footer>
 
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // TWOJE POŁĄCZENIE Z ARKUSZEM NEWSY
+    const newsCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb/pub?gid=1840446675&single=true&output=csv';
+
+    // Funkcja parsująca CSV (bezpieczna dla przecinków w opisach)
+    function parseCSV(text) {
+        const lines = text.split(/\r?\n/);
+        return lines.map(line => {
+            const matches = line.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
+            return matches ? matches.map(m => m.replace(/^"|"$/g, '').trim()) : [];
+        });
+    }
+
+    async function loadNews() {
+        try {
+            const response = await fetch(newsCsvUrl);
+            const text = await response.text();
+            const rows = parseCSV(text).slice(1); // Pomijamy nagłówki
+            
+            let html = '';
+            
+            rows.forEach(col => {
+                if (col.length < 4) return;
+
+                const title = col[0];
+                const desc = col[1];
+                const img = col[2];
+                const link = col[3];
+
+                html += `
+                    <div class="col-md-4 mb-4">
+                        <div class="news-card">
+                            <img src="${img}" class="news-img" alt="${title}" onerror="this.src='assets/images/logo-gfl.png-160x160.png'">
+                            <div class="news-content">
+                                <h5 class="news-title">${title}</h5>
+                                <p style="color:#888; font-size:0.9rem;">${desc}</p>
+                                <a href="${link}" class="btn-ig">ZOBACZ WIĘCEJ ></a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('news-container').innerHTML = html || '<p class="text-center">Brak aktualności w tym tygodniu.</p>';
+        } catch (e) {
+            console.error("Błąd ładowania newsów:", e);
+            document.getElementById('news-container').innerHTML = '<p class="text-center">Serwis informacyjny tymczasowo niedostępny.</p>';
+        }
+    }
+    loadNews();
+</script>
 </body>
 </html>
-
-

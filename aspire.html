@@ -9,21 +9,32 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   
   <style>
-    /* --- TWOJE STYLE (IDENTYCZNE JAK W ELITE) --- */
+    /* --- GLOBALNE --- */
     html { overflow-y: scroll; }
     body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
     h1, h2, h5, .nav-link, .dropdown-item, .table-title { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
+    /* --- NAWIGACJA (ZINDEX.HTML) --- */
     .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
     .navbar-brand img { height: 4.5rem !important; }
-    .nav-link { color: #fff !important; font-size: 1.1rem !important; }
+    .navbar-nav { display: flex !important; align-items: center !important; flex-direction: row !important; }
+    .nav-item { list-style: none !important; margin-left: 20px !important; }
+    .nav-link { color: #fff !important; font-size: 1.1rem !important; text-decoration: none !important; }
+    .nav-link:hover { color: #44b1ff !important; }
+
     .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
+    .navbar-toggler-icon { 
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    }
+
     .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
-    .dropdown-item { color: #fff !important; font-size: 1.1rem !important; }
+    .dropdown-item { color: #fff !important; font-family: 'Bebas Neue' !important; font-size: 1.1rem !important; }
     .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
 
+    /* --- NAGŁÓWEK --- */
     .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
 
+    /* --- TABELA --- */
     .table-container-main { padding: 40px 0 30px 0; }
     .gfl-card { background: #080808; border-radius: 20px; border: 1px solid #222; overflow: hidden; max-width: 1000px; margin: 0 auto; }
     .table-responsive-wrapper { width: 100%; overflow-x: auto; }
@@ -34,6 +45,7 @@
     .gfl-table tbody td { padding: 12px 5px; border-bottom: 1px solid #141414; text-align: center; }
     .col-highlight { color: #44b1ff !important; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.1rem; }
 
+    /* --- HARMONIJKA TERMINARZA --- */
     .schedule-section { padding: 40px 0 80px 0; }
     .accordion-item { background-color: #080808 !important; border: 1px solid #222 !important; margin-bottom: 10px; border-radius: 10px !important; overflow: hidden; }
     .accordion-button { background-color: #0f0f0f !important; color: #fff !important; font-family: 'Bebas Neue' !important; font-size: 1.2rem; letter-spacing: 1px; box-shadow: none !important; }
@@ -47,11 +59,28 @@
     .score-box { width: 20%; text-align: center; font-family: 'Bebas Neue'; font-size: 1.2rem; color: #44b1ff; line-height: 1.1; }
     .match-details { display: block; color: #666; font-size: 0.7rem; font-family: sans-serif; margin-top: 4px; letter-spacing: 0; }
 
+    /* --- STOPKA (Z INDEX.HTML) --- */
     .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; }
+    .footer h5 { color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 1px; margin-bottom: 20px; }
+    .footer p { line-height: 1.6; }
+    .footer-links { list-style: none; padding: 0; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a { color: #888; text-decoration: none; transition: 0.3s; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+    .footer-links a:hover { color: #44b1ff; padding-left: 5px; }
+    .social-btn { display: inline-block; padding: 8px 16px; margin-bottom: 10px; border: 1px solid #333; border-radius: 5px; color: #fff; text-decoration: none; font-family: 'Bebas Neue'; font-size: 1rem; transition: 0.3s; width: 100%; text-align: center; }
+    .social-btn:hover { background: #44b1ff; border-color: #44b1ff; color: #000; }
+    .social-btn.btn-contact { border-color: #44b1ff !important; color: #44b1ff !important; }
+    .social-btn.btn-contact:hover { background-color: #44b1ff !important; color: #fff !important; }
     .copyright-row { margin-top: 40px; padding-top: 20px; border-top: 1px solid #111; text-align: center; font-size: 0.8rem; }
 
-    @media (max-width: 767px) {
+    /* --- MEDIA QUERIES --- */
+    @media (max-width: 991px) {
+        .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; display: none; }
+        .navbar-nav.show { display: flex !important; }
+        .nav-item { margin: 10px 0 !important; margin-left: 0 !important; }
         .navbar-brand img { height: 3.5rem !important; }
+    }
+    @media (max-width: 767px) {
         .team-name { font-size: 0.8rem; }
         .gfl-table { min-width: 380px !important; font-size: 0.7rem !important; }
     }
@@ -68,6 +97,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="gflNav">
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
+                <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
                     <ul class="dropdown-menu">
@@ -77,6 +107,7 @@
                     </ul>
                 </li>
                 <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px;">Zapisy</a></li>
             </ul>
         </div>
     </div>
@@ -157,13 +188,15 @@
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <script>
+    // Skrypt mobilny do menu
+    $('.navbar-toggler').on('click', function() { $('.navbar-nav').toggleClass('show'); });
+
     // Linki Aspire
     const tableCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf/pub?gid=1101831234&single=true&output=csv';
     const matchesCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf/pub?gid=682329859&single=true&output=csv';
 
     async function loadData() {
         try {
-            // 1. TABELA
             const resTable = await fetch(tableCsvUrl);
             const dataTable = await resTable.text();
             let tableHtml = '';
@@ -173,17 +206,12 @@
                 tableHtml += `<tr>
                     <td class="sticky-pos col-highlight">${col[0]}</td>
                     <td class="sticky-team" style="font-weight:bold;">${col[1]}</td>
-                    <td class="col-stat">${col[2]}</td>
-                    <td class="col-stat">${col[3]}</td>
-                    <td class="col-stat">${col[5]}</td>
-                    <td class="col-stat">${col[4]}</td>
-                    <td class="col-goals">${col[6]}:${col[7]}</td>
-                    <td class="col-highlight col-pkt">${col[9]}</td>
+                    <td class="col-stat">${col[2]}</td><td class="col-stat">${col[3]}</td><td class="col-stat">${col[5]}</td><td class="col-stat">${col[4]}</td>
+                    <td class="col-goals">${col[6]}:${col[7]}</td><td class="col-highlight col-pkt">${col[9]}</td>
                 </tr>`;
             });
             document.getElementById('table-data').innerHTML = tableHtml;
 
-            // 2. TERMINARZ
             const resMatches = await fetch(matchesCsvUrl);
             const dataMatches = await resMatches.text();
             const rounds = {};
@@ -191,59 +219,35 @@
             dataMatches.split('\n').slice(1).forEach(row => {
                 const col = row.split(',');
                 if (col.length < 8) return;
-
-                const team1 = col[0];    // A
-                const team2 = col[1];    // B
-                const goal1 = col[2];    // C
-                const goal2 = col[3];    // D
-                const roundNum = col[5]; // F (RUNDA)
-                const matchTime = col[6];// G (DATA/GODZINA)
-                const stadium = col[7];  // H (BOISKO)
-
+                const roundNum = col[5];
                 if (!rounds[roundNum]) rounds[roundNum] = [];
 
-                const score = (goal1 !== "" && goal2 !== "") ? `${goal1} : ${goal2}` : "vs";
-                const info = (matchTime && matchTime !== "Brak rezerwacji") ? `${matchTime} | ${stadium || ''}` : "Termin do ustalenia";
+                const score = (col[2] !== "" && col[3] !== "") ? `${col[2]} : ${col[3]}` : "vs";
+                const info = (col[6] && col[6] !== "Brak rezerwacji") ? `${col[6]} | ${col[7] || ''}` : "Termin do ustalenia";
 
                 rounds[roundNum].push(`
                     <div class="match-row">
-                        <span class="team-name text-end">${team1}</span>
-                        <span class="score-box">
-                            ${score}
-                            <span class="match-details">${info}</span>
-                        </span>
-                        <span class="team-name">${team2}</span>
+                        <span class="team-name text-end">${col[0]}</span>
+                        <span class="score-box">${score}<span class="match-details">${info}</span></span>
+                        <span class="team-name">${col[1]}</span>
                     </div>
                 `);
             });
 
             let accordionHtml = '';
-            const sortedRounds = Object.keys(rounds).sort((a, b) => parseInt(a) - parseInt(b));
-
-            sortedRounds.forEach((r, index) => {
-                const isOpen = index === 0 ? 'show' : '';
-                const isCollapsed = index === 0 ? '' : 'collapsed';
-                
+            Object.keys(rounds).sort((a,b) => parseInt(a)-parseInt(b)).forEach((r, index) => {
                 accordionHtml += `
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button ${isCollapsed}" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">
-                                KOLEJKA ${r}
-                            </button>
+                            <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">KOLEJKA ${r}</button>
                         </h2>
-                        <div id="k${r}" class="accordion-collapse collapse ${isOpen}" data-bs-parent="#scheduleAccordion">
-                            <div class="accordion-body">
-                                ${rounds[r].join('')}
-                            </div>
+                        <div id="k${r}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" data-bs-parent="#scheduleAccordion">
+                            <div class="accordion-body">${rounds[r].join('')}</div>
                         </div>
-                    </div>
-                `;
+                    </div>`;
             });
             document.getElementById('scheduleAccordion').innerHTML = accordionHtml;
-
-        } catch (e) { 
-            console.error("Błąd Aspire:", e);
-        }
+        } catch (e) { console.error(e); }
     }
     loadData();
 </script>

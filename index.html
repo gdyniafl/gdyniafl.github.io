@@ -268,18 +268,30 @@
 
                     // Zakres wyświetlania: od 7 dni temu do 14 dni w przód
                     if (diff > -7 && diff < 14) {
-                        const scoreHome = col[2] || '-';
-                        const scoreAway = col[3] || '-';
-                        const dateTime = col[6] ? col[6].trim() : "TERMIN DO USTALENIA";
-                        const pitch = col[7] ? col[7].trim() : "";
+                        // ... (początek pętli bez zmian)
+const scoreHome = col[2] ? col[2].trim() : '-';
+const scoreAway = col[3] ? col[3].trim() : '-';
+const dateTime = col[6] ? col[6].trim() : "";
+const pitch = col[7] ? col[7].trim() : "";
 
-                        // Formatowanie daty i boiska
-                        let infoString = dateTime;
-                        if (dateTime.includes("Brak") || dateTime === "") {
-                            infoString = "TERMIN DO USTALENIA";
-                        }
-                        
-                        const pitchInfo = (pitch !== "" && pitch !== "-") ? ` | <b>${pitch}</b>` : "";
+// Logika sprawdzania, czy mecz już się odbył (czy są wpisane bramki)
+const czyJestWynik = (scoreHome !== "" && scoreHome !== "-") || (scoreAway !== "" && scoreAway !== "-");
+
+let infoString = dateTime;
+
+// Jeśli termin jest pusty lub domyślny
+if (dateTime === "" || dateTime.toUpperCase().includes("TERMIN DO USTALENIA")) {
+    if (czyJestWynik) {
+        // Mecz rozegrany, ale zapomnieli wpisać daty rezerwacji
+        infoString = "BRAK INFORMACJI";
+    } else {
+        // Meczu jeszcze nie było i nie ma terminu
+        infoString = "TERMIN DO USTALENIA";
+    }
+}
+
+const pitchInfo = (pitch !== "" && pitch !== "-") ? ` | <b>${pitch}</b>` : "";
+// ... (reszta generowania HTML bez zmian)
 
                         html += `
                         <div class="match-card">

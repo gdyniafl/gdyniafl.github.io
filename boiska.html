@@ -175,33 +175,45 @@
             let html = '';
             const rows = data.split('\n').slice(1);
             
-            if (rows.length === 0 || rows[0].trim() === "") {
-                document.getElementById('grafik-container').innerHTML = '<p class="text-center w-100" style="color:#444;">Brak zaplanowanych meczów.</p>';
-                return;
-            }
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Ustawienie na początek dzisiejszego dnia
 
             rows.forEach(row => {
                 const col = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(p => p.replace(/^"|"$/g, '').trim());
-                if (col.length < 5) return;
+                if (col.length < 5 || col[0] === "") return;
+
+                // Przetwarzanie daty z formatu DD.MM.RRRR na format zrozumiały dla JS
+                const dateParts = col[1].split(' ')[0].split('.'); 
+                if (dateParts.length < 3) return;
                 
-                html += `
-                <div class="col">
-                    <div class="match-card">
-                        <span class="league-tag">${col[0]}</span>
-                        <div class="team-box">
-                            <span class="team-name">${col[3]}</span>
-                            <div class="vs-divider">VS</div>
-                            <span class="team-name">${col[4]}</span>
+                // Tworzymy datę meczu: rok (dateParts[2]), miesiąc-1 (dateParts[1]-1), dzień (dateParts[0])
+                const matchDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+
+                // FILTRACJA: Wyświetl tylko jeśli data meczu jest dzisiaj lub w przyszłości
+                if (matchDate >= today) {
+                    html += `
+                    <div class="col">
+                        <div class="match-card">
+                            <span class="league-tag">${col[0]}</span>
+                            <div class="team-box">
+                                <span class="team-name">${col[3]}</span>
+                                <div class="vs-divider">VS</div>
+                                <span class="team-name">${col[4]}</span>
+                            </div>
+                            <div class="match-info">
+                                TERMIN: <b>${col[1]}</b><br>
+                                BOISKO: <b>${col[2]}</b>
+                            </div>
                         </div>
-                        <div class="match-info">
-                            TERMIN: <b>${col[1]}</b><br>
-                            BOISKO: <b>${col[2]}</b>
-                        </div>
-                    </div>
-                </div>`;
+                    </div>`;
+                }
             });
-            document.getElementById('grafik-container').innerHTML = html;
-        } catch (e) { document.getElementById('grafik-container').innerHTML = 'Błąd ładowania.'; }
+
+            document.getElementById('grafik-container').innerHTML = html || '<p class="text-center w-100" style="color:#666;">Brak nadchodzących meczów.</p>';
+        } catch (e) { 
+            console.error("Błąd ładowania CSV:", e);
+            document.getElementById('grafik-container').innerHTML = '<p class="text-center w-100">Błąd ładowania danych.</p>'; 
+        }
     }
     loadGrafik();
 </script>

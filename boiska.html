@@ -173,65 +173,74 @@
         try {
             const res = await fetch(csvUrl);
             const data = await res.text();
-            const rows = data.split('\n').slice(1);
+            
+            // Rozbicie na wiersze i usunięcie nagłówka
+            const rows = data.split(/\r?\n/).slice(1);
             let html = '';
             
-            // Pobieramy aktualną datę i ustawiamy godzinę na 00:00:00
-            // aby mecze z dzisiaj również były widoczne
+            // Pobranie daty dzisiejszej (bez godziny)
             const today = new Date();
             today.setHours(0, 0, 0, 0);
 
-            rows.forEach(row => {
-                // Obsługa cudzysłowów w CSV
+            rows.forEach((row, index) => {
+                // Precyzyjne rozbicie CSV z uwzględnieniem cudzysłowów
                 const col = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(p => p.replace(/^"|"$/g, '').trim());
                 
-                if (col.length < 5 || !col[1]) return;
+                // Sprawdzenie czy wiersz posiada dane ligi i daty
+                if (col.length < 5 || !col[0] || !col[1]) return;
 
-                let matchDate;
-                const rawDateValue = col[1];
+                let matchDate = null;
+                const rawDateStr = col[1];
 
-                // 1. SPRAWDZAMY CZY DATA JEST LICZBĄ (Format Google: 46095.45)
-                if (!isNaN(rawDateValue.replace(',', '.')) && rawDateValue.length > 4) {
-                    const serial = parseFloat(rawDateValue.replace(',', '.'));
+                // PRÓBA 1: Jeśli Google wysłało datę jako liczbę (np. 46095)
+                if (!isNaN(rawDateStr.replace(',', '.')) && rawDateStr.length > 4) {
+                    const serial = parseFloat(rawDateStr.replace(',', '.'));
                     matchDate = new Date(Math.round((serial - 25569) * 86400 * 1000));
-                    matchDate.setHours(0, 0, 0, 0);
-                } else {
-                    // 2. JEŚLI DATA JEST TEKSTEM (Format: DD.MM.RRRR HH:MM)
-                    // Rozbijamy kropki, spacje i dwukropki
-                    const parts = rawDateValue.split(/[\. :]/);
-                    if (parts.length >= 3) {
-                        // parts[0]=DD, parts[1]=MM, parts[2]=RRRR
-                        matchDate = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
-                        matchDate.setHours(0, 0, 0, 0);
+                } 
+                // PRÓBA 2: Jeśli data jest tekstem (np. 15.03.2026)
+                else {
+                    const digits = rawDateStr.match(/\d+/g); // Wyciąga same liczby
+                    if (digits && digits.length >= 3) {
+                        // digits[0]=DD, digits[1]=MM, digits[2]=YYYY
+                        const day = parseInt(digits[0]);
+                        const month = parseInt(digits[1]) - 1;
+                        const year = parseInt(digits[2]);
+                        matchDate = new Date(year, month, day);
                     }
                 }
 
-                // FILTR: Jeśli data meczu jest dzisiejsza lub przyszła
-                if (matchDate && matchDate >= today) {
-                    html += `
-                    <div class="col">
-                        <div class="match-card">
-                            <span class="league-tag">${col[0]}</span>
-                            <div class="team-box">
-                                <span class="team-name">${col[3]}</span>
-                                <div class="vs-divider">VS</div>
-                                <span class="team-name">${col[4]}</span>
+                // WERYFIKACJA I FILTRACJA
+                if (matchDate && !isNaN(matchDate.getTime())) {
+                    matchDate.setHours(0, 0, 0, 0);
+
+                    // Pokaż tylko jeśli data meczu jest >= dzisiaj
+                    if (matchDate >= today) {
+                        html += `
+                        <div class="col">
+                            <div class="match-card">
+                                <span class="league-tag">${col[0]}</span>
+                                <div class="team-box">
+                                    <span class="team-name">${col[3]}</span>
+                                    <div class="vs-divider">VS</div>
+                                    <span class="team-name">${col[4]}</span>
+                                </div>
+                                <div class="match-info">
+                                    TERMIN: <b>${col[1]}</b><br>
+                                    BOISKO: <b>${col[2]}</b>
+                                </div>
                             </div>
-                            <div class="match-info">
-                                TERMIN: <b>${col[1]}</b><br>
-                                BOISKO: <b>${col[2]}</b>
-                            </div>
-                        </div>
-                    </div>`;
+                        </div>`;
+                    }
                 }
             });
 
-            container.innerHTML = html || '<p class="text-center w-100" style="color:#666; padding: 50px;">Brak nadchodzących rezerwacji.</p>';
-        } catch (e) {
-            console.error("Błąd parsowania:", e);
-            container.innerHTML = '<p class="text-center w-100">Błąd ładowania danych.</p>';
+            container.innerHTML = html || '<p class="text-center w-100" style="color:#666; padding: 40px;">Brak nadchodzących meczów na liście rezerwacji.</p>';
+        } catch (error) {
+            console.error("Błąd ładowania danych:", error);
+            container.innerHTML = '<p class="text-center w-100">Błąd podczas łączenia z bazą danych.</p>';
         }
     }
+
     loadGrafik();
 </script>
 </body>

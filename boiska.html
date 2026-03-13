@@ -169,28 +169,35 @@
     const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRT2NjlK7JkP2frWPBST7rj14EITRyHT1_z0_aOMHsXke2HzmcOJIAKpRq_EN3AL_FH6EweAAL3xbaD/pub?gid=1994792907&single=true&output=csv';
 
     async function loadGrafik() {
+        const container = document.getElementById('grafik-container');
         try {
             const res = await fetch(csvUrl);
             const data = await res.text();
-            let html = '';
             const rows = data.split('\n').slice(1);
+            let html = '';
             
-            const today = new Date();
-            today.setHours(0, 0, 0, 0); // Ustawienie na początek dzisiejszego dnia
+            const now = new Date();
+            now.setHours(0, 0, 0, 0);
 
             rows.forEach(row => {
                 const col = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(p => p.replace(/^"|"$/g, '').trim());
                 if (col.length < 5 || col[0] === "") return;
 
-                // Przetwarzanie daty z formatu DD.MM.RRRR na format zrozumiały dla JS
-                const dateParts = col[1].split(' ')[0].split('.'); 
-                if (dateParts.length < 3) return;
-                
-                // Tworzymy datę meczu: rok (dateParts[2]), miesiąc-1 (dateParts[1]-1), dzień (dateParts[0])
-                const matchDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+                let matchDate;
+                const rawDate = col[1].replace(',', '.');
 
-                // FILTRACJA: Wyświetl tylko jeśli data meczu jest dzisiaj lub w przyszłości
-                if (matchDate >= today) {
+                // Jeśli data jest liczbą (format seryjny Excela 46089...)
+                if (!isNaN(rawDate) && rawDate.length > 4) {
+                    matchDate = new Date((parseFloat(rawDate) - 25569) * 86400 * 1000);
+                } else {
+                    // Jeśli data jest tekstem (np. 14.03.2026)
+                    const parts = col[1].split(/[\. :\/]/);
+                    if (parts.length >= 3) {
+                        matchDate = new Date(parts[2], parts[1] - 1, parts[0]);
+                    }
+                }
+
+                if (matchDate && matchDate >= now) {
                     html += `
                     <div class="col">
                         <div class="match-card">
@@ -209,10 +216,9 @@
                 }
             });
 
-            document.getElementById('grafik-container').innerHTML = html || '<p class="text-center w-100" style="color:#666;">Brak nadchodzących meczów.</p>';
-        } catch (e) { 
-            console.error("Błąd ładowania CSV:", e);
-            document.getElementById('grafik-container').innerHTML = '<p class="text-center w-100">Błąd ładowania danych.</p>'; 
+            container.innerHTML = html || '<p class="text-center w-100">Brak nadchodzących meczów.</p>';
+        } catch (e) {
+            container.innerHTML = '<p class="text-center w-100">Błąd ładowania danych.</p>';
         }
     }
     loadGrafik();

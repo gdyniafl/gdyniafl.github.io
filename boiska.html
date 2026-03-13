@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Grafik Boisk | Gdynia Football League</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  
+  <style>
+    /* TWOJE STYLE Z INDEX.HTML */
+    body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
+    h1, h2, h3, h4, .nav-link { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
+
+    .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
+    .navbar-brand img { height: 4.5rem !important; }
+    .nav-item { margin-left: 20px !important; }
+    .nav-link { color: #fff !important; font-size: 1.1rem !important; }
+    .nav-link:hover { color: #44b1ff !important; }
+
+    /* STYL DLA GRAFIKU */
+    .grafik-section { padding: 140px 0 60px 0; background: #000; min-height: 80vh; }
+    .grid-grafik { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-top: 30px; }
+    
+    .match-card { background: #0f0f0f; border: 1px solid #222; border-radius: 10px; padding: 20px; transition: 0.3s; }
+    .match-card:hover { border-color: #44b1ff; transform: translateY(-3px); }
+    
+    .pitch-label { color: #44b1ff; font-family: 'Bebas Neue'; font-size: 1.2rem; margin-bottom: 10px; }
+    .teams-box { font-size: 1.3rem; font-family: 'Bebas Neue'; line-height: 1.2; margin: 15px 0; }
+    .time-label { color: #888; font-size: 0.9rem; border-top: 1px solid #222; padding-top: 10px; display: flex; justify-content: space-between; }
+    .liga-badge { font-size: 0.7rem; background: #222; padding: 2px 8px; border-radius: 3px; color: #44b1ff; }
+
+    .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; }
+    .social-btn { display: inline-block; padding: 8px 16px; margin-bottom: 10px; border: 1px solid #333; border-radius: 5px; color: #fff; text-decoration: none; font-family: 'Bebas Neue'; width: 100%; text-align: center; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
+        <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav" style="flex-direction: row !important;">
+                <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
+                <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
+                <li class="nav-item"><a class="nav-link" href="index.html#rozDrop">Rozgrywki</a></li>
+                <li class="nav-item"><a class="nav-link" href="boiska.html" style="color: #44b1ff !important;">Grafik Boisk</a></li>
+                <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px;">Zapisy</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="grafik-section">
+    <div class="container">
+        <h1 style="font-size: 3.5rem;">GRAFIK BOISK</h1>
+        <p style="color: #44b1ff; letter-spacing: 3px;">POTWIERDZONE TERMINY SPOTKAŃ</p>
+        
+        <div id="grafik-wrapper" class="grid-grafik">
+            <div style="color: #44b1ff;">ŁADOWANIE GRAFIKU...</div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <h5 style="font-family: 'Bebas Neue'; color:#fff;">GDYNIA FOOTBALL LEAGUE</h5>
+                <p>Oficjalny terminarz rezerwacji boisk ligowych GFL.</p>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h5 style="font-family: 'Bebas Neue'; color:#fff;">ŚLEDŹ NAS</h5>
+                <a href="https://www.instagram.com/gdyniafl/" class="social-btn">INSTAGRAM ↗</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // TU WKLEJ SWÓJ LINK CSV Z ARKUSZA "PODGLAD REZERWACJI"
+    const csvUrl = 'TWÓJ_LINK_DO_CSV_Z_ARKUSZA';
+
+    async function loadGrafik() {
+        const wrapper = document.getElementById('grafik-wrapper');
+        try {
+            const response = await fetch(csvUrl);
+            const csvText = await response.text();
+            const rows = csvText.split('\n').slice(1);
+            
+            let html = '';
+            rows.forEach(row => {
+                const col = row.split(',');
+                if (col.length < 10) return;
+
+                const dataGodzina = col[1]; // B
+                const liga = col[2];        // C
+                const boisko = col[3];      // D
+                
+                // Logika wyboru drużyn (EF, GH, IJ)
+                let t1 = "", t2 = "";
+                if (liga.toUpperCase().includes("ELITE")) { t1 = col[4]; t2 = col[5]; }
+                else if (liga.toUpperCase().includes("CHALLENGE")) { t1 = col[6]; t2 = col[7]; }
+                else if (liga.toUpperCase().includes("ASPIRE")) { t1 = col[8]; t2 = col[9]; }
+
+                if (!t1 || t1.trim() === "") return;
+
+                html += `
+                <div class="match-card">
+                    <div class="pitch-label">${boisko}</div>
+                    <div class="liga-badge">${liga}</div>
+                    <div class="teams-box">${t1}<br><span style="color:#444; font-size:0.8rem;">VS</span><br>${t2}</div>
+                    <div class="time-label">
+                        <span>DATA I GODZINA:</span>
+                        <span style="color:#fff;">${dataGodzina}</span>
+                    </div>
+                </div>`;
+            });
+            wrapper.innerHTML = html || '<div style="color:#888;">Brak zaplanowanych meczów na najbliższe dni.</div>';
+        } catch (e) {
+            wrapper.innerHTML = "Błąd ładowania danych.";
+        }
+    }
+    loadGrafik();
+</script>
+
+</body>
+</html>

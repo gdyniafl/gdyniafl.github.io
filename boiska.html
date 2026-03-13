@@ -7,46 +7,51 @@
     <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    
     <style>
+        /* --- GLOBALNE --- */
+        html { overflow-y: scroll; }
         body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
-        h1, h2, .nav-link, .league-tag, .team-name { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
+        h1, h2, h5, .nav-link, .dropdown-item, .table-title, .league-tag, .team-name { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* NAWIGACJA */
+        /* --- NAWIGACJA --- */
         .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
         .navbar-brand img { height: 4.5rem !important; }
-        .nav-item { list-style: none; margin-left: 20px; }
-        .nav-link { color: #fff !important; font-size: 1.1rem !important; text-decoration: none; transition: 0.3s; }
+        .nav-link { color: #fff !important; font-size: 1.1rem !important; }
         .nav-link:hover { color: #44b1ff !important; }
+        .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; }
+        .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important; }
+        .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
+        .dropdown-item { color: #fff !important; font-size: 1.1rem !important; }
+        .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
 
-        /* NAGŁÓWEK SEKCJI */
-        .grafik-header { padding: 160px 0 40px 0; text-align: center; background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('assets/images/background-gfl.jpg'); background-size: cover; }
-        .section-title { font-size: 4rem; margin-bottom: 0; color: #fff; }
-        .section-subtitle { color: #44b1ff; letter-spacing: 4px; font-size: 1rem; }
+        /* --- NAGŁÓWEK --- */
+        .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
 
-        /* KARTY MECZOWE */
-        .grafik-container { padding: 60px 0; background: #050505; min-height: 600px; }
-        .match-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 25px; }
-        
-        .match-card { background: #0f0f0f; border: 1px solid #222; border-radius: 12px; padding: 25px; transition: 0.4s; position: relative; overflow: hidden; }
-        .match-card:hover { border-color: #44b1ff; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(68, 177, 255, 0.1); }
-        
-        .league-tag { font-size: 0.8rem; color: #44b1ff; margin-bottom: 15px; display: block; border-bottom: 1px solid #222; padding-bottom: 10px; }
-        
-        .teams-wrapper { margin: 20px 0; text-align: center; }
-        .team-name { font-size: 1.6rem; line-height: 1.1; margin: 5px 0; }
-        .vs-divider { color: #333; font-size: 0.7rem; margin: 10px 0; font-weight: bold; }
+        /* --- GRAFIK KARTY --- */
+        .grafik-section { padding: 40px 0 80px 0; }
+        .match-card { background: #080808; border: 1px solid #222; border-radius: 15px; padding: 20px; margin-bottom: 20px; transition: 0.3s; }
+        .match-card:hover { border-color: #44b1ff; transform: translateY(-3px); }
+        .league-tag { font-size: 0.8rem; color: #44b1ff; font-weight: bold; margin-bottom: 5px; display: block; }
+        .teams-row { display: flex; justify-content: space-between; align-items: center; margin: 10px 0; }
+        .team-name { font-size: 1.3rem; width: 42%; }
+        .vs-tag { color: #333; font-weight: bold; font-size: 0.8rem; }
+        .match-meta { border-top: 1px solid #141414; margin-top: 15px; padding-top: 10px; display: flex; justify-content: space-between; color: #666; font-size: 0.85rem; }
+        .match-meta b { color: #fff; font-weight: normal; font-family: 'Bebas Neue'; font-size: 1.1rem; }
 
-        .match-footer { margin-top: 20px; padding-top: 15px; border-top: 1px solid #111; font-size: 0.85rem; color: #888; display: flex; justify-content: space-between; align-items: center; }
-        .match-footer b { color: #fff; font-weight: normal; }
-        .pitch-badge { background: #1a1a1a; color: #44b1ff; padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; text-transform: uppercase; }
+        /* --- STOPKA --- */
+        .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; }
+        .footer h5 { color: #fff; margin-bottom: 20px; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: #888; text-decoration: none; transition: 0.3s; text-transform: uppercase; font-size: 0.85rem; }
+        .footer-links a:hover { color: #44b1ff; padding-left: 5px; }
+        .social-btn { display: inline-block; padding: 8px 16px; margin-bottom: 10px; border: 1px solid #333; border-radius: 5px; color: #fff; text-decoration: none; font-family: 'Bebas Neue'; font-size: 1rem; transition: 0.3s; width: 100%; text-align: center; }
+        .social-btn:hover { background: #44b1ff; border-color: #44b1ff; color: #000; }
+        .copyright-row { margin-top: 40px; padding-top: 20px; border-top: 1px solid #111; text-align: center; font-size: 0.8rem; }
 
-        /* FOOTER */
-        .footer { background-color: #050505; border-top: 1px solid #222; padding: 40px 0; text-align: center; color: #666; font-size: 0.8rem; }
-
-        @media (max-width: 768px) {
-            .section-title { font-size: 2.5rem; }
-            .match-grid { grid-template-columns: 1fr; }
+        @media (max-width: 991px) { 
+            .navbar-brand img { height: 3.5rem !important; } 
+            .team-name { font-size: 1.1rem; }
         }
     </style>
 </head>
@@ -55,92 +60,127 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
-        <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav" style="display: flex; flex-direction: row;">
-                <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
-                <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
-                <li class="nav-item"><a class="nav-link" href="index.html">Rozgrywki</a></li>
-                <li class="nav-item"><a class="nav-link" href="boiska.html" style="color: #44b1ff !important;">Grafik Boisk</a></li>
-                <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
-                <li class="nav-item"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border: 1px solid #44b1ff; padding: 5px 15px; border-radius: 5px; margin-left: 20px;">Zapisy</a></li>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="gflNav">
+            <ul class="navbar-nav align-items-center">
+                <li class="nav-item ms-lg-4"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
+                <li class="nav-item ms-lg-4"><a class="nav-link" href="onas.html">O nas</a></li>
+                <li class="nav-item dropdown ms-lg-4">
+                    <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
+                        <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
+                        <li><a class="dropdown-item" href="aspire.html">Aspire League</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item ms-lg-4"><a class="nav-link" href="boiska.html" style="color: #44b1ff !important;">Grafik Boisk</a></li>
+                <li class="nav-item ms-lg-4"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
+                <li class="nav-item ms-lg-4"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px;">Zapisy</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<header class="grafik-header">
+<section class="page-header">
     <div class="container">
-        <h1 class="section-title">GRAFIK BOISK</h1>
-        <p class="section-subtitle">REZERWACJE I TERMINY SPOTKAŃ</p>
+        <h1 class="display-1">GRAFIK BOISK</h1>
+        <p style="color: #44b1ff; letter-spacing: 2px;">REZERWACJE I TERMINY NAJBLIŻSZYCH SPOTKAŃ</p>
     </div>
 </header>
 
-<section class="grafik-container">
+<section class="grafik-section">
     <div class="container">
-        <div class="match-grid" id="grafik-data">
-            <div style="grid-column: 1/-1; text-align: center; padding: 50px; color: #44b1ff;">ŁADOWANIE AKTUALNEGO GRAFIKU...</div>
+        <div class="row justify-content-center" id="grafik-container">
+            <p class="text-center">Ładowanie grafiku...</p>
         </div>
     </div>
 </section>
 
 <footer class="footer">
     <div class="container">
-        &copy; 2026 Gdynia Football League | Wszystkie prawa zastrzeżone.
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5>GDYNIA FOOTBALL LEAGUE</h5>
+                <p>Największa amatorska liga piłkarska w Gdyni. Tworzymy przestrzeń dla pasjonatów futbolu, łącząc sportową rywalizację z profesjonalną oprawą medialną.</p>
+                <p style="color: #444;">📍 Gdynia, Polska</p>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5>NA SKRÓTY</h5>
+                <ul class="footer-links">
+                    <li><a href="index.html">Strona Główna</a></li>
+                    <li><a href="aktualnosci.html">Aktualności</a></li>
+                    <li><a href="regulamin.html">Regulamin Ligi</a></li>
+                    <li><a href="onas.html">O Nas</a></li>
+                    <li><a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank">Formularz Zgłoszeniowy</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <h5>ŚLEDŹ NAS</h5>
+                <div class="d-flex flex-column align-items-start">
+                    <a href="https://www.instagram.com/gdyniafl/" target="_blank" class="social-btn">OBSERWUJ NA INSTAGRAMIE ↗</a>
+                    <a href="https://www.tiktok.com/@gdyniafl" target="_blank" class="social-btn">OBSERWUJ NA TIKTOK ↗</a>
+                    <a href="mailto:gdyniafootballleague@gmail.com" class="social-btn btn-contact" style="border-color: #44b1ff !important; color: #44b1ff !important;">WSPÓŁPRACA / KONTAKT ✉</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-row">&copy; 2026 Gdynia Football League. Design & Code: Ezi</div>
     </div>
 </footer>
 
+<script src="assets/web/assets/jquery/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
     const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRT2NjlK7JkP2frWPBST7rj14EITRyHT1_z0_aOMHsXke2HzmcOJIAKpRq_EN3AL_FH6EweAAL3xbaD/pub?gid=1994792907&single=true&output=csv';
 
-    async function fetchGrafik() {
-        const container = document.getElementById('grafik-data');
-        try {
-            const response = await fetch(csvUrl);
-            const data = await response.text();
-            const rows = data.split('\n').slice(1); // Pomijamy nagłówek
+    function parseCSV(text) {
+        const rows = text.split(/\r?\n/);
+        return rows.map(row => {
+            const parts = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+            return parts.map(p => p.replace(/^"|"$/g, '').trim());
+        });
+    }
 
+    async function loadGrafik() {
+        try {
+            const res = await fetch(csvUrl);
+            const data = await res.text();
             let html = '';
             
-            if (rows.length === 0 || (rows.length === 1 && rows[0].trim() === "")) {
-                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #666;">Brak potwierdzonych rezerwacji na najbliższe dni.</div>';
+            const rows = parseCSV(data).slice(1);
+            
+            if (rows.length === 0 || (rows.length === 1 && rows[0][0] === "")) {
+                document.getElementById('grafik-container').innerHTML = '<p class="text-center" style="color:#444;">Brak zaplanowanych meczów w najbliższym czasie.</p>';
                 return;
             }
 
-            rows.forEach(row => {
-                // Używamy prostego splita, ale uważamy na przecinki w nazwach (jeśli by były)
-                const cols = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
-                if (cols.length < 5) return;
-
-                const liga = cols[0].replace(/"/g, '');
-                const dataMeczu = cols[1].replace(/"/g, '');
-                const boisko = cols[2].replace(/"/g, '');
-                const team1 = cols[3].replace(/"/g, '');
-                const team2 = cols[4].replace(/"/g, '');
-
+            rows.forEach(col => {
+                if (col.length < 5) return;
+                
                 html += `
+                <div class="col-lg-10">
                     <div class="match-card">
-                        <span class="league-tag">${liga}</span>
-                        <div class="teams-wrapper">
-                            <div class="team-name">${team1}</div>
-                            <div class="vs-divider">VS</div>
-                            <div class="team-name">${team2}</div>
+                        <span class="league-tag">${col[0]}</span>
+                        <div class="teams-row">
+                            <span class="team-name text-end">${col[3]}</span>
+                            <span class="vs-tag">VS</span>
+                            <span class="team-name text-start">${col[4]}</span>
                         </div>
-                        <div class="match-footer">
-                            <span>${dataMeczu}</span>
-                            <span class="pitch-badge">${boisko}</span>
+                        <div class="match-meta">
+                            <span>TERMIN: <b>${col[1]}</b></span>
+                            <span>BOISKO: <b>${col[2]}</b></span>
                         </div>
                     </div>
-                `;
+                </div>`;
             });
-
-            container.innerHTML = html;
-        } catch (error) {
-            container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: #ff4444;">Błąd ładowania danych. Spróbuj odświeżyć stronę.</div>';
+            document.getElementById('grafik-container').innerHTML = html;
+        } catch (e) {
+            console.error("Błąd grafiku:", e);
+            document.getElementById('grafik-container').innerHTML = '<p class="text-center text-danger">Błąd ładowania danych.</p>';
         }
     }
-
-    fetchGrafik();
+    loadGrafik();
 </script>
-
 </body>
 </html>

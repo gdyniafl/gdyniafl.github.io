@@ -165,6 +165,45 @@
 
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Grafik Boisk | GFL</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #000; color: #fff; font-family: sans-serif; }
+        h1, .league-tag, .team-name { font-family: 'Bebas Neue', sans-serif; text-transform: uppercase; }
+        .page-header { padding: 100px 0 40px; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
+        .grafik-section { padding: 50px 0; }
+        .match-card { background: #0f0f0f; border: 1px solid #222; border-radius: 12px; padding: 20px; transition: 0.3s; text-align: center; height: 100%; }
+        .match-card:hover { border-color: #44b1ff; }
+        .league-tag { color: #44b1ff; font-size: 0.9rem; border-bottom: 1px solid #222; padding-bottom: 5px; margin-bottom: 15px; display: block; }
+        .team-name { font-size: 1.4rem; min-height: 3rem; display: flex; align-items: center; justify-content: center; }
+        .vs { color: #333; font-weight: bold; margin: 5px 0; font-size: 0.8rem; }
+        .match-info { margin-top: 15px; padding-top: 10px; border-top: 1px solid #111; font-size: 0.85rem; color: #888; }
+        .match-info b { color: #fff; }
+    </style>
+</head>
+<body>
+
+<section class="page-header">
+    <div class="container">
+        <h1>GRAFIK BOISK</h1>
+        <p style="color: #44b1ff;">NADCHODZĄCE REZERWACJE</p>
+    </div>
+</section>
+
+<section class="grafik-section">
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="grafik-container">
+            <p class="text-center w-100">Ładowanie danych...</p>
+        </div>
+    </div>
+</section>
+
 <script>
     const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRT2NjlK7JkP2frWPBST7rj14EITRyHT1_z0_aOMHsXke2HzmcOJIAKpRq_EN3AL_FH6EweAAL3xbaD/pub?gid=1994792907&single=true&output=csv';
 
@@ -173,62 +212,40 @@
         try {
             const res = await fetch(csvUrl);
             const data = await res.text();
-            
-            // 1. Rozbijamy na wiersze i czyścimy puste linie
-            const rows = data.split(/\r?\n/).filter(line => line.trim() !== "");
+            const rows = data.split(/\r?\n/).slice(1);
             let html = '';
             
-            // 2. Pobieramy datę dzisiejszą (13.03.2026) bez godziny
             const now = new Date();
-            const todayMidnight = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+            now.setHours(0, 0, 0, 0);
 
-            // Pomijamy nagłówek (pierwszy wiersz)
-            for (let i = 1; i < rows.length; i++) {
-                const row = rows[i];
-
-                // 3. DETEKCJA SEPARATORA: Google Sheets w PL często używa średnika zamiast przecinka
-                let col = [];
-                if (row.includes(';')) {
-                    col = row.split(';').map(p => p.replace(/^"|"$/g, '').trim());
-                } else {
-                    col = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(p => p.replace(/^"|"$/g, '').trim());
-                }
-
-                // 4. Sprawdzamy czy mamy kolumny (Liga, Data, Boisko, Drużyna1, Drużyna2)
-                if (col.length < 5 || !col[1]) continue;
-
-                // 5. PARSOWANIE DATY (Obsługa "15.03.2026 11:00" lub formatu liczbowego)
-                let matchTimestamp = 0;
-                const dateCell = col[1];
-
-                // Szukamy wszystkich grup cyfr w komórce daty
-                const d = dateCell.match(/\d+/g); 
+            rows.forEach(row => {
+                if (!row.trim()) return;
+                // Obsługa separatorów (średnik lub przecinek)
+                const col = row.split(/[,;](?=(?:(?:[^"]*"){2})*[^"]*$)/).map(p => p.replace(/^"|"$/g, '').trim());
                 
-                if (d && d.length >= 3) {
-                    // d[0]=DD, d[1]=MM, d[2]=YYYY
-                    // Tworzymy datę (Miesiące w JS są 0-11, więc MM - 1)
-                    const year = parseInt(d[2]);
-                    const month = parseInt(d[1]) - 1;
-                    const day = parseInt(d[0]);
-                    
-                    // Jeśli rok jest zapisany jako 26 zamiast 2026
-                    const fullYear = year < 100 ? 2000 + year : year;
-                    
-                    const parsedDate = new Date(fullYear, month, day);
-                    matchTimestamp = parsedDate.getTime();
-                }
+                if (col.length < 5) return;
 
-                // 6. FILTRACJA: Pokaż mecz tylko jeśli data >= dzisiaj
-                if (matchTimestamp >= todayMidnight) {
+                const rawDate = col[1]; // np. "2026-03-15 13:30:00"
+                const d = rawDate.match(/\d+/g);
+                if (!d || d.length < 3) return;
+
+                let matchDate;
+                // Sprawdzenie czy pierwszy człon to rok (4 cyfry) czy dzień (2 cyfry)
+                if (d[0].length === 4) {
+                    matchDate = new Date(parseInt(d[0]), parseInt(d[1]) - 1, parseInt(d[2]));
+                } else {
+                    matchDate = new Date(parseInt(d[2]), parseInt(d[1]) - 1, parseInt(d[0]));
+                }
+                matchDate.setHours(0,0,0,0);
+
+                if (matchDate >= now) {
                     html += `
                     <div class="col">
                         <div class="match-card">
                             <span class="league-tag">${col[0]}</span>
-                            <div class="team-box">
-                                <span class="team-name">${col[3]}</span>
-                                <div class="vs-divider">VS</div>
-                                <span class="team-name">${col[4]}</span>
-                            </div>
+                            <div class="team-name">${col[3]}</div>
+                            <div class="vs">VS</div>
+                            <div class="team-name">${col[4]}</div>
                             <div class="match-info">
                                 TERMIN: <b>${col[1]}</b><br>
                                 BOISKO: <b>${col[2]}</b>
@@ -236,22 +253,16 @@
                         </div>
                     </div>`;
                 }
-            }
+            });
 
-            // 7. Wstawienie wyników lub komunikatu o braku
-            if (html === '') {
-                container.innerHTML = '<p class="text-center w-100" style="color:#666; padding: 50px;">Brak nadchodzących meczów na liście rezerwacji.</p>';
-            } else {
-                container.innerHTML = html;
-            }
-
-        } catch (error) {
-            console.error("Błąd:", error);
-            container.innerHTML = '<p class="text-center w-100">Błąd połączenia z bazą danych.</p>';
+            container.innerHTML = html || '<p class="text-center w-100">Brak nadchodzących meczów.</p>';
+        } catch (e) {
+            container.innerHTML = '<p class="text-center w-100">Błąd ładowania danych.</p>';
         }
     }
-
     loadGrafik();
 </script>
+</body>
+</html>
 </body>
 </html>

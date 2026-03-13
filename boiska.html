@@ -176,28 +176,38 @@
             const rows = data.split('\n').slice(1);
             let html = '';
             
-            const now = new Date();
-            now.setHours(0, 0, 0, 0);
+            // Pobieramy aktualną datę i ustawiamy godzinę na 00:00:00
+            // aby mecze z dzisiaj również były widoczne
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
 
             rows.forEach(row => {
+                // Obsługa cudzysłowów w CSV
                 const col = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(p => p.replace(/^"|"$/g, '').trim());
-                if (col.length < 5 || col[0] === "") return;
+                
+                if (col.length < 5 || !col[1]) return;
 
                 let matchDate;
-                const rawDate = col[1].replace(',', '.');
+                const rawDateValue = col[1];
 
-                // Jeśli data jest liczbą (format seryjny Excela 46089...)
-                if (!isNaN(rawDate) && rawDate.length > 4) {
-                    matchDate = new Date((parseFloat(rawDate) - 25569) * 86400 * 1000);
+                // 1. SPRAWDZAMY CZY DATA JEST LICZBĄ (Format Google: 46095.45)
+                if (!isNaN(rawDateValue.replace(',', '.')) && rawDateValue.length > 4) {
+                    const serial = parseFloat(rawDateValue.replace(',', '.'));
+                    matchDate = new Date(Math.round((serial - 25569) * 86400 * 1000));
+                    matchDate.setHours(0, 0, 0, 0);
                 } else {
-                    // Jeśli data jest tekstem (np. 14.03.2026)
-                    const parts = col[1].split(/[\. :\/]/);
+                    // 2. JEŚLI DATA JEST TEKSTEM (Format: DD.MM.RRRR HH:MM)
+                    // Rozbijamy kropki, spacje i dwukropki
+                    const parts = rawDateValue.split(/[\. :]/);
                     if (parts.length >= 3) {
-                        matchDate = new Date(parts[2], parts[1] - 1, parts[0]);
+                        // parts[0]=DD, parts[1]=MM, parts[2]=RRRR
+                        matchDate = new Date(parseInt(parts[2]), parseInt(parts[1]) - 1, parseInt(parts[0]));
+                        matchDate.setHours(0, 0, 0, 0);
                     }
                 }
 
-                if (matchDate && matchDate >= now) {
+                // FILTR: Jeśli data meczu jest dzisiejsza lub przyszła
+                if (matchDate && matchDate >= today) {
                     html += `
                     <div class="col">
                         <div class="match-card">
@@ -216,8 +226,9 @@
                 }
             });
 
-            container.innerHTML = html || '<p class="text-center w-100">Brak nadchodzących meczów.</p>';
+            container.innerHTML = html || '<p class="text-center w-100" style="color:#666; padding: 50px;">Brak nadchodzących rezerwacji.</p>';
         } catch (e) {
+            console.error("Błąd parsowania:", e);
             container.innerHTML = '<p class="text-center w-100">Błąd ładowania danych.</p>';
         }
     }

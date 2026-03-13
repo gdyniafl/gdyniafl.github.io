@@ -174,46 +174,52 @@
             const res = await fetch(csvUrl);
             const data = await res.text();
             
-            // Rozbicie na wiersze i usunięcie nagłówka
+            // Rozbicie na wiersze
             const rows = data.split(/\r?\n/).slice(1);
             let html = '';
             
-            // Pobranie daty dzisiejszej (bez godziny)
+            // Pobranie dzisiejszej daty (13.03.2026) i ustawienie na północ
             const today = new Date();
             today.setHours(0, 0, 0, 0);
 
-            rows.forEach((row, index) => {
-                // Precyzyjne rozbicie CSV z uwzględnieniem cudzysłowów
-                const col = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(p => p.replace(/^"|"$/g, '').trim());
+            rows.forEach((row) => {
+                if (!row.trim()) return;
+
+                // DETEKCJA SEPARATORA: Przecinek lub Średnik
+                let col = [];
+                if (row.includes(';')) {
+                    col = row.split(';').map(p => p.replace(/^"|"$/g, '').trim());
+                } else {
+                    col = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(p => p.replace(/^"|"$/g, '').trim());
+                }
                 
-                // Sprawdzenie czy wiersz posiada dane ligi i daty
-                if (col.length < 5 || !col[0] || !col[1]) return;
+                // Sprawdzenie czy mamy minimum 5 kolumn (Liga, Data, Boisko, Drużyna1, Drużyna2)
+                if (col.length < 5 || !col[1]) return;
 
                 let matchDate = null;
-                const rawDateStr = col[1];
+                const rawDateTime = col[1]; // Cała rubryka "15.03.2026 11:00"
 
-                // PRÓBA 1: Jeśli Google wysłało datę jako liczbę (np. 46095)
-                if (!isNaN(rawDateStr.replace(',', '.')) && rawDateStr.length > 4) {
-                    const serial = parseFloat(rawDateStr.replace(',', '.'));
+                // PARSOWANIE DATY
+                // Sprawdzamy czy to format liczbowy (np. 46095.45)
+                if (!isNaN(rawDateTime.replace(',', '.')) && rawDateTime.length > 4) {
+                    const serial = parseFloat(rawDateTime.replace(',', '.'));
                     matchDate = new Date(Math.round((serial - 25569) * 86400 * 1000));
                 } 
-                // PRÓBA 2: Jeśli data jest tekstem (np. 15.03.2026)
+                // Sprawdzamy czy to format tekstowy (wyciągamy pierwsze 3 grupy cyfr: DD, MM, RRRR)
                 else {
-                    const digits = rawDateStr.match(/\d+/g); // Wyciąga same liczby
-                    if (digits && digits.length >= 3) {
-                        // digits[0]=DD, digits[1]=MM, digits[2]=YYYY
-                        const day = parseInt(digits[0]);
-                        const month = parseInt(digits[1]) - 1;
-                        const year = parseInt(digits[2]);
+                    const parts = rawDateTime.match(/(\d+)/g);
+                    if (parts && parts.length >= 3) {
+                        const day = parseInt(parts[0]);
+                        const month = parseInt(parts[1]) - 1;
+                        const year = parseInt(parts[2]);
                         matchDate = new Date(year, month, day);
                     }
                 }
 
-                // WERYFIKACJA I FILTRACJA
                 if (matchDate && !isNaN(matchDate.getTime())) {
                     matchDate.setHours(0, 0, 0, 0);
 
-                    // Pokaż tylko jeśli data meczu jest >= dzisiaj
+                    // WARUNEK: Tylko mecze od dzisiaj (13.03.2026) wzwyż
                     if (matchDate >= today) {
                         html += `
                         <div class="col">
@@ -236,8 +242,8 @@
 
             container.innerHTML = html || '<p class="text-center w-100" style="color:#666; padding: 40px;">Brak nadchodzących meczów na liście rezerwacji.</p>';
         } catch (error) {
-            console.error("Błąd ładowania danych:", error);
-            container.innerHTML = '<p class="text-center w-100">Błąd podczas łączenia z bazą danych.</p>';
+            console.error("Błąd skryptu:", error);
+            container.innerHTML = '<p class="text-center w-100">Błąd połączenia z arkuszem danych.</p>';
         }
     }
 

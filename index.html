@@ -253,63 +253,59 @@
     ];
 
     async function loadMatches() {
-        const wrapper = document.getElementById('match-center-wrapper');
-        const today = new Date();
-        let html = '';
-        try {
-            const results = await Promise.all(links.map(l => fetch(l.url).then(r => r.text())));
-            results.forEach((csv, idx) => {
-                const lines = csv.split('\n');
-                lines.slice(1).forEach(row => {
-    const col = row.split(',');
-    if (col.length < 6) return;
+    const wrapper = document.getElementById('match-center-wrapper');
+    const today = new Date();
+    let html = '';
+    try {
+        const results = await Promise.all(links.map(l => fetch(l.url).then(r => r.text())));
+        results.forEach((csv, idx) => {
+            const lines = csv.split('\n');
+            lines.slice(1).forEach(row => {
+                const col = row.split(',');
+                if (col.length < 6) return;
 
-    const deadline = new Date(col[4]);
-    const diff = (deadline - today) / (1000 * 3600 * 24);
+                // Ustawiamy deadline na koniec dnia (23:59:59), 
+                // żeby mecze nie znikały w trakcie niedzieli, tylko dopiero w poniedziałek rano.
+                const deadline = new Date(col[4]);
+                deadline.setHours(23, 59, 59);
 
-    // Zakres wyświetlania: od 7 dni temu do 14 dni w przód
-    if (diff > -7 && diff < 14) {
-        // Czyścimy dane z arkusza (usuwamy zbędne spacje)
-        const scoreHome = col[2] ? col[2].trim() : "";
-        const scoreAway = col[3] ? col[3].trim() : "";
-        const dateTime = col[6] ? col[6].trim() : "";
-        const pitch = col[7] ? col[7].trim() : "";
+                const diff = (deadline - today) / (1000 * 3600 * 24);
 
-        // SPRAWDZAMY CZY MECZ SIĘ ODBYŁ (czy w komórkach są cyfry, a nie "-" lub pusto)
-        const czyJestWynik = (scoreHome !== "" && scoreHome !== "-") || (scoreAway !== "" && scoreAway !== "-");
+                // ZMIANA LOGIKI:
+                // diff >= 0 -> mecze, których deadline jeszcze nie minął (dzisiaj i przyszłość)
+                // diff <= 14 -> tylko mecze z najbliższej kolejki (okno 2 tygodni)
+                if (diff >= 0 && diff <= 14) { 
+                    const scoreHome = col[2] ? col[2].trim() : "";
+                    const scoreAway = col[3] ? col[3].trim() : "";
+                    const dateTime = col[6] ? col[6].trim() : "";
+                    const pitch = col[7] ? col[7].trim() : "";
 
-        let infoString = "";
+                    const czyJestWynik = (scoreHome !== "" && scoreHome !== "-") || (scoreAway !== "" && scoreAway !== "-");
 
-        // LOGIKA DATY I STATUSU
-        if (dateTime === "" || dateTime.toUpperCase().includes("TERMIN DO USTALENIA") || dateTime.toUpperCase().includes("BRAK")) {
-            if (czyJestWynik) {
-                infoString = "BRAK INFORMACJI O TERMINIE"; // Mecz był, daty nie wpisano
-            } else {
-                infoString = "TERMIN DO USTALENIA"; // Meczu nie było, daty brak
-            }
-        } else {
-            infoString = dateTime; // Jest wpisana data (np. 08-03-2026 13:00)
-        }
-        
-        // LOGIKA BOISKA (Kolumna H w arkuszu)
-        // Jeśli boisko jest wpisane i nie jest myślnikiem, dodajemy je po kresce
-        const pitchInfo = (pitch !== "" && pitch !== "-") ? ` | <b>${pitch}</b>` : "";
+                    let infoString = "";
+                    if (dateTime === "" || dateTime.toUpperCase().includes("TERMIN DO USTALENIA") || dateTime.toUpperCase().includes("BRAK")) {
+                        infoString = czyJestWynik ? "BRAK INFORMACJI O TERMINIE" : "TERMIN DO USTALENIA";
+                    } else {
+                        infoString = dateTime;
+                    }
+                    
+                    const pitchInfo = (pitch !== "" && pitch !== "-") ? ` | <b>${pitch}</b>` : "";
 
-        html += `
-        <div class="match-card">
-            <div class="league-tag">${links[idx].name} | KOLEJKA ${col[5]}</div>
-            <div class="team-row"><span>${col[0]}</span><span class="score-box">${scoreHome || '-'}</span></div>
-            <div class="team-row"><span>${col[1]}</span><span class="score-box">${scoreAway || '-'}</span></div>
-            <div class="match-info">
-                <span>${infoString}${pitchInfo}</span>
-            </div>
-        </div>`;
-    }
-});
+                    html += `
+                    <div class="match-card">
+                        <div class="league-tag">${links[idx].name} | KOLEJKA ${col[5]}</div>
+                        <div class="team-row"><span>${col[0]}</span><span class="score-box">${scoreHome || '-'}</span></div>
+                        <div class="team-row"><span>${col[1]}</span><span class="score-box">${scoreAway || '-'}</span></div>
+                        <div class="match-info">
+                            <span>${infoString}${pitchInfo}</span>
+                        </div>
+                    </div>`;
+                }
             });
-            wrapper.innerHTML = html || '<div style="padding:20px;">Brak meczów w bieżącej kolejce.</div>';
-        } catch (e) { wrapper.innerHTML = "<div style='padding:20px;'>Błąd ładowania danych.</div>"; }
-    }
+        });
+        wrapper.innerHTML = html || '<div style="padding:20px;">Brak meczów w bieżącej kolejce.</div>';
+    } catch (e) { wrapper.innerHTML = "<div style='padding:20px;'>Błąd ładowania danych.</div>"; }
+}
     loadMatches();
 </script>
 </body>

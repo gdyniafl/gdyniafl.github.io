@@ -6,85 +6,118 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
     /* --- GLOBALNE & TYPOGRAFIA --- */
     html { overflow-y: scroll; }
-    body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
-    h1, h2, h3, h4, h5, .nav-link, .dropdown-item, .league-tag, .team-name, .stat-num { 
+    body { background-color: #000; color: #fff; font-family: 'Inter', sans-serif; margin: 0; }
+    h1, h2, h3, h4, h5, .nav-link, .dropdown-item, .news-title { 
         font-family: 'Bebas Neue', sans-serif !important; 
         text-transform: uppercase; 
         letter-spacing: 1px; 
     }
 
-    /* --- NAWIGACJA (STYL Z INDEX.HTML) --- */
+    /* --- NAWIGACJA --- */
     .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
     .navbar-brand img { height: 4.5rem !important; }
     .navbar-nav { display: flex !important; align-items: center !important; flex-direction: row !important; }
     .nav-item { list-style: none !important; margin-left: 20px !important; }
     .nav-link { color: #fff !important; font-size: 1.1rem !important; text-decoration: none !important; transition: 0.3s; }
     .nav-link:hover { color: #44b1ff !important; }
-
-    /* Mobilny Toggler */
-    .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
-    .navbar-toggler-icon { 
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-    }
-
-    /* Dropdown */
-    .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; padding: 10px 0; }
-    .dropdown-item { color: #fff !important; font-size: 1.1rem !important; padding: 10px 20px; transition: 0.2s; }
+    .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
+    .dropdown-item { color: #fff !important; }
     .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
 
     /* --- NAGŁÓWEK PODSTRONY --- */
-    .page-header { padding: 160px 0 60px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
-    .page-header h1 { font-size: 5rem; line-height: 1; margin: 0; }
+    .page-header { padding: 160px 0 60px 0; text-align: center; background: radial-gradient(circle at center, #111 0%, #000 100%); border-bottom: 1px solid #222; }
+    .page-header h1 { font-size: 5rem; line-height: 1; margin: 0; text-shadow: 0 10px 20px rgba(0,0,0,0.5); }
     .page-header p { color: #44b1ff; letter-spacing: 4px; font-size: 1rem; margin-top: 10px; }
 
-    /* --- SEKCJA GRAFIKU (KARTY) --- */
-    .grafik-section { padding: 60px 0 100px 0; background: #050505; }
-    .match-card { 
-        background: #080808; 
-        border: 1px solid #222; 
-        border-radius: 15px; 
-        padding: 30px; 
-        margin-bottom: 30px; 
-        transition: 0.4s; 
+    /* --- SEKCJA NEWSÓW (KARTY) --- */
+    .news-section { padding: 80px 0 100px 0; background: #050505; }
+    
+    .news-card {
+        background: #0f0f0f;
+        border: 1px solid #222;
+        border-radius: 12px;
+        overflow: hidden;
+        height: 100%;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .news-card:hover {
+        border-color: #44b1ff;
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(68, 177, 255, 0.15);
+    }
+
+    .news-img-wrapper {
         position: relative;
+        width: 100%;
+        padding-top: 56.25%; /* Proporcje 16:9 */
+        overflow: hidden;
+        background: #111;
     }
-    .match-card:hover { 
-        border-color: #44b1ff; 
-        transform: translateY(-5px); 
-        box-shadow: 0 10px 30px rgba(68, 177, 255, 0.1); 
+
+    .news-img {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
     }
-    
-    .league-tag { font-size: 0.9rem; color: #44b1ff; font-weight: bold; margin-bottom: 15px; display: block; border-bottom: 1px solid #111; padding-bottom: 10px; }
-    
-    .teams-row { display: flex; justify-content: space-between; align-items: center; margin: 20px 0; }
-    .team-name { font-size: 1.8rem; width: 42%; line-height: 1.1; }
-    .vs-tag { color: #222; font-weight: bold; font-size: 0.9rem; font-family: sans-serif; }
 
-    .match-meta { 
-        border-top: 1px solid #141414; 
-        margin-top: 20px; 
-        padding-top: 15px; 
-        display: flex; 
-        justify-content: space-between; 
-        color: #666; 
-        font-size: 0.9rem; 
-        text-transform: uppercase; 
+    .news-card:hover .news-img {
+        transform: scale(1.1);
     }
-    .match-meta b { color: #fff; font-weight: normal; font-family: 'Bebas Neue'; font-size: 1.2rem; letter-spacing: 1px; }
 
-    /* --- STOPKA (STYL INDEX.HTML) --- */
-    .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; }
-    .footer h5 { color: #fff; font-size: 1.4rem; margin-bottom: 25px; }
-    .footer p { line-height: 1.6; }
-    .footer-links { list-style: none; padding: 0; }
-    .footer-links li { margin-bottom: 12px; }
-    .footer-links a { color: #888; text-decoration: none; transition: 0.3s; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
-    .footer-links a:hover { color: #44b1ff; padding-left: 5px; }
+    .news-content {
+        padding: 25px;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
 
+    .news-title {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+        line-height: 1.1;
+        color: #fff;
+    }
+
+    .news-desc {
+        font-size: 0.95rem;
+        color: #888;
+        line-height: 1.6;
+        margin-bottom: 25px;
+        flex-grow: 1;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .btn-details {
+        display: inline-block;
+        color: #44b1ff;
+        text-decoration: none;
+        font-family: 'Bebas Neue';
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+        transition: 0.3s;
+        border-top: 1px solid #222;
+        padding-top: 15px;
+    }
+
+    .btn-details:hover {
+        color: #fff;
+        letter-spacing: 2px;
+    }
+
+    /* --- STOPKA --- */
+    .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; }
+    .footer h5 { color: #fff; margin-bottom: 25px; }
     .social-btn { 
         display: inline-block; 
         padding: 10px 20px; 
@@ -94,43 +127,14 @@
         color: #fff; 
         text-decoration: none; 
         font-family: 'Bebas Neue'; 
-        font-size: 1.1rem; 
-        transition: 0.3s; 
         width: 100%; 
         text-align: center; 
+        transition: 0.3s;
     }
-    .social-btn:hover { background: #44b1ff; border-color: #44b1ff; color: #000; }
-    .social-btn.btn-contact { border-color: #44b1ff !important; color: #44b1ff !important; }
-    .social-btn.btn-contact:hover { background-color: #44b1ff !important; color: #fff !important; }
+    .social-btn:hover { background: #44b1ff; color: #000; border-color: #44b1ff; }
 
-    .copyright-row { 
-        margin-top: 50px; 
-        padding-top: 25px; 
-        border-top: 1px solid #111; 
-        text-align: center; 
-        font-size: 0.8rem; 
-        line-height: 1.6;
-    }
-
-    /* --- RESPONSYWNOŚĆ (MOBILE) --- */
-    @media (max-width: 991px) {
-        .navbar-nav { 
-            flex-direction: column !important; 
-            background: rgba(0,0,0,0.98); 
-            padding: 20px; 
-            width: 100%; 
-            position: absolute; 
-            top: 100%; 
-            left: 0; 
-            display: none; 
-            border-bottom: 1px solid #222;
-        }
-        .navbar-nav.show { display: flex !important; }
-        .nav-item { margin: 10px 0 !important; margin-left: 0 !important; }
-        
+    @media (max-width: 768px) {
         .page-header h1 { font-size: 3.5rem; }
-        .team-name { font-size: 1.3rem; }
-        .match-meta { flex-direction: column; gap: 10px; text-align: center; }
     }
 </style>
 </head>
@@ -139,15 +143,12 @@
 <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
         <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse justify-content-end" id="gflNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
+                <li class="nav-item"><a class="nav-link" href="aktualnosci.html" style="color: #44b1ff;">Aktualności</a></li>
                 <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Rozgrywki</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
                         <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
@@ -156,7 +157,6 @@
                 </li>
                 <li class="nav-item"><a class="nav-link" href="boiska.html">Grafik Boisk</a></li>
                 <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
-                <li class="nav-item"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px;">Zapisy</a></li>
             </ul>
         </div>
     </div>
@@ -164,48 +164,38 @@
 
 <section class="page-header">
     <div class="container">
-        <h1 class="display-1">AKTUALNOŚCI LIGOWE</h1>
-        <p style="color: #44b1ff; letter-spacing: 2px;">BĄDŹ NA BIEŻĄCO Z ŻYCIEM GFL</p>
+        <h1>AKTUALNOŚCI LIGOWE</h1>
+        <p>BĄDŹ NA BIEŻĄCO Z ŻYCIEM GFL</p>
     </div>
 </section>
 
 <section class="news-section">
     <div class="container">
-        <div class="row" id="news-container">
-            <p class="text-center">Synchronizacja z redakcją GFL...</p>
+        <div class="row g-4" id="news-container">
+            <p class="text-center">Łączenie z bazą GFL...</p>
         </div>
     </div>
 </section>
 
 <footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 mb-4">
+    <div class="container text-center">
+        <div class="row text-start">
+            <div class="col-md-4">
                 <h5>GDYNIA FOOTBALL LEAGUE</h5>
-                <p>Największa amatorska liga piłkarska w Gdyni. Tworzymy przestrzeń dla pasjonatów futbolu, łącząc sportową rywalizację z profesjonalną oprawą medialną.</p>
-                <p style="color: #444;">📍 Gdynia, Polska</p>
+                <p>Pasja, rywalizacja i profesjonalizm na każdym kroku.</p>
             </div>
-            <div class="col-lg-4 col-md-6 mb-4">
-                <h5>NA SKRÓTY</h5>
-                <ul class="footer-links">
-                    <li><a href="index.html">Strona Główna</a></li>
-                    <li><a href="aktualnosci.html">Aktualności</a></li>
-                    <li><a href="regulamin.html">Regulamin Ligi</a></li>
-                    <li><a href="onas.html">O Nas</a></li>
-                    <li><a href="boiska.html">Grafik Boisk</a></li>
-                    <li><a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank">Formularz Zgłoszeniowy</a></li>
-                </ul>
+            <div class="col-md-4">
+                <h5>LINKI</h5>
+                <p><a href="regulamin.html" style="color:#888">Regulamin</a></p>
+                <p><a href="boiska.html" style="color:#888">Boiska</a></p>
             </div>
-            <div class="col-lg-4 col-md-12">
-                <h5>ŚLEDŹ NAS</h5>
-                <div class="d-flex flex-column align-items-start">
-                    <a href="https://www.instagram.com/gdyniafl/" target="_blank" class="social-btn">OBSERWUJ NA INSTAGRAMIE ↗</a>
-                    <a href="https://www.tiktok.com/@gdyniafl" target="_blank" class="social-btn">OBSERWUJ NA TIKTOK ↗</a>
-                    <a href="mailto:gdyniafootballleague@gmail.com" class="social-btn btn-contact">WSPÓŁPRACA / KONTAKT ✉</a>
-                </div>
+            <div class="col-md-4">
+                <h5>SOCIAL MEDIA</h5>
+                <a href="https://www.instagram.com/gdyniafl/" class="social-btn">INSTAGRAM ↗</a>
             </div>
         </div>
-        <div class="copyright-row">&copy; 2026 Gdynia Football League. Design & Code: Ezi</div>
+        <hr style="border-color: #222">
+        <p class="mb-0">&copy; 2026 Gdynia Football League. Design & Code: Ezi</p>
     </div>
 </footer>
 
@@ -215,11 +205,9 @@
 <script>
     const newsCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb/pub?gid=1840446675&single=true&output=csv';
 
-    // NOWA, LEPSZA FUNKCJA CZYTANIA PLIKÓW CSV (ignoruje spacje, dzieli tylko po przecinku)
     function parseCSV(text) {
         const rows = text.split(/\r?\n/);
         return rows.map(row => {
-            // Ten regex dzieli tylko po przecinkach, które nie są wewnątrz cudzysłowu
             const parts = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
             return parts.map(p => p.replace(/^"|"$/g, '').trim());
         });
@@ -237,17 +225,19 @@
                 
                 const title = col[0];
                 const desc = col[1];
-                const img = col[2];
+                const img = col[2] || 'assets/images/logo-gfl.png-160x160.png';
                 const link = col[3];
 
                 html += `
-                    <div class="col-md-4 mb-4">
+                    <div class="col-lg-4 col-md-6">
                         <div class="news-card">
-                            <img src="${img}" class="news-img" alt="${title}" onerror="this.src='assets/images/logo-gfl.png-160x160.png'">
+                            <div class="news-img-wrapper">
+                                <img src="${img}" class="news-img" alt="${title}" onerror="this.src='assets/images/logo-gfl.png-160x160.png'">
+                            </div>
                             <div class="news-content">
                                 <h5 class="news-title">${title}</h5>
                                 <p class="news-desc">${desc}</p>
-                                <a href="${link}" class="btn-ig">ZOBACZ SZCZEGÓŁY ></a>
+                                <a href="${link}" class="btn-details">ZOBACZ SZCZEGÓŁY &rarr;</a>
                             </div>
                         </div>
                     </div>`;
@@ -261,7 +251,3 @@
 </script>
 </body>
 </html>
-
-
-
-

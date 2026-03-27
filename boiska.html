@@ -11,9 +11,9 @@
         /* --- GLOBALNE --- */
         html { overflow-y: scroll; }
         body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
-        h1, h2, h3, h5, .nav-link, .dropdown-item, .league-tag, .team-name { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
+        h1, h2, h3, h5, .nav-link, .dropdown-item, .league-tag, .team-name, .vs-divider { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- NAWIGACJA (STYL INDEX) --- */
+        /* --- NAWIGACJA --- */
         .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
         .navbar-brand img { height: 4.5rem !important; }
         .navbar-nav { display: flex !important; align-items: center !important; flex-direction: row !important; }
@@ -30,7 +30,7 @@
         .page-header { padding: 150px 0 50px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
         .page-header h1 { font-size: 4.5rem; line-height: 1; margin: 0; }
 
-        /* --- NOWY UKŁAD SIATKI (GRID) --- */
+        /* --- UKŁAD SIATKI --- */
         .grafik-section { padding: 60px 0 100px 0; background: #050505; }
         
         .match-card { 
@@ -44,28 +44,37 @@
             flex-direction: column; 
             justify-content: space-between;
         }
-        .match-card:hover { border-color: #44b1ff; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(68, 177, 255, 0.05); }
+        .match-card:hover { border-color: #44b1ff; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(68, 177, 255, 0.1); }
         
-        .league-tag { font-size: 0.8rem; color: #44b1ff; text-align: center; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 8px; }
+        .league-tag { font-size: 0.9rem; color: #44b1ff; text-align: center; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 8px; }
         
-        .team-box { text-align: center; margin: 10px 0; }
-        .team-name { font-size: 1.4rem; line-height: 1.1; display: block; min-height: 3rem; display: flex; align-items: center; justify-content: center; }
-        .vs-divider { color: #333; font-size: 0.7rem; margin: 5px 0; font-weight: bold; }
+        .team-name { font-size: 1.6rem; line-height: 1.1; text-align: center; display: flex; align-items: center; justify-content: center; min-height: 3.5rem; }
+        
+        /* POPRAWIONY VS DIVIDER */
+        .vs-divider { 
+            color: #44b1ff; 
+            font-size: 1.2rem; 
+            margin: 10px 0; 
+            text-align: center; 
+            display: block;
+            width: 100%;
+            opacity: 0.6;
+        }
 
         .match-info { 
             margin-top: 15px; 
             padding-top: 12px; 
             border-top: 1px solid #222; 
-            font-size: 0.8rem; 
+            font-size: 0.85rem; 
             color: #666; 
             text-align: center;
         }
         .match-info b { color: #fff; font-weight: normal; }
 
-        /* --- STOPKA (NAPRAWIONA) --- */
+        /* --- STOPKA --- */
         .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; }
-        .footer h5 { color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: 1px; margin-bottom: 20px; }
-        .footer p { line-height: 1.6; color: #888 !important; } /* TUTAJ NAPRAWIŁEM KOLOR */
+        .footer h5 { color: #fff; font-size: 1.4rem; margin-bottom: 20px; }
+        .footer p { line-height: 1.6; }
         .footer-links { list-style: none; padding: 0; }
         .footer-links li { margin-bottom: 10px; }
         .footer-links a { color: #888; text-decoration: none; transition: 0.3s; text-transform: uppercase; font-size: 0.85rem; }
@@ -182,17 +191,15 @@
 
             rows.forEach(row => {
                 if (!row.trim()) return;
-                // Obsługa separatorów (średnik lub przecinek)
                 const col = row.split(/[,;](?=(?:(?:[^"]*"){2})*[^"]*$)/).map(p => p.replace(/^"|"$/g, '').trim());
                 
                 if (col.length < 5) return;
 
-                const rawDate = col[1]; // np. "2026-03-15 13:30:00"
+                const rawDate = col[1];
                 const d = rawDate.match(/\d+/g);
                 if (!d || d.length < 3) return;
 
                 let matchDate;
-                // Sprawdzenie czy pierwszy człon to rok (4 cyfry) czy dzień (2 cyfry)
                 if (d[0].length === 4) {
                     matchDate = new Date(parseInt(d[0]), parseInt(d[1]) - 1, parseInt(d[2]));
                 } else {
@@ -206,7 +213,7 @@
                         <div class="match-card">
                             <span class="league-tag">${col[0]}</span>
                             <div class="team-name">${col[3]}</div>
-                            <div class="vs">VS</div>
+                            <div class="vs-divider">VS</div>
                             <div class="team-name">${col[4]}</div>
                             <div class="match-info">
                                 TERMIN: <b>${col[1]}</b><br>
@@ -224,7 +231,5 @@
     }
     loadGrafik();
 </script>
-</body>
-</html>
 </body>
 </html>

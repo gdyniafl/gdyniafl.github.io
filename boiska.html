@@ -166,45 +166,6 @@
 
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title>Grafik Boisk | GFL</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <style>
-        body { background-color: #000; color: #fff; font-family: sans-serif; }
-        h1, .league-tag, .team-name { font-family: 'Bebas Neue', sans-serif; text-transform: uppercase; }
-        .page-header { padding: 100px 0 40px; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
-        .grafik-section { padding: 50px 0; }
-        .match-card { background: #0f0f0f; border: 1px solid #222; border-radius: 12px; padding: 20px; transition: 0.3s; text-align: center; height: 100%; }
-        .match-card:hover { border-color: #44b1ff; }
-        .league-tag { color: #44b1ff; font-size: 0.9rem; border-bottom: 1px solid #222; padding-bottom: 5px; margin-bottom: 15px; display: block; }
-        .team-name { font-size: 1.4rem; min-height: 3rem; display: flex; align-items: center; justify-content: center; }
-        .vs { color: #333; font-weight: bold; margin: 5px 0; font-size: 0.8rem; }
-        .match-info { margin-top: 15px; padding-top: 10px; border-top: 1px solid #111; font-size: 0.85rem; color: #888; }
-        .match-info b { color: #fff; }
-    </style>
-</head>
-<body>
-
-<section class="page-header">
-    <div class="container">
-        <h1>GRAFIK BOISK</h1>
-        <p style="color: #44b1ff;">NADCHODZĄCE REZERWACJE</p>
-    </div>
-</section>
-
-<section class="grafik-section">
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="grafik-container">
-            <p class="text-center w-100">Ładowanie danych...</p>
-        </div>
-    </div>
-</section>
-
 <script>
     const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRT2NjlK7JkP2frWPBST7rj14EITRyHT1_z0_aOMHsXke2HzmcOJIAKpRq_EN3AL_FH6EweAAL3xbaD/pub?gid=1994792907&single=true&output=csv';
 

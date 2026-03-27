@@ -315,7 +315,7 @@
 
     const scorersCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb/pub?gid=1372879295&single=true&output=csv';
 
-    // 3. ŁADOWANIE MECZÓW (TERMINARZ)
+    // 3. ŁADOWANIE MECZÓW
     async function loadMatches() {
         const wrapper = document.getElementById('match-center-wrapper');
         const today = new Date();
@@ -327,11 +327,9 @@
                 lines.slice(1).forEach(row => {
                     const col = row.split(',');
                     if (col.length < 6) return;
-
                     const deadline = new Date(col[4]);
                     deadline.setHours(23, 59, 59);
                     const diff = (deadline - today) / (1000 * 3600 * 24);
-
                     if (diff >= 0 && diff <= 14) { 
                         const scoreHome = col[2] ? col[2].trim() : "";
                         const scoreAway = col[3] ? col[3].trim() : "";
@@ -339,14 +337,12 @@
                         const pitch = col[7] ? col[7].trim() : "";
                         const czyJestWynik = (scoreHome !== "" && scoreHome !== "-") || (scoreAway !== "" && scoreAway !== "-");
                         let infoString = (dateTime === "" || dateTime.toUpperCase().includes("TERMIN DO USTALENIA")) ? (czyJestWynik ? "BRAK INFO" : "TERMIN DO USTALENIA") : dateTime;
-                        const pitchInfo = (pitch !== "" && pitch !== "-") ? ` | <b>${pitch}</b>` : "";
-
                         html += `
                         <div class="match-card">
                             <div class="league-tag">${matchLinks[idx].name} | KOLEJKA ${col[5]}</div>
                             <div class="team-row"><span>${col[0]}</span><span class="score-box">${scoreHome || '-'}</span></div>
                             <div class="team-row"><span>${col[1]}</span><span class="score-box">${scoreAway || '-'}</span></div>
-                            <div class="match-info"><span>${infoString}${pitchInfo}</span></div>
+                            <div class="match-info"><span>${infoString} | <b>${pitch || ''}</b></span></div>
                         </div>`;
                     }
                 });
@@ -355,7 +351,7 @@
         } catch (e) { wrapper.innerHTML = "<div style='padding:20px;'>Błąd ładowania terminarza.</div>"; }
     }
 
-    // 4. ŁADOWANIE STRZELCÓW (RANKING)
+    // 4. ŁADOWANIE STRZELCÓW (TOP 3)
     async function loadTopScorers() {
         const container = document.getElementById('scorers-container');
         try {
@@ -366,18 +362,12 @@
             let lastLeague = ""; 
 
             dataRows.forEach(row => {
-                // POPRAWIONY REGEX (podmiana [^2] na [^"])
                 const col = row.split(/[,;](?=(?:(?:[^"]*"){2})*[^"]*$)/).map(p => p.replace(/^"|"$/g, '').trim());
                 if (col[0] && col[0] !== "-" && col[0] !== "LIGA") {
                     lastLeague = col[0].toUpperCase();
                 }
                 if (lastLeague && col[1] && col[1] !== "-" && parseInt(col[3]) > 0) {
-                    players.push({
-                        league: lastLeague,
-                        name: col[1],
-                        team: col[2] || "Brak danych",
-                        goals: parseInt(col[3])
-                    });
+                    players.push({ league: lastLeague, name: col[1], team: col[2], goals: parseInt(col[3]) });
                 }
             });
 
@@ -385,17 +375,18 @@
             let html = '';
 
             leagues.forEach(liga => {
-                const top5 = players
+                // TUTAJ ZMIENIŁEM NA .slice(0, 3)
+                const top3 = players
                     .filter(p => p.league.includes(liga))
                     .sort((a, b) => b.goals - a.goals)
-                    .slice(0, 5);
+                    .slice(0, 3);
 
                 html += `
                 <div class="col-lg-4">
                     <div class="league-column">
                         <h3 class="league-header">${liga} LEAGUE</h3>
                         <div class="scorers-list">
-                            ${top5.map((p, index) => `
+                            ${top3.map((p, index) => `
                                 <div class="scorer-item">
                                     <div class="scorer-info">
                                         <span class="scorer-name">${index === 0 ? '👑 ' : ''}${p.name}</span>
@@ -403,7 +394,7 @@
                                     </div>
                                     <div class="scorer-count">${p.goals}</div>
                                 </div>`).join('')}
-                            ${top5.length === 0 ? '<p class="text-center" style="color: #444; margin-top: 20px;">Czekamy na pierwsze bramki...</p>' : ''}
+                            ${top3.length === 0 ? '<p class="text-center" style="color: #444; margin-top: 20px;">Czekamy na pierwsze bramki...</p>' : ''}
                         </div>
                     </div>
                 </div>`;
@@ -412,7 +403,7 @@
         } catch (e) { container.innerHTML = '<p class="text-center">Błąd połączenia z rankingiem.</p>'; }
     }
 
-    // --- KLUCZOWY MOMENT: ODPALENIE OBU FUNKCJI ---
+    // ODPALENIE WSZYSTKIEGO
     window.onload = function() {
         loadMatches();
         loadTopScorers();

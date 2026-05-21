@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Drużyn | Gdynia Football League</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+    <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
+        h1, h2, h5, .nav-link, .table-title { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- NAWIGACJA Z INDEX.HTML --- */
+        .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
+        .navbar-brand img { height: 4.5rem !important; }
+        .navbar-nav { display: flex !important; align-items: center !important; }
+        .nav-item { list-style: none !important; margin-left: 20px !important; }
+        .nav-link { color: #fff !important; font-size: 1.1rem !important; transition: 0.3s; }
+        .nav-link:hover { color: #44b1ff !important; }
+        .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
+        .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important; }
+        .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
+        .dropdown-item { color: #fff !important; font-family: 'Bebas Neue' !important; font-size: 1.1rem !important; }
+        .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
+
+        .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
+
+        /* --- ZAKŁADKI LIGOWE (NOWE) --- */
+        .stats-section { padding: 40px 0 80px 0; }
+        .gfl-tabs { border-bottom: 2px solid #222; margin-bottom: 30px; justify-content: center; border-radius: 0; }
+        .gfl-tabs .nav-link { color: #666 !important; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; border: none; padding: 15px 30px; background: transparent; transition: 0.3s; letter-spacing: 1px; }
+        .gfl-tabs .nav-link:hover { color: #fff !important; }
+        .gfl-tabs .nav-link.active { color: #44b1ff !important; border-bottom: 3px solid #44b1ff; background: transparent; }
+
+        /* --- KONTENER NA EXCELA --- */
+        .iframe-container { position: relative; width: 100%; height: 800px; background: #080808; border-radius: 20px; border: 1px solid #222; overflow: hidden; margin: 0 auto; max-width: 1100px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .iframe-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; background-color: transparent; }
+
+        /* --- STOPKA --- */
+        .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; }
+        .footer h5 { color: #fff; margin-bottom: 20px; }
+        .footer-links { list-style: none; padding: 0; }
+        .footer-links li { margin-bottom: 10px; }
+        .footer-links a { color: #888; text-decoration: none; transition: 0.3s; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
+        .footer-links a:hover { color: #44b1ff; padding-left: 5px; }
+        .social-btn { display: inline-block; padding: 8px 16px; margin-bottom: 10px; border: 1px solid #333; border-radius: 5px; color: #fff; text-decoration: none; font-family: 'Bebas Neue'; font-size: 1rem; transition: 0.3s; width: 100%; text-align: center; }
+        .social-btn:hover { background: #44b1ff; border-color: #44b1ff; color: #000; }
+        .social-btn.btn-contact { border-color: #44b1ff !important; color: #44b1ff !important; }
+        .social-btn.btn-contact:hover { background-color: #44b1ff !important; color: #fff !important; }
+        .copyright-row { margin-top: 40px; padding-top: 20px; border-top: 1px solid #111; text-align: center; font-size: 0.8rem; }
+
+        @media (max-width: 991px) {
+            .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; display: none; }
+            .navbar-nav.show { display: flex !important; }
+            .nav-item { margin: 10px 0 !important; margin-left: 0 !important; }
+            .gfl-tabs .nav-link { font-size: 1.2rem; padding: 10px 15px; }
+            .iframe-container { height: 900px; border-radius: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="gflNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
+                <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
+                <li class="nav-item"><a class="nav-link" href="druzyny.html" style="color: #44b1ff !important; border-bottom: 2px solid #44b1ff;">Drużyny</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
+                        <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
+                        <li><a class="dropdown-item" href="aspire.html">Aspire League</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="boiska.html">Grafik Boisk</a></li>
+                <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
+                <li class="nav-item"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px;">Zapisy</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<section class="page-header">
+    <div class="container">
+        <h1 class="display-1">CENTRUM STATYSTYK</h1>
+        <p style="color: #44b1ff; letter-spacing: 2px;">PROFILE DRUŻYN, OFICJALNE KADRY I CZYSTE KONTA</p>
+    </div>
+</section>
+
+<section class="stats-section">
+    <div class="container">
+        
+        <ul class="nav nav-tabs gfl-tabs" id="leagueTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="elite-tab" data-bs-toggle="tab" data-bs-target="#elite" type="button" role="tab">ELITE LEAGUE</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="challenge-tab" data-bs-toggle="tab" data-bs-target="#challenge" type="button" role="tab">CHALLENGE LEAGUE</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="aspire-tab" data-bs-toggle="tab" data-bs-target="#aspire" type="button" role="tab">ASPIRE LEAGUE</button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="leagueTabsContent">
+            
+            <div class="tab-pane fade show active" id="elite" role="tabpanel">
+                <div class="iframe-container">
+                    <iframe src="TU_WKLEISZ_LINK_ELITE"></iframe>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="challenge" role="tabpanel">
+                <div class="iframe-container">
+                    <iframe src="TU_WKLEISZ_LINK_CHALLENGE"></iframe>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="aspire" role="tabpanel">
+                <div class="iframe-container">
+                    <iframe src="TU_WKLEISZ_LINK_ASPIRE"></iframe>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5>GDYNIA FOOTBALL LEAGUE</h5>
+                <p>Największa amatorska liga piłkarska w Gdyni. Tworzymy przestrzeń dla pasjonatów futbolu, łącząc sportową rywalizację z profesjonalną oprawą medialną.</p>
+                <p style="color: #444;">📍 Gdynia, Polska</p>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5>NA SKRÓTY</h5>
+                <ul class="footer-links">
+                    <li><a href="index.html">Strona Główna</a></li>
+                    <li><a href="aktualnosci.html">Aktualności</a></li>
+                    <li><a href="regulamin.html">Regulamin Ligi</a></li>
+                    <li><a href="onas.html">O Nas</a></li>
+                    <li><a href="boiska.html">Grafik Boisk</a></li>
+                    <li><a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank">Formularz Zgłoszeniowy</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <h5>ŚLEDŹ NAS</h5>
+                <div class="d-flex flex-column align-items-start">
+                    <a href="https://www.facebook.com/profile.php?id=61577475248674" target="_blank" class="social-btn">OBSERWUJ NA FACEBOOKU ↗</a>
+                    <a href="https://www.instagram.com/gdyniafl/" target="_blank" class="social-btn">OBSERWUJ NA INSTAGRAMIE ↗</a>
+                    <a href="https://www.tiktok.com/@gdyniafl" target="_blank" class="social-btn">OBSERWUJ NA TIKTOK ↗</a>
+                    <a href="mailto:gdyniafootballleague@gmail.com" class="social-btn btn-contact">WSPÓŁPRACA / KONTAKT ✉</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-row">&copy; 2026 Gdynia Football League. Design & Code: Ezi</div>
+    </div>
+</footer>
+
+<script src="assets/web/assets/jquery/jquery.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Skrypt mobilny do menu
+    $('.navbar-toggler').on('click', function() { $('#gflNav').toggleClass('show'); });
+</script>
+</body>
+</html>

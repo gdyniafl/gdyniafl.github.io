@@ -26,7 +26,7 @@
 
         .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
 
-        /* --- ZAKŁADKI LIGOWE (NOWE) --- */
+        /* --- ZAKŁADKI LIGOWE --- */
         .stats-section { padding: 40px 0 80px 0; }
         .gfl-tabs { border-bottom: 2px solid #222; margin-bottom: 30px; justify-content: center; border-radius: 0; }
         .gfl-tabs .nav-link { color: #666 !important; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; border: none; padding: 15px 30px; background: transparent; transition: 0.3s; letter-spacing: 1px; }
@@ -34,7 +34,7 @@
         .gfl-tabs .nav-link.active { color: #44b1ff !important; border-bottom: 3px solid #44b1ff; background: transparent; }
 
         /* --- KONTENER NA EXCELA --- */
-        .iframe-container { position: relative; width: 100%; height: 800px; background: #080808; border-radius: 20px; border: 1px solid #222; overflow: hidden; margin: 0 auto; max-width: 1100px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .iframe-container { position: relative; width: 100%; height: 600px; background: #080808; border-radius: 20px; border: 1px solid #222; overflow: hidden; margin: 0 auto; max-width: 1100px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .iframe-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; background-color: transparent; }
 
         /* --- STOPKA --- */
@@ -55,7 +55,7 @@
             .navbar-nav.show { display: flex !important; }
             .nav-item { margin: 10px 0 !important; margin-left: 0 !important; }
             .gfl-tabs .nav-link { font-size: 1.2rem; padding: 10px 15px; }
-            .iframe-container { height: 900px; border-radius: 10px; }
+            .iframe-container { height: 650px; border-radius: 10px; }
         }
     </style>
 </head>
@@ -91,7 +91,7 @@
 <section class="page-header">
     <div class="container">
         <h1 class="display-1">CENTRUM STATYSTYK</h1>
-        <p style="color: #44b1ff; letter-spacing: 2px;">PROFILE DRUŻYN, OFICJALNE KADRY I CZYSTE KONTA</p>
+        <p style="color: #44b1ff; letter-spacing: 2px;">PROFILE DRUŻYN, ZDOBYCZ BRAMKOWA I CZYSTE KONTA</p>
     </div>
 </section>
 
@@ -114,19 +114,19 @@
             
             <div class="tab-pane fade show active" id="elite" role="tabpanel">
                 <div class="iframe-container">
-                    <iframe src="TU_WKLEISZ_LINK_ELITE"></iframe>
+                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pubhtml?gid=1464091989&single=true&widget=false&headers=false"></iframe>
                 </div>
             </div>
 
             <div class="tab-pane fade" id="challenge" role="tabpanel">
                 <div class="iframe-container">
-                    <iframe src="TU_WKLEISZ_LINK_CHALLENGE"></iframe>
+                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pubhtml?gid=2082205064&single=true&widget=false&headers=false"></iframe>
                 </div>
             </div>
 
             <div class="tab-pane fade" id="aspire" role="tabpanel">
                 <div class="iframe-container">
-                    <iframe src="TU_WKLEISZ_LINK_ASPIRE"></iframe>
+                    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pubhtml?gid=720624350&single=true&widget=false&headers=false"></iframe>
                 </div>
             </div>
 
@@ -171,7 +171,6 @@
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Skrypt mobilny do menu
     $('.navbar-toggler').on('click', function() { $('#gflNav').toggleClass('show'); });
 </script>
 </body>

@@ -11,7 +11,6 @@
         body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
         h1, h2, h5, .nav-link, .table-title { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- NAWIGACJA Z INDEX.HTML --- */
         .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
         .navbar-brand img { height: 4.5rem !important; }
         .navbar-nav { display: flex !important; align-items: center !important; }
@@ -26,67 +25,26 @@
 
         .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
 
-        /* --- ZAKŁADKI LIGOWE --- */
         .stats-section { padding: 40px 0 80px 0; }
         .gfl-tabs { border-bottom: 2px solid #222; margin-bottom: 40px; justify-content: center; border-radius: 0; }
         .gfl-tabs .nav-link { color: #666 !important; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; border: none; padding: 15px 30px; background: transparent; transition: 0.3s; letter-spacing: 1px; }
         .gfl-tabs .nav-link:hover { color: #fff !important; }
         .gfl-tabs .nav-link.active { color: #44b1ff !important; border-bottom: 3px solid #44b1ff; background: transparent; }
 
-        /* --- GRID WYBORU DRUŻYNY - KOMPAKTOWE BLOCZKI --- */
         .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; }
         
         .team-btn { 
-            position: relative;
-            background-color: #080808; 
-            border: 1px solid #222; 
-            border-radius: 10px; 
-            padding: 15px; 
-            min-height: 110px; /* ZNACZNIE WĘŻSZE / NIŻSZE */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center; 
-            color: #fff; 
-            font-family: 'Bebas Neue', sans-serif; 
-            font-size: 1.5rem; 
-            cursor: pointer; 
-            transition: all 0.3s; 
-            letter-spacing: 1px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            
-            /* Tło z herbu */
-            background-size: cover; 
-            background-position: center;
-            background-repeat: no-repeat;
-            overflow: hidden;
-            z-index: 1;
-            
-            /* Cień gwarantujący czytelność */
-            text-shadow: 2px 2px 6px rgba(0,0,0,1), -2px -2px 6px rgba(0,0,0,1), 0px 0px 20px rgba(0,0,0,0.9);
+            position: relative; background-color: #080808; border: 1px solid #222; border-radius: 10px; 
+            padding: 15px; min-height: 110px; display: flex; align-items: center; justify-content: center;
+            text-align: center; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; 
+            cursor: pointer; transition: all 0.3s; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            background-size: cover; background-position: center; background-repeat: no-repeat;
+            overflow: hidden; z-index: 1; text-shadow: 2px 2px 6px rgba(0,0,0,1), -2px -2px 6px rgba(0,0,0,1), 0px 0px 20px rgba(0,0,0,0.9);
         }
+        .team-btn::before { content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.55); z-index: -1; transition: all 0.3s; }
+        .team-btn:hover { border-color: #44b1ff; color: #44b1ff; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(68, 177, 255, 0.2); }
+        .team-btn:hover::before { background: rgba(0, 0, 0, 0.25); }
 
-        .team-btn::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.55); 
-            z-index: -1;
-            transition: all 0.3s;
-        }
-
-        .team-btn:hover { 
-            border-color: #44b1ff; 
-            color: #44b1ff; 
-            transform: translateY(-3px); 
-            box-shadow: 0 6px 15px rgba(68, 177, 255, 0.2); 
-        }
-
-        .team-btn:hover::before {
-            background: rgba(0, 0, 0, 0.25);
-        }
-
-        /* --- WIDOK MODALA (PROFILU DRUŻYNY) --- */
         .modal-content { background-color: #0a0a0a; border: 1px solid #333; border-radius: 15px; }
         .modal-header { border-bottom: 1px solid #222; padding: 20px 30px; }
         .modal-title { color: #44b1ff; font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; margin: 0; letter-spacing: 1px; }
@@ -97,6 +55,15 @@
         .stat-label-profile { color: #666; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; margin-bottom: 5px; }
         .stat-value-profile { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: #fff; line-height: 1; }
         
+        /* NOWE STYLE DLA FORMY ZESPOŁU */
+        .form-section { background: #111; border: 1px solid #222; border-radius: 10px; padding: 15px; margin-top: 15px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+        .form-label { color: #666; font-size: 0.85rem; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; margin: 0; }
+        .form-container { display: flex; gap: 8px; }
+        .form-badge { width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-size: 0.85rem; font-weight: bold; color: #fff; font-family: -apple-system, sans-serif; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+        .f-Z { background-color: #28a745; } /* Zielony */
+        .f-R { background-color: #ffc107; color: #000; } /* Żółty */
+        .f-P { background-color: #dc3545; } /* Czerwony */
+
         .scorers-title { color: #44b1ff; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; border-bottom: 1px solid #222; padding-bottom: 10px; margin: 30px 0 15px 0; letter-spacing: 1px; }
         .scorers-table { width: 100%; color: #fff; }
         .scorers-table td { padding: 10px 5px; border-bottom: 1px solid #1a1a1a; vertical-align: middle; }
@@ -104,7 +71,6 @@
         .scorers-table .s-name { font-size: 1.05rem; }
         .scorers-table .s-goals { text-align: right; color: #44b1ff; font-weight: bold; font-size: 1.1rem; }
 
-        /* --- STOPKA --- */
         .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; margin-top: 40px; }
         .footer h5 { color: #fff; margin-bottom: 20px; }
         .footer-links { list-style: none; padding: 0; }
@@ -122,6 +88,7 @@
             .team-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
             .team-btn { font-size: 1.3rem; min-height: 100px; padding: 10px; border-radius: 8px; }
             .stat-value-profile { font-size: 1.8rem; }
+            .form-section { justify-content: center; }
         }
     </style>
 </head>
@@ -163,17 +130,10 @@
 
 <section class="stats-section">
     <div class="container">
-        
         <ul class="nav nav-tabs gfl-tabs" id="leagueTabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="elite-tab" data-bs-toggle="tab" data-bs-target="#elite" type="button" role="tab">ELITE LEAGUE</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="challenge-tab" data-bs-toggle="tab" data-bs-target="#challenge" type="button" role="tab">CHALLENGE LEAGUE</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="aspire-tab" data-bs-toggle="tab" data-bs-target="#aspire" type="button" role="tab">ASPIRE LEAGUE</button>
-            </li>
+            <li class="nav-item" role="presentation"><button class="nav-link active" id="elite-tab" data-bs-toggle="tab" data-bs-target="#elite" type="button" role="tab">ELITE LEAGUE</button></li>
+            <li class="nav-item" role="presentation"><button class="nav-link" id="challenge-tab" data-bs-toggle="tab" data-bs-target="#challenge" type="button" role="tab">CHALLENGE LEAGUE</button></li>
+            <li class="nav-item" role="presentation"><button class="nav-link" id="aspire-tab" data-bs-toggle="tab" data-bs-target="#aspire" type="button" role="tab">ASPIRE LEAGUE</button></li>
         </ul>
 
         <div class="tab-content" id="leagueTabsContent">
@@ -187,7 +147,6 @@
                 <div id="aspire-data" class="team-grid"><div class="text-center w-100 p-5">Ładowanie drużyn...</div></div>
             </div>
         </div>
-
     </div>
 </section>
 
@@ -240,11 +199,8 @@
 
     let appData = { 'elite': {}, 'challenge': {}, 'aspire': {} };
 
-    // ===============================================
-    // BAZA HERBÓW DRUŻYN
-    // ===============================================
     const teamLogos = {
-        "AC MISTRZOVIA GDYNIA A": "assets/images/logotypy/acmistrzovia.png",
+                "AC MISTRZOVIA GDYNIA A": "assets/images/logotypy/acmistrzovia.png",
         "AC MISTRZOVIA GDYNIA B": "assets/images/logotypy/acmistrzovia.png",
         "CISOVIA FC": "assets/images/logotypy/cisoviafc.png",
         "COCCOLINO FRESH": "assets/images/logotypy/coccolinofresh.png",
@@ -282,7 +238,6 @@
     };
     
     const defaultLogo = "assets/images/logo-gfl.png-160x160.png";
-    // ===============================================
 
     function parseCSVRow(str) {
         let arr = [], quote = false, col = '';
@@ -307,12 +262,13 @@
 
             for (let i = 1; i < rows.length; i++) {
                 const cols = parseCSVRow(rows[i]);
-                if (cols.length < 4) continue;
+                if (cols.length < 5) continue; // Wymagamy 5 kolumn z formą!
                 
                 let teamName = cols[0];
                 let matches = parseInt(cols[1]) || 0;
                 let cleanSheets = parseInt(cols[2]) || 0;
                 let rawScorers = cols[3];
+                let formString = cols[4] || ""; // np "Z,P,R,Z,Z"
                 
                 let totalGoals = 0;
                 let scorersList = [];
@@ -337,7 +293,8 @@
                     cleanSheets: cleanSheets,
                     totalGoals: totalGoals,
                     avg: avg,
-                    scorers: scorersList
+                    scorers: scorersList,
+                    forma: formString.split(',')
                 };
 
                 let currentLogo = teamLogos[teamName] || defaultLogo;
@@ -358,6 +315,17 @@
         if (!data) return;
 
         document.getElementById('modalTeamName').innerText = teamName;
+
+        // Renderowanie odznak formy
+        let formBadgesHtml = '';
+        if (data.forma[0] !== "" && data.forma[0] !== "Brak") {
+            data.forma.forEach(f => {
+                let fClass = f === 'Z' ? 'f-Z' : (f === 'P' ? 'f-P' : 'f-R');
+                formBadgesHtml += `<span class="form-badge ${fClass}">${f}</span>`;
+            });
+        } else {
+            formBadgesHtml = `<span style="color: #666; font-size: 0.85rem;">Brak danych</span>`;
+        }
 
         let bodyHtml = `
             <div class="row g-3 mb-2">
@@ -384,6 +352,13 @@
                         <div class="stat-label-profile">Czyste Konta</div>
                         <div class="stat-value-profile">${data.cleanSheets}</div>
                     </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <p class="form-label">FORMA (OSTATNIE 5 MECZÓW):</p>
+                <div class="form-container">
+                    ${formBadgesHtml}
                 </div>
             </div>
 

@@ -325,32 +325,31 @@
     const scorersCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb/pub?gid=1372879295&single=true&output=csv';
     async function loadMatches() {
         const wrapper = document.getElementById('match-center-wrapper');
-        const today = new Date();
+        const todayString = "22.05.2026"; // TU WPISZ DZISIEJSZĄ DATĘ
         let html = '';
         try {
             const results = await Promise.all(matchLinks.map(l => fetch(l.url).then(r => r.text())));
             results.forEach((csv, idx) => {
-                const lines = csv.split('\n');
-                lines.slice(1).forEach(row => {
+                csv.split('\n').slice(1).forEach(row => {
                     const col = row.split(',');
                     if (col.length < 6) return;
 
+                    // NAPRAWA: Porównanie tekstowe, a nie przez new Date()
                     const rawDate = col[6] ? col[6].trim() : "";
-                    const matchDate = new Date(rawDate);
-                    const isToday = !isNaN(matchDate) && (matchDate.toDateString() === today.toDateString());
+                    const isToday = rawDate.startsWith(todayString);
                     const liveBadge = isToday ? '<span class="live-dot"></span>' : '';
 
+                    // Reszta logiki
                     const deadline = new Date(col[4]);
                     deadline.setHours(23, 59, 59);
-                    const diff = (deadline - today) / (1000 * 3600 * 24);
+                    const diff = (deadline - new Date()) / (1000 * 3600 * 24);
 
                     if (diff >= 0 && diff <= 14) { 
                         const scoreHome = col[2] ? col[2].trim() : "";
                         const scoreAway = col[3] ? col[3].trim() : "";
-                        const dateTime = rawDate;
                         const pitch = col[7] ? col[7].trim() : "";
                         const czyJestWynik = (scoreHome !== "" && scoreHome !== "-") || (scoreAway !== "" && scoreAway !== "-");
-                        let infoString = (dateTime === "" || dateTime.toUpperCase().includes("TERMIN")) ? (czyJestWynik ? "BRAK INFO" : "TERMIN DO USTALENIA") : dateTime;
+                        let infoString = (rawDate === "" || rawDate.toUpperCase().includes("TERMIN")) ? (czyJestWynik ? "BRAK INFO" : "TERMIN DO USTALENIA") : rawDate;
 
                         html += `
                         <div class="match-card">

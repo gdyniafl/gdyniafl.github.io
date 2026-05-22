@@ -310,10 +310,9 @@
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
-    // 1. FUNKCJA AUDIO
+
     function playAudio() { new Audio('assets/zapowiedz.mp3').play().catch(() => alert("Błąd audio.")); }
 
-    // 2. KONFIGURACJA LINKÓW
     const matchLinks = [
         { name: 'ELITE', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv' },
         { name: 'CHALLENGE', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3/pub?gid=682329859&single=true&output=csv' },
@@ -321,8 +320,6 @@
     ];
 
     const scorersCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb/pub?gid=1372879295&single=true&output=csv';
-
-    // 3. ŁADOWANIE MECZÓW
     async function loadMatches() {
         const wrapper = document.getElementById('match-center-wrapper');
         const today = new Date();
@@ -334,21 +331,27 @@
                 lines.slice(1).forEach(row => {
                     const col = row.split(',');
                     if (col.length < 6) return;
-                    const isToday = (new Date().toDateString() === new Date(col[6]).toDateString());
+                    
+                    const rawDate = col[6] ? col[6].trim() : "";
+                    const matchDate = new Date(rawDate);
+                    const isToday = !isNaN(matchDate) && (matchDate.toDateString() === today.toDateString());
                     const liveBadge = isToday ? '<span class="live-dot"></span>' : '';
+                    
                     const deadline = new Date(col[4]);
                     deadline.setHours(23, 59, 59);
                     const diff = (deadline - today) / (1000 * 3600 * 24);
+                    
                     if (diff >= 0 && diff <= 14) { 
                         const scoreHome = col[2] ? col[2].trim() : "";
                         const scoreAway = col[3] ? col[3].trim() : "";
-                        const dateTime = col[6] ? col[6].trim() : "";
+                        const dateTime = rawDate;
                         const pitch = col[7] ? col[7].trim() : "";
                         const czyJestWynik = (scoreHome !== "" && scoreHome !== "-") || (scoreAway !== "" && scoreAway !== "-");
-                        let infoString = (dateTime === "" || dateTime.toUpperCase().includes("TERMIN DO USTALENIA")) ? (czyJestWynik ? "BRAK INFO" : "TERMIN DO USTALENIA") : dateTime;
+                        let infoString = (dateTime === "" || dateTime.toUpperCase().includes("TERMIN")) ? (czyJestWynik ? "BRAK INFO" : "TERMIN DO USTALENIA") : dateTime;
+                        
                         html += `
                         <div class="match-card">
-                            <div class="league-tag">${matchLinks[idx].name} | KOLEJKA ${col[5]}</div>
+                            <div class="league-tag">${liveBadge} ${matchLinks[idx].name} | KOLEJKA ${col[5]}</div>
                             <div class="team-row"><span>${col[0]}</span><span class="score-box">${scoreHome || '-'}</span></div>
                             <div class="team-row"><span>${col[1]}</span><span class="score-box">${scoreAway || '-'}</span></div>
                             <div class="match-info"><span>${infoString} | <b>${pitch || ''}</b></span></div>
@@ -360,7 +363,6 @@
         } catch (e) { wrapper.innerHTML = "<div style='padding:20px;'>Błąd ładowania terminarza.</div>"; }
     }
 
-    // 4. ŁADOWANIE STRZELCÓW (TOP 3)
     async function loadTopScorers() {
         const container = document.getElementById('scorers-container');
         try {
@@ -412,12 +414,11 @@
         } catch (e) { container.innerHTML = '<p class="text-center">Błąd połączenia z rankingiem.</p>'; }
     }
 
-    // ODPALENIE WSZYSTKIEGO
     window.onload = function() {
         loadMatches();
         loadTopScorers();
     };
-  // Liczniki statystyk
+
 const counters = document.querySelectorAll('.counter');
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

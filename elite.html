@@ -79,6 +79,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
                 <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
+                <li class="nav-item"><a class="nav-link" href="druzyny.html" style="color: #44b1ff !important; border-bottom: 2px solid #44b1ff;">Drużyny</a></li>
                 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
@@ -157,52 +158,38 @@
 
     async function loadData() {
         try {
-            // 1. TABELA
             const resTable = await fetch(tableCsvUrl);
             const dataTable = await resTable.text();
             let tableHtml = '';
             dataTable.split('\n').slice(1).forEach(row => {
                 const col = row.split(',');
                 if (col.length < 8) return;
-                tableHtml += `<tr><td class="sticky-pos col-highlight">${col[0]}</td><td class="sticky-team" style="font-weight:bold;">${col[1]}</td><td>${col[2]}</td><td>${col[9]}</td></tr>`;
+                tableHtml += `<tr><td class="sticky-pos col-highlight">${col[0]}</td><td class="sticky-team" style="font-weight:bold;">${col[1]}</td><td class="col-stat">${col[2]}</td><td class="col-stat">${col[3]}</td><td class="col-stat">${col[5]}</td><td class="col-stat">${col[4]}</td><td class="col-goals">${col[6]}:${col[7]}</td><td class="col-highlight col-pkt">${col[9]}</td></tr>`;
             });
             document.getElementById('table-data').innerHTML = tableHtml;
 
-            // 2. TERMINARZ
             const resMatches = await fetch(matchesCsvUrl);
             const dataMatches = await resMatches.text();
             const rounds = {};
-            
             dataMatches.split('\n').slice(1).forEach(row => {
                 const col = row.split(',');
                 if (col.length < 8) return;
-                const r = col[5];
-                if (!rounds[r]) rounds[r] = [];
-                rounds[r].push(`<div class="match-row"><span class="team-name text-end">${col[0]}</span><span class="score-box">${col[2]}:${col[3]}</span><span class="team-name">${col[1]}</span></div>`);
+                const roundNum = col[5];
+                if (!rounds[roundNum]) rounds[roundNum] = [];
+                const score = (col[2] !== "" && col[3] !== "") ? `${col[2]} : ${col[3]}` : "vs";
+                const info = (col[6] && col[6] !== "Brak rezerwacji") ? `${col[6]} | ${col[7] || ''}` : "Termin do ustalenia";
+                rounds[roundNum].push(`<div class="match-row"><span class="team-name text-end">${col[0]}</span><span class="score-box">${score}<span class="match-details">${info}</span></span><span class="team-name">${col[1]}</span></div>`);
             });
-
-            // Inteligentne rozwijanie: znajdź najwyższy numer kolejki, w której są już wyniki
-            const roundNumbers = Object.keys(rounds).sort((a,b) => parseInt(a)-parseInt(b));
-            const lastRound = roundNumbers[roundNumbers.length - 1];
 
             let accordionHtml = '';
-            roundNumbers.forEach(r => {
-                const isExpanded = (r == lastRound);
-                accordionHtml += `
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button ${isExpanded ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">KOLEJKA ${r}</button>
-                    </h2>
-                    <div id="k${r}" class="accordion-collapse collapse ${isExpanded ? 'show' : ''}" data-bs-parent="#scheduleAccordion">
-                        <div class="accordion-body">${rounds[r].join('')}</div>
-                    </div>
-                </div>`;
+            Object.keys(rounds).sort((a,b) => parseInt(a)-parseInt(b)).forEach((r, index) => {
+                accordionHtml += `<div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">KOLEJKA ${r}</button></h2><div id="k${r}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" data-bs-parent="#scheduleAccordion"><div class="accordion-body">${rounds[r].join('')}</div></div></div>`;
             });
             document.getElementById('scheduleAccordion').innerHTML = accordionHtml;
-
-        } catch (e) { console.error("Błąd: ", e); }
+        } catch (e) { console.error(e); }
     }
     loadData();
+    // Skrypt mobilny do menu
     $('.navbar-toggler').on('click', function() { $('#gflNav').toggleClass('show'); });
 </script>
 </body>

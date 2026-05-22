@@ -322,7 +322,8 @@
     const scorersCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb/pub?gid=1372879295&single=true&output=csv';
     async function loadMatches() {
         const wrapper = document.getElementById('match-center-wrapper');
-        const todayString = "22.05.2026"; // TU WPISZ DZISIEJSZĄ DATĘ
+        // Używamy formatu zgodnego z Twoim screenem (z myślnikami)
+        const todayString = "22-05-2026"; 
         let html = '';
         try {
             const results = await Promise.all(matchLinks.map(l => fetch(l.url).then(r => r.text())));
@@ -331,35 +332,25 @@
                     const col = row.split(',');
                     if (col.length < 6) return;
 
-                    // NAPRAWA: Porównanie tekstowe, a nie przez new Date()
+                    // Logika LIVE: sprawdzamy czy tekst w komórce zawiera datę
                     const rawDate = col[6] ? col[6].trim() : "";
-                    const isToday = rawDate.startsWith(todayString);
+                    const isToday = rawDate.includes(todayString);
                     const liveBadge = isToday ? '<span class="live-dot"></span>' : '';
 
-                    // Reszta logiki
-                    const deadline = new Date(col[4]);
-                    deadline.setHours(23, 59, 59);
-                    const diff = (deadline - new Date()) / (1000 * 3600 * 24);
-
-                    if (diff >= 0 && diff <= 14) { 
-                        const scoreHome = col[2] ? col[2].trim() : "";
-                        const scoreAway = col[3] ? col[3].trim() : "";
-                        const pitch = col[7] ? col[7].trim() : "";
-                        const czyJestWynik = (scoreHome !== "" && scoreHome !== "-") || (scoreAway !== "" && scoreAway !== "-");
-                        let infoString = (rawDate === "" || rawDate.toUpperCase().includes("TERMIN")) ? (czyJestWynik ? "BRAK INFO" : "TERMIN DO USTALENIA") : rawDate;
-
-                        html += `
-                        <div class="match-card">
-                            <div class="league-tag">${liveBadge} ${matchLinks[idx].name} | KOLEJKA ${col[5]}</div>
-                            <div class="team-row"><span>${col[0]}</span><span class="score-box">${scoreHome || '-'}</span></div>
-                            <div class="team-row"><span>${col[1]}</span><span class="score-box">${scoreAway || '-'}</span></div>
-                            <div class="match-info"><span>${infoString} | <b>${pitch || ''}</b></span></div>
-                        </div>`;
-                    }
+                    const scoreHome = col[2] ? col[2].trim() : "";
+                    const scoreAway = col[3] ? col[3].trim() : "";
+                    
+                    html += `
+                    <div class="match-card">
+                        <div class="league-tag">${liveBadge} ${matchLinks[idx].name} | KOLEJKA ${col[5]}</div>
+                        <div class="team-row"><span>${col[0]}</span><span class="score-box">${scoreHome || '-'}</span></div>
+                        <div class="team-row"><span>${col[1]}</span><span class="score-box">${scoreAway || '-'}</span></div>
+                        <div class="match-info"><span>${rawDate} | <b>${col[7] || ''}</b></span></div>
+                    </div>`;
                 });
             });
-            wrapper.innerHTML = html || '<div style="padding:20px;">Brak meczów w bieżącej kolejce.</div>';
-        } catch (e) { wrapper.innerHTML = "<div style='padding:20px;'>Błąd ładowania terminarza.</div>"; }
+            wrapper.innerHTML = html;
+        } catch (e) { wrapper.innerHTML = "Błąd."; }
     }
 
     async function loadTopScorers() {

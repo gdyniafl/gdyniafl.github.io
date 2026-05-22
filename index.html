@@ -320,60 +320,52 @@
     ];
 
     const scorersCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb/pub?gid=1372879295&single=true&output=csv';
-    async function loadMatches() {
-        const wrapper = document.getElementById('match-center-wrapper');
-        // Używamy formatu zgodnego z Twoim screenem (z myślnikami)
-        const todayString = "22-05-2026"; 
-        let html = '';
-        // ... wewnątrz funkcji loadMatches ...
-try {
-    const results = await Promise.all(matchLinks.map(l => fetch(l.url).then(r => r.text())));
+   async function loadMatches() {
+    const wrapper = document.getElementById('match-center-wrapper');
+    const today = new Date();
+    // Format daty dzisiejszej do porównania (dostosuj do formatu w kolumnie 6!)
+    const todayString = "22.05.2026"; 
+    let html = '';
     
-    let currentRound = null;
-    let maxRound = 0;
+    try {
+        const results = await Promise.all(matchLinks.map(l => fetch(l.url).then(r => r.text())));
+        
+        results.forEach((csv, idx) => {
+            const lines = csv.split('\n');
+            lines.slice(1).forEach(row => {
+                const col = row.split(',');
+                if (col.length < 6) return;
 
-    results.forEach(csv => {
-        csv.split('\n').slice(1).forEach(row => {
-            const col = row.split(',');
-            if (col.length < 6) return;
-            
-            const rNum = parseInt(col[5]);
-            if (rNum > maxRound) maxRound = rNum; // Zapisz największą dostępną
+                // 1. Logika deadline (to wyświetla tylko najbliższe 14 dni)
+                const deadline = new Date(col[4]); // Zakładam, że kolumna 4 to deadline
+                deadline.setHours(23, 59, 59);
+                const diff = (deadline - today) / (1000 * 3600 * 24);
 
-            // Jeśli mecz jest dzisiaj - to jest nasza kolejka priorytetowa!
-            if (col[6] && col[6].trim().includes(todayString)) {
-                currentRound = col[5];
-            }
+                if (diff >= 0 && diff <= 14) { 
+                    // 2. Kropka LIVE (sprawdzamy tylko czy dzisiaj)
+                    const rawDate = col[6] ? col[6].trim() : "";
+                    const isToday = rawDate.includes(todayString);
+                    const liveBadge = isToday ? '<span class="live-dot"></span>' : '';
+
+                    const scoreHome = col[2] ? col[2].trim() : "";
+                    const scoreAway = col[3] ? col[3].trim() : "";
+                    const pitch = col[7] ? col[7].trim() : "";
+                    
+                    html += `
+                    <div class="match-card">
+                        <div class="league-tag">${liveBadge} ${matchLinks[idx].name} | KOLEJKA ${col[5]}</div>
+                        <div class="team-row"><span>${col[0]}</span><span class="score-box">${scoreHome || '-'}</span></div>
+                        <div class="team-row"><span>${col[1]}</span><span class="score-box">${scoreAway || '-'}</span></div>
+                        <div class="match-info"><span>${rawDate} | <b>${pitch || ''}</b></span></div>
+                    </div>`;
+                }
+            });
         });
-    });
-
-    // Jeśli nie znaleziono dzisiejszej (currentRound jest null), użyj ostatniej (maxRound)
-    const targetRound = currentRound || maxRound.toString();
-
-    // 2. Wyświetl tylko mecze z tej kolejki
-    results.forEach((csv, idx) => {
-        csv.split('\n').slice(1).forEach(row => {
-            const col = row.split(',');
-            if (col.length < 6) return;
-            
-            // FILTR: Pokazujemy tylko jeśli to dzisiejsza kolejka (lub jeśli nie znaleźliśmy dzisiejszej - np. Elite)
-            if (currentRound && col[5] !== currentRound) return;
-
-            const isToday = col[6] && col[6].trim().includes(todayString);
-            const liveBadge = isToday ? '<span class="live-dot"></span>' : '';
-            
-            html += `
-            <div class="match-card">
-                <div class="league-tag">${liveBadge} ${matchLinks[idx].name} | KOLEJKA ${col[5]}</div>
-                <div class="team-row"><span>${col[0]}</span><span class="score-box">${col[2] || '-'}</span></div>
-                <div class="team-row"><span>${col[1]}</span><span class="score-box">${col[3] || '-'}</span></div>
-                <div class="match-info"><span>${col[6] || ''} | <b>${col[7] || ''}</b></span></div>
-            </div>`;
-        });
-    });
-    wrapper.innerHTML = html || '<div style="padding:20px;">Brak meczów w bieżącej kolejce.</div>';
-} catch (e) { wrapper.innerHTML = "Błąd."; }
+        wrapper.innerHTML = html || '<div style="padding:20px;">Brak meczów w najbliższym terminie.</div>';
+    } catch (e) { 
+        wrapper.innerHTML = "<div style='padding:20px;'>Błąd ładowania terminarza.</div>"; 
     }
+}
 
     async function loadTopScorers() {
         const container = document.getElementById('scorers-container');

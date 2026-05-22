@@ -329,17 +329,26 @@
 try {
     const results = await Promise.all(matchLinks.map(l => fetch(l.url).then(r => r.text())));
     
-    // 1. Najpierw znajdź numer bieżącej kolejki (tej z dzisiejszą datą)
     let currentRound = null;
+    let maxRound = 0;
+
     results.forEach(csv => {
         csv.split('\n').slice(1).forEach(row => {
             const col = row.split(',');
             if (col.length < 6) return;
+            
+            const rNum = parseInt(col[5]);
+            if (rNum > maxRound) maxRound = rNum; // Zapisz największą dostępną
+
+            // Jeśli mecz jest dzisiaj - to jest nasza kolejka priorytetowa!
             if (col[6] && col[6].trim().includes(todayString)) {
-                currentRound = col[5]; // Numer kolejki
+                currentRound = col[5];
             }
         });
     });
+
+    // Jeśli nie znaleziono dzisiejszej (currentRound jest null), użyj ostatniej (maxRound)
+    const targetRound = currentRound || maxRound.toString();
 
     // 2. Wyświetl tylko mecze z tej kolejki
     results.forEach((csv, idx) => {

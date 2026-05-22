@@ -33,23 +33,31 @@
         .gfl-tabs .nav-link:hover { color: #fff !important; }
         .gfl-tabs .nav-link.active { color: #44b1ff !important; border-bottom: 3px solid #44b1ff; background: transparent; }
 
-        /* --- KARTY DRUŻYN (ZAMIAST TABELI) --- */
-        .team-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 25px; }
-        .team-card { background: #080808; border: 1px solid #222; border-radius: 15px; padding: 25px; display: flex; flex-direction: column; transition: transform 0.2s; }
-        .team-card:hover { border-color: #44b1ff; transform: translateY(-3px); }
-        .team-name { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: #44b1ff; border-bottom: 1px solid #1a1a1a; padding-bottom: 10px; margin-bottom: 20px; letter-spacing: 1px; }
+        /* --- GRID WYBORU DRUŻYNY --- */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+        .team-btn { background: #080808; border: 1px solid #222; border-radius: 12px; padding: 25px 15px; text-align: center; color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; cursor: pointer; transition: all 0.2s; letter-spacing: 1px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+        .team-btn:hover { background: #111; border-color: #44b1ff; color: #44b1ff; transform: translateY(-3px); box-shadow: 0 6px 15px rgba(68, 177, 255, 0.2); }
+
+        /* --- WIDOK MODALA (PROFILU DRUŻYNY) --- */
+        .modal-content { background-color: #0a0a0a; border: 1px solid #333; border-radius: 15px; }
+        .modal-header { border-bottom: 1px solid #222; padding: 20px 30px; }
+        .modal-title { color: #44b1ff; font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; margin: 0; letter-spacing: 1px; }
+        .modal-body { padding: 30px; }
+        .btn-close-white { filter: invert(1) grayscale(100%) brightness(200%); }
+
+        .stat-box-profile { text-align: center; background: #111; border: 1px solid #222; padding: 15px 10px; border-radius: 10px; height: 100%; }
+        .stat-label-profile { color: #666; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; margin-bottom: 5px; }
+        .stat-value-profile { font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem; color: #fff; line-height: 1; }
         
-        .team-stats-row { display: flex; gap: 30px; margin-bottom: 25px; }
-        .stat-box { display: flex; flex-direction: column; }
-        .stat-label { font-size: 0.75rem; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
-        .stat-value { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: #fff; line-height: 1; }
-        
-        .scorers-section { display: flex; flex-direction: column; }
-        .scorer-badge { color: #ddd; background: #141414; padding: 6px 12px; border-radius: 6px; display: inline-block; margin: 0 6px 8px 0; border: 1px solid #222; font-size: 0.85rem; font-weight: 500; }
-        .scorer-badge strong { color: #44b1ff; font-weight: bold; } /* Wyróżnienie liczby goli */
+        .scorers-title { color: #44b1ff; font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; border-bottom: 1px solid #222; padding-bottom: 10px; margin: 30px 0 15px 0; letter-spacing: 1px; }
+        .scorers-table { width: 100%; color: #fff; }
+        .scorers-table td { padding: 10px 5px; border-bottom: 1px solid #1a1a1a; vertical-align: middle; }
+        .scorers-table .s-num { color: #666; width: 30px; font-weight: bold; font-size: 0.9rem; }
+        .scorers-table .s-name { font-size: 1.05rem; }
+        .scorers-table .s-goals { text-align: right; color: #44b1ff; font-weight: bold; font-size: 1.1rem; }
 
         /* --- STOPKA --- */
-        .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; }
+        .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; margin-top: 40px; }
         .footer h5 { color: #fff; margin-bottom: 20px; }
         .footer-links { list-style: none; padding: 0; }
         .footer-links li { margin-bottom: 10px; }
@@ -57,17 +65,15 @@
         .footer-links a:hover { color: #44b1ff; padding-left: 5px; }
         .social-btn { display: inline-block; padding: 8px 16px; margin-bottom: 10px; border: 1px solid #333; border-radius: 5px; color: #fff; text-decoration: none; font-family: 'Bebas Neue'; font-size: 1rem; transition: 0.3s; width: 100%; text-align: center; }
         .social-btn:hover { background: #44b1ff; border-color: #44b1ff; color: #000; }
-        .social-btn.btn-contact { border-color: #44b1ff !important; color: #44b1ff !important; }
-        .social-btn.btn-contact:hover { background-color: #44b1ff !important; color: #fff !important; }
         .copyright-row { margin-top: 40px; padding-top: 20px; border-top: 1px solid #111; text-align: center; font-size: 0.8rem; }
 
         @media (max-width: 991px) {
             .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; display: none; }
             .navbar-nav.show { display: flex !important; }
             .nav-item { margin: 10px 0 !important; margin-left: 0 !important; }
-            .gfl-tabs .nav-link { font-size: 1.2rem; padding: 10px 15px; }
-            .team-cards-grid { grid-template-columns: 1fr; } /* Na telefonie 1 karta w rzędzie */
-            .team-card { padding: 20px; }
+            .team-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .team-btn { font-size: 1.3rem; padding: 20px 10px; }
+            .stat-value-profile { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -102,8 +108,8 @@
 
 <section class="page-header">
     <div class="container">
-        <h1 class="display-1">PROFILE DRUŻYN</h1>
-        <p style="color: #44b1ff; letter-spacing: 2px;">STATYSTYKI ZESPOŁOWE I KADRY STRZELECKIE</p>
+        <h1 class="display-1">WYBIERZ DRUŻYNĘ</h1>
+        <p style="color: #44b1ff; letter-spacing: 2px;">KLIKNIJ, ABY ZOBACZYĆ SZCZEGÓŁOWE STATYSTYKI</p>
     </div>
 </section>
 
@@ -123,23 +129,32 @@
         </ul>
 
         <div class="tab-content" id="leagueTabsContent">
-            
             <div class="tab-pane fade show active" id="elite" role="tabpanel">
-                <div id="elite-data" class="text-center p-5">Ładowanie danych...</div>
+                <div id="elite-data" class="team-grid"><div class="text-center w-100 p-5">Ładowanie drużyn...</div></div>
             </div>
-
             <div class="tab-pane fade" id="challenge" role="tabpanel">
-                <div id="challenge-data" class="text-center p-5">Ładowanie danych...</div>
+                <div id="challenge-data" class="team-grid"><div class="text-center w-100 p-5">Ładowanie drużyn...</div></div>
             </div>
-
             <div class="tab-pane fade" id="aspire" role="tabpanel">
-                <div id="aspire-data" class="text-center p-5">Ładowanie danych...</div>
+                <div id="aspire-data" class="team-grid"><div class="text-center w-100 p-5">Ładowanie drużyn...</div></div>
             </div>
-
         </div>
 
     </div>
 </section>
+
+<div class="modal fade" id="teamModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTeamName">NAZWA DRUŻYNY</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Zamknij"></button>
+            </div>
+            <div class="modal-body" id="modalTeamBody">
+                </div>
+        </div>
+    </div>
+</div>
 
 <footer class="footer">
     <div class="container">
@@ -166,7 +181,6 @@
                     <a href="https://www.facebook.com/profile.php?id=61577475248674" target="_blank" class="social-btn">OBSERWUJ NA FACEBOOKU ↗</a>
                     <a href="https://www.instagram.com/gdyniafl/" target="_blank" class="social-btn">OBSERWUJ NA INSTAGRAMIE ↗</a>
                     <a href="https://www.tiktok.com/@gdyniafl" target="_blank" class="social-btn">OBSERWUJ NA TIKTOK ↗</a>
-                    <a href="mailto:gdyniafootballleague@gmail.com" class="social-btn btn-contact">WSPÓŁPRACA / KONTAKT ✉</a>
                 </div>
             </div>
         </div>
@@ -181,6 +195,9 @@
     const urlChallenge = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3/pub?gid=239846389&single=true&output=csv';
     const urlAspire = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf/pub?gid=1718488559&single=true&output=csv';
 
+    // Baza danych przechwytująca dane ze wszystkich lig
+    let appData = { 'elite': {}, 'challenge': {}, 'aspire': {} };
+
     function parseCSVRow(str) {
         let arr = [], quote = false, col = '';
         for (let i = 0; i < str.length; i++) {
@@ -194,70 +211,126 @@
         return arr;
     }
 
-    async function loadLeagueStats(url, containerId) {
+    async function loadLeagueStats(url, containerId, leagueKey) {
         try {
             const res = await fetch(url);
             const text = await res.text();
-            
             const rows = text.split('\n').map(r => r.trim()).filter(r => r);
             
-            let html = `<div class="team-cards-grid">`;
+            let html = '';
 
             for (let i = 1; i < rows.length; i++) {
                 const cols = parseCSVRow(rows[i]);
                 if (cols.length < 4) continue;
                 
                 let teamName = cols[0];
-                let matches = cols[1];
-                let cleanSheets = cols[2];
-                
+                let matches = parseInt(cols[1]) || 0;
+                let cleanSheets = parseInt(cols[2]) || 0;
                 let rawScorers = cols[3];
-                let formattedScorers = "";
                 
+                let totalGoals = 0;
+                let scorersList = [];
+
                 if (rawScorers && rawScorers !== "Brak bramek") {
                     let scorersArray = rawScorers.split(', ');
-                    formattedScorers = scorersArray.map(s => {
-                        // Wyróżnienie samej cyfry w nawiasie na niebiesko
-                        let fancyS = s.replace(/\((\d+)\)/, '(<strong>$1</strong>)');
-                        return `<span class="scorer-badge">${fancyS}</span>`;
-                    }).join('');
-                } else {
-                    formattedScorers = "<span style='color: #666; font-size: 0.9rem;'>Brak strzelonych bramek</span>";
+                    scorersArray.forEach(s => {
+                        let match = s.match(/(.+)\((\d+)\)/);
+                        if (match) {
+                            let name = match[1].trim();
+                            let goals = parseInt(match[2]);
+                            totalGoals += goals;
+                            scorersList.push({ name: name, goals: goals });
+                        }
+                    });
                 }
 
-                html += `
-                    <div class="team-card">
-                        <div class="team-name">${teamName}</div>
-                        <div class="team-stats-row">
-                            <div class="stat-box">
-                                <span class="stat-label">Rozegrane Mecze</span>
-                                <span class="stat-value">${matches}</span>
-                            </div>
-                            <div class="stat-box">
-                                <span class="stat-label">Czyste Konta</span>
-                                <span class="stat-value">${cleanSheets}</span>
-                            </div>
-                        </div>
-                        <div class="scorers-section">
-                            <span class="stat-label mb-2">Strzelcy (Gole)</span>
-                            <div>${formattedScorers}</div>
-                        </div>
-                    </div>`;
+                let avg = matches > 0 ? (totalGoals / matches).toFixed(2) : "0.00";
+
+                // Zapisujemy przetworzone dane do naszej wewnętrznej bazy
+                appData[leagueKey][teamName] = {
+                    matches: matches,
+                    cleanSheets: cleanSheets,
+                    totalGoals: totalGoals,
+                    avg: avg,
+                    scorers: scorersList
+                };
+
+                // Tworzymy kafelek drużyny z akcją otwierającą Modal
+                html += `<div class="team-btn" onclick="openTeamModal('${leagueKey}', '${teamName.replace(/'/g, "\\'")}')">${teamName}</div>`;
             }
 
-            html += `</div>`;
             document.getElementById(containerId).innerHTML = html;
 
         } catch (e) {
             console.error(e);
-            document.getElementById(containerId).innerHTML = `<div class="text-center p-4 text-danger">Błąd pobierania danych. Odśwież stronę.</div>`;
+            document.getElementById(containerId).innerHTML = `<div class="text-center w-100 p-4 text-danger">Błąd pobierania danych z Google Sheets.</div>`;
         }
     }
 
-    loadLeagueStats(urlElite, 'elite-data');
-    loadLeagueStats(urlChallenge, 'challenge-data');
-    loadLeagueStats(urlAspire, 'aspire-data');
+    // Funkcja otwierająca Profil Drużyny
+    function openTeamModal(leagueKey, teamName) {
+        let data = appData[leagueKey][teamName];
+        if (!data) return;
 
+        document.getElementById('modalTeamName').innerText = teamName;
+
+        let bodyHtml = `
+            <div class="row g-3 mb-2">
+                <div class="col-6 col-md-3">
+                    <div class="stat-box-profile">
+                        <div class="stat-label-profile">Rozegrane</div>
+                        <div class="stat-value-profile">${data.matches}</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-box-profile">
+                        <div class="stat-label-profile">Bramki z gry</div>
+                        <div class="stat-value-profile" style="color:#44b1ff;">${data.totalGoals}</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-box-profile">
+                        <div class="stat-label-profile">Gole / Mecz</div>
+                        <div class="stat-value-profile">${data.avg}</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-box-profile">
+                        <div class="stat-label-profile">Czyste Konta</div>
+                        <div class="stat-value-profile">${data.cleanSheets}</div>
+                    </div>
+                </div>
+            </div>
+
+            <h6 class="scorers-title">OFICJALNI STRZELCY ZESPOŁU</h6>
+        `;
+
+        if (data.scorers.length > 0) {
+            bodyHtml += `<table class="scorers-table"><tbody>`;
+            data.scorers.forEach((s, idx) => {
+                bodyHtml += `
+                <tr>
+                    <td class="s-num">${idx + 1}.</td>
+                    <td class="s-name">${s.name}</td>
+                    <td class="s-goals">${s.goals} ⚽</td>
+                </tr>`;
+            });
+            bodyHtml += `</tbody></table>`;
+        } else {
+            bodyHtml += `<div class="text-muted mt-3" style="font-size:0.9rem;">Brak zarejestrowanych strzelców w systemie.</div>`;
+        }
+
+        document.getElementById('modalTeamBody').innerHTML = bodyHtml;
+        var myModal = new bootstrap.Modal(document.getElementById('teamModal'));
+        myModal.show();
+    }
+
+    // Odpalamy pobieranie danych przy starcie
+    loadLeagueStats(urlElite, 'elite-data', 'elite');
+    loadLeagueStats(urlChallenge, 'challenge-data', 'challenge');
+    loadLeagueStats(urlAspire, 'aspire-data', 'aspire');
+
+    // Skrypt mobilny do menu
     $('.navbar-toggler').on('click', function() { $('#gflNav').toggleClass('show'); });
 </script>
 </body>

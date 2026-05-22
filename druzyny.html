@@ -33,69 +33,62 @@
         .gfl-tabs .nav-link:hover { color: #fff !important; }
         .gfl-tabs .nav-link.active { color: #44b1ff !important; border-bottom: 3px solid #44b1ff; background: transparent; }
 
-        /* --- GRID WYBORU DRUŻYNY --- */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+        /* --- GRID WYBORU DRUŻYNY Z HERBAMI W TLE (PIONOWE BLOCZKI) --- */
+        .team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
         
-        /* NOWA STRUKTURA PRZYCISKU */
         .team-btn { 
+            position: relative;
             background-color: #080808; 
             border: 1px solid #222; 
             border-radius: 12px; 
-            padding: 25px 15px; 
-            text-align: center; 
-            cursor: pointer; 
-            transition: all 0.3s; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            padding: 20px; 
+            min-height: 180px; /* To robi ten efekt "pionowego bloczku" */
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100%;
-        }
-
-        /* Kontener na herb - TO JEST KLUCZ DO JEDNAKOWEGO ROZMIARU */
-        .team-logo-container {
-            width: 100px; /* Stała szerokość */
-            height: 100px; /* Stała wysokość */
-            margin-bottom: 15px;
-            border-radius: 50%; /* Idealne koło */
-            border: 2px solid #1a1a1a;
-            background-size: contain; /* Logo mieści się w środku */
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: #050505; /* Tło kółka */
-            transition: all 0.3s;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
-        }
-
-        /* Nazwa drużyny pod herbem */
-        .team-btn-name {
+            text-align: center; 
             color: #fff; 
             font-family: 'Bebas Neue', sans-serif; 
-            font-size: 1.6rem; 
-            letter-spacing: 1px; 
+            font-size: 1.8rem; 
+            cursor: pointer; 
             transition: all 0.3s; 
-            margin: 0;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+            letter-spacing: 1px; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            
+            /* Tło z herbu wypełniające cały kafel */
+            background-size: cover; 
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow: hidden;
+            z-index: 1;
+            
+            /* MOCNY CIEŃ POD TEKSTEM */
+            text-shadow: 2px 2px 6px rgba(0,0,0,1), -2px -2px 6px rgba(0,0,0,1), 0px 0px 20px rgba(0,0,0,0.9);
         }
 
-        /* EFEKTY HOVER */
+        /* Filtr przyciemniający, żeby tekst był czytelny */
+        .team-btn::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.55); 
+            z-index: -1;
+            transition: all 0.3s;
+        }
+
         .team-btn:hover { 
             border-color: #44b1ff; 
+            color: #44b1ff; 
             transform: translateY(-3px); 
             box-shadow: 0 6px 15px rgba(68, 177, 255, 0.2); 
         }
 
-        .team-btn:hover .team-logo-container {
-            border-color: #44b1ff;
-            box-shadow: 0 0 15px rgba(68, 177, 255, 0.4);
+        /* Rozjaśnienie po najechaniu - herb błyszczy */
+        .team-btn:hover::before {
+            background: rgba(0, 0, 0, 0.25);
         }
 
-        .team-btn:hover .team-btn-name {
-            color: #44b1ff; 
-        }
-
-        /* --- WIDOK MODALA --- */
+        /* --- WIDOK MODALA (PROFILU DRUŻYNY) --- */
         .modal-content { background-color: #0a0a0a; border: 1px solid #333; border-radius: 15px; }
         .modal-header { border-bottom: 1px solid #222; padding: 20px 30px; }
         .modal-title { color: #44b1ff; font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; margin: 0; letter-spacing: 1px; }
@@ -128,10 +121,9 @@
             .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; display: none; }
             .navbar-nav.show { display: flex !important; }
             .nav-item { margin: 10px 0 !important; margin-left: 0 !important; }
-            .gfl-tabs .nav-link { font-size: 1.2rem; padding: 10px 15px; }
             .team-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
-            .team-btn-name { font-size: 1.3rem; }
-            .team-logo-container { width: 80px; height: 80px; margin-bottom: 10px; } /* Trochę mniejsze loga na mobile */
+            .team-btn { font-size: 1.4rem; min-height: 140px; }
+            .stat-value-profile { font-size: 1.8rem; }
         }
     </style>
 </head>
@@ -289,7 +281,6 @@
         "ANTD FC": "assets/images/logotypy/antd.png"
     };
     
-    // Domyślne logo, jeśli drużyna jeszcze nie ma wpisanego herbu:
     const defaultLogo = "assets/images/logo-gfl.png-160x160.png";
     // ===============================================
 
@@ -349,15 +340,9 @@
                     scorers: scorersList
                 };
 
-                // Pobieramy herb
                 let currentLogo = teamLogos[teamName] || defaultLogo;
 
-                // NOWA STRUKTURA HTML KAFELKA
-                html += `
-                    <div class="team-btn" onclick="openTeamModal('${leagueKey}', '${teamName.replace(/'/g, "\\'")}')">
-                        <div class="team-logo-container" style="background-image: url('${currentLogo}');"></div>
-                        <p class="team-btn-name">${teamName}</p>
-                    </div>`;
+                html += `<div class="team-btn" style="background-image: url('${currentLogo}');" onclick="openTeamModal('${leagueKey}', '${teamName.replace(/'/g, "\\'")}')">${teamName}</div>`;
             }
 
             document.getElementById(containerId).innerHTML = html;

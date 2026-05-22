@@ -170,11 +170,9 @@
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // TWOJE LINKI ASPIRE
     const tableCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf/pub?gid=1101831234&single=true&output=csv';
     const matchesCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf/pub?gid=682329859&single=true&output=csv';
 
-    // Funkcja parsująca CSV (bezpieczna)
     function parseCSV(text) {
         const rows = text.split(/\r?\n/);
         return rows.map(row => {
@@ -185,7 +183,7 @@
 
     async function loadData() {
         try {
-            // 1. ŁADOWANIE TABELI
+            // 1. TABELA
             const resTable = await fetch(tableCsvUrl);
             const dataTable = await resTable.text();
             let tableHtml = '';
@@ -200,14 +198,14 @@
             });
             document.getElementById('table-data').innerHTML = tableHtml;
 
-            // 2. ŁADOWANIE TERMINARZA
+            // 2. TERMINARZ
             const resMatches = await fetch(matchesCsvUrl);
             const dataMatches = await resMatches.text();
             const rounds = {};
 
             parseCSV(dataMatches).slice(1).forEach(col => {
                 if (col.length < 8) return;
-                const roundNum = col[5]; // F (RUNDA)
+                const roundNum = col[5];
                 if (!rounds[roundNum]) rounds[roundNum] = [];
 
                 const score = (col[2] !== "" && col[3] !== "") ? `${col[2]} : ${col[3]}` : "vs";
@@ -221,27 +219,28 @@
                     </div>`);
             });
 
-           let accordionHtml = '';
-Object.keys(rounds).sort((a,b) => parseInt(a)-parseInt(b)).forEach((r, index) => {
-    // ZMIENIAMY TUTAJ: (index === 0 ? 'show' : '') na ''
-    accordionHtml += `<div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">KOLEJKA ${r}</button></h2><div id="k${r}" class="accordion-collapse collapse" data-bs-parent="#scheduleAccordion"><div class="accordion-body">${rounds[r].join('')}</div></div></div>`;
-});
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">KOLEJKA ${r}</button>
-                        </h2>
-                        <div id="k${r}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" data-bs-parent="#scheduleAccordion">
-                            <div class="accordion-body">${rounds[r].join('')}</div>
-                        </div>
-                    </div>`;
+            // Generowanie akordeonu (Wszystko zwinięte zgodnie z Twoją prośbą)
+            let accordionHtml = '';
+            Object.keys(rounds).sort((a,b) => parseInt(a)-parseInt(b)).forEach((r) => {
+                accordionHtml += `
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">
+                            KOLEJKA ${r}
+                        </button>
+                    </h2>
+                    <div id="k${r}" class="accordion-collapse collapse" data-bs-parent="#scheduleAccordion">
+                        <div class="accordion-body">${rounds[r].join('')}</div>
+                    </div>
+                </div>`;
             });
             document.getElementById('scheduleAccordion').innerHTML = accordionHtml;
+
         } catch (e) { console.error("Błąd Aspire:", e); }
     }
-    loadData();
 
-    // Skrypt mobilny
-    $('#menu-toggle').on('click', function() { $('.navbar-nav').toggleClass('show'); });
+    loadData();
+    $('.navbar-toggler').on('click', function() { $('#gflNav').toggleClass('show'); });
 </script>
 </body>
 </html>

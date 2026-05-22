@@ -325,32 +325,45 @@
         // Używamy formatu zgodnego z Twoim screenem (z myślnikami)
         const todayString = "22-05-2026"; 
         let html = '';
-        try {
-            const results = await Promise.all(matchLinks.map(l => fetch(l.url).then(r => r.text())));
-            results.forEach((csv, idx) => {
-                csv.split('\n').slice(1).forEach(row => {
-                    const col = row.split(',');
-                    if (col.length < 6) return;
+        // ... wewnątrz funkcji loadMatches ...
+try {
+    const results = await Promise.all(matchLinks.map(l => fetch(l.url).then(r => r.text())));
+    
+    // 1. Najpierw znajdź numer bieżącej kolejki (tej z dzisiejszą datą)
+    let currentRound = null;
+    results.forEach(csv => {
+        csv.split('\n').slice(1).forEach(row => {
+            const col = row.split(',');
+            if (col.length < 6) return;
+            if (col[6] && col[6].trim().includes(todayString)) {
+                currentRound = col[5]; // Numer kolejki
+            }
+        });
+    });
 
-                    // Logika LIVE: sprawdzamy czy tekst w komórce zawiera datę
-                    const rawDate = col[6] ? col[6].trim() : "";
-                    const isToday = rawDate.includes(todayString);
-                    const liveBadge = isToday ? '<span class="live-dot"></span>' : '';
+    // 2. Wyświetl tylko mecze z tej kolejki
+    results.forEach((csv, idx) => {
+        csv.split('\n').slice(1).forEach(row => {
+            const col = row.split(',');
+            if (col.length < 6) return;
+            
+            // FILTR: Pokazujemy tylko jeśli to dzisiejsza kolejka (lub jeśli nie znaleźliśmy dzisiejszej - np. Elite)
+            if (currentRound && col[5] !== currentRound) return;
 
-                    const scoreHome = col[2] ? col[2].trim() : "";
-                    const scoreAway = col[3] ? col[3].trim() : "";
-                    
-                    html += `
-                    <div class="match-card">
-                        <div class="league-tag">${liveBadge} ${matchLinks[idx].name} | KOLEJKA ${col[5]}</div>
-                        <div class="team-row"><span>${col[0]}</span><span class="score-box">${scoreHome || '-'}</span></div>
-                        <div class="team-row"><span>${col[1]}</span><span class="score-box">${scoreAway || '-'}</span></div>
-                        <div class="match-info"><span>${rawDate} | <b>${col[7] || ''}</b></span></div>
-                    </div>`;
-                });
-            });
-            wrapper.innerHTML = html;
-        } catch (e) { wrapper.innerHTML = "Błąd."; }
+            const isToday = col[6] && col[6].trim().includes(todayString);
+            const liveBadge = isToday ? '<span class="live-dot"></span>' : '';
+            
+            html += `
+            <div class="match-card">
+                <div class="league-tag">${liveBadge} ${matchLinks[idx].name} | KOLEJKA ${col[5]}</div>
+                <div class="team-row"><span>${col[0]}</span><span class="score-box">${col[2] || '-'}</span></div>
+                <div class="team-row"><span>${col[1]}</span><span class="score-box">${col[3] || '-'}</span></div>
+                <div class="match-info"><span>${col[6] || ''} | <b>${col[7] || ''}</b></span></div>
+            </div>`;
+        });
+    });
+    wrapper.innerHTML = html || '<div style="padding:20px;">Brak meczów w bieżącej kolejce.</div>';
+} catch (e) { wrapper.innerHTML = "Błąd."; }
     }
 
     async function loadTopScorers() {

@@ -221,9 +221,11 @@
                     </div>`);
             });
 
-            let accordionHtml = '';
-            Object.keys(rounds).sort((a,b) => parseInt(a)-parseInt(b)).forEach((r, index) => {
-                accordionHtml += `
+           let accordionHtml = '';
+Object.keys(rounds).sort((a,b) => parseInt(a)-parseInt(b)).forEach((r, index) => {
+    // ZMIENIAMY TUTAJ: (index === 0 ? 'show' : '') na ''
+    accordionHtml += `<div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">KOLEJKA ${r}</button></h2><div id="k${r}" class="accordion-collapse collapse" data-bs-parent="#scheduleAccordion"><div class="accordion-body">${rounds[r].join('')}</div></div></div>`;
+});
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">KOLEJKA ${r}</button>

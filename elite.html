@@ -155,38 +155,60 @@
     const tableCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=1101831234&single=true&output=csv';
     const matchesCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv';
 
-    async function loadData() {
-        try {
-            const resTable = await fetch(tableCsvUrl);
-            const dataTable = await resTable.text();
-            let tableHtml = '';
-            dataTable.split('\n').slice(1).forEach(row => {
-                const col = row.split(',');
-                if (col.length < 8) return;
-                tableHtml += `<tr><td class="sticky-pos col-highlight">${col[0]}</td><td class="sticky-team" style="font-weight:bold;">${col[1]}</td><td class="col-stat">${col[2]}</td><td class="col-stat">${col[3]}</td><td class="col-stat">${col[5]}</td><td class="col-stat">${col[4]}</td><td class="col-goals">${col[6]}:${col[7]}</td><td class="col-highlight col-pkt">${col[9]}</td></tr>`;
-            });
-            document.getElementById('table-data').innerHTML = tableHtml;
+    // 1. Znajdź sekcję loadData() i podmień logikę tworzenia akordeonu na tę:
 
-            const resMatches = await fetch(matchesCsvUrl);
-            const dataMatches = await resMatches.text();
-            const rounds = {};
-            dataMatches.split('\n').slice(1).forEach(row => {
-                const col = row.split(',');
-                if (col.length < 8) return;
-                const roundNum = col[5];
-                if (!rounds[roundNum]) rounds[roundNum] = [];
-                const score = (col[2] !== "" && col[3] !== "") ? `${col[2]} : ${col[3]}` : "vs";
-                const info = (col[6] && col[6] !== "Brak rezerwacji") ? `${col[6]} | ${col[7] || ''}` : "Termin do ustalenia";
-                rounds[roundNum].push(`<div class="match-row"><span class="team-name text-end">${col[0]}</span><span class="score-box">${score}<span class="match-details">${info}</span></span><span class="team-name">${col[1]}</span></div>`);
-            });
+async function loadData() {
+    try {
+        // ... (kod pobierania CSV zostaje bez zmian) ...
+        
+        // Zbieramy dane do obiektu rounds
+        const rounds = {};
+        const today = new Date();
+        let closestRound = "1"; // domyślnie 1
+        let minDiff = Infinity;
 
-            let accordionHtml = '';
-            Object.keys(rounds).sort((a,b) => parseInt(a)-parseInt(b)).forEach((r, index) => {
-                accordionHtml += `<div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">KOLEJKA ${r}</button></h2><div id="k${r}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" data-bs-parent="#scheduleAccordion"><div class="accordion-body">${rounds[r].join('')}</div></div></div>`;
-            });
-            document.getElementById('scheduleAccordion').innerHTML = accordionHtml;
-        } catch (e) { console.error(e); }
-    }
+        dataMatches.split('\n').slice(1).forEach(row => {
+            const col = row.split(',');
+            if (col.length < 8) return;
+            const roundNum = col[5];
+            if (!rounds[roundNum]) rounds[roundNum] = [];
+            
+            // Zakładając, że data meczu jest w col[6] lub col[4] - dopasuj indeks jeśli trzeba!
+            // Tutaj przykład dla daty meczu z kolumny 6 (u Ciebie: col[6])
+            const matchDate = new Date(col[6]); 
+            if (!isNaN(matchDate)) {
+                const diff = Math.abs(today - matchDate);
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    closestRound = roundNum;
+                }
+            }
+
+            const score = (col[2] !== "" && col[3] !== "") ? `${col[2]} : ${col[3]}` : "vs";
+            const info = (col[6] && col[6] !== "Brak rezerwacji") ? `${col[6]} | ${col[7] || ''}` : "Termin do ustalenia";
+            rounds[roundNum].push(`<div class="match-row"><span class="team-name text-end">${col[0]}</span><span class="score-box">${score}<span class="match-details">${info}</span></span><span class="team-name">${col[1]}</span></div>`);
+        });
+
+        // 2. Generowanie akordeonu z aktywną kolejką
+        let accordionHtml = '';
+        Object.keys(rounds).sort((a,b) => parseInt(a)-parseInt(b)).forEach((r) => {
+            const isExpanded = (r == closestRound); // Rozwinie tę najbliższą dacie
+            accordionHtml += `
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button ${isExpanded ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">
+                        KOLEJKA ${r}
+                    </button>
+                </h2>
+                <div id="k${r}" class="accordion-collapse collapse ${isExpanded ? 'show' : ''}" data-bs-parent="#scheduleAccordion">
+                    <div class="accordion-body">${rounds[r].join('')}</div>
+                </div>
+            </div>`;
+        });
+        document.getElementById('scheduleAccordion').innerHTML = accordionHtml;
+
+    } catch (e) { console.error(e); }
+}
     loadData();
     // Skrypt mobilny do menu
     $('.navbar-toggler').on('click', function() { $('#gflNav').toggleClass('show'); });

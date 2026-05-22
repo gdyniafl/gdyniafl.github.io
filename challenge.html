@@ -210,11 +210,11 @@
                 rounds[roundNum].push(`<div class="match-row"><span class="team-name text-end">${col[0]}</span><span class="score-box">${score}<span class="match-details">${info}</span></span><span class="team-name">${col[1]}</span></div>`);
             });
 
-            let accordionHtml = '';
-            Object.keys(rounds).sort((a,b) => parseInt(a)-parseInt(b)).forEach((r, index) => {
-                const isOpen = index === 0 ? 'show' : '';
-                accordionHtml += `<div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button ${index === 0 ? '' : 'collapsed'}" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">KOLEJKA ${r}</button></h2><div id="k${r}" class="accordion-collapse collapse ${isOpen}" data-bs-parent="#scheduleAccordion"><div class="accordion-body">${rounds[r].join('')}</div></div></div>`;
-            });
+           let accordionHtml = '';
+Object.keys(rounds).sort((a,b) => parseInt(a)-parseInt(b)).forEach((r, index) => {
+    // ZMIENIAMY TUTAJ: (index === 0 ? 'show' : '') na ''
+    accordionHtml += `<div class="accordion-item"><h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#k${r}">KOLEJKA ${r}</button></h2><div id="k${r}" class="accordion-collapse collapse" data-bs-parent="#scheduleAccordion"><div class="accordion-body">${rounds[r].join('')}</div></div></div>`;
+});
             document.getElementById('scheduleAccordion').innerHTML = accordionHtml;
         } catch (e) { console.error("Błąd ładowania Challenge:", e); }
     }

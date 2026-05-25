@@ -34,7 +34,7 @@
     <h3 class="text-center mb-3">🔒 AUTORYZACJA KAPITANA</h3>
     <div class="mb-3">
       <label class="form-label">Wybierz Ligę</label>
-      <select class="form-select" id="login-liga">
+      <select class="form-select" id="login-liga" onchange="aktualizujListeDruzyn(this.value)">
         <option value="">-- Wybierz --</option>
         <option value="ELITE">ELITE LEAGUE</option>
         <option value="CHALLENGE">CHALLENGE LEAGUE</option>
@@ -42,14 +42,16 @@
       </select>
     </div>
     <div class="mb-3">
-      <label class="form-label">Wpisz Nazwę Drużyny</label>
-      <input type="text" class="form-control" id="login-druzyna" placeholder="np. Kasztelanki">
+      <label class="form-label">Wybierz Drużynę</label>
+      <select class="form-select" id="login-druzyna">
+        <option value="">-- Najpierw wybierz ligę --</option>
+      </select>
     </div>
     <div class="mb-3">
       <label class="form-label">Kod PIN Zespołu</label>
       <input type="password" class="form-control text-center" id="login-pin" placeholder="••••" maxlength="6" style="font-size: 1.2rem; letter-spacing: 5px;">
     </div>
-    <button type="button" class="btn btn-primary w-100" onclick="autoryzujKapitana(this)">ZALOGUJ SIĘ</button>
+    <button type="button" class="btn btn-primary w-100" id="btn-zaloguj" onclick="autoryzujKapitana(this)" disabled>ŁADOWANIE DANYCH LIGI...</button>
     <div id="status-logowania" class="status-msg"></div>
   </div>
 
@@ -70,7 +72,7 @@
           <form id="form-raport">
             <div class="row">
               <div class="col-6 mb-3"><label class="form-label">Twoja Drużyna</label><input type="text" class="form-control text-white-50" id="moja-display" readonly></div>
-              <div class="col-6 mb-3"><label class="form-label">Nazwa Przeciwnika</label><input type="text" class="form-control" id="on" required placeholder="Dokładna nazwa"></div>
+              <div class="col-6 mb-3"><label class="form-label">Nazwa Przeciwnika</label><select class="form-select" id="on" required></select></div>
             </div>
             <div class="row">
               <div class="col-6 mb-3"><label class="form-label">Twoje Gole</label><input type="number" class="form-control" id="mojeGole" required></div>
@@ -100,14 +102,40 @@
 </div>
 
 <script>
-  // Podmień na swój oczyszczony link produkcyjny z Google Script (bez /u/1/)
+  // Twój pełny adres URL wdrożenia Google Web App
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw08suOhWfb1Jbw8xEcDSO90By7djkYW-wX1EkETWgT82Wx6lnoBfC6C6DCnHIxI2IH3g/exec";
 
+  let daneLigi = {};
   let sesja = { liga: "", druzyna: "", pin: "" };
+
+  // Skrypt od razu pyta Google Sheets o aktualną bazę klubów
+  window.addEventListener('DOMContentLoaded', () => {
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify({ action: "getTeams" })
+    })
+    .then(r => r.json())
+    .then(data => {
+      daneLigi = data;
+      const btn = document.getElementById('btn-zaloguj');
+      btn.innerText = "ZALOGUJ SIĘ";
+      btn.disabled = false;
+    })
+    .catch(() => {
+      document.getElementById('status-logowania').innerHTML = "❌ Błąd synchronizacji bazy GFL. Odśwież stronę.";
+    });
+  });
+
+  function aktualizujListeDruzyn(liga) {
+    const teams = daneLigi[liga] || [];
+    let html = '<option value="">-- Wybierz zespół --</option>';
+    teams.forEach(t => html += `<option value="${t}">${t}</option>`);
+    document.getElementById('login-druzyna').innerHTML = html;
+  }
 
   function autoryzujKapitana(btn) {
     const liga = document.getElementById('login-liga').value;
-    const druzyna = document.getElementById('login-druzyna').value.trim();
+    const druzyna = document.getElementById('login-druzyna').value;
     const pin = document.getElementById('login-pin').value.trim();
     const status = document.getElementById('status-logowania');
 
@@ -116,45 +144,53 @@
 
     fetch(SCRIPT_URL, {
       method: "POST",
-      mode: "no-cors", // Ignoruje błędy blokowania polityki CORS w telefonach
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ action: "login", liga: liga, druzyna: druzyna, pin: pin })
     })
-    .then(() => {
-        // Ponieważ no-cors nie zwraca czytelnej odpowiedzi dla r.json(),
-        // autoryzację i walidację matematyczną strzelców wykona ostatecznie funkcja doPost na serwerze Google.
-        // Tutaj wpuszczamy użytkownika do interfejsu GFL.
+    .then(r => r.json())
+    .then(res => {
+      if(res.status === "OK") {
         sesja = { liga: liga, druzyna: druzyna, pin: pin };
         document.getElementById('zalogowany-zespol').innerText = druzyna;
         document.getElementById('zalogowana-liga').innerText = liga;
         document.getElementById('moja-display').value = druzyna;
         document.getElementById('add-druzyna-display').value = druzyna;
         
+        const teams = daneLigi[liga] || [];
+        let htmlOpp = '<option value="">-- Wybierz rywala --</option>';
+        teams.forEach(t => { if(t !== druzyna) htmlOpp += `<option value="${t}">${t}</option>`; });
+        document.getElementById('on').innerHTML = htmlOpp;
+
         document.getElementById('sekcja-logowania').style.display = 'none';
         document.getElementById('sekcja-glowna').style.display = 'block';
-    })
-    .catch(() => { status.innerText = "Błąd połączenia."; btn.disabled = false; });
+      } else {
+        status.innerText = "❌ BŁĄD: Podany kod PIN jest niepoprawny!";
+        btn.disabled = false;
+      }
+    }).catch(() => { status.innerText = "Błąd połączenia."; btn.disabled = false; });
   }
 
   function wyslijRaport(btn) {
     const status = document.getElementById('status-raport');
+    if(!document.getElementById('on').value) { alert("Wybierz przeciwnika!"); return; }
+    
     btn.disabled = true; status.style.display = 'block'; status.innerText = "Wysyłanie...";
 
     const payload = {
       action: "raport",
       formData: {
         liga: sesja.liga, moja: sesja.druzyna, pin: sesja.pin,
-        on: document.getElementById('on').value.trim(),
+        on: document.getElementById('on').value,
         mojeGole: document.getElementById('mojeGole').value,
         onGole: document.getElementById('onGole').value,
         gole: []
       }
     };
 
-    fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) })
-    .then(() => {
-        status.innerText = "✅ RAPORT ZOSTAŁ PRZEKAZANY DO WERYFIKACJI!";
-        setTimeout(() => location.reload(), 3000);
+    fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) })
+    .then(r => r.json())
+    .then(res => {
+      if(res.status === "OK") { status.style.background = "#28a745"; status.innerText = "✅ RAPORT WYSŁANY!"; setTimeout(() => location.reload(), 2000); }
+      else { status.style.background = "#ff4444"; status.innerText = res.status; btn.disabled = false; }
     });
   }
 
@@ -171,11 +207,12 @@
       }
     };
 
-    fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", body: JSON.stringify(payload) })
-    .then(() => {
-        status.innerText = "✅ ZGŁOSZONO! JEŚLI KOD JEST POPRAWNY, ZAWODNIK TRAFI DO POCZEKALNI.";
-        document.getElementById('form-gracz').reset();
-        btn.disabled = false;
+    fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) })
+    .then(r => r.json())
+    .then(res => {
+      if(res.status === "OK") { status.style.background = "#28a745"; status.innerText = "✅ ZGŁOSZONO POPRAWNIE!"; document.getElementById('form-gracz').reset(); }
+      else { status.style.background = "#ff4444"; status.innerText = res.status; }
+      btn.disabled = false;
     });
   }
 </script>

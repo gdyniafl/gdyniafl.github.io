@@ -1,17 +1,187 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>GFL | Panel Organizacyjny Kapitanów</title>
-    <style>
-        html, body { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #000; }
-        iframe { width: 100%; height: 100%; border: none; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <title>GFL | Panel Ligowy</title>
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  
+  <style>
+    body { background-color: #000; color: #fff; font-family: sans-serif; padding-bottom: 50px; }
+    h2, h3, .btn, .nav-link { font-family: 'Bebas Neue', sans-serif !important; letter-spacing: 1px; }
+    .card { background: #0f0f0f; border: 1px solid #222; border-radius: 10px; padding: 20px; margin-bottom: 30px; }
+    .form-label { color: #888; font-size: 0.8rem; text-transform: uppercase; }
+    .form-control, .form-select { background-color: #111 !important; border: 1px solid #333 !important; color: #fff !important; }
+    .form-control:focus, .form-select:focus { border-color: #44b1ff !important; box-shadow: none; }
+    .btn-primary { background: #44b1ff; border: none; color: #000; font-weight: bold; font-size: 1.2rem; }
+    .btn-primary:hover { background: #3399ff; color: #000; }
+    .status-msg { padding: 15px; border-radius: 5px; margin-top: 15px; display: none; text-align: center; font-weight: bold; }
+    .nav-pills .nav-link { color: #888; border: 1px solid #222; margin: 0 5px; }
+    .nav-pills .nav-link.active { background-color: #44b1ff !important; color: #000 !important; }
+  </style>
 </head>
 <body>
 
-    <iframe src="https://script.google.com/macros/s/AKfycbw08suOhWfb1Jbw8xEcDSO90By7djkYW-wX1EkETWgT82Wx6lnoBfC6C6DCnHIxI2IH3g/exec"></iframe>
+<div class="container mt-4">
+  <div class="text-center mb-4">
+    <img src="https://gdyniafl.pl/assets/images/logo-gfl.png-160x160.png" style="height: 80px;">
+    <h2 class="mt-2" style="color: #44b1ff;">PANEL ORGANIZACYJNY GFL</h2>
+  </div>
 
+  <div id="sekcja-logowania" class="card mx-auto" style="max-width: 450px;">
+    <h3 class="text-center mb-3">🔒 AUTORYZACJA KAPITANA</h3>
+    <div class="mb-3">
+      <label class="form-label">Wybierz Ligę</label>
+      <select class="form-select" id="login-liga">
+        <option value="">-- Wybierz --</option>
+        <option value="ELITE">ELITE LEAGUE</option>
+        <option value="CHALLENGE">CHALLENGE LEAGUE</option>
+        <option value="ASPIRE">ASPIRE LEAGUE</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Wpisz Nazwę Drużyny</label>
+      <input type="text" class="form-control" id="login-druzyna" placeholder="np. Kasztelanki">
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Kod PIN Zespołu</label>
+      <input type="password" class="form-control text-center" id="login-pin" placeholder="••••" maxlength="6" style="font-size: 1.2rem; letter-spacing: 5px;">
+    </div>
+    <button type="button" class="btn btn-primary w-100" onclick="autoryzujKapitana(this)">ZALOGUJ SIĘ</button>
+    <div id="status-logowania" class="status-msg"></div>
+  </div>
+
+  <div id="sekcja-glowna" style="display: none;">
+    <div class="alert alert-info bg-dark text-white border-secondary text-center small mb-4">
+      Zalogowano jako zespół: <b id="zalogowany-zespol" style="color: #44b1ff;">---</b> (<span id="zalogowana-liga">---</span>)
+    </div>
+
+    <ul class="nav nav-pills justify-content-center mb-4" id="pills-tab" role="tablist">
+      <li class="nav-item"><button class="nav-link active w-100" id="tab-raport-tab" data-bs-toggle="pill" data-bs-target="#tab-raport">RAPORT MECZOWY</button></li>
+      <li class="nav-item"><button class="nav-link w-100" id="tab-gracz-tab" data-bs-toggle="pill" data-bs-target="#tab-gracz">ZGŁOŚ ZAWODNIKA</button></li>
+    </ul>
+
+    <div class="tab-content" id="pills-tabContent">
+      <div class="tab-pane fade show active" id="tab-raport" role="tabpanel">
+        <div class="card">
+          <h3>📄 PROTOKÓŁ MECZOWY</h3>
+          <form id="form-raport">
+            <div class="row">
+              <div class="col-6 mb-3"><label class="form-label">Twoja Drużyna</label><input type="text" class="form-control text-white-50" id="moja-display" readonly></div>
+              <div class="col-6 mb-3"><label class="form-label">Nazwa Przeciwnika</label><input type="text" class="form-control" id="on" required placeholder="Dokładna nazwa"></div>
+            </div>
+            <div class="row">
+              <div class="col-6 mb-3"><label class="form-label">Twoje Gole</label><input type="number" class="form-control" id="mojeGole" required></div>
+              <div class="col-6 mb-3"><label class="form-label">Gole Przeciwnika</label><input type="number" class="form-control" id="onGole" required></div>
+            </div>
+            <div class="mb-3"><label class="form-label">Zdjęcia z meczu (opcjonalnie)</label><input type="file" class="form-control" id="foto" accept="image/*"></div>
+            <button type="button" class="btn btn-primary w-100" onclick="wyslijRaport(this)">WYŚLIJ RAPORT MECZOWY</button>
+          </form>
+          <div id="status-raport" class="status-msg"></div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="tab-gracz" role="tabpanel">
+        <div class="card">
+          <h3>➕ NOWY ZAWODNIK</h3>
+          <form id="form-gracz">
+            <div class="mb-3"><label class="form-label">Twoja Drużyna</label><input type="text" class="form-control text-white-50" id="add-druzyna-display" readonly></div>
+            <div class="mb-3"><label class="form-label">Imię i Nazwisko</label><input type="text" class="form-control" id="add-gracz" placeholder="np. Jan Kowalski"></div>
+            <div class="mb-3"><label class="form-label">Data Urodzenia</label><input type="text" class="form-control" id="add-data-urodzenia" placeholder="np. 24.05.1996"></div>
+            <button type="button" class="btn btn-primary w-100" onclick="wyslijZgloszenieGracza(this)">WYŚLIJ ZGŁOSZENIE</button>
+          </form>
+          <div id="status-gracz" class="status-msg"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // TUTEJ WKLEJ SWÓJ ADRES Z GOOGLE APPS SCRIPT (Z KOŃCÓWKĄ /exec)
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw08suOhWfb1Jbw8xEcDSO90By7djkYW-wX1EkETWgT82Wx6lnoBfC6C6DCnHIxI2IH3g/exec";
+
+  let sesja = { liga: "", druzyna: "", pin: "" };
+
+  function autoryzujKapitana(btn) {
+    const liga = document.getElementById('login-liga').value;
+    const druzyna = document.getElementById('login-druzyna').value.trim();
+    const pin = document.getElementById('login-pin').value.trim();
+    const status = document.getElementById('status-logowania');
+
+    if(!liga || !druzyna || !pin) { alert("Uzupełnij pola!"); return; }
+    btn.disabled = true; status.style.display = 'block'; status.innerText = "Weryfikacja...";
+
+    fetch(SCRIPT_URL, {
+      method: "POST",
+      body: JSON.stringify({ action: "login", liga: liga, druzyna: druzyna, pin: pin })
+    })
+    .then(r => r.json())
+    .then(res => {
+      if(res.status === "OK") {
+        sesja = { liga: liga, druzyna: druzyna, pin: pin };
+        document.getElementById('zalogowany-zespol').innerText = druzyna;
+        document.getElementById('zalogowana-liga').innerText = liga;
+        document.getElementById('moja-display').value = druzyna;
+        document.getElementById('add-druzyna-display').value = druzyna;
+        
+        document.getElementById('sekcja-logowania').style.display = 'none';
+        document.getElementById('sekcja-glowna').style.display = 'block';
+      } else {
+        status.innerText = "❌ BŁĄD: Zły PIN lub nazwa zespołu!";
+        btn.disabled = false;
+      }
+    }).catch(() => { status.innerText = "Błąd połączenia."; btn.disabled = false; });
+  }
+
+  function wyslijRaport(btn) {
+    const status = document.getElementById('status-raport');
+    btn.disabled = true; status.style.display = 'block'; status.innerText = "Wysyłanie...";
+
+    const payload = {
+      action: "raport",
+      formData: {
+        liga: sesja.liga, moja: sesja.druzyna, pin: sesja.pin,
+        on: document.getElementById('on').value.trim(),
+        mojeGole: document.getElementById('mojeGole').value,
+        onGole: document.getElementById('onGole').value,
+        gole: [] // W wersji uproszczonej bez listy rozwijanej
+      }
+    };
+
+    fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) })
+    .then(r => r.json())
+    .then(res => {
+      if(res.status === "OK") { status.innerText = "✅ RAPORT WYSŁANY!"; setTimeout(() => location.reload(), 2000); }
+      else { status.innerText = res.status; btn.disabled = false; }
+    });
+  }
+
+  function wyslijZgloszenieGracza(btn) {
+    const status = document.getElementById('status-gracz');
+    btn.disabled = true; status.style.display = 'block'; status.innerText = "Zgłaszanie...";
+
+    const payload = {
+      action: "gracz",
+      playerData: {
+        liga: sesja.liga, druzyna: sesja.druzyna, pin: sesja.pin,
+        imieNazwisko: document.getElementById('add-gracz').value.trim(),
+        dataUrodzenia: document.getElementById('add-data-urodzenia').value.trim()
+      }
+    };
+
+    fetch(SCRIPT_URL, { method: "POST", body: JSON.stringify(payload) })
+    .then(r => r.json())
+    .then(res => {
+      if(res.status === "OK") { status.innerText = "✅ ZGŁOSZONO!"; document.getElementById('form-gracz').reset(); }
+      else { status.innerText = res.status; }
+      btn.disabled = false;
+    });
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

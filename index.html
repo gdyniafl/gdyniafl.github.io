@@ -12,18 +12,44 @@
     body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
     h1, h2, h3, h4, .nav-link, .stat-num, .hof-name { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
-    /* --- NAWIGACJA --- */
-    .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
-    .navbar-brand img { height: 4.5rem !important; }
-    .navbar-nav { display: flex !important; align-items: center !important; flex-direction: row !important; }
-    .nav-item { list-style: none !important; margin-left: 20px !important; }
-    .nav-link { color: #fff !important; font-size: 1.1rem !important; text-decoration: none !important; }
-    .nav-link:hover { color: #44b1ff !important; }
+    <div style="background: #0a0a0a; border-bottom: 1px solid #111; padding: 5px 0; font-size: 0.8rem; letter-spacing: 1px;">
+    <div class="container d-flex justify-content-end align-items-center">
+        <span style="color: #666; margin-right: 10px;">ZARZĄDZANIE KLUBEM:</span>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#captainModal" style="color: #ffc107; text-decoration: none; font-weight: bold; font-family: 'Bebas Neue'; font-size: 0.9rem;">
+            PANEL KAPITANA (RAPORTY / TRANSFERY) 🔐
+        </a>
+    </div>
+</div>
 
-    .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
-    .navbar-toggler-icon { 
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-    }
+<nav class="navbar navbar-expand-lg" style="position: sticky; top: 0; z-index: 1030;">
+    <div class="container">
+        <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="gflNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
+                <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
+                        <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
+                        <li><a class="dropdown-item" href="aspire.html">Aspire League</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="boiska.html">Grafik Boisk</a></li>
+                <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#joinModal" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px; color: #44b1ff !important;">
+                        Zapisy ↗
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
     .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
     .dropdown-item { color: #fff !important; font-family: 'Bebas Neue' !important; font-size: 1.1rem !important; }

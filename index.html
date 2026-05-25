@@ -12,44 +12,18 @@
     body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
     h1, h2, h3, h4, .nav-link, .stat-num, .hof-name { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
-    <div style="background: #0a0a0a; border-bottom: 1px solid #111; padding: 5px 0; font-size: 0.8rem; letter-spacing: 1px;">
-    <div class="container d-flex justify-content-end align-items-center">
-        <span style="color: #666; margin-right: 10px;">ZARZĄDZANIE KLUBEM:</span>
-        <a href="#" data-bs-toggle="modal" data-bs-target="#captainModal" style="color: #ffc107; text-decoration: none; font-weight: bold; font-family: 'Bebas Neue'; font-size: 0.9rem;">
-            PANEL KAPITANA (RAPORTY / TRANSFERY) 🔐
-        </a>
-    </div>
-</div>
+    /* --- NAWIGACJA --- */
+    .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
+    .navbar-brand img { height: 4.5rem !important; }
+    .navbar-nav { display: flex !important; align-items: center !important; flex-direction: row !important; }
+    .nav-item { list-style: none !important; margin-left: 20px !important; }
+    .nav-link { color: #fff !important; font-size: 1.1rem !important; text-decoration: none !important; }
+    .nav-link:hover { color: #44b1ff !important; }
 
-<nav class="navbar navbar-expand-lg" style="position: sticky; top: 0; z-index: 1030;">
-    <div class="container">
-        <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="gflNav">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
-                <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
-                        <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
-                        <li><a class="dropdown-item" href="aspire.html">Aspire League</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="boiska.html">Grafik Boisk</a></li>
-                <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#joinModal" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px; color: #44b1ff !important;">
-                        Zapisy ↗
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
+    .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
+    .navbar-toggler-icon { 
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+    }
 
     .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
     .dropdown-item { color: #fff !important; font-family: 'Bebas Neue' !important; font-size: 1.1rem !important; }
@@ -74,12 +48,12 @@
     .score-box { color: #44b1ff; font-family: 'Bebas Neue'; font-size: 1.4rem; }
 
     /* Styl dla kropki Live */
-.live-dot {
-    height: 8px; width: 8px; background-color: #ff0000;
-    border-radius: 50%; display: inline-block;
-    animation: blink 1.5s infinite; margin-right: 5px;
-}
-@keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
+    .live-dot {
+        height: 8px; width: 8px; background-color: #ff0000;
+        border-radius: 50%; display: inline-block;
+        animation: blink 1.5s infinite; margin-right: 5px;
+    }
+    @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
 
     .match-info { 
         margin-top: 15px; 
@@ -101,51 +75,51 @@
     .stat-label { color: #666; font-size: 0.9rem; text-transform: uppercase; }
 
     /* --- WIDGET STRZELCÓW --- */
-.top-scorers-section { padding: 80px 0; background: #000; }
-.section-title { font-size: 3.5rem; margin-bottom: 50px; color: #fff; }
+    .top-scorers-section { padding: 80px 0; background: #000; }
+    .section-title { font-size: 3.5rem; margin-bottom: 50px; color: #fff; }
 
-.league-column { 
-    background: #080808; 
-    border: 1px solid #1a1a1a; 
-    border-radius: 15px; 
-    padding: 25px; 
-    height: 100%;
-}
+    .league-column { 
+        background: #080808; 
+        border: 1px solid #1a1a1a; 
+        border-radius: 15px; 
+        padding: 25px; 
+        height: 100%;
+    }
 
-.league-header { 
-    color: #44b1ff; 
-    border-bottom: 1px solid #222; 
-    margin-bottom: 20px; 
-    padding-bottom: 10px; 
-    text-align: center;
-}
+    .league-header { 
+        color: #44b1ff; 
+        border-bottom: 1px solid #222; 
+        margin-bottom: 20px; 
+        padding-bottom: 10px; 
+        text-align: center;
+    }
 
-.scorer-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px 0;
-    border-bottom: 1px solid #111;
-}
+    .scorer-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #111;
+    }
 
-.scorer-item:last-child { border-bottom: none; }
+    .scorer-item:last-child { border-bottom: none; }
 
-.scorer-info { display: flex; flex-direction: column; }
-.scorer-name { font-family: 'Bebas Neue'; font-size: 1.3rem; color: #fff; line-height: 1; }
-.scorer-team { font-size: 0.75rem; color: #666; text-transform: uppercase; }
+    .scorer-info { display: flex; flex-direction: column; }
+    .scorer-name { font-family: 'Bebas Neue'; font-size: 1.3rem; color: #fff; line-height: 1; }
+    .scorer-team { font-size: 0.75rem; color: #666; text-transform: uppercase; }
 
-.scorer-count { 
-    font-family: 'Bebas Neue'; 
-    font-size: 1.8rem; 
-    color: #44b1ff; 
-    background: rgba(68, 177, 255, 0.05);
-    padding: 0 10px;
-    border-radius: 5px;
-}
+    .scorer-count { 
+        font-family: 'Bebas Neue'; 
+        font-size: 1.8rem; 
+        color: #44b1ff; 
+        background: rgba(68, 177, 255, 0.05);
+        padding: 0 10px;
+        border-radius: 5px;
+    }
 
-/* Wyróżnienie lidera */
-.scorer-item:first-child .scorer-name { color: #ffd700; } /* Złoty dla 1. miejsca */
-.scorer-item:first-child .scorer-count { color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+    /* Wyróżnienie lidera */
+    .scorer-item:first-child .scorer-name { color: #ffd700; }
+    .scorer-item:first-child .scorer-count { color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
 
     /* --- HALL OF FAME --- */
     .hof-section { padding: 80px 0; text-align: center; }
@@ -191,7 +165,16 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg fixed-top">
+<div style="background: #0a0a0a; border-bottom: 1px solid #111; padding: 8px 0; font-size: 0.8rem; letter-spacing: 1px;">
+    <div class="container d-flex justify-content-end align-items-center">
+        <span style="color: #666; margin-right: 10px;">ZARZĄDZANIE KLUBEM:</span>
+        <a href="#" data-bs-toggle="modal" data-bs-target="#captainModal" style="color: #ffc107; text-decoration: none; font-weight: bold; font-family: 'Bebas Neue'; font-size: 0.9rem;">
+            PANEL KAPITANA (RAPORTY / TRANSFERY) 🔐
+        </a>
+    </div>
+</div>
+
+<nav class="navbar navbar-expand-lg" style="position: sticky; top: 0; z-index: 1030;">
     <div class="container">
         <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav">
@@ -199,21 +182,24 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="gflNav">
             <ul class="navbar-nav">
-    <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
-    <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
-
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
-            <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
-            <li><a class="dropdown-item" href="aspire.html">Aspire League</a></li>
-        </ul>
-    </li>
-    <li class="nav-item"><a class="nav-link" href="boiska.html">Grafik Boisk</a></li>
-    <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
-    <li class="nav-item"><a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px;">Zapisy</a></li>
-</ul>
+                <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
+                <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
+                        <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
+                        <li><a class="dropdown-item" href="aspire.html">Aspire League</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="boiska.html">Grafik Boisk</a></li>
+                <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#joinModal" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px; color: #44b1ff !important;">
+                        Zapisy ↗
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -234,6 +220,7 @@
         </div>
     </div>
 </section>
+
 <section class="stats-bar">
     <div class="container">
         <div class="row">
@@ -243,6 +230,7 @@
         </div>
     </div>
 </section>
+
 <section class="top-scorers-section">
     <div class="container">
         <h2 class="section-title text-center">LIDERZY STRZELCÓW</h2>
@@ -333,6 +321,63 @@
     </div>
 </footer>
 
+<div class="modal fade" id="captainModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background: #0f0f0f; border: 1px solid #222; color: #fff; border-radius: 15px;">
+            <div class="modal-header" style="border-bottom: 1px solid #222;">
+                <h5 class="modal-title" style="font-family: 'Bebas Neue'; font-size: 1.8rem; color: #44b1ff;">STREFA KAPITANA</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="captainLoginForm">
+                    <div class="mb-3">
+                        <label class="form-label" style="font-size: 0.8rem; color: #666; text-transform: uppercase;">Wybierz drużynę</label>
+                        <select class="form-select" id="captainTeam" style="background: #000; color: #fff; border: 1px solid #333;" required>
+                            <option value="">-- Wybierz zespół --</option>
+                            <option value="Czarodziejskie Lisy">Czarodziejskie Lisy</option>
+                            <option value="Kasztelanki">Kasztelanki</option>
+                            <option value="Coccolino Fresh">Coccolino Fresh</option>
+                            <option value="Ogarnij Się FC">Ogarnij Się FC</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" style="font-size: 0.8rem; color: #666; text-transform: uppercase;">Wybierz operację</label>
+                        <select class="form-select" id="captainAction" style="background: #000; color: #fff; border: 1px solid #333;" required>
+                            <option value="raport">Dodaj raport meczowy 📝</option>
+                            <option value="transfer">Zgłoś nowy transfer / Zawodnika 🔄</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" style="font-size: 0.8rem; color: #666; text-transform: uppercase;">Kod PIN zespołu</label>
+                        <input type="password" class="form-control" id="captainPin" maxlength="4" placeholder="••••" style="background: #000; color: #fff; border: 1px solid #333; text-align: center; letter-spacing: 5px; font-size: 1.2rem;" required>
+                    </div>
+                    <div id="loginError" class="text-danger text-center small mb-3" style="display: none;">❌ Niepoprawny PIN dla wybranej drużyny!</div>
+                    <button type="submit" class="btn w-100" style="background: #44b1ff; color: #000; font-family: 'Bebas Neue'; font-size: 1.2rem;">WEJDŹ DO PANELU</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="joinModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background: #0f0f0f; border: 1px solid #222; color: #fff; border-radius: 15px;">
+            <div class="modal-header" style="border-bottom: 1px solid #222;">
+                <h5 class="modal-title" style="font-family: 'Bebas Neue'; font-size: 1.8rem; color: #ffc107;">ZAPISY SEZON III</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Zgłoszenia do trwającego Sezonu II zostały zamknięte. Interesuje Cię gra w kolejnej edycji Gdynia Football League?</p>
+                <div style="background: #111; padding: 15px; border-radius: 10px; border: 1px solid #222; margin-bottom: 20px;">
+                    <h4 style="font-size: 1.2rem; color: #44b1ff; margin-bottom: 5px;">LISTA OCZEKUJĄCYCH</h4>
+                    <p style="font-size: 0.85rem; color: #888; margin: 0;">Zostaw zgłoszenie na liście rezerwowej. Skontaktujemy się z Tobą telefonicznie lub mailowo przed startem oficjalnych zapisów!</p>
+                </div>
+                <a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" class="btn w-100" style="background: #ffc107; color: #000; font-family: 'Bebas Neue'; font-size: 1.2rem;">DOŁĄCZ DO LISTY REZERWOWEJ ↗</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
@@ -346,52 +391,50 @@
     ];
 
     const scorersCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb/pub?gid=1372879295&single=true&output=csv';
-   async function loadMatches() {
-    const wrapper = document.getElementById('match-center-wrapper');
-    const today = new Date();
-    // Format daty dzisiejszej do porównania (dostosuj do formatu w kolumnie 6!)
-    const todayString = "22.05.2026"; 
-    let html = '';
     
-    try {
-        const results = await Promise.all(matchLinks.map(l => fetch(l.url).then(r => r.text())));
+    async function loadMatches() {
+        const wrapper = document.getElementById('match-center-wrapper');
+        const today = new Date();
+        const todayString = "22.05.2026"; 
+        let html = '';
         
-        results.forEach((csv, idx) => {
-            const lines = csv.split('\n');
-            lines.slice(1).forEach(row => {
-                const col = row.split(',');
-                if (col.length < 6) return;
+        try {
+            const results = await Promise.all(matchLinks.map(l => fetch(l.url).then(r => r.text())));
+            
+            results.forEach((csv, idx) => {
+                const lines = csv.split('\n');
+                lines.slice(1).forEach(row => {
+                    const col = row.split(',');
+                    if (col.length < 6) return;
 
-                // 1. Logika deadline (to wyświetla tylko najbliższe 14 dni)
-                const deadline = new Date(col[4]); // Zakładam, że kolumna 4 to deadline
-                deadline.setHours(23, 59, 59);
-                const diff = (deadline - today) / (1000 * 3600 * 24);
+                    const deadline = new Date(col[4]); 
+                    deadline.setHours(23, 59, 59);
+                    const diff = (deadline - today) / (1000 * 3600 * 24);
 
-                if (diff >= 0 && diff <= 14) { 
-                    // 2. Kropka LIVE (sprawdzamy tylko czy dzisiaj)
-                    const rawDate = col[6] ? col[6].trim() : "";
-                    const isToday = rawDate.includes(todayString);
-                    const liveBadge = isToday ? '<span class="live-dot"></span>' : '';
+                    if (diff >= 0 && diff <= 14) { 
+                        const rawDate = col[6] ? col[6].trim() : "";
+                        const isToday = rawDate.includes(todayString);
+                        const liveBadge = isToday ? '<span class="live-dot"></span>' : '';
 
-                    const scoreHome = col[2] ? col[2].trim() : "";
-                    const scoreAway = col[3] ? col[3].trim() : "";
-                    const pitch = col[7] ? col[7].trim() : "";
-                    
-                    html += `
-                    <div class="match-card">
-                        <div class="league-tag">${liveBadge} ${matchLinks[idx].name} | KOLEJKA ${col[5]}</div>
-                        <div class="team-row"><span>${col[0]}</span><span class="score-box">${scoreHome || '-'}</span></div>
-                        <div class="team-row"><span>${col[1]}</span><span class="score-box">${scoreAway || '-'}</span></div>
-                        <div class="match-info"><span>${rawDate} | <b>${pitch || ''}</b></span></div>
-                    </div>`;
-                }
+                        const scoreHome = col[2] ? col[2].trim() : "";
+                        const scoreAway = col[3] ? col[3].trim() : "";
+                        const pitch = col[7] ? col[7].trim() : "";
+                        
+                        html += `
+                        <div class="match-card">
+                            <div class="league-tag">${liveBadge} ${matchLinks[idx].name} | KOLEJKA ${col[5]}</div>
+                            <div class="team-row"><span>${col[0]}</span><span class="score-box">${scoreHome || '-'}</span></div>
+                            <div class="team-row"><span>${col[1]}</span><span class="score-box">${scoreAway || '-'}</span></div>
+                            <div class="match-info"><span>${rawDate} | <b>${pitch || ''}</b></span></div>
+                        </div>`;
+                    }
+                });
             });
-        });
-        wrapper.innerHTML = html || '<div style="padding:20px;">Brak meczów w najbliższym terminie.</div>';
-    } catch (e) { 
-        wrapper.innerHTML = "<div style='padding:20px;'>Błąd ładowania terminarza.</div>"; 
+            wrapper.innerHTML = html || '<div style="padding:20px;">Brak meczów w najbliższym terminie.</div>';
+        } catch (e) { 
+            wrapper.innerHTML = "<div style='padding:20px;'>Błąd ładowania terminarza.</div>"; 
+        }
     }
-}
 
     async function loadTopScorers() {
         const container = document.getElementById('scorers-container');
@@ -416,7 +459,6 @@
             let html = '';
 
             leagues.forEach(liga => {
-                // TUTAJ ZMIENIŁEM NA .slice(0, 3)
                 const top3 = players
                     .filter(p => p.league.includes(liga))
                     .sort((a, b) => b.goals - a.goals)
@@ -444,31 +486,73 @@
         } catch (e) { container.innerHTML = '<p class="text-center">Błąd połączenia z rankingiem.</p>'; }
     }
 
+    // --- LOGIKA FORMULARZA KAPITANA (PINY) ---
+    const teamDatabase = {
+        "Czarodziejskie Lisy": { pin: "1111" },
+        "Kasztelanki": { pin: "2222" },
+        "Coccolino Fresh": { pin: "3333" },
+        "Ogarnij Się FC": { pin: "4444" }
+    };
+
+    const linksConfig = {
+        raport: "https://forms.gle/LINK_DO_RAPORTOW", 
+        transfer: "https://forms.gle/GBsXaMQieoRt8oqYA" // Użyłem Twojego linku jako bazowego
+    };
+
+    document.getElementById('captainLoginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const selectedTeam = document.getElementById('captainTeam').value;
+        const enteredPin = document.getElementById('captainPin').value;
+        const selectedAction = document.getElementById('captainAction').value;
+        const errorDiv = document.getElementById('loginError');
+
+        if (teamDatabase[selectedTeam] && teamDatabase[selectedTeam].pin === enteredPin) {
+            errorDiv.style.display = 'none';
+            let targetUrl = linksConfig[selectedAction];
+            
+            window.open(targetUrl, '_blank');
+            
+            const modalEl = document.getElementById('captainModal');
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            modal.hide();
+            this.reset();
+        } else {
+            errorDiv.style.display = 'block';
+            document.getElementById('captainPin').value = '';
+        }
+    });
+
+    // --- INICJALIZACJA STRONY ---
     window.onload = function() {
         loadMatches();
         loadTopScorers();
     };
 
-const counters = document.querySelectorAll('.counter');
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const updateCount = (counter) => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                const inc = target / 50;
-                if (count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(() => updateCount(counter), 30);
-                } else { counter.innerText = target; }
-            };
-            updateCount(entry.target);
-            observer.unobserve(entry.target);
-        }
-    });
-}, { threshold: 0.5 });
+    // --- ANIMACJA LICZNIKÓW ---
+    const counters = document.querySelectorAll('.counter');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const updateCount = (counter) => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / 50;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(() => updateCount(counter), 30);
+                    } else { counter.innerText = target; }
+                };
+                updateCount(entry.target);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
 
-counters.forEach(counter => observer.observe(counter));
+    counters.forEach(counter => observer.observe(counter));
+    
+    // Obsługa menu mobilnego
+    $('.navbar-toggler').on('click', function() { $('.navbar-nav').toggleClass('show'); });
 </script>
 
 </body>

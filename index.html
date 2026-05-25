@@ -168,7 +168,7 @@
 <div style="background: #0a0a0a; border-bottom: 1px solid #111; padding: 8px 0; font-size: 0.8rem; letter-spacing: 1px;">
     <div class="container d-flex justify-content-end align-items-center">
         <span style="color: #666; margin-right: 10px;">ZARZĄDZANIE KLUBEM:</span>
-        <a href="#" data-bs-toggle="modal" data-bs-target="#captainModal" style="color: #ffc107; text-decoration: none; font-weight: bold; font-family: 'Bebas Neue'; font-size: 0.9rem;">
+        <a href="TUTAJ_WKLEJ_LINK_DO_PANELU_GOOGLE_APPS_SCRIPT" target="_blank" style="color: #ffc107; text-decoration: none; font-weight: bold; font-family: 'Bebas Neue'; font-size: 0.9rem;">
             PANEL KAPITANA (RAPORTY / TRANSFERY) 🔐
         </a>
     </div>
@@ -321,44 +321,6 @@
     </div>
 </footer>
 
-<div class="modal fade" id="captainModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content" style="background: #0f0f0f; border: 1px solid #222; color: #fff; border-radius: 15px;">
-            <div class="modal-header" style="border-bottom: 1px solid #222;">
-                <h5 class="modal-title" style="font-family: 'Bebas Neue'; font-size: 1.8rem; color: #44b1ff;">STREFA KAPITANA</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="captainLoginForm">
-                    <div class="mb-3">
-                        <label class="form-label" style="font-size: 0.8rem; color: #666; text-transform: uppercase;">Wybierz drużynę</label>
-                        <select class="form-select" id="captainTeam" style="background: #000; color: #fff; border: 1px solid #333;" required>
-                            <option value="">-- Wybierz zespół --</option>
-                            <option value="Czarodziejskie Lisy">Czarodziejskie Lisy</option>
-                            <option value="Kasztelanki">Kasztelanki</option>
-                            <option value="Coccolino Fresh">Coccolino Fresh</option>
-                            <option value="Ogarnij Się FC">Ogarnij Się FC</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" style="font-size: 0.8rem; color: #666; text-transform: uppercase;">Wybierz operację</label>
-                        <select class="form-select" id="captainAction" style="background: #000; color: #fff; border: 1px solid #333;" required>
-                            <option value="raport">Dodaj raport meczowy 📝</option>
-                            <option value="transfer">Zgłoś nowy transfer / Zawodnika 🔄</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label" style="font-size: 0.8rem; color: #666; text-transform: uppercase;">Kod PIN zespołu</label>
-                        <input type="password" class="form-control" id="captainPin" maxlength="4" placeholder="••••" style="background: #000; color: #fff; border: 1px solid #333; text-align: center; letter-spacing: 5px; font-size: 1.2rem;" required>
-                    </div>
-                    <div id="loginError" class="text-danger text-center small mb-3" style="display: none;">❌ Niepoprawny PIN dla wybranej drużyny!</div>
-                    <button type="submit" class="btn w-100" style="background: #44b1ff; color: #000; font-family: 'Bebas Neue'; font-size: 1.2rem;">WEJDŹ DO PANELU</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="modal fade" id="joinModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="background: #0f0f0f; border: 1px solid #222; color: #fff; border-radius: 15px;">
@@ -381,7 +343,6 @@
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
-
     function playAudio() { new Audio('assets/zapowiedz.mp3').play().catch(() => alert("Błąd audio.")); }
 
     const matchLinks = [
@@ -485,43 +446,6 @@
             container.innerHTML = html;
         } catch (e) { container.innerHTML = '<p class="text-center">Błąd połączenia z rankingiem.</p>'; }
     }
-
-    // --- LOGIKA FORMULARZA KAPITANA (PINY) ---
-    const teamDatabase = {
-        "Czarodziejskie Lisy": { pin: "1111" },
-        "Kasztelanki": { pin: "2222" },
-        "Coccolino Fresh": { pin: "3333" },
-        "Ogarnij Się FC": { pin: "4444" }
-    };
-
-    const linksConfig = {
-        raport: "https://forms.gle/LINK_DO_RAPORTOW", 
-        transfer: "https://forms.gle/GBsXaMQieoRt8oqYA" // Użyłem Twojego linku jako bazowego
-    };
-
-    document.getElementById('captainLoginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const selectedTeam = document.getElementById('captainTeam').value;
-        const enteredPin = document.getElementById('captainPin').value;
-        const selectedAction = document.getElementById('captainAction').value;
-        const errorDiv = document.getElementById('loginError');
-
-        if (teamDatabase[selectedTeam] && teamDatabase[selectedTeam].pin === enteredPin) {
-            errorDiv.style.display = 'none';
-            let targetUrl = linksConfig[selectedAction];
-            
-            window.open(targetUrl, '_blank');
-            
-            const modalEl = document.getElementById('captainModal');
-            const modal = bootstrap.Modal.getInstance(modalEl);
-            modal.hide();
-            this.reset();
-        } else {
-            errorDiv.style.display = 'block';
-            document.getElementById('captainPin').value = '';
-        }
-    });
 
     // --- INICJALIZACJA STRONY ---
     window.onload = function() {

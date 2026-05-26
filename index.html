@@ -39,13 +39,33 @@
     .hero-title { font-size: 5rem; line-height: 1; }
     .btn-audio { background: #ffc107; color: #000; font-weight: bold; border: none; padding: 12px 30px; border-radius: 5px; margin-top: 20px; }
 
-    /* --- MATCH CENTER --- */
-    .match-center { padding: 60px 0; background: #050505; }
-    .match-scroll { display: flex; overflow-x: auto; gap: 20px; padding-bottom: 20px; -webkit-overflow-scrolling: touch; }
+    /* --- MATCH CENTER (ZAKRĘCONY NA AUTOMATYCZNĄ TAŚMĘ) --- */
+    .match-center { padding: 60px 0; background: #050505; overflow: hidden; }
+    
+    /* Ukrywamy standardowy scroll, robimy z tego kontener dla pętli */
+    .match-scroll { 
+        display: flex; 
+        gap: 20px; 
+        padding-bottom: 10px; 
+        width: max-content;
+        animation: ticker 25s linear infinite; /* Automatyczne przewijanie - 25 sekund na pełną pętlę */
+    }
+    
+    /* Po najechaniu myszką lub dotknięciu, karuzela stopuje, żeby sprawdzić wynik */
+    .match-scroll:hover { 
+        animation-play-state: paused; 
+    }
+
     .match-card { min-width: 300px; background: #0f0f0f; border: 1px solid #222; border-radius: 10px; padding: 20px; }
     .league-tag { font-size: 0.7rem; color: #44b1ff; font-weight: bold; letter-spacing: 1px; }
     .team-row { display: flex; justify-content: space-between; font-weight: bold; margin: 5px 0; }
     .score-box { color: #44b1ff; font-family: 'Bebas Neue'; font-size: 1.4rem; }
+
+    /* Płynna animacja przesunięcia taśmy sportowej */
+    @keyframes ticker {
+        0% { transform: translate3d(0, 0, 0); }
+        100% { transform: translate3d(-35%, 0, 0); } /* Przesuwa taśmę w lewo, po czym płynnie zapętla */
+    }
 
     /* Styl dla kropki Live */
     .live-dot {

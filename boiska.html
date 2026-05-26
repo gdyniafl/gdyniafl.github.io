@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Grafik Boisk | Gdynia Football League</title>
+    <title>Terminarz Boisk | Gdynia Football League</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
@@ -11,7 +11,7 @@
         /* --- GLOBALNE --- */
         html { overflow-y: scroll; }
         body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
-        h1, h2, h3, h5, .nav-link, .dropdown-item, .league-tag, .team-name, .vs-divider { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
+        h1, h2, h3, h5, .nav-link, .dropdown-item, .league-tag, .team-name, .vs-divider, .filter-btn { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
         /* --- NAWIGACJA --- */
         .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
@@ -27,11 +27,17 @@
         .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
 
         /* --- NAGŁÓWEK --- */
-        .page-header { padding: 150px 0 50px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
+        .page-header { padding: 150px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
         .page-header h1 { font-size: 4.5rem; line-height: 1; margin: 0; }
 
+        /* --- FILTRY LIGOWE --- */
+        .filter-container { background: #050505; padding: 20px 0; text-align: center; border-bottom: 1px solid #111; }
+        .filter-btn { background: #0f0f0f; border: 1px solid #333; color: #fff; padding: 8px 24px; margin: 5px; border-radius: 5px; font-size: 1.1rem; transition: 0.3s; }
+        .filter-btn:hover { border-color: #44b1ff; color: #44b1ff; }
+        .filter-btn.active { background: #44b1ff; border-color: #44b1ff; color: #000; font-weight: bold; }
+
         /* --- UKŁAD SIATKI --- */
-        .grafik-section { padding: 60px 0 100px 0; background: #050505; }
+        .grafik-section { padding: 40px 0 100px 0; background: #050505; min-height: 400px; }
         
         .match-card { 
             background: #0f0f0f; 
@@ -50,7 +56,6 @@
         
         .team-name { font-size: 1.6rem; line-height: 1.1; text-align: center; display: flex; align-items: center; justify-content: center; min-height: 3.5rem; }
         
-        /* POPRAWIONY VS DIVIDER */
         .vs-divider { 
             color: #44b1ff; 
             font-size: 1.2rem; 
@@ -117,28 +122,38 @@
                         <li><a class="dropdown-item" href="aspire.html">Aspire League</a></li>
                     </ul>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="boiska.html" style="color: #44b1ff;">Grafik Boisk</a></li>
+                <li class="nav-item"><a class="nav-link" href="boiska.html" style="color: #44b1ff;">Terminarz Boisk</a></li>
                 <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#joinModal" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px; color: #44b1ff !important;">
+                    <a class="nav-link" href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px; color: #44b1ff !important;">
                         Zapisy
                     </a>
                 </li>
+            </ul>
         </div>
     </div>
 </nav>
 
 <section class="page-header">
     <div class="container">
-        <h1>GRAFIK BOISK</h1>
-        <p style="color: #44b1ff; letter-spacing: 2px;">REZERWACJE I TERMINY SPOTKAŃ</p>
+        <h1>TERMINARZ BOISK</h1>
+        <p style="color: #44b1ff; letter-spacing: 2px;">REZERWACJE I STATUSY OBIEKTÓW</p>
     </div>
 </section>
+
+<div class="filter-container">
+    <div class="container">
+        <button class="filter-btn active" onclick="filterLeague('ALL', this)">WSZYSTKIE REZERWACJE</button>
+        <button class="filter-btn" onclick="filterLeague('ELITE', this)">ELITE LEAGUE</button>
+        <button class="filter-btn" onclick="filterLeague('CHALLENGE', this)">CHALLENGE LEAGUE</button>
+        <button class="filter-btn" onclick="filterLeague('ASPIRE', this)">ASPIRE LEAGUE</button>
+    </div>
+</div>
 
 <section class="grafik-section">
     <div class="container">
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="grafik-container">
-            <p class="text-center w-100">Ładowanie grafiku...</p>
+            <p class="text-center w-100">Ładowanie terminarza spotkań...</p>
         </div>
     </div>
 </section>
@@ -158,7 +173,7 @@
                     <li><a href="aktualnosci.html">Aktualności</a></li>
                     <li><a href="regulamin.html">Regulamin Ligi</a></li>
                     <li><a href="onas.html">O Nas</a></li>
-                    <li><a href="boiska.html">Grafik Boisk</a></li>
+                    <li><a href="boiska.html">Terminarz Boisk</a></li>
                     <li><a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank">Formularz Zgłoszeniowy</a></li>
                 </ul>
             </div>
@@ -178,6 +193,7 @@
         </div>
     </div>
 </footer>
+
 <div class="modal fade" id="joinModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="background: #0f0f0f; border: 1px solid #222; color: #fff; border-radius: 15px;">
@@ -196,10 +212,14 @@
         </div>
     </div>
 </div>
+
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
+    // NIENARUSZONY TWÓJ LINK DO BAZY CSV Z POPRZEDNIEGO PLIKU
     const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRT2NjlK7JkP2frWPBST7rj14EITRyHT1_z0_aOMHsXke2HzmcOJIAKpRq_EN3AL_FH6EweAAL3xbaD/pub?gid=1994792907&single=true&output=csv';
+    
+    let allMatches = [];
 
     async function loadGrafik() {
         const container = document.getElementById('grafik-container');
@@ -207,7 +227,7 @@
             const res = await fetch(csvUrl);
             const data = await res.text();
             const rows = data.split(/\r?\n/).slice(1);
-            let html = '';
+            allMatches = [];
             
             const now = new Date();
             now.setHours(0, 0, 0, 0);
@@ -231,27 +251,61 @@
                 matchDate.setHours(0,0,0,0);
 
                 if (matchDate >= now) {
-                    html += `
-                    <div class="col">
-                        <div class="match-card">
-                            <span class="league-tag">${col[0]}</span>
-                            <div class="team-name">${col[3]}</div>
-                            <div class="vs-divider">VS</div>
-                            <div class="team-name">${col[4]}</div>
-                            <div class="match-info">
-                                TERMIN: <b>${col[1]}</b><br>
-                                BOISKO: <b>${col[2]}</b>
-                            </div>
-                        </div>
-                    </div>`;
+                    allMatches.push({
+                        liga: col[0],
+                        termin: col[1],
+                        boisko: col[2],
+                        team1: col[3],
+                        team2: col[4],
+                        dateObj: matchDate
+                    });
                 }
             });
 
-            container.innerHTML = html || '<p class="text-center w-100">Brak nadchodzących meczów.</p>';
+            // Sortowanie chronologiczne od najbliższego meczu
+            allMatches.sort((a, b) => a.dateObj - b.dateObj);
+            
+            renderCards(allMatches);
         } catch (e) {
-            container.innerHTML = '<p class="text-center w-100">Błąd ładowania danych.</p>';
+            container.innerHTML = '<p class="text-center w-100 text-danger">Błąd ładowania danych.</p>';
         }
     }
+
+    function renderCards(matches) {
+        const container = document.getElementById('grafik-container');
+        let html = '';
+
+        matches.forEach(m => {
+            html += `
+            <div class="col">
+                <div class="match-card">
+                    <span class="league-tag">${m.liga}</span>
+                    <div class="team-name">${m.team1}</div>
+                    <div class="vs-divider">VS</div>
+                    <div class="team-name">${m.team2}</div>
+                    <div class="match-info">
+                        TERMIN: <b>${m.termin}</b><br>
+                        BOISKO: <b>${m.boisko}</b>
+                    </div>
+                </div>
+            </div>`;
+        });
+
+        container.innerHTML = html || '<p class="text-center w-100 py-4 text-white-50">Brak nadchodzących meczów dla wybranego filtru.</p>';
+    }
+
+    function filterLeague(liga, btn) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        if (liga === 'ALL') {
+            renderCards(allMatches);
+        } else {
+            const filtered = allMatches.filter(m => m.liga.toUpperCase().includes(liga));
+            renderCards(filtered);
+        }
+    }
+
     loadGrafik();
 </script>
 </body>

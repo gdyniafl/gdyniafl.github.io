@@ -11,7 +11,7 @@
         /* --- GLOBALNE --- */
         html { overflow-y: scroll; }
         body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
-        h1, h2, h3, h5, .nav-link, .dropdown-item, .league-tag, .team-name, .vs-divider, .filter-btn { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
+        h1, h2, h3, h5, .nav-link, .dropdown-item, .league-tag, .team-name, .vs-divider, .filter-btn, .section-title { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
 
         /* --- NAWIGACJA --- */
         .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
@@ -30,51 +30,40 @@
         .page-header { padding: 150px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
         .page-header h1 { font-size: 4.5rem; line-height: 1; margin: 0; }
 
-        /* --- FILTRY LIGOWE --- */
-        .filter-container { background: #050505; padding: 20px 0; text-align: center; border-bottom: 1px solid #111; }
-        .filter-btn { background: #0f0f0f; border: 1px solid #333; color: #fff; padding: 8px 24px; margin: 5px; border-radius: 5px; font-size: 1.1rem; transition: 0.3s; }
+        /* --- FILTRY --- */
+        .filter-container { background: #050505; padding: 15px 0; border-bottom: 1px solid #111; }
+        .section-title { font-size: 0.9rem; color: #555; margin-bottom: 5px; text-align: center; }
+        .filter-row { text-align: center; margin-bottom: 10px; }
+        .filter-btn { background: #0f0f0f; border: 1px solid #222; color: #888; padding: 5px 15px; margin: 3px; border-radius: 4px; font-size: 0.95rem; transition: 0.2s; }
         .filter-btn:hover { border-color: #44b1ff; color: #44b1ff; }
         .filter-btn.active { background: #44b1ff; border-color: #44b1ff; color: #000; font-weight: bold; }
 
-        /* --- UKŁAD SIATKI --- */
-        .grafik-section { padding: 40px 0 100px 0; background: #050505; min-height: 400px; }
+        /* --- UKŁAD SIATKI (KOMPAKTOWE PROSTOKĄTY) --- */
+        .grafik-section { padding: 30px 0 100px 0; background: #050505; min-height: 400px; }
         
-        .match-card { 
+        .match-row-card { 
             background: #0f0f0f; 
-            border: 1px solid #222; 
-            border-radius: 12px; 
-            padding: 20px; 
-            height: 100%; 
-            transition: 0.3s; 
-            display: flex; 
-            flex-direction: column; 
+            border: 1px solid #1c1c1c; 
+            border-radius: 8px; 
+            padding: 12px 20px; 
+            transition: 0.2s; 
+            display: flex;
+            align-items: center;
             justify-content: space-between;
+            margin-bottom: 12px;
         }
-        .match-card:hover { border-color: #44b1ff; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(68, 177, 255, 0.1); }
+        .match-row-card:hover { border-color: #44b1ff; background: #121212; }
         
-        .league-tag { font-size: 0.9rem; color: #44b1ff; text-align: center; margin-bottom: 15px; border-bottom: 1px solid #222; padding-bottom: 8px; }
+        .league-tag { font-size: 1rem; color: #44b1ff; width: 15%; text-align: left; margin: 0; padding: 0; border: none; }
         
-        .team-name { font-size: 1.6rem; line-height: 1.1; text-align: center; display: flex; align-items: center; justify-content: center; min-height: 3.5rem; }
+        .teams-block { display: flex; align-items: center; justify-content: center; width: 50%; padding: 0 10px; }
+        .team-name { font-size: 1.3rem; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 45%; }
+        .team-right { text-align: left; }
+        .team-left { text-align: right; }
+        .vs-divider { color: #44b1ff; font-size: 1rem; margin: 0 15px; opacity: 0.5; width: 10%; text-align: center; }
         
-        .vs-divider { 
-            color: #44b1ff; 
-            font-size: 1.2rem; 
-            margin: 10px 0; 
-            text-align: center; 
-            display: block;
-            width: 100%;
-            opacity: 0.6;
-        }
-
-        .match-info { 
-            margin-top: 15px; 
-            padding-top: 12px; 
-            border-top: 1px solid #222; 
-            font-size: 0.85rem; 
-            color: #666; 
-            text-align: center;
-        }
-        .match-info b { color: #fff; font-weight: normal; }
+        .match-info-block { width: 35%; text-align: right; font-size: 0.9rem; color: #aaa; line-height: 1.3; }
+        .match-info-block b { color: #fff; font-weight: normal; font-size: 0.95rem; }
 
         /* --- STOPKA --- */
         .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; }
@@ -92,7 +81,15 @@
         
         .copyright-row { margin-top: 40px; padding-top: 20px; border-top: 1px solid #111; text-align: center; font-size: 0.8rem; }
 
-        @media (max-width: 991px) {
+        /* RESPONSYWNOŚĆ DLA SMARTFONÓW (ZMIANA W ZGRABNY PION NA TELEFONIE) */
+        @media (max-width: 767px) {
+            .match-row-card { flex-direction: column; text-align: center; padding: 15px; }
+            .league-tag { width: 100%; text-align: center; margin-bottom: 8px; font-size: 0.9rem; }
+            .teams-block { width: 100%; margin-bottom: 10px; }
+            .team-name { width: 45%; font-size: 1.2rem; }
+            .team-left { text-align: right; }
+            .team-right { text-align: left; }
+            .match-info-block { width: 100%; text-align: center; border-top: 1px solid #1c1c1c; padding-top: 8px; font-size: 0.85rem; }
             .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; display: none; }
             .navbar-nav.show { display: flex !important; }
             .nav-item { margin: 10px 0 !important; margin-left: 0 !important; }
@@ -143,16 +140,23 @@
 
 <div class="filter-container">
     <div class="container">
-        <button class="filter-btn active" onclick="filterLeague('ALL', this)">WSZYSTKIE REZERWACJE</button>
-        <button class="filter-btn" onclick="filterLeague('ELITE', this)">ELITE LEAGUE</button>
-        <button class="filter-btn" onclick="filterLeague('CHALLENGE', this)">CHALLENGE LEAGUE</button>
-        <button class="filter-btn" onclick="filterLeague('ASPIRE', this)">ASPIRE LEAGUE</button>
+        <div class="section-title">Klasa Rozgrywkowa</div>
+        <div class="filter-row" id="liga-filters">
+            <button class="filter-btn active" onclick="filterLeague('ALL', this)">Wszystkie Ligi</button>
+            <button class="filter-btn" onclick="filterLeague('ELITE', this)">Elite League</button>
+            <button class="filter-btn" onclick="filterLeague('CHALLENGE', this)">Challenge League</button>
+            <button class="filter-btn" onclick="filterLeague('ASPIRE', this)">Aspire League</button>
+        </div>
+        
+        <div class="section-title" style="margin-top: 10px;">Lokalizacja / Obiekt</div>
+        <div class="filter-row" id="boisko-filters">
+            </div>
     </div>
 </div>
 
 <section class="grafik-section">
     <div class="container">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="grafik-container">
+        <div id="grafik-container">
             <p class="text-center w-100">Ładowanie terminarza spotkań...</p>
         </div>
     </div>
@@ -216,18 +220,19 @@
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
-    // NIENARUSZONY TWÓJ LINK DO BAZY CSV Z POPRZEDNIEGO PLIKU
     const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRT2NjlK7JkP2frWPBST7rj14EITRyHT1_z0_aOMHsXke2HzmcOJIAKpRq_EN3AL_FH6EweAAL3xbaD/pub?gid=1994792907&single=true&output=csv';
     
     let allMatches = [];
+    let activeLiga = 'ALL';
+    let activeBoisko = 'ALL';
 
     async function loadGrafik() {
-        const container = document.getElementById('grafik-container');
         try {
             const res = await fetch(csvUrl);
             const data = await res.text();
             const rows = data.split(/\r?\n/).slice(1);
             allMatches = [];
+            let boiskaSet = new Set();
             
             const now = new Date();
             now.setHours(0, 0, 0, 0);
@@ -235,7 +240,6 @@
             rows.forEach(row => {
                 if (!row.trim()) return;
                 const col = row.split(/[,;](?=(?:(?:[^"]*"){2})*[^"]*$)/).map(p => p.replace(/^"|"$/g, '').trim());
-                
                 if (col.length < 5) return;
 
                 const rawDate = col[1];
@@ -259,51 +263,72 @@
                         team2: col[4],
                         dateObj: matchDate
                     });
+                    if (col[2]) boiskaSet.add(col[2]); // Zbieramy unikalne boiska do filtra
                 }
             });
 
-            // Sortowanie chronologiczne od najbliższego meczu
             allMatches.sort((a, b) => a.dateObj - b.dateObj);
             
-            renderCards(allMatches);
+            // Generowanie dynamicznych przycisków boisk
+            buildBoiskoFilters(Array.from(boiskaSet).sort());
+            
+            renderRowCards();
         } catch (e) {
-            container.innerHTML = '<p class="text-center w-100 text-danger">Błąd ładowania danych.</p>';
+            document.getElementById('grafik-container').innerHTML = '<p class="text-center w-100 text-danger">Błąd połączenia z bazą.</p>';
         }
     }
 
-    function renderCards(matches) {
+    function buildBoiskoFilters(boiskaList) {
+        const bContainer = document.getElementById('boisko-filters');
+        let html = `<button class="filter-btn active" onclick="filterBoisko('ALL', this)">Wszystkie obiekty</button>`;
+        boiskaList.forEach(b => {
+            html += `<button class="filter-btn" onclick="filterBoisko('${b}', this)">${b}</button>`;
+        });
+        bContainer.innerHTML = html;
+    }
+
+    function renderRowCards() {
         const container = document.getElementById('grafik-container');
         let html = '';
 
-        matches.forEach(m => {
+        // Filtrowanie krzyżowe (Liga + Boisko na raz!)
+        const filtered = allMatches.filter(m => {
+            const matchLiga = activeLiga === 'ALL' || m.liga.toUpperCase().includes(activeLiga);
+            const matchBoisko = activeBoisko === 'ALL' || m.boisko.toUpperCase() === activeBoisko.toUpperCase();
+            return matchLiga && matchBoisko;
+        });
+
+        filtered.forEach(m => {
             html += `
-            <div class="col">
-                <div class="match-card">
-                    <span class="league-tag">${m.liga}</span>
-                    <div class="team-name">${m.team1}</div>
+            <div class="match-row-card">
+                <div class="league-tag">${m.liga} League</div>
+                <div class="teams-block">
+                    <div class="team-name team-left">${m.team1}</div>
                     <div class="vs-divider">VS</div>
-                    <div class="team-name">${m.team2}</div>
-                    <div class="match-info">
-                        TERMIN: <b>${m.termin}</b><br>
-                        BOISKO: <b>${m.boisko}</b>
-                    </div>
+                    <div class="team-name team-right">${m.team2}</div>
+                </div>
+                <div class="match-info-block">
+                    TERMIN: <b>${m.termin}</b><br>
+                    BOISKO: <b>${m.boisko}</b>
                 </div>
             </div>`;
         });
 
-        container.innerHTML = html || '<p class="text-center w-100 py-4 text-white-50">Brak nadchodzących meczów dla wybranego filtru.</p>';
+        container.innerHTML = html || '<p class="text-center w-100 py-5 text-white-50">Brak zaplanowanych spotkań dla wybranych filtrów.</p>';
     }
 
     function filterLeague(liga, btn) {
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('#liga-filters .filter-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
+        activeLiga = liga;
+        renderRowCards();
+    }
 
-        if (liga === 'ALL') {
-            renderCards(allMatches);
-        } else {
-            const filtered = allMatches.filter(m => m.liga.toUpperCase().includes(liga));
-            renderCards(filtered);
-        }
+    function filterBoisko(boisko, btn) {
+        document.querySelectorAll('#boisko-filters .filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeBoisko = boisko;
+        renderRowCards();
     }
 
     loadGrafik();

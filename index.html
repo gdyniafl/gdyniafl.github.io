@@ -39,33 +39,71 @@
     .hero-title { font-size: 5rem; line-height: 1; }
     .btn-audio { background: #ffc107; color: #000; font-weight: bold; border: none; padding: 12px 30px; border-radius: 5px; margin-top: 20px; }
 
-    /* --- MATCH CENTER (ZAKRĘCONY NA AUTOMATYCZNĄ TAŚMĘ) --- */
-    .match-center { padding: 60px 0; background: #050505; overflow: hidden; }
+    /* --- MATCH CENTER (ZAAWANSOWANA KARUZELA SWIPE) --- */
+    .match-center { padding: 60px 0; background: #050505; position: relative; }
     
-    /* Ukrywamy standardowy scroll, robimy z tego kontener dla pętli */
+    .match-scroll-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
     .match-scroll { 
         display: flex; 
         gap: 20px; 
-        padding-bottom: 10px; 
-        width: max-content;
-        animation: ticker 25s linear infinite; /* Automatyczne przewijanie - 25 sekund na pełną pętlę */
+        padding-bottom: 15px; 
+        overflow-x: auto; 
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch; /* Płynne przewijanie na iOS */
+        scrollbar-width: none; /* Ukrywa pasek scrolla Firefox */
+        -ms-overflow-style: none;  /* Ukrywa pasek scrolla IE/Edge */
+        width: 100%;
     }
-    
-    /* Po najechaniu myszką lub dotknięciu, karuzela stopuje, żeby sprawdzić wynik */
-    .match-scroll:hover { 
-        animation-play-state: paused; 
+    .match-scroll::-webkit-scrollbar { 
+        display: none; /* Ukrywa pasek scrolla Chrome/Safari */
     }
 
-    .match-card { min-width: 300px; background: #0f0f0f; border: 1px solid #222; border-radius: 10px; padding: 20px; }
+    .match-card { 
+        min-width: 300px; 
+        flex-shrink: 0; /* Zapobiega zgniataniu kart */
+        background: #0f0f0f; 
+        border: 1px solid #222; 
+        border-radius: 10px; 
+        padding: 20px; 
+        transition: 0.3s;
+    }
+    .match-card:hover { border-color: #44b1ff; }
+
+    /* Strzałki nawigacyjne */
+    .scroll-btn {
+        background: #111;
+        color: #44b1ff;
+        border: 1px solid #333;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.3s;
+        position: absolute;
+        z-index: 10;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    .scroll-btn:hover { background: #44b1ff; color: #000; border-color: #44b1ff; }
+    .scroll-left { left: -20px; }
+    .scroll-right { right: -20px; }
+    
+    /* Ukrywamy strzałki na małych ekranach, bo tam lepiej działa palec (swipe) */
+    @media (max-width: 768px) {
+        .scroll-btn { display: none; }
+    }
+
     .league-tag { font-size: 0.7rem; color: #44b1ff; font-weight: bold; letter-spacing: 1px; }
     .team-row { display: flex; justify-content: space-between; font-weight: bold; margin: 5px 0; }
     .score-box { color: #44b1ff; font-family: 'Bebas Neue'; font-size: 1.4rem; }
-
-    /* Płynna animacja przesunięcia taśmy sportowej */
-    @keyframes ticker {
-        0% { transform: translate3d(0, 0, 0); }
-        100% { transform: translate3d(-35%, 0, 0); } /* Przesuwa taśmę w lewo, po czym płynnie zapętla */
-    }
 
     /* Styl dla kropki Live */
     .live-dot {
@@ -139,14 +177,12 @@
         border-radius: 5px;
     }
 
-    /* Subtelne podświetlenie lidera klasyfikacji */
     .scorer-item.leader-highlight { 
         background: rgba(68, 177, 255, 0.06); 
         border: 1px solid rgba(68, 177, 255, 0.15);
         margin-bottom: 5px;
     }
 
-    /* Wyróżnienie lidera */
     .scorer-item:first-child .scorer-name { color: #ffd700; }
     .scorer-item:first-child .scorer-count { color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
 
@@ -244,10 +280,14 @@
 </section>
 
 <section class="match-center">
-    <div class="container">
+    <div class="container position-relative">
         <h2 class="mb-4">AKTUALNA KOLEJKA</h2>
-        <div class="match-scroll" id="match-center-wrapper">
-            <div style="padding: 20px; color: #44b1ff;">ŁADOWANIE TERMINARZA...</div>
+        <div class="match-scroll-container">
+            <button class="scroll-btn scroll-left" onclick="scrollMatches(-320)">&#10094;</button>
+            <div class="match-scroll" id="match-center-wrapper">
+                <div style="padding: 20px; color: #44b1ff;">ŁADOWANIE TERMINARZA...</div>
+            </div>
+            <button class="scroll-btn scroll-right" onclick="scrollMatches(320)">&#10095;</button>
         </div>
     </div>
 </section>
@@ -311,7 +351,7 @@
             CHCIAŁBYŚ WSPOMÓC LIGĘ? <a href="mailto:gdyniafootballleague@gmail.com">NAPISZ DO NAS</a>
         </div>
     </div>
-</nav>
+</section>
 
 <footer class="footer">
     <div class="container">
@@ -373,6 +413,12 @@
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
     function playAudio() { new Audio('assets/zapowiedz.mp3').play().catch(() => alert("Błąd audio.")); }
+
+    // Funkcja do płynnego przewijania karuzeli strzałkami
+    function scrollMatches(amount) {
+        const wrapper = document.getElementById('match-center-wrapper');
+        wrapper.scrollBy({ left: amount, behavior: 'smooth' });
+    }
 
     const matchLinks = [
         { name: 'ELITE', url: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv' },

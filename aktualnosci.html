@@ -53,23 +53,6 @@
         box-shadow: 0 20px 40px rgba(68, 177, 255, 0.15);
     }
 
-    .news-img-wrapper {
-        position: relative;
-        width: 100%;
-        padding-top: 56.25%; /* 16:9 */
-        overflow: hidden;
-        background: #111;
-    }
-
-    .news-img {
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        object-fit: cover;
-        transition: transform 0.6s ease;
-    }
-
-    .news-card:hover .news-img { transform: scale(1.1); }
-
     .news-content {
         padding: 25px;
         display: flex;
@@ -85,10 +68,6 @@
         line-height: 1.6;
         margin-bottom: 25px;
         flex-grow: 1;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
     }
 
     .btn-details {
@@ -127,7 +106,7 @@
         .nav-item { margin: 10px 0 !important; margin-left: 0 !important; }
         .page-header h1 { font-size: 3.5rem; }
     }
-</style>
+    </style>
 </head>
 <body>
 
@@ -142,7 +121,7 @@
                 <li class="nav-item"><a class="nav-link" href="aktualnosci.html" style="color: #44b1ff;">Aktualności</a></li>
                 <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
                 <li class="nav-item"><a class="nav-link" href="druzyny.html">Drużyny</a></li>
-               
+                
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="rozDrop" data-bs-toggle="dropdown">Rozgrywki</a>
                     <ul class="dropdown-menu">
@@ -158,6 +137,7 @@
                         Zapisy
                     </a>
                 </li>
+            </ul>
         </div>
     </div>
 </nav>
@@ -172,7 +152,7 @@
 <section class="news-section">
     <div class="container">
         <div class="row g-4" id="news-container">
-            <p class="text-center">Łączenie z bazą GFL...</p>
+            <p class="text-center w-100">Łączenie z bazą GFL...</p>
         </div>
     </div>
 </section>
@@ -213,6 +193,7 @@
         </div>
     </div>
 </footer>
+
 <div class="modal fade" id="joinModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="background: #0f0f0f; border: 1px solid #222; color: #fff; border-radius: 15px;">
@@ -231,6 +212,7 @@
         </div>
     </div>
 </div>
+
 <div class="modal fade" id="newsModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content" style="background: #0f0f0f; border: 1px solid #222; color: #fff; border-radius: 15px;">
@@ -247,13 +229,13 @@
         </div>
     </div>
 </div>
+
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <script>
     const newsCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb/pub?gid=1840446675&single=true&output=csv';
     
-    // Tu będziemy trzymać pobrane newsy, żeby móc je wrzucać do Modala
     window.newsData = [];
 
     function parseCSV(text) {
@@ -278,11 +260,11 @@
                 const title = col[1];
                 const fullDesc = col[2];
 
-                // Zapisujemy pełne dane do globalnej tablicy, żeby Modal miał do nich dostęp
                 window.newsData[index] = { date: date, title: title, desc: fullDesc };
 
-                // Tworzymy zajawkę - usuwamy tagi <br>, tniemy po 120 znakach i dajemy wielokropek
-                let shortDesc = fullDesc.replace(/<br>/g, ' ').substring(0, 120) + '...';
+                // Skrócona wersja opisu do kafelka (bez tagów HTML, max 120 znaków)
+                let shortDesc = fullDesc.replace(/<br>/g, ' ').replace(/<[^>]*>?/gm, '');
+                if(shortDesc.length > 120) shortDesc = shortDesc.substring(0, 120) + '...';
 
                 html += `
                     <div class="col-lg-4 col-md-6 mb-4 d-flex">
@@ -312,21 +294,17 @@
         }
     }
 
-    // Funkcja odpalająca okienko z pełnym tekstem
+    // Funkcja otwierająca okienko Modala po kliknięciu
     function openNewsModal(index) {
         const news = window.newsData[index];
-        
-        // Wstrzykujemy dane do Modala
         document.getElementById('modalDate').innerText = news.date;
         document.getElementById('modalTitle').innerText = news.title;
         document.getElementById('modalContent').innerHTML = news.desc;
         
-        // Pokazujemy Modal używając Bootstrapa
-        var newsModal = new bootstrap.Modal(document.getElementById('newsModal'));
-        newsModal.show();
+        var newsModalObj = new bootstrap.Modal(document.getElementById('newsModal'));
+        newsModalObj.show();
     }
     
-    // Start!
     loadNews();
 </script>
 </body>

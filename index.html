@@ -42,89 +42,54 @@
     /* --- MATCH CENTER (ZAAWANSOWANA KARUZELA SWIPE) --- */
     .match-center { padding: 60px 0; background: #050505; position: relative; }
     
-    .match-scroll-container {
-        position: relative;
-        display: flex;
-        align-items: center;
-    }
+    .match-scroll-container { position: relative; display: flex; align-items: center; }
 
     .match-scroll { 
-        display: flex; 
-        gap: 20px; 
-        padding-bottom: 15px; 
-        overflow-x: auto; 
-        scroll-behavior: smooth;
-        -webkit-overflow-scrolling: touch; /* Płynne przewijanie na iOS */
-        scrollbar-width: none; /* Ukrywa pasek scrolla Firefox */
-        -ms-overflow-style: none;  /* Ukrywa pasek scrolla IE/Edge */
-        width: 100%;
+        display: flex; gap: 20px; padding-bottom: 15px; overflow-x: auto; scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none; width: 100%;
     }
-    .match-scroll::-webkit-scrollbar { 
-        display: none; /* Ukrywa pasek scrolla Chrome/Safari */
-    }
+    .match-scroll::-webkit-scrollbar { display: none; }
 
     .match-card { 
-        min-width: 300px; 
-        flex-shrink: 0; /* Zapobiega zgniataniu kart */
-        background: #0f0f0f; 
-        border: 1px solid #222; 
-        border-radius: 10px; 
-        padding: 20px; 
-        transition: 0.3s;
+        min-width: 300px; flex-shrink: 0; background: #0f0f0f; border: 1px solid #222; 
+        border-radius: 10px; padding: 20px; transition: 0.3s; cursor: pointer;
     }
-    .match-card:hover { border-color: #44b1ff; }
+    .match-card:hover { border-color: #44b1ff; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(68, 177, 255, 0.1); }
 
     /* Strzałki nawigacyjne */
     .scroll-btn {
-        background: #111;
-        color: #44b1ff;
-        border: 1px solid #333;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: 0.3s;
-        position: absolute;
-        z-index: 10;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        background: #111; color: #44b1ff; border: 1px solid #333; border-radius: 50%; width: 40px; height: 40px;
+        font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer;
+        transition: 0.3s; position: absolute; z-index: 10; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     }
     .scroll-btn:hover { background: #44b1ff; color: #000; border-color: #44b1ff; }
     .scroll-left { left: -20px; }
     .scroll-right { right: -20px; }
     
-    /* Ukrywamy strzałki na małych ekranach, bo tam lepiej działa palec (swipe) */
-    @media (max-width: 768px) {
-        .scroll-btn { display: none; }
-    }
+    @media (max-width: 768px) { .scroll-btn { display: none; } }
 
     .league-tag { font-size: 0.7rem; color: #44b1ff; font-weight: bold; letter-spacing: 1px; }
     .team-row { display: flex; justify-content: space-between; font-weight: bold; margin: 5px 0; }
     .score-box { color: #44b1ff; font-family: 'Bebas Neue'; font-size: 1.4rem; }
 
-    /* Styl dla kropki Live */
     .live-dot {
-        height: 8px; width: 8px; background-color: #ff0000;
-        border-radius: 50%; display: inline-block;
+        height: 8px; width: 8px; background-color: #ff0000; border-radius: 50%; display: inline-block;
         animation: blink 1.5s infinite; margin-right: 5px;
     }
     @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0; } 100% { opacity: 1; } }
 
     .match-info { 
-        margin-top: 15px; 
-        padding-top: 10px; 
-        border-top: 1px solid #222; 
-        font-size: 0.8rem; 
-        color: #888; 
-        display: flex; 
-        justify-content: space-between; 
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        margin-top: 15px; padding-top: 10px; border-top: 1px solid #222; font-size: 0.8rem; 
+        color: #888; display: flex; justify-content: space-between; text-transform: uppercase; letter-spacing: 1px;
     }
     .match-info b { color: #44b1ff; font-weight: normal; }
+
+    /* --- WIDGET SYMULACJI (PASKI) --- */
+    .pred-wrapper { width: 100%; margin-top: 25px; }
+    .pred-team-labels { display: flex; justify-content: space-between; font-family: 'Bebas Neue'; font-size: 1.3rem; margin-bottom: 5px; }
+    .pred-bar-container { width: 100%; height: 35px; background: #222; border-radius: 8px; overflow: hidden; display: flex; }
+    .pred-bar-home { height: 100%; background: linear-gradient(90deg, #0056b3, #44b1ff); display: flex; align-items: center; padding-left: 15px; font-weight: bold; font-size: 1.1rem; transition: width 1.5s cubic-bezier(0.165, 0.84, 0.44, 1); white-space: nowrap; }
+    .pred-bar-away { height: 100%; background: linear-gradient(90deg, #ff9800, #ffc107); display: flex; align-items: center; justify-content: flex-end; padding-right: 15px; font-weight: bold; color: #000; font-size: 1.1rem; transition: width 1.5s cubic-bezier(0.165, 0.84, 0.44, 1); white-space: nowrap; }
 
     /* --- STATS --- */
     .stats-bar { background: #0a0a0a; padding: 50px 0; border-top: 1px solid #111; border-bottom: 1px solid #111; }
@@ -136,53 +101,17 @@
     .top-scorers-section { padding: 80px 0; background: #000; }
     .section-title { font-size: 3.5rem; margin-bottom: 50px; color: #fff; }
 
-    .league-column { 
-        background: #080808; 
-        border: 1px solid #1a1a1a; 
-        border-radius: 15px; 
-        padding: 25px; 
-        height: 100%;
-    }
+    .league-column { background: #080808; border: 1px solid #1a1a1a; border-radius: 15px; padding: 25px; height: 100%; }
+    .league-header { color: #44b1ff; border-bottom: 1px solid #222; margin-bottom: 20px; padding-bottom: 10px; text-align: center; }
 
-    .league-header { 
-        color: #44b1ff; 
-        border-bottom: 1px solid #222; 
-        margin-bottom: 20px; 
-        padding-bottom: 10px; 
-        text-align: center;
-    }
-
-    .scorer-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 12px 10px;
-        border-bottom: 1px solid #111;
-        transition: 0.2s;
-        border-radius: 6px;
-    }
-
+    .scorer-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 10px; border-bottom: 1px solid #111; transition: 0.2s; border-radius: 6px; }
     .scorer-item:last-child { border-bottom: none; }
-
     .scorer-info { display: flex; flex-direction: column; }
     .scorer-name { font-family: 'Bebas Neue'; font-size: 1.3rem; color: #fff; line-height: 1; }
     .scorer-team { font-size: 0.75rem; color: #666; text-transform: uppercase; }
+    .scorer-count { font-family: 'Bebas Neue'; font-size: 1.8rem; color: #44b1ff; background: rgba(68, 177, 255, 0.05); padding: 0 10px; border-radius: 5px; }
 
-    .scorer-count { 
-        font-family: 'Bebas Neue'; 
-        font-size: 1.8rem; 
-        color: #44b1ff; 
-        background: rgba(68, 177, 255, 0.05);
-        padding: 0 10px;
-        border-radius: 5px;
-    }
-
-    .scorer-item.leader-highlight { 
-        background: rgba(68, 177, 255, 0.06); 
-        border: 1px solid rgba(68, 177, 255, 0.15);
-        margin-bottom: 5px;
-    }
-
+    .scorer-item.leader-highlight { background: rgba(68, 177, 255, 0.06); border: 1px solid rgba(68, 177, 255, 0.15); margin-bottom: 5px; }
     .scorer-item:first-child .scorer-name { color: #ffd700; }
     .scorer-item:first-child .scorer-count { color: #ffd700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
 
@@ -281,7 +210,9 @@
 
 <section class="match-center">
     <div class="container position-relative">
-        <h2 class="mb-4">AKTUALNA KOLEJKA</h2>
+        <h2 class="mb-1">AKTUALNA KOLEJKA</h2>
+        <p style="color: #666; font-size: 0.85rem; margin-bottom: 20px;">KLIKNIJ W MECZ, ABY SPRAWDZIĆ SYMULACJĘ SZANS</p>
+        
         <div class="match-scroll-container">
             <button class="scroll-btn scroll-left" onclick="scrollMatches(-320)">&#10094;</button>
             <div class="match-scroll" id="match-center-wrapper">
@@ -409,12 +340,42 @@
     </div>
 </div>
 
+<div class="modal fade" id="predictionModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background: #0a0a0a; border: 1px solid #333; color: #fff; border-radius: 15px;">
+            <div class="modal-header" style="border-bottom: 1px solid #222;">
+                <h5 class="modal-title" style="font-family: 'Bebas Neue'; font-size: 1.8rem; color: #fff;">
+                    📊 SYMULACJA SZANS (ALGORYTM GFL)
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center" style="padding: 30px 20px;">
+                <p style="color: #888; font-size: 0.85rem; margin-bottom: 25px;">SZANSE WYLICZONE NA PODSTAWIE OBECNEJ FORMY I POZYCJI W TABELI</p>
+                
+                <div class="pred-wrapper">
+                    <div class="pred-team-labels">
+                        <span id="predTeamA" style="color: #44b1ff; width: 45%; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">GOSPODARZ</span>
+                        <span style="color: #555; width: 10%;">VS</span>
+                        <span id="predTeamB" style="color: #ffc107; width: 45%; text-align: right; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">GOŚĆ</span>
+                    </div>
+                    
+                    <div class="pred-bar-container">
+                        <div id="predBarA" class="pred-bar-home" style="width: 50%;">50%</div>
+                        <div id="predBarB" class="pred-bar-away" style="width: 50%;">50%</div>
+                    </div>
+                </div>
+                
+                <p id="predVerdict" style="margin-top: 25px; font-weight: bold; color: #fff; letter-spacing: 1px;"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script>
     function playAudio() { new Audio('assets/zapowiedz.mp3').play().catch(() => alert("Błąd audio.")); }
 
-    // Funkcja do płynnego przewijania karuzeli strzałkami
     function scrollMatches(amount) {
         const wrapper = document.getElementById('match-center-wrapper');
         wrapper.scrollBy({ left: amount, behavior: 'smooth' });
@@ -428,6 +389,9 @@
 
     const scorersCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb/pub?gid=1372879295&single=true&output=csv';
     
+    // Obiekt do przechowywania niewidzialnej tabeli (punktów)
+    window.leagueStandings = { 'ELITE': {}, 'CHALLENGE': {}, 'ASPIRE': {} };
+
     async function loadMatches() {
         const wrapper = document.getElementById('match-center-wrapper');
         const today = new Date();
@@ -439,9 +403,30 @@
             
             results.forEach((csv, idx) => {
                 const lines = csv.split('\n');
+                const leagueName = matchLinks[idx].name;
+
                 lines.slice(1).forEach(row => {
                     const col = row.split(',');
                     if (col.length < 6) return;
+
+                    const teamA = col[0] ? col[0].trim() : "";
+                    const teamB = col[1] ? col[1].trim() : "";
+                    const scoreHome = col[2] ? col[2].trim() : "";
+                    const scoreAway = col[3] ? col[3].trim() : "";
+
+                    // Budowanie "niewidzialnej tabeli" w tle dla symulacji
+                    if (teamA && teamB) {
+                        if (!window.leagueStandings[leagueName][teamA]) window.leagueStandings[leagueName][teamA] = 0;
+                        if (!window.leagueStandings[leagueName][teamB]) window.leagueStandings[leagueName][teamB] = 0;
+                        
+                        let sh = parseInt(scoreHome);
+                        let sa = parseInt(scoreAway);
+                        if (!isNaN(sh) && !isNaN(sa)) {
+                            if (sh > sa) window.leagueStandings[leagueName][teamA] += 3;
+                            else if (sa > sh) window.leagueStandings[leagueName][teamB] += 3;
+                            else { window.leagueStandings[leagueName][teamA] += 1; window.leagueStandings[leagueName][teamB] += 1; }
+                        }
+                    }
 
                     const deadline = new Date(col[4]); 
                     deadline.setHours(23, 59, 59);
@@ -451,16 +436,14 @@
                         const rawDate = col[6] ? col[6].trim() : "";
                         const isToday = rawDate.includes(todayString);
                         const liveBadge = isToday ? '<span class="live-dot"></span>' : '';
-
-                        const scoreHome = col[2] ? col[2].trim() : "";
-                        const scoreAway = col[3] ? col[3].trim() : "";
                         const pitch = col[7] ? col[7].trim() : "";
                         
+                        // Dodanie onClick do karty, żeby odpalić animację przewidywań
                         html += `
-                        <div class="match-card">
-                            <div class="league-tag">${liveBadge} ${matchLinks[idx].name} | KOLEJKA ${col[5]}</div>
-                            <div class="team-row"><span>${col[0]}</span><span class="score-box">${scoreHome || '-'}</span></div>
-                            <div class="team-row"><span>${col[1]}</span><span class="score-box">${scoreAway || '-'}</span></div>
+                        <div class="match-card" onclick="showPrediction('${leagueName}', '${teamA}', '${teamB}')">
+                            <div class="league-tag">${liveBadge} ${leagueName} | KOLEJKA ${col[5]}</div>
+                            <div class="team-row"><span>${teamA}</span><span class="score-box">${scoreHome || '-'}</span></div>
+                            <div class="team-row"><span>${teamB}</span><span class="score-box">${scoreAway || '-'}</span></div>
                             <div class="match-info"><span>${rawDate} | <b>${pitch || ''}</b></span></div>
                         </div>`;
                     }
@@ -470,6 +453,47 @@
         } catch (e) { 
             wrapper.innerHTML = "<div style='padding:20px;'>Błąd ładowania terminarza.</div>"; 
         }
+    }
+
+    // Funkcja odpalająca modal z symulacją 
+    function showPrediction(league, teamA, teamB) {
+        let ptsA = window.leagueStandings[league][teamA] || 0;
+        let ptsB = window.leagueStandings[league][teamB] || 0;
+        
+        // Magiczna liczba (baza), żeby uniknąć sytuacji 100% vs 0% (wtedy paski brzydko wyglądają)
+        let magicA = ptsA + 10;
+        let magicB = ptsB + 10;
+        let total = magicA + magicB;
+        
+        let pctA = Math.round((magicA / total) * 100);
+        let pctB = 100 - pctA;
+
+        // Werdykt tekstowy
+        let verdict = "ZAPOWIADA SIĘ NIEZWYKLE WYRÓWNANE STARCIE!";
+        if (pctA > 60) verdict = "ZDECYDOWANYM FAWORYTEM JEST " + teamA;
+        if (pctB > 60) verdict = "ZDECYDOWANYM FAWORYTEM JEST " + teamB;
+
+        // Resetowanie pasków przed otwarciem modala
+        document.getElementById('predTeamA').innerText = teamA;
+        document.getElementById('predTeamB').innerText = teamB;
+        document.getElementById('predBarA').style.width = '50%';
+        document.getElementById('predBarB').style.width = '50%';
+        document.getElementById('predBarA').innerText = '';
+        document.getElementById('predBarB').innerText = '';
+        document.getElementById('predVerdict').innerText = "";
+
+        // Otwieramy okienko
+        var predModal = new bootstrap.Modal(document.getElementById('predictionModal'));
+        predModal.show();
+
+        // Odpalamy animację z małym opóźnieniem
+        setTimeout(() => {
+            document.getElementById('predBarA').style.width = pctA + '%';
+            document.getElementById('predBarB').style.width = pctB + '%';
+            document.getElementById('predBarA').innerText = pctA + '%';
+            document.getElementById('predBarB').innerText = pctB + '%';
+            document.getElementById('predVerdict').innerText = verdict;
+        }, 400);
     }
 
     async function loadTopScorers() {
@@ -525,13 +549,11 @@
         } catch (e) { container.innerHTML = '<p class="text-center">Błąd połączenia z rankingiem.</p>'; }
     }
 
-    // --- INICJALIZACJA STRONY ---
     window.onload = function() {
         loadMatches();
         loadTopScorers();
     };
 
-    // --- ANIMACJA LICZNIKÓW ---
     const counters = document.querySelectorAll('.counter');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -553,7 +575,6 @@
 
     counters.forEach(counter => observer.observe(counter));
     
-    // Obsługa menu mobilnego
     $('.navbar-toggler').on('click', function() { $('.navbar-nav').toggleClass('show'); });
 </script>
 

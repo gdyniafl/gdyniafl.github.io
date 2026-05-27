@@ -245,19 +245,18 @@
         });
     }
 
-   async function loadNews() {
+    async function loadNews() {
         try {
             const response = await fetch(newsCsvUrl);
             const text = await response.text();
-            // Używamy funkcji parseCSV, którą już masz w kodzie
             const dataRows = parseCSV(text).slice(1);
             let html = '';
 
-            // Reverse, żeby najnowszy był na górze
+            // reverse() żeby najnowsze były na samej górze
             dataRows.reverse().forEach(col => {
-                if (col.length < 3 || col[1] === "") return;
+                // Skrypt pobiera z arkusza: [0]Data, [1]Tytuł, [2]Treść
+                if (col.length < 3 || col[1] === "" || !col[1]) return;
                 
-                // col[0] = Data, col[1] = Tytuł, col[2] = Treść
                 const date = col[0];
                 const title = col[1];
                 const desc = col[2];
@@ -266,21 +265,30 @@
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="news-card">
                             <div class="news-content">
-                                <small style="color: #44b1ff; font-weight: bold; font-family: 'Bebas Neue';">${date}</small>
-                                <h3 class="news-title">${title}</h3>
-                                <p class="news-desc">${desc}</p>
-                                <div class="mt-auto pt-3">
-                                    <span class="btn-details">CZYTAJ WIĘCEJ &rarr;</span>
+                                <small style="color: #44b1ff; font-weight: bold; font-family: 'Bebas Neue'; font-size: 1.1rem; margin-bottom: 5px; display: block;">
+                                    ${date}
+                                </small>
+                                <h3 class="news-title" style="margin-bottom: 15px; color: #fff;">${title}</h3>
+                                
+                                <p class="news-desc" style="color: #bbb;">${desc}</p>
+                                
+                                <div class="mt-auto pt-3" style="border-top: 1px solid #222;">
+                                    <span class="btn-details" style="border: none; padding: 0; cursor: pointer;">CZYTAJ WIĘCEJ &rarr;</span>
                                 </div>
                             </div>
                         </div>
                     </div>`;
             });
-            document.getElementById('news-container').innerHTML = html || '<p class="text-center">Brak aktualności.</p>';
+            document.getElementById('news-container').innerHTML = html || '<p class="text-center w-100">Brak aktualności w bazie.</p>';
         } catch (e) {
-            document.getElementById('news-container').innerHTML = '<p class="text-center">Błąd ładowania newsów.</p>';
+            document.getElementById('news-container').innerHTML = '<p class="text-center w-100 text-danger">Błąd połączenia z bazą danych GFL.</p>';
         }
     }
+    
+    // Uruchomienie funkcji
+    loadNews();
 </script>
+</body>
+</html>
 </body>
 </html>

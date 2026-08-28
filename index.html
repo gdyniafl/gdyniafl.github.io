@@ -121,7 +121,6 @@
     .hof-card.gold { border-color: #C9A050; }
     .hof-card:hover { transform: translateY(-5px); border-color: #44b1ff; }
     .hof-name { font-size: 1.4rem; color: #fff; margin: 5px 0; line-height: 1.1; }
-    .hof-sub { font-size: 0.75rem; color: #888; text-transform: uppercase; margin-bottom: 5px; }
     .hof-label { color: #666; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; font-family: sans-serif; }
     .hof-stat { color: #44b1ff; font-weight: bold; font-size: 0.9rem; margin-top: 5px; }
 
@@ -266,14 +265,14 @@
         <h2 style="color: #C9A050; font-size: 3.5rem;">HALL OF FAME</h2>
 
         <!-- TABS / WYBÓR SEZONU -->
-        <div class="hof-tabs">
-            <button class="hof-tab-btn active" onclick="switchHof('s2', this)">SEZON II</button>
-            <button class="hof-tab-btn" onclick="switchHof('s1', this)">SEZON I</button>
-            <button class="hof-tab-btn" onclick="switchHof('s0', this)">SEZON 0</button>
+        <div class="hof-tabs-nav">
+            <button class="hof-tab-btn active" onclick="switchHofTab('s2', this)">SEZON II</button>
+            <button class="hof-tab-btn" onclick="switchHofTab('s1', this)">SEZON I</button>
+            <button class="hof-tab-btn" onclick="switchHofTab('s0', this)">SEZON 0</button>
         </div>
 
         <!-- SEZON II -->
-        <div class="hof-pane active" id="hof-s2">
+        <div class="hof-tab-content active" id="hof-s2">
             <div class="row justify-content-center">
                 <div class="col-6 col-md-4 mb-4"><div class="hof-card gold"><div class="hof-label">MISTRZ ELITE</div><div class="hof-name">KURNIK KASZTELANKI</div>🏆</div></div>
                 <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">MISTRZ CHALLENGE</div><div class="hof-name">WPW WICZLINO</div>🥈</div></div>
@@ -285,7 +284,7 @@
         </div>
 
         <!-- SEZON I -->
-        <div class="hof-pane" id="hof-s1">
+        <div class="hof-tab-content" id="hof-s1">
             <div class="row justify-content-center">
                 <div class="col-6 col-md-4 mb-4"><div class="hof-card gold"><div class="hof-label">MISTRZ ELITE</div><div class="hof-name">CZARODZIEJSKIE LISY</div>🏆</div></div>
                 <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">MISTRZ CHALLENGE</div><div class="hof-name">COCCOLINO FRESH</div>🥈</div></div>
@@ -297,7 +296,7 @@
         </div>
 
         <!-- SEZON 0 -->
-        <div class="hof-pane" id="hof-s0">
+        <div class="hof-tab-content" id="hof-s0">
             <div class="row justify-content-center">
                 <div class="col-6 col-md-3 mb-4"><div class="hof-card gold"><div class="hof-label">MISTRZ ELITE</div><div class="hof-name">KASZTELANKI</div></div></div>
                 <div class="col-6 col-md-3 mb-4"><div class="hof-card"><div class="hof-label">MISTRZ CHALLENGE</div><div class="hof-name">KURNIK TUCHOMEK</div></div></div>

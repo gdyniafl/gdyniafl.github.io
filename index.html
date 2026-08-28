@@ -265,49 +265,48 @@
     <div class="container">
         <h2 style="color: #C9A050; font-size: 3.5rem;">HALL OF FAME</h2>
 
-        <!-- Przełącznik Sezonów -->
-        <div class="hof-tabs-nav">
-            <button class="hof-tab-btn active" onclick="switchHofTab('s2', this)">SEZON II</button>
-            <button class="hof-tab-btn" onclick="switchHofTab('s1', this)">SEZON I</button>
-            <button class="hof-tab-btn" onclick="switchHofTab('s0', this)">SEZON 0</button>
+        <!-- TABS / WYBÓR SEZONU -->
+        <div class="hof-tabs">
+            <button class="hof-tab-btn active" onclick="switchHof('s2', this)">SEZON II</button>
+            <button class="hof-tab-btn" onclick="switchHof('s1', this)">SEZON I</button>
+            <button class="hof-tab-btn" onclick="switchHof('s0', this)">SEZON 0</button>
         </div>
 
         <!-- SEZON II -->
-        <div class="hof-tab-content active" id="hof-s2">
+        <div class="hof-pane active" id="hof-s2">
             <div class="row justify-content-center">
                 <div class="col-6 col-md-4 mb-4"><div class="hof-card gold"><div class="hof-label">MISTRZ ELITE</div><div class="hof-name">KURNIK KASZTELANKI</div>🏆</div></div>
                 <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">MISTRZ CHALLENGE</div><div class="hof-name">WPW WICZLINO</div>🥈</div></div>
                 <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">MISTRZ ASPIRE</div><div class="hof-name">KURNIK KASZTELANKI B</div>🥉</div></div>
-                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL ELITE (S2)</div><div class="hof-name">PATRYK KLINKUSZ</div><div class="hof-sub">ZKS ZAGÓRZAK RUMIA</div><div class="hof-stat">36 GOLI ⚽</div></div></div>
-                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL CHALLENGE (S2)</div><div class="hof-name">ARTUR ELIASZ</div><div class="hof-sub">FC GOTENHOF</div><div class="hof-stat">55 GOLI ⚽</div></div></div>
-                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL ASPIRE (S2)</div><div class="hof-name">ROMAN PANKIV</div><div class="hof-sub">INAZUMA ELEVEN 2025</div><div class="hof-stat">41 GOLI ⚽</div></div></div>
+                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL ELITE (S2)</div><div class="hof-name">PATRYK KLINKUSZ</div><div class="hof-label" style="margin-top:2px;">ZKS ZAGÓRZAK RUMIA</div><div class="hof-stat">36 GOLI ⚽</div></div></div>
+                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL CHALLENGE (S2)</div><div class="hof-name">ARTUR ELIASZ</div><div class="hof-label" style="margin-top:2px;">FC GOTENHOF</div><div class="hof-stat">55 GOLI ⚽</div></div></div>
+                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL ASPIRE (S2)</div><div class="hof-name">ROMAN PANKIV</div><div class="hof-label" style="margin-top:2px;">INAZUMA ELEVEN 2025</div><div class="hof-stat">41 GOLI ⚽</div></div></div>
             </div>
         </div>
 
         <!-- SEZON I -->
-        <div class="hof-tab-content" id="hof-s1">
+        <div class="hof-pane" id="hof-s1">
             <div class="row justify-content-center">
                 <div class="col-6 col-md-4 mb-4"><div class="hof-card gold"><div class="hof-label">MISTRZ ELITE</div><div class="hof-name">CZARODZIEJSKIE LISY</div>🏆</div></div>
                 <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">MISTRZ CHALLENGE</div><div class="hof-name">COCCOLINO FRESH</div>🥈</div></div>
                 <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">MISTRZ ASPIRE</div><div class="hof-name">OGARNIJ SIĘ FC</div>🥉</div></div>
-                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL ELITE (S1)</div><div class="hof-name">ADAM WINNICKI</div><div class="hof-stat">41 GOLI ⚽</div></div></div>
-                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL CHALLENGE (S1)</div><div class="hof-name">PATRYK KLINKUSZ</div><div class="hof-stat">39 GOLI ⚽</div></div></div>
-                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL ASPIRE (S1)</div><div class="hof-name">ARTUR ELIASZ</div><div class="hof-stat">48 GOLI ⚽</div></div></div>
+                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL ELITE (S1)</div><div class="hof-name">ADAM WINNICKI</div><div class="hof-label" style="margin-top:2px;">KASZTELANKI</div><div class="hof-stat">41 GOLI ⚽</div></div></div>
+                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL CHALLENGE (S1)</div><div class="hof-name">PATRYK KLINKUSZ</div><div class="hof-label" style="margin-top:2px;">ZKS ZAGÓRZAK RUMIA</div><div class="hof-stat">39 GOLI ⚽</div></div></div>
+                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL ASPIRE (S1)</div><div class="hof-name">ARTUR ELIASZ</div><div class="hof-label" style="margin-top:2px;">FC GOTENHOF</div><div class="hof-stat">48 GOLI ⚽</div></div></div>
             </div>
         </div>
 
         <!-- SEZON 0 -->
-        <div class="hof-tab-content" id="hof-s0">
+        <div class="hof-pane" id="hof-s0">
             <div class="row justify-content-center">
                 <div class="col-6 col-md-3 mb-4"><div class="hof-card gold"><div class="hof-label">MISTRZ ELITE</div><div class="hof-name">KASZTELANKI</div></div></div>
                 <div class="col-6 col-md-3 mb-4"><div class="hof-card"><div class="hof-label">MISTRZ CHALLENGE</div><div class="hof-name">KURNIK TUCHOMEK</div></div></div>
                 <div class="col-6 col-md-3 mb-4"><div class="hof-card"><div class="hof-label">MISTRZ ASPIRE</div><div class="hof-name">MISTRZOVIA GDYNIA A</div></div></div>
                 <div class="col-6 col-md-3 mb-4"><div class="hof-card"><div class="hof-label">MISTRZ AGGRESSIVE</div><div class="hof-name">ZKS ZAGÓRZAK RUMIA</div></div></div>
-                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL ELITE (S0)</div><div class="hof-name">OLIVIER PLESKACZ</div><div class="hof-stat">38 GOLI ⚽</div></div></div>
-                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL CHALLENGE (S0)</div><div class="hof-name">MICHAŁ SKOCZEK</div><div class="hof-stat">44 GOLE ⚽</div></div></div>
+                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL ELITE (S0)</div><div class="hof-name">OLIVIER PLESKACZ</div><div class="hof-label" style="margin-top:2px;">CZARODZIEJSKIE LISY</div><div class="hof-stat">38 GOLI ⚽</div></div></div>
+                <div class="col-6 col-md-4 mb-4"><div class="hof-card"><div class="hof-label">KRÓL CHALLENGE (S0)</div><div class="hof-name">MICHAŁ SKOCZEK</div><div class="hof-label" style="margin-top:2px;">WPW WICZLINO</div><div class="hof-stat">44 GOLE ⚽</div></div></div>
             </div>
         </div>
-
     </div>
 </section>
 

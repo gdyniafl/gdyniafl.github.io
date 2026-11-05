@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /panel.html
+Allow: /
+
+Sitemap: https://gdyniafl.pl/sitemap.xml

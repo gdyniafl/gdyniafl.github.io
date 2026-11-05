@@ -7,7 +7,7 @@
 
     GFL.renderSeasonSwitch(document.getElementById('season-switch'), season);
     const sub = document.getElementById('league-subtitle');
-    if (sub) sub.textContent = 'TABELA I TERMINARZ – ' + season.label;
+    if (sub) sub.textContent = (season.static ? 'TABELA KOŃCOWA – ' : 'TABELA I TERMINARZ – ') + season.label;
 
     // 1. TABELA
     try {
@@ -18,7 +18,7 @@
                 <td class="sticky-pos col-highlight">${esc(c[0])}</td>
                 <td class="sticky-team" style="font-weight:bold;">${esc(c[1])}</td>
                 <td class="col-stat">${esc(c[2])}</td><td class="col-stat">${esc(c[3])}</td><td class="col-stat">${esc(c[5])}</td><td class="col-stat">${esc(c[4])}</td>
-                <td class="col-goals">${esc(c[6])}:${esc(c[7])}</td><td class="col-highlight col-pkt">${esc(c[9])}</td>
+                <td class="col-goals">${c[6] === '' ? 'bil. ' + (parseInt(c[8]) > 0 ? '+' : '') + esc(c[8]) : esc(c[6]) + ':' + esc(c[7])}</td><td class="col-highlight col-pkt">${esc(c[9])}</td>
             </tr>`).join('');
     } catch (e) {
         console.error(e);
@@ -26,14 +26,18 @@
     }
 
     // 2. TERMINARZ
+    const acc = document.getElementById('scheduleAccordion');
+    if (season.static) {
+        acc.innerHTML = '<p class="text-center" style="color:#666;">Terminarz tego sezonu nie jest dostępny w archiwum – zachowała się tylko tabela końcowa.</p>';
+        return;
+    }
     try {
         const rows = await GFL.load(season, league, 'mecze');
         const rounds = {};
         rows.slice(1).filter(c => c.length >= 6 && c[0]).forEach(c => {
-            const r = c[5];
-            (rounds[r] = rounds[r] || []).push(c);
+            (rounds[c[5]] = rounds[c[5]] || []).push(c);
         });
-        document.getElementById('scheduleAccordion').innerHTML = Object.keys(rounds)
+        acc.innerHTML = Object.keys(rounds)
             .sort((a, b) => parseInt(a) - parseInt(b))
             .map(r => {
                 const matches = rounds[r].map(c => {
@@ -46,6 +50,6 @@
             }).join('') || '<p class="text-center">Brak terminarza.</p>';
     } catch (e) {
         console.error(e);
-        document.getElementById('scheduleAccordion').innerHTML = '<p class="text-center">Brak terminarza dla tego sezonu.</p>';
+        acc.innerHTML = '<p class="text-center">Brak terminarza dla tego sezonu.</p>';
     }
 })();

@@ -21,8 +21,9 @@ const GFL_CONFIG = {
     SEASON_START: '2027-03-29',
 
     /* Lista sezonów – NAJNOWSZY NA GÓRZE.
-       live: true  -> dane z arkuszy Google (sekcja LIVE niżej)
-       sheets      -> archiwum w zakładkach Arkuszy Google (np. "MECZE SEZON II") */
+       live: true  -> dane z bieżących zakładek arkuszy (sekcja LIVE niżej)
+       sheets      -> archiwum w zakładkach Arkuszy Google (np. "MECZE SEZON II")
+       static      -> tylko tabela końcowa zapisana w assets/gfl/archiwum.js */
     SEASONS: [
         { id: 'III', label: 'SEZON III', live: true },
         {
@@ -43,9 +44,11 @@ const GFL_CONFIG = {
                     tabela:  sheet(DOC_ASPIRE, '1607044438'),
                     druzyny: sheet(DOC_ASPIRE, '432935784')
                 },
-                strzelcy: sheet(DOC_STATY, '419762549')        // RANKING_STRZELCOW SEZON II
+                strzelcy: sheet(DOC_STATY, '419762549')         // RANKING_STRZELCOW SEZON II
             }
-        }
+        },
+        { id: 'I', label: 'SEZON I', static: 'I' },
+        { id: '0', label: 'SEZON 0', static: '0' }
     ],
 
     /* Linki do opublikowanych arkuszy (CSV) bieżącego sezonu */
@@ -73,7 +76,9 @@ const GFL_CONFIG = {
     /* Zmiany nazw drużyn między sezonami: 'STARA NAZWA': 'AKTUALNA NAZWA'.
        Dzięki temu historia drużyny łączy się w jedną. Wpisuj WIELKIMI LITERAMI. */
     TEAM_ALIASES: {
-        // 'KASZTELANKI': 'KURNIK KASZTELANKI',
+        'GKS CHYLONIA A': 'GKS CHYLONIA'   // sezon 0: A i B, od sezonu I jedna drużyna pod nazwą główną
+        /* KASZTELANKI i KURNIK TUCHOMEK celowo BEZ aliasu – w sezonach 0 i I grały osobno
+           (w jednym sezonie zsumowałyby się dwie drużyny). Od sezonu II: KURNIK KASZTELANKI. */
     },
 
     /* Herby drużyn */

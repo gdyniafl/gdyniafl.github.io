@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Historia ligi | Gdynia Football League</title>
+  <meta name="description" content="Historia Gdynia Football League – mistrzowie, królowie strzelców, rekordy i tabela wszech czasów.">
+  <meta property="og:title" content="Historia Gdynia Football League">
+  <meta property="og:description" content="Mistrzowie, królowie strzelców, rekordy i tabela wszech czasów.">
+  <meta property="og:image" content="https://gdyniafl.pl/assets/images/logo-gfl.png-160x160.png">
+  <meta property="og:type" content="website">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/gfl/gfl.css">
+  <style>
+    body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
+    h1, h2, h3, h4, .nav-link { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
+    .navbar-nav { display: flex !important; align-items: center !important; flex-direction: row !important; }
+    .dropdown-item { color: #fff !important; font-family: 'Bebas Neue' !important; font-size: 1.1rem !important; }
+    @media (max-width: 991px) {
+        .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; display: none; }
+        .navbar-collapse.show .navbar-nav, .navbar-collapse.collapsing .navbar-nav { display: flex !important; }
+        .nav-item { margin: 10px 0 !important; }
+    }
+
+    .page-header { padding: 120px 0 40px 0; text-align: center; background: linear-gradient(#0a0a0a, #000); border-bottom: 1px solid #222; }
+    .page-header h1 { font-size: 4rem; color: #C9A050; margin: 0; }
+    .h-section { padding: 60px 0; border-bottom: 1px solid #111; }
+    .h-section h2 { font-size: 2.8rem; text-align: center; margin-bottom: 35px; }
+    .h-nav { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 20px; }
+    .h-nav a { background: #0d0d0d; border: 1px solid #333; color: #888; font-family: 'Bebas Neue'; font-size: 1.15rem; padding: 6px 18px; border-radius: 8px; text-decoration: none; }
+    .h-nav a:hover { color: #000; background: #C9A050; border-color: #C9A050; }
+    .muted { color: #666; }
+    .b { font-weight: bold; }
+    .gold-txt { color: #ffc107; }
+
+    .season-block { margin-bottom: 35px; }
+    .season-head { color: #44b1ff; text-align: center; font-size: 1.8rem; margin-bottom: 15px; }
+    .champ-card { background: #080808; border: 1px solid #333; border-radius: 12px; padding: 18px 10px; text-align: center; height: 100%; transition: .3s; }
+    .champ-card.gold { border-color: #C9A050; box-shadow: 0 0 20px rgba(201,160,80,.12); }
+    .champ-card:hover { transform: translateY(-4px); border-color: #44b1ff; }
+    .champ-card img { width: 56px; height: 56px; object-fit: contain; margin-bottom: 8px; }
+    .champ-league { color: #666; font-size: .72rem; letter-spacing: 1px; }
+    .champ-name { font-family: 'Bebas Neue'; font-size: 1.35rem; line-height: 1.1; margin: 4px 0; }
+
+    .rec-card { background: #080808; border: 1px solid #1f1f1f; border-left: 3px solid #44b1ff; border-radius: 10px; padding: 18px 20px; height: 100%; }
+    .rec-label { color: #666; font-size: .75rem; text-transform: uppercase; letter-spacing: 1px; }
+    .rec-val { font-family: 'Bebas Neue'; font-size: 2.4rem; color: #44b1ff; line-height: 1.1; }
+    .rec-name { font-family: 'Bebas Neue'; font-size: 1.3rem; }
+    .rec-sub { color: #555; font-size: .8rem; }
+
+    .table-wrap { overflow-x: auto; background: #080808; border: 1px solid #1a1a1a; border-radius: 12px; }
+    .h-table { width: 100%; border-collapse: collapse; text-align: center; font-size: .95rem; }
+    .h-table th { color: #666; font-size: .75rem; letter-spacing: 1px; text-transform: uppercase; padding: 12px 8px; border-bottom: 1px solid #222; white-space: nowrap; }
+    .h-table td { padding: 10px 8px; border-bottom: 1px solid #141414; white-space: nowrap; }
+    .h-table tr:hover td { background: rgba(68,177,255,.05); }
+    .h-table .l { text-align: left; }
+    .h-table .pos { color: #44b1ff; font-weight: bold; }
+    .h-table .team img { width: 24px; height: 24px; object-fit: contain; margin-right: 8px; vertical-align: middle; }
+    .h-table tr.top1 .pos { color: #ffd700; } .h-table tr.top2 .pos { color: #c0c0c0; } .h-table tr.top3 .pos { color: #cd7f32; }
+    @media (max-width: 576px) { .hide-sm { display: none; } .page-header h1 { font-size: 2.8rem; } }
+  </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg" style="position: sticky; top: 0; z-index: 1030;">
+    <div class="container">
+        <a class="navbar-brand" href="index.html"><img src="assets/images/logo-gfl.png-160x160.png" alt="GFL"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#gflNav" aria-label="Menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="gflNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="aktualnosci.html">Aktualności</a></li>
+                <li class="nav-item"><a class="nav-link" href="onas.html">O nas</a></li>
+                <li class="nav-item"><a class="nav-link" href="druzyny.html">Drużyny</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Rozgrywki</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="elite.html">Elite League</a></li>
+                        <li><a class="dropdown-item" href="challenge.html">Challenge League</a></li>
+                        <li><a class="dropdown-item" href="aspire.html">Aspire League</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="boiska.html">Terminarz Boisk</a></li>
+                <li class="nav-item"><a class="nav-link" href="regulamin.html">Regulamin</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#joinModal" style="border: 1px solid #44b1ff; padding: 5px 15px !important; border-radius: 5px; color: #44b1ff !important;">Zapisy</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <h1>HISTORIA LIGI</h1>
+        <p style="color:#44b1ff; letter-spacing:3px;">MISTRZOWIE • KRÓLOWIE STRZELCÓW • REKORDY • TABELA WSZECH CZASÓW</p>
+        <div class="h-nav">
+            <a href="#mistrzowie">Mistrzowie</a><a href="#krolowie">Królowie strzelców</a>
+            <a href="#rekordy">Rekordy</a><a href="#wszech-czasow">Tabela wszech czasów</a>
+        </div>
+        <p id="loading" style="color:#44b1ff; margin-top:25px;">ŁADOWANIE HISTORII...</p>
+    </div>
+</header>
+
+<section class="h-section" id="mistrzowie">
+    <div class="container"><h2 style="color:#C9A050;">MISTRZOWIE</h2><div id="champions"></div></div>
+</section>
+
+<section class="h-section" id="krolowie">
+    <div class="container"><h2>KRÓLOWIE STRZELCÓW</h2><div id="kings"></div></div>
+</section>
+
+<section class="h-section" id="rekordy">
+    <div class="container"><h2>REKORDY</h2><div class="row g-3" id="records"></div></div>
+</section>
+
+<section class="h-section" id="wszech-czasow">
+    <div class="container">
+        <h2>TABELA WSZECH CZASÓW</h2>
+        <div class="table-wrap">
+            <table class="h-table">
+                <thead><tr><th>#</th><th class="l">Drużyna</th><th>Sez.</th><th>M</th><th>W</th><th>R</th><th>P</th><th class="hide-sm">Bramki</th><th>Bil.</th><th>Pkt</th></tr></thead>
+                <tbody id="alltime"></tbody>
+            </table>
+        </div>
+        <p id="alltime-note" class="muted" style="font-size:.78rem; margin-top:12px;"></p>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5>GDYNIA FOOTBALL LEAGUE</h5>
+                <p>Największa amatorska liga piłkarska w Gdyni. Tworzymy przestrzeń dla pasjonatów futbolu, łącząc sportową rywalizację z profesjonalną oprawą medialną.</p>
+                <p style="color: #444;">📍 Gdynia, Polska</p>
+                <a href="https://buycoffee.to/gfl" target="_blank" rel="noopener"><img src="https://buycoffee.to/static/img/share/share-button-dark.png" style="width: 146px; height: 38px" alt="Postaw kawę dla Gdynia Football League na buycoffee.to"></a>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h5>NA SKRÓTY</h5>
+                <ul class="footer-links">
+                    <li><a href="index.html">Strona Główna</a></li>
+                    <li><a href="aktualnosci.html">Aktualności</a></li>
+                    <li><a href="regulamin.html">Regulamin Ligi</a></li>
+                    <li><a href="onas.html">O Nas</a></li>
+                    <li><a href="druzyny.html">Drużyny</a></li>
+                    <li><a href="boiska.html">Terminarz Boisk</a></li>
+                    <li><a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" rel="noopener">Formularz Zgłoszeniowy</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 col-md-12">
+                <h5>ŚLEDŹ NAS</h5>
+                <div class="d-flex flex-column align-items-start">
+                    <a href="https://www.facebook.com/profile.php?id=61577475248674" target="_blank" rel="noopener" class="social-btn">OBSERWUJ NA FACEBOOKU ↗</a>
+                    <a href="https://www.instagram.com/gdyniafl/" target="_blank" rel="noopener" class="social-btn">OBSERWUJ NA INSTAGRAMIE ↗</a>
+                    <a href="https://www.tiktok.com/@gdyniafl" target="_blank" rel="noopener" class="social-btn">OBSERWUJ NA TIKTOK ↗</a>
+                    <a href="mailto:gdyniafootballleague@gmail.com" class="social-btn btn-contact">WSPÓŁPRACA / KONTAKT ✉</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-row">&copy; 2026 Gdynia Football League. Wszystkie prawa zastrzeżone.<br>Design & Code: Ezi</div>
+    </div>
+</footer>
+
+<div class="modal fade" id="joinModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background: #0f0f0f; border: 1px solid #222; color: #fff; border-radius: 15px;">
+            <div class="modal-header" style="border-bottom: 1px solid #222;">
+                <h5 class="modal-title" style="font-family: 'Bebas Neue'; font-size: 1.8rem; color: #ffc107;">ZAPISY SEZON III</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <p>Zapisy do Sezonu III Gdynia Football League zostały oficjalnie otwarte. Jeśli chcesz zgłosić swoją drużynę do rozgrywek, wypełnij formularz zgłoszeniowy.</p>
+                <div style="background: #111; padding: 15px; border-radius: 10px; border: 1px solid #222; margin-bottom: 20px;">
+                    <h4 style="font-size: 1.2rem; color: #44b1ff; margin-bottom: 5px;">⚽ ZAPISY SEZON III</h4>
+                    <p style="font-size: 0.85rem; color: #888; margin: 0;">Liczba miejsc jest ograniczona. Zgłoś swoją drużynę już teraz i dołącz do rozgrywek Gdynia Football League.</p>
+                </div>
+                <a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" rel="noopener" class="btn w-100" style="background: #ffc107; color: #000; font-family: 'Bebas Neue'; font-size: 1.2rem;">ZGŁOŚ SWOJĄ DRUŻYNĘ ↗</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/gfl/config.js"></script>
+<script src="assets/gfl/gfl.js"></script>
+<script src="assets/gfl/archiwum.js"></script>
+<script src="assets/gfl/historia.js"></script>
+</body>
+</html>

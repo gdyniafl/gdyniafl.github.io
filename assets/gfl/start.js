@@ -33,7 +33,7 @@
         hero.insertAdjacentHTML('afterbegin', `
             <video class="hero-bg-video" autoplay muted loop playsinline preload="auto"
                    poster="${HERO_VIDEO.poster}" aria-hidden="true"
-                   style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;transition:opacity 1s;">
+                   style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;transition:opacity 1s;filter:blur(1.5px);transform:scale(1.03);">
                 <source src="${HERO_VIDEO.mp4}" type="video/mp4">
             </video>
             <div class="hero-bg-shade" style="position:absolute;inset:0;z-index:1;pointer-events:none;

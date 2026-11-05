@@ -1,6 +1,8 @@
 /* Strona DRUŻYNY: profile z wyborem sezonu + historia drużyny ze wszystkich sezonów */
 (() => {
     const esc = GFL.esc;
+    document.head.insertAdjacentHTML('beforeend',
+        '<style>.team-btn.team-withdrawn{text-decoration:line-through;opacity:.45;filter:grayscale(1);}</style>');
     const season = GFL.selectedSeason();
     const data = {};          // data[league][TEAM] = statystyki wybranego sezonu
     let historyCache = null;
@@ -67,12 +69,12 @@
             let forma = (c[4] || '').split(',').map(s => s.trim()).filter(f => ['Z', 'R', 'P'].includes(f));
             if (!forma.length && calc[key]) forma = calc[key].forma.slice(-5);
             data[league][name] = {
-                basic, pos: t.pos, matches, gz, gs: t.gs, bil, w: t.w, r: t.r, p: t.p, pkt: t.pkt,
+                basic, withdrawn: !!t.withdrawn, pos: t.pos, matches, gz, gs: t.gs, bil, w: t.w, r: t.r, p: t.p, pkt: t.pkt,
                 cleanSheets: parseInt(c[2]) || (calc[key] || {}).cs || 0,
                 avg: (matches && gz !== null) ? (gz / matches).toFixed(2) : '–',
                 scorers, forma
             };
-            html += `<button type="button" class="team-btn" style="background-image:url('${esc(GFL.logo(name))}')" data-league="${league}" data-team="${esc(name)}">${esc(name)}</button>`;
+            html += `<button type="button" class="team-btn${t.withdrawn ? ' team-withdrawn' : ''}" title="${t.withdrawn ? 'Wycofana w trakcie sezonu' : ''}" style="background-image:url('${esc(GFL.logo(name))}')" data-league="${league}" data-team="${esc(name)}">${esc(name)}</button>`;
         });
         box.innerHTML = html || '<div class="text-center w-100 p-4" style="color:#666;">Brak danych dla tej ligi w wybranym sezonie.</div>';
     }
@@ -81,6 +83,10 @@
         `<div class="col-6 col-md-3"><div class="stat-box-profile"><div class="stat-label-profile">${label}</div><div class="stat-value-profile"${color ? ` style="color:${color}"` : ''}>${val}</div></div></div>`;
 
     function seasonView(d) {
+        if (d.withdrawn) {
+            return '<div class="text-center p-4"><div style="font-family:\'Bebas Neue\';font-size:1.6rem;color:#ff6b6b;">WYCOFANA W TRAKCIE SEZONU</div>' +
+                '<p style="color:#888;margin-top:10px;">Drużyna zrezygnowała z rozgrywek, a jej mecze zostały anulowane.</p></div>';
+        }
         const hasMatches = d.gs !== undefined;
         const onlyBil = d.gz === null;       // znany tylko bilans bramek
         const bil = d.bil;
@@ -134,7 +140,7 @@
     }
 
     async function historyView(team) {
-        const rows = (await loadHistory()).filter(r => r.name === GFL.norm(team) && r.m > 0);
+        const rows = (await loadHistory()).filter(r => r.name === GFL.norm(team) && (r.m > 0 || r.withdrawn));
         if (!rows.length) return '<p style="color:#666;">Brak danych historycznych dla tej drużyny.</p>';
         const partial = rows.some(r => r.gz === null);
         const sum = rows.reduce((a, r) => {
@@ -144,7 +150,9 @@
         }, { m: 0, w: 0, r: 0, p: 0, gz: 0, gs: 0, pkt: 0, bil: 0 });
         const sign = v => (v > 0 ? '+' : '') + v;
         const goals = r => r.gz === null ? 'bil. ' + sign(r.bil) : `${r.gz}:${r.gs}`;
-        const tr = (r, cls = '', g = goals(r)) => `<tr class="${cls}"><td>${esc(r.season)}</td><td>${esc(r.league)}</td><td>${r.pos ?? '–'}</td><td>${r.m}</td><td>${r.w}-${r.r}-${r.p}</td><td>${g}</td><td class="h-pkt">${r.pkt}</td></tr>`;
+        const tr = (r, cls = '', g = goals(r)) => r.withdrawn
+            ? `<tr style="opacity:.55;"><td>${esc(r.season)}</td><td>${esc(r.league)}</td><td colspan="5" style="color:#ff6b6b;font-size:.8rem;">WYCOFANA W TRAKCIE SEZONU</td></tr>`
+            : `<tr class="${cls}"><td>${esc(r.season)}</td><td>${esc(r.league)}</td><td>${r.pos ?? '–'}</td><td>${r.m}</td><td>${r.w}-${r.r}-${r.p}</td><td>${g}</td><td class="h-pkt">${r.pkt}</td></tr>`;
         return `<div class="history-wrap"><table class="history-table">
             <thead><tr><th>Sezon</th><th>Liga</th><th>Miejsce</th><th>M</th><th>W-R-P</th><th>Bramki</th><th>Pkt</th></tr></thead>
             <tbody>${rows.map(r => tr(r)).join('')}</tbody>

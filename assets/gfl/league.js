@@ -14,7 +14,11 @@
         const rows = await GFL.load(season, league, 'tabela');
         document.getElementById('table-data').innerHTML = rows.slice(1)
             .filter(c => c.length >= 8 && c[1])
-            .map(c => `<tr>
+            .map(c => c[10] === '1' ? `<tr style="opacity:.45;">
+                <td class="sticky-pos">${esc(c[0])}</td>
+                <td class="sticky-team" style="text-decoration:line-through;">${esc(c[1])}</td>
+                <td colspan="6" style="color:#ff6b6b;font-size:.8rem;letter-spacing:1px;">WYCOFANA W TRAKCIE SEZONU</td>
+            </tr>` : `<tr>
                 <td class="sticky-pos col-highlight">${esc(c[0])}</td>
                 <td class="sticky-team" style="font-weight:bold;">${esc(c[1])}</td>
                 <td class="col-stat">${esc(c[2])}</td><td class="col-stat">${esc(c[3])}</td><td class="col-stat">${esc(c[5])}</td><td class="col-stat">${esc(c[4])}</td>

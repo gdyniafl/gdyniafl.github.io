@@ -63,7 +63,7 @@ const GFL = (() => {
     /* Archiwum sezonów 0 i I (assets/gfl/archiwum.js) – ładowane tylko gdy potrzebne */
     let archivePromise = null;
     function loadArchive() {
-        if (window.GFL_ARCHIVE || typeof GFL_ARCHIVE !== 'undefined') return Promise.resolve();
+        if (typeof GFL_ARCHIVE !== 'undefined') return Promise.resolve();
         return archivePromise || (archivePromise = new Promise((ok, fail) => {
             const s = document.createElement('script');
             s.src = 'assets/gfl/archiwum.js';
@@ -80,9 +80,10 @@ const GFL = (() => {
             const t = ((GFL_ARCHIVE[season.static] || {})[league]);
             if (kind !== 'tabela' || !t) throw new Error('Brak danych: sezon ' + season.id + ' / ' + kind);
             const v = x => (x === null || x === undefined) ? '' : String(x);
-            return [['#', 'DRUŻYNA', 'M', 'W', 'P', 'R', 'GZ', 'GS', 'BIL', 'PKT']]
+            return [['#', 'DRUŻYNA', 'M', 'W', 'P', 'R', 'GZ', 'GS', 'BIL', 'PKT', 'WYC']]
                 .concat(t.map((r, i) => [i + 1, r[0], r[1], r[2], r[3], r[4], v(r[5]), v(r[6]),
-                    (r[8] !== undefined ? r[8] : r[5] - r[6]), r[7]].map(v)));
+                    (r[8] !== undefined && r[8] !== null ? r[8] : r[5] - r[6]), r[7],
+                    r[9] === 'wycofana' ? '1' : ''].map(v)));
         }
         const liveUrl = kind === 'strzelcy' ? C.LIVE.strzelcy : C.LIVE[league][kind];
         if (season.live) return parseCSV(await fetchText(liveUrl));
@@ -109,7 +110,8 @@ const GFL = (() => {
         return rows.slice(1).filter(c => c.length >= 10 && c[1]).map(c => ({
             pos: n(c[0]) || null, name: norm(c[1]), m: n(c[2]), w: n(c[3]), p: n(c[4]), r: n(c[5]),
             gz: c[6] === '' ? null : n(c[6]), gs: c[7] === '' ? null : n(c[7]),
-            bil: c[6] === '' ? n(c[8]) : n(c[6]) - n(c[7]), pkt: n(c[9])
+            bil: c[6] === '' ? n(c[8]) : n(c[6]) - n(c[7]), pkt: n(c[9]),
+            withdrawn: c[10] === '1'
         }));
     }
 
@@ -148,5 +150,19 @@ const GFL = (() => {
         }).join('');
     }
 
-    return { C, LEAGUES, LEAGUE_NAMES, isLive, seasons, selectedSeason, parseCSV, esc, norm, logo, load, fetchText, leaguesFor, tableStats, teamStatsFromMatches, renderSeasonSwitch };
+    /* Link "Historia ligi" dodawany automatycznie do menu i stopki na każdej stronie */
+    (function addHistoryLinks() {
+        const menu = document.querySelector('.navbar .dropdown-menu');
+        if (menu && !menu.querySelector('a[href="historia.html"]')) {
+            menu.insertAdjacentHTML('beforeend', '<li><hr class="dropdown-divider" style="border-color:#333;"></li><li><a class="dropdown-item" href="historia.html">Historia ligi</a></li>');
+        }
+        const foot = document.querySelector('.footer-links');
+        if (foot && !foot.querySelector('a[href="historia.html"]')) {
+            const reg = foot.querySelector('a[href="regulamin.html"]');
+            const li = '<li><a href="historia.html">Historia ligi</a></li>';
+            reg ? reg.parentElement.insertAdjacentHTML('beforebegin', li) : foot.insertAdjacentHTML('beforeend', li);
+        }
+    })();
+
+    return { C, LEAGUES, LEAGUE_NAMES, isLive, seasons, selectedSeason, parseCSV, esc, norm, logo, load, fetchText, leaguesFor, loadArchive, tableStats, teamStatsFromMatches, renderSeasonSwitch };
 })();

@@ -5,7 +5,10 @@
    Kolejność wierszy = miejsce w tabeli.
    Punkty przepisane z oficjalnych tabel (uwzględniają ew. kary/walkowery).
    Gdy znany jest tylko bilans bramek: bramki = null, a bilans jako 9. element.
+   Drużyny wycofane w trakcie sezonu: WYC('NAZWA') – pokazywane jako przekreślone.
    ===================================================================== */
+const WYC = name => [name, 0, 0, 0, 0, 0, 0, 0, null, 'wycofana'];
+
 const GFL_ARCHIVE = {
 
     '0': {
@@ -22,7 +25,8 @@ const GFL_ARCHIVE = {
             ['GKS CHYLONIA A',       13,  4,  5, 4,  84,  88, 13],
             ['KKS ALKUS WITOMINO',   13,  3, 10, 0,  80, 148,  9],
             ['J6K WITOMINO',         13,  3, 10, 0,  78, 157,  9],
-            ['WIELKIE POGÓRZE',      13,  2,  9, 2,  21,  94,  5]
+            ['WIELKIE POGÓRZE',      13,  2,  9, 2,  21,  94,  5],
+            WYC('MK OLDBOYS')
         ],
         challenge: [
             ['KURNIK TUCHOMEK',      13, 12,  1, 0,  83,  28, 36],
@@ -35,7 +39,10 @@ const GFL_ARCHIVE = {
             ['FC SIÓDEMKA7 A',       13,  6,  6, 1,  83,  93, 19],
             ['GKS CHYLONIA B',       13,  6,  4, 3,  99,  74, 18],
             ['WPW WICZLINO',         13,  5,  7, 1,  96,  91, 16],
-            ['PAWIANY FC',           13,  3,  8, 2,  30,  57,  8]
+            ['PAWIANY FC',           13,  3,  8, 2,  30,  57,  8],
+            WYC('TRAMPKARZE Z OBŁUŻA'),
+            WYC('FC GIGANTY'),
+            WYC('WKS MIŚKOLANDIA')
         ],
         aspire: [
             ['AC MISTRZOVIA GDYNIA A', 13, 13, 0, 0, 148,  37, 39],
@@ -49,7 +56,9 @@ const GFL_ARCHIVE = {
             ['FC SIÓDEMKA7 B',       13,  4,  7, 2,  70, 111, 14],
             ['LA MASSA',             13,  4,  9, 0, 124, 124, 12],
             ['FC COSINUS',           13,  4,  9, 0,  45,  82, 12],
-            ['POMERANIA GDYNIA',     13,  3,  9, 1,  67, 140,  8]
+            ['POMERANIA GDYNIA',     13,  3,  9, 1,  67, 140,  8],
+            WYC('FC PALECIARZE'),
+            WYC('RED THUNDER')
         ],
         /* Aggressive League – tylko sezon 0; na grafice był tylko bilans bramek */
         aggressive: [
@@ -62,7 +71,8 @@ const GFL_ARCHIVE = {
             ['P2G PUSTKI',              6, 2, 2, 1, null, null,  7,  -7],
             ['UKS AC MATERACE',         4, 2, 2, 0, null, null,  6,  -1],
             ['SUVIK GDYNIA',            3, 1, 2, 0, null, null,  3, -30],
-            ['FC SIÓDEMKA7 C',         10, 1, 9, 0, null, null,  3, -96]
+            ['FC SIÓDEMKA7 C',         10, 1, 9, 0, null, null,  3, -96],
+            WYC('FC FISZKI')
         ]
     },
 
@@ -123,3 +133,36 @@ const GFL_ARCHIVE = {
         ]
     }
 };
+
+/* =====================================================================
+   MISTRZOWIE I KRÓLOWIE STRZELCÓW (z Hall of Fame)
+   Po każdym sezonie dopisz nowy wpis NA GÓRZE.
+   ===================================================================== */
+const GFL_HONOURS = [
+    {
+        season: 'II',
+        champions: { elite: 'KURNIK KASZTELANKI', challenge: 'WPW WICZLINO', aspire: 'KURNIK KASZTELANKI B' },
+        kings: [
+            { league: 'elite',     name: 'PATRYK KLINKUSZ', team: 'ZKS ZAGÓRZAK RUMIA',  goals: 36 },
+            { league: 'challenge', name: 'ARTUR ELIASZ',    team: 'FC GOTENHOF',         goals: 55 },
+            { league: 'aspire',    name: 'ROMAN PANKIV',    team: 'INAZUMA ELEVEN 2025', goals: 41 }
+        ]
+    },
+    {
+        season: 'I',
+        champions: { elite: 'CZARODZIEJSKIE LISY', challenge: 'COCCOLINO FRESH', aspire: 'OGARNIJ SIĘ FC' },
+        kings: [
+            { league: 'elite',     name: 'ADAM WINNICKI',   team: 'KASZTELANKI',         goals: 41 },
+            { league: 'challenge', name: 'PATRYK KLINKUSZ', team: 'ZKS ZAGÓRZAK RUMIA',  goals: 39 },
+            { league: 'aspire',    name: 'ARTUR ELIASZ',    team: 'FC GOTENHOF',         goals: 48 }
+        ]
+    },
+    {
+        season: '0',
+        champions: { elite: 'KASZTELANKI', challenge: 'KURNIK TUCHOMEK', aspire: 'AC MISTRZOVIA GDYNIA A', aggressive: 'ZKS ZAGÓRZAK RUMIA' },
+        kings: [
+            { league: 'elite',     name: 'OLIVIER PLESKACZ', team: 'CZARODZIEJSKIE LISY', goals: 38 },
+            { league: 'challenge', name: 'MICHAŁ SKOCZEK',   team: 'WPW WICZLINO',        goals: 44 }
+        ]
+    }
+];

@@ -3,48 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <title>O Nas | Gdynia Football League</title>
+    <meta name="description" content="Poznaj Gdynia Football League – historia i idea amatorskiej ligi piłkarskiej w Gdyni.">
+    <meta property="og:title" content="Gdynia Football League">
+    <meta property="og:description" content="Poznaj Gdynia Football League – historia i idea amatorskiej ligi piłkarskiej w Gdyni.">
+    <meta property="og:image" content="https://gdyniafl.pl/assets/images/logo-gfl.png-160x160.png">
+    <meta property="og:type" content="website">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
   <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   
-  <style>
-    body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
+  <link rel="stylesheet" href="assets/gfl/gfl.css">
+    <style>
     h1, h2, h3, .nav-link, .dropdown-item { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
-
-    /* --- NAWIGACJA --- */
-    .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
-    .navbar-brand img { height: 4.5rem !important; }
     
     /* Podstawowy układ - bez !important dla kierunku, by mobile mógł to zmienić */
     .navbar-nav { display: flex !important; align-items: center; }
     .nav-item { list-style: none; margin-left: 20px; }
     .nav-link { color: #fff !important; font-size: 1.1rem !important; text-decoration: none !important; }
-    .nav-link:hover { color: #44b1ff !important; }
-
-    /* BIAŁY HAMBURGER */
-    .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
-    .navbar-toggler-icon { 
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-    }
-
-    /* DROPDOWN */
-    .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
-    .dropdown-item { color: #fff !important; font-family: 'Bebas Neue' !important; font-size: 1.1rem !important; }
-    .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
 
     /* --- TREŚĆ --- */
     .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
     .content-body { padding: 60px 0; line-height: 1.8; color: #ccc; font-size: 1.1rem; }
     .highlight-card { border-left: 4px solid #44b1ff; background: #0f0f0f; padding: 30px; border-radius: 0 15px 15px 0; margin: 40px 0; }
-    
-     .footer { 
-        background-color: #050505; 
-        border-top: 1px solid #222; 
-        padding: 60px 0 30px 0; 
-        color: #888; 
-        font-size: 0.9rem;
-    }
     
     .footer h5 {
         color: #fff;
@@ -55,57 +36,6 @@
     }
 
     .footer p { line-height: 1.6; }
-
-    .footer-links { list-style: none; padding: 0; }
-    .footer-links li { margin-bottom: 10px; }
-    .footer-links a { 
-        color: #888; 
-        text-decoration: none; 
-        transition: 0.3s; 
-        text-transform: uppercase;
-        font-size: 0.85rem;
-        letter-spacing: 1px;
-    }
-    .footer-links a:hover { color: #44b1ff; padding-left: 5px; }
-
-    .social-btn {
-        display: inline-block;
-        padding: 8px 16px;
-        margin-bottom: 10px;
-        border: 1px solid #333;
-        border-radius: 5px;
-        color: #fff;
-        text-decoration: none;
-        font-family: 'Bebas Neue';
-        font-size: 1rem;
-        transition: 0.3s;
-        width: 100%; /* Rozciągnij na szerokość kolumny na telefonie */
-        text-align: center;
-    }
-    .social-btn:hover { 
-        background: #44b1ff; 
-        border-color: #44b1ff; 
-        color: #000; 
-    }
-    /* --- FIX DLA PRZYCISKU KONTAKT --- */
-    /* Normalny stan przycisku kontaktu (niebieski obrys i tekst) */
-    .social-btn.btn-contact {
-        border-color: #44b1ff !important;
-        color: #44b1ff !important;
-    }
-
-    /* Stan po najechaniu (tło niebieskie, TEKST BIAŁY) */
-    .social-btn.btn-contact:hover {
-        background-color: #44b1ff !important;
-        color: #fff !important; /* To jest kluczowa zmiana */
-    }
-    .copyright-row {
-        margin-top: 40px;
-        padding-top: 20px;
-        border-top: 1px solid #111;
-        text-align: center;
-        font-size: 0.8rem;
-    }
     @media (max-width: 991px) {
         .navbar-nav { 
             flex-direction: column !important; 
@@ -151,6 +81,7 @@
                         Zapisy
                     </a>
                 </li>
+        </ul>
         </div>
     </div>
 </nav>
@@ -166,7 +97,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-9">
-                <p>Gdynia Football League (GFL) to amatorska liga piłkarska, która powstała z prostej potrzeby – chęci wyjścia z domu, wspólnego ruchu i poczucia sportowej rywalizacji. Wszystko zaczęło się od <strong>Sezonu 0</strong>, a dziś z dumą prowadzimy już <strong>Sezon II</strong>, łącząc setki pasjonatów piłki z całej Gdyni.</p>
+                <p>Gdynia Football League (GFL) to amatorska liga piłkarska, która powstała z prostej potrzeby – chęci wyjścia z domu, wspólnego ruchu i poczucia sportowej rywalizacji. Wszystko zaczęło się od <strong>Sezonu 0</strong>, a dziś mamy za sobą już dwa pełne sezony i szykujemy <strong>Sezon III</strong>, łącząc setki pasjonatów piłki z całej Gdyni.</p>
                 <div class="highlight-card">
                     <h2 class="h4" style="color: #44b1ff; margin-bottom: 15px;">MIEJSCE DLA KAŻDEGO</h2>
                     <p class="mb-0">Naszym celem jest stworzenie przestrzeni dla każdego. Niezależnie od tego, czy grałeś w klubach, czy po prostu lubisz pokopać piłkę z kumplami na osiedlu – GFL jest dla Ciebie. Stawiamy na integrację i radość z gry, dbając jednocześnie o profesjonalną oprawę statystyczną i organizacyjną.</p>
@@ -330,17 +261,24 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <p>Zgłoszenia do trwającego Sezonu II zostały zamknięte. Interesuje Cię gra w kolejnej edycji Gdynia Football League?</p>
-                <div style="background: #111; padding: 15px; border-radius: 10px; border: 1px solid #222; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.2rem; color: #44b1ff; margin-bottom: 5px;">LISTA OCZEKUJĄCYCH</h4>
-                    <p style="font-size: 0.85rem; color: #888; margin: 0;">Zostaw zgłoszenie na liście rezerwowej. Skontaktujemy się z Tobą mailowo przed startem oficjalnych zapisów!</p>
-                </div>
-                <a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" class="btn w-100" style="background: #ffc107; color: #000; font-family: 'Bebas Neue'; font-size: 1.2rem;">DOŁĄCZ DO LISTY REZERWOWEJ ↗</a>
+               <p>
+    Zapisy do Sezonu III Gdynia Football League zostały oficjalnie otwarte.
+    Jeśli chcesz zgłosić swoją drużynę do rozgrywek, wypełnij formularz zgłoszeniowy.
+</p>
+
+<div style="background: #111; padding: 15px; border-radius: 10px; border: 1px solid #222; margin-bottom: 20px;">
+    <h4 style="font-size: 1.2rem; color: #44b1ff; margin-bottom: 5px;">⚽ ZAPISY SEZON III</h4>
+    <p style="font-size: 0.85rem; color: #888; margin: 0;">
+        Liczba miejsc jest ograniczona. Zgłoś swoją drużynę już teraz i dołącz do rozgrywek Gdynia Football League.
+    </p>
+</div>
+                <a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" class="btn w-100" style="background: #ffc107; color: #000; font-family: 'Bebas Neue'; font-size: 1.2rem;">ZGŁOŚ SWOJĄ DRUŻYNĘ ↗</a>
             </div>
         </div>
     </div>
 </div>
-<script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/gfl/config.js"></script>
+<script src="assets/gfl/gfl.js"></script>
 </body>
 </html>

@@ -3,10 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Aktualności | Gdynia Football League</title>
+    <meta name="description" content="Aktualności Gdynia Football League – najnowsze informacje z ligi.">
+    <meta property="og:title" content="Gdynia Football League">
+    <meta property="og:description" content="Aktualności Gdynia Football League – najnowsze informacje z ligi.">
+    <meta property="og:image" content="https://gdyniafl.pl/assets/images/logo-gfl.png-160x160.png">
+    <meta property="og:type" content="website">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/gfl/gfl.css">
     <style>
     /* --- GLOBALNE & TYPOGRAFIA --- */
     html { overflow-y: scroll; }
@@ -16,17 +22,10 @@
         text-transform: uppercase; 
         letter-spacing: 1px; 
     }
-
-    /* --- NAWIGACJA --- */
-    .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
-    .navbar-brand img { height: 4.5rem !important; }
     .navbar-nav { display: flex !important; align-items: center !important; flex-direction: row !important; }
-    .nav-item { list-style: none !important; margin-left: 20px !important; }
     .nav-link { color: #fff !important; font-size: 1.1rem !important; text-decoration: none !important; transition: 0.3s; }
-    .nav-link:hover { color: #44b1ff !important; }
     .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; padding: 10px 0; }
     .dropdown-item { color: #fff !important; font-size: 1.1rem !important; padding: 10px 20px; transition: 0.2s; }
-    .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
 
     /* --- NAGŁÓWEK PODSTRONY --- */
     .page-header { padding: 160px 0 60px 0; text-align: center; background: radial-gradient(circle at center, #111 0%, #000 100%); border-bottom: 1px solid #222; }
@@ -83,26 +82,18 @@
     }
 
     .btn-details:hover { color: #fff; letter-spacing: 2px; }
-
-    /* --- STOPKA --- */
-    .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; }
     .footer h5 { color: #fff; font-size: 1.4rem; letter-spacing: 1px; margin-bottom: 25px; }
     .footer p { line-height: 1.6; color: #888 !important; }
-    .footer-links { list-style: none; padding: 0; }
     .footer-links li { margin-bottom: 12px; }
     .footer-links a { color: #888; text-decoration: none; transition: 0.3s; text-transform: uppercase; font-size: 0.85rem; }
-    .footer-links a:hover { color: #44b1ff; padding-left: 5px; }
     
     .social-btn { display: inline-block; padding: 10px 20px; margin-bottom: 12px; border: 1px solid #333; border-radius: 5px; color: #fff; text-decoration: none; font-family: 'Bebas Neue'; font-size: 1.1rem; transition: 0.3s; width: 100%; text-align: center; }
-    .social-btn:hover { background: #44b1ff; border-color: #44b1ff; color: #000; }
-    .social-btn.btn-contact { border-color: #44b1ff !important; color: #44b1ff !important; }
-    .social-btn.btn-contact:hover { background-color: #44b1ff !important; color: #fff !important; }
     
     .copyright-row { margin-top: 50px; padding-top: 25px; border-top: 1px solid #111; text-align: center; font-size: 0.8rem; }
 
     @media (max-width: 991px) {
         .navbar-nav { flex-direction: column !important; background: rgba(0,0,0,0.98); padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; display: none; border-bottom: 1px solid #222; }
-        .navbar-nav.show { display: flex !important; }
+        
         .nav-item { margin: 10px 0 !important; margin-left: 0 !important; }
         .page-header h1 { font-size: 3.5rem; }
     }
@@ -203,12 +194,18 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <p>Zgłoszenia do trwającego Sezonu II zostały zamknięte. Interesuje Cię gra w kolejnej edycji Gdynia Football League?</p>
-                <div style="background: #111; padding: 15px; border-radius: 10px; border: 1px solid #222; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.2rem; color: #44b1ff; margin-bottom: 5px;">LISTA OCZEKUJĄCYCH</h4>
-                    <p style="font-size: 0.85rem; color: #888; margin: 0;">Zostaw zgłoszenie na liście rezerwowej. Skontaktujemy się z Tobą mailowo przed startem oficjalnych zapisów!</p>
-                </div>
-                <a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" class="btn w-100" style="background: #ffc107; color: #000; font-family: 'Bebas Neue'; font-size: 1.2rem;">DOŁĄCZ DO LISTY REZERWOWEJ ↗</a>
+               <p>
+    Zapisy do Sezonu III Gdynia Football League zostały oficjalnie otwarte.
+    Jeśli chcesz zgłosić swoją drużynę do rozgrywek, wypełnij formularz zgłoszeniowy.
+</p>
+
+<div style="background: #111; padding: 15px; border-radius: 10px; border: 1px solid #222; margin-bottom: 20px;">
+    <h4 style="font-size: 1.2rem; color: #44b1ff; margin-bottom: 5px;">⚽ ZAPISY SEZON III</h4>
+    <p style="font-size: 0.85rem; color: #888; margin: 0;">
+        Liczba miejsc jest ograniczona. Zgłoś swoją drużynę już teraz i dołącz do rozgrywek Gdynia Football League.
+    </p>
+</div>
+                <a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" class="btn w-100" style="background: #ffc107; color: #000; font-family: 'Bebas Neue'; font-size: 1.2rem;">ZGŁOŚ SWOJĄ DRUŻYNĘ ↗</a>
             </div>
         </div>
     </div>
@@ -231,11 +228,12 @@
     </div>
 </div>
 
-<script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="assets/gfl/config.js"></script>
+<script src="assets/gfl/gfl.js"></script>
 
 <script>
-    const newsCsvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb/pub?gid=1840446675&single=true&output=csv';
+    const newsCsvUrl = GFL_CONFIG.LIVE.aktualnosci;
     
     window.newsData = [];
 

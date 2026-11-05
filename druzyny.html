@@ -3,25 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile Drużyn | Gdynia Football League</title>
+    <meta name="description" content="Drużyny Gdynia Football League – statystyki, strzelcy, forma i historia drużyn.">
+    <meta property="og:title" content="Gdynia Football League">
+    <meta property="og:description" content="Drużyny Gdynia Football League – statystyki, strzelcy, forma i historia drużyn.">
+    <meta property="og:image" content="https://gdyniafl.pl/assets/images/logo-gfl.png-160x160.png">
+    <meta property="og:type" content="website">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
     <link rel="shortcut icon" href="assets/images/logo-gfl.png-160x160.png" type="image/x-icon">
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/gfl/gfl.css">
     <style>
-        body { background-color: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; margin: 0; }
         h1, h2, h5, .nav-link, .table-title { font-family: 'Bebas Neue', sans-serif !important; text-transform: uppercase; letter-spacing: 1px; }
-
-        .navbar { background: rgba(10, 10, 10, 0.95) !important; border-bottom: 1px solid #222; padding: 10px 0 !important; }
-        .navbar-brand img { height: 4.5rem !important; }
         .navbar-nav { display: flex !important; align-items: center !important; }
-        .nav-item { list-style: none !important; margin-left: 20px !important; }
         .nav-link { color: #fff !important; font-size: 1.1rem !important; transition: 0.3s; }
-        .nav-link:hover { color: #44b1ff !important; }
-        .navbar-toggler { border-color: rgba(255,255,255,0.5) !important; padding: 5px !important; }
-        .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important; }
-        .dropdown-menu { background-color: #111 !important; border: 1px solid #333 !important; }
-        .dropdown-item { color: #fff !important; font-family: 'Bebas Neue' !important; font-size: 1.1rem !important; }
-        .dropdown-item:hover { background-color: #44b1ff !important; color: #000 !important; }
 
         .page-header { padding: 140px 0 40px 0; text-align: center; background: #0a0a0a; border-bottom: 1px solid #222; }
 
@@ -73,17 +68,10 @@
 
         .footer { background-color: #050505; border-top: 1px solid #222; padding: 60px 0 30px 0; color: #888; font-size: 0.9rem; margin-top: 40px; }
         .footer h5 { color: #fff; margin-bottom: 20px; }
-        .footer-links { list-style: none; padding: 0; }
-        .footer-links li { margin-bottom: 10px; }
-        .footer-links a { color: #888; text-decoration: none; transition: 0.3s; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
-        .footer-links a:hover { color: #44b1ff; padding-left: 5px; }
-        .social-btn { display: inline-block; padding: 8px 16px; margin-bottom: 10px; border: 1px solid #333; border-radius: 5px; color: #fff; text-decoration: none; font-family: 'Bebas Neue'; font-size: 1rem; transition: 0.3s; width: 100%; text-align: center; }
-        .social-btn:hover { background: #44b1ff; border-color: #44b1ff; color: #000; }
-        .copyright-row { margin-top: 40px; padding-top: 20px; border-top: 1px solid #111; text-align: center; font-size: 0.8rem; }
 
         @media (max-width: 991px) {
             .navbar-nav { flex-direction: column !important; background: #000; padding: 20px; width: 100%; position: absolute; top: 100%; left: 0; display: none; }
-            .navbar-nav.show { display: flex !important; }
+            
             .nav-item { margin: 10px 0 !important; margin-left: 0 !important; }
             .team-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
             .team-btn { font-size: 1.3rem; min-height: 100px; padding: 10px; border-radius: 8px; }
@@ -121,6 +109,7 @@
                         Zapisy
                     </a>
                 </li>
+        </ul>
         </div>
     </div>
 </nav>
@@ -128,7 +117,8 @@
 <section class="page-header">
     <div class="container">
         <h1 class="display-1">WYBIERZ DRUŻYNĘ</h1>
-        <p style="color: #44b1ff; letter-spacing: 2px;">KLIKNIJ, ABY ZOBACZYĆ SZCZEGÓŁOWE STATYSTYKI</p>
+        <p id="season-subtitle" style="color: #44b1ff; letter-spacing: 2px;">KLIKNIJ, ABY ZOBACZYĆ SZCZEGÓŁOWE STATYSTYKI</p>
+        <div class="season-switch" id="season-switch"></div>
     </div>
 </section>
 
@@ -213,216 +203,25 @@
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body text-center">
-                <p>Zgłoszenia do trwającego Sezonu II zostały zamknięte. Interesuje Cię gra w kolejnej edycji Gdynia Football League?</p>
-                <div style="background: #111; padding: 15px; border-radius: 10px; border: 1px solid #222; margin-bottom: 20px;">
-                    <h4 style="font-size: 1.2rem; color: #44b1ff; margin-bottom: 5px;">LISTA OCZEKUJĄCYCH</h4>
-                    <p style="font-size: 0.85rem; color: #888; margin: 0;">Zostaw zgłoszenie na liście rezerwowej. Skontaktujemy się z Tobą mailowo przed startem oficjalnych zapisów!</p>
-                </div>
-                <a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" class="btn w-100" style="background: #ffc107; color: #000; font-family: 'Bebas Neue'; font-size: 1.2rem;">DOŁĄCZ DO LISTY REZERWOWEJ ↗</a>
+               <p>
+    Zapisy do Sezonu III Gdynia Football League zostały oficjalnie otwarte.
+    Jeśli chcesz zgłosić swoją drużynę do rozgrywek, wypełnij formularz zgłoszeniowy.
+</p>
+
+<div style="background: #111; padding: 15px; border-radius: 10px; border: 1px solid #222; margin-bottom: 20px;">
+    <h4 style="font-size: 1.2rem; color: #44b1ff; margin-bottom: 5px;">⚽ ZAPISY SEZON III</h4>
+    <p style="font-size: 0.85rem; color: #888; margin: 0;">
+        Liczba miejsc jest ograniczona. Zgłoś swoją drużynę już teraz i dołącz do rozgrywek Gdynia Football League.
+    </p>
+</div>
+                <a href="https://forms.gle/GBsXaMQieoRt8oqYA" target="_blank" class="btn w-100" style="background: #ffc107; color: #000; font-family: 'Bebas Neue'; font-size: 1.2rem;">ZGŁOŚ SWOJĄ DRUŻYNĘ ↗</a>
             </div>
         </div>
     </div>
 </div>
-<script src="assets/web/assets/jquery/jquery.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script>
-    const urlElite = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=2106948188&single=true&output=csv';
-    const urlChallenge = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3/pub?gid=239846389&single=true&output=csv';
-    const urlAspire = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf/pub?gid=1718488559&single=true&output=csv';
-
-    let appData = { 'elite': {}, 'challenge': {}, 'aspire': {} };
-
-    const teamLogos = {
-                "AC MISTRZOVIA GDYNIA A": "assets/images/logotypy/acmistrzovia.png",
-        "AC MISTRZOVIA GDYNIA B": "assets/images/logotypy/acmistrzovia.png",
-        "CISOVIA FC": "assets/images/logotypy/cisoviafc.png",
-        "COCCOLINO FRESH": "assets/images/logotypy/coccolinofresh.png",
-        "CWDKS MIERNIKI": "assets/images/logotypy/cwdksmierniki.png",
-        "FC BARANKI": "assets/images/logotypy/fcbaranki.png",
-        "FC DĘBOGÓRZE": "assets/images/logotypy/fcdebogorze.png",
-        "FC GOTENHOF": "assets/images/logotypy/fcgotenhof.png",
-        "FC KARWINY": "assets/images/logotypy/fckarwiny.png",
-        "FC KOKONUT": "assets/images/logotypy/fckokonut.png",
-        "FC ŻUBRY": "assets/images/logotypy/fczubry.png",
-        "GKS CHYLONIA": "assets/images/logotypy/gkschylonia.png",
-        "INAZUMA ELEVEN 2025": "assets/images/logotypy/inazuma.png",
-        "J6K WITOMINO": "assets/images/logotypy/j6kwitomino.png",
-        "JORDANIA SOPOT III": "assets/images/logotypy/jordaniasopot.png",
-        "KKS ORŁY": "assets/images/logotypy/kksorly.png",
-        "KURNIK KASZTELANKI": "assets/images/logotypy/kurnikkasztelanki.png",
-        "KURNIK KASZTELANKI B": "assets/images/logotypy/kurnikkasztelanki.png",
-        "LA MASSA": "assets/images/logotypy/lamassa.png",
-        "FC MARION GDYNIA": "assets/images/logotypy/mariongdynia.png",
-        "MORDA BUŁA": "assets/images/logotypy/mordabula.png",
-        "OGARNIJ SIĘ FC": "assets/images/logotypy/ogarnijsiefc.png",
-        "PAWIANY FC": "assets/images/logotypy/pawianyfc.png",
-        "Q-STOSZ": "assets/images/logotypy/qstosz.png",
-        "FC SIÓDEMKA7 A": "assets/images/logotypy/siodemka7a.png",
-        "FC SIÓDEMKA7 B": "assets/images/logotypy/siodemka7b.png",
-        "FC SIÓDEMKA7 C": "assets/images/logotypy/siodemka7c.png",
-        "SPELUNO FC": "assets/images/logotypy/spelunofc.png",
-        "SUVIK GDYNIA": "assets/images/logotypy/suvikgdynia.png",
-        "TURBOSPRĘŻARKA C.F": "assets/images/logotypy/turbosprezarkacf.png",
-        "UKS AC MATERACE": "assets/images/logotypy/uksacmaterace.png",
-        "WPW WICZLINO": "assets/images/logotypy/wpwwiczlino.png",
-        "ZKS ZAGÓRZAK RUMIA": "assets/images/logotypy/zksrumia.png",
-        "CZARODZIEJSKIE LISY": "assets/images/logotypy/czarodziejskielisy.png",
-        "ANTD FC": "assets/images/logotypy/antd.png"
-    };
-    
-    const defaultLogo = "assets/images/logo-gfl.png-160x160.png";
-
-    function parseCSVRow(str) {
-        let arr = [], quote = false, col = '';
-        for (let i = 0; i < str.length; i++) {
-            let cc = str[i], nc = str[i+1];
-            if (cc === '"' && quote && nc === '"') { col += cc; ++i; continue; }
-            if (cc === '"') { quote = !quote; continue; }
-            if (cc === ',' && !quote) { arr.push(col); col = ''; continue; }
-            col += cc;
-        }
-        arr.push(col);
-        return arr;
-    }
-
-    async function loadLeagueStats(url, containerId, leagueKey) {
-        try {
-            const res = await fetch(url);
-            const text = await res.text();
-            const rows = text.split('\n').map(r => r.trim()).filter(r => r);
-            
-            let html = '';
-
-            for (let i = 1; i < rows.length; i++) {
-                const cols = parseCSVRow(rows[i]);
-                if (cols.length < 5) continue; // Wymagamy 5 kolumn z formą!
-                
-                let teamName = cols[0];
-                let matches = parseInt(cols[1]) || 0;
-                let cleanSheets = parseInt(cols[2]) || 0;
-                let rawScorers = cols[3];
-                let formString = cols[4] || ""; // np "Z,P,R,Z,Z"
-                
-                let totalGoals = 0;
-                let scorersList = [];
-
-                if (rawScorers && rawScorers !== "Brak bramek") {
-                    let scorersArray = rawScorers.split(', ');
-                    scorersArray.forEach(s => {
-                        let match = s.match(/(.+)\((\d+)\)/);
-                        if (match) {
-                            let name = match[1].trim();
-                            let goals = parseInt(match[2]);
-                            totalGoals += goals;
-                            scorersList.push({ name: name, goals: goals });
-                        }
-                    });
-                }
-
-                let avg = matches > 0 ? (totalGoals / matches).toFixed(2) : "0.00";
-
-                appData[leagueKey][teamName] = {
-                    matches: matches,
-                    cleanSheets: cleanSheets,
-                    totalGoals: totalGoals,
-                    avg: avg,
-                    scorers: scorersList,
-                    forma: formString.split(',')
-                };
-
-                let currentLogo = teamLogos[teamName] || defaultLogo;
-
-                html += `<div class="team-btn" style="background-image: url('${currentLogo}');" onclick="openTeamModal('${leagueKey}', '${teamName.replace(/'/g, "\\'")}')">${teamName}</div>`;
-            }
-
-            document.getElementById(containerId).innerHTML = html;
-
-        } catch (e) {
-            console.error(e);
-            document.getElementById(containerId).innerHTML = `<div class="text-center w-100 p-4 text-danger">Błąd pobierania danych.</div>`;
-        }
-    }
-
-    function openTeamModal(leagueKey, teamName) {
-        let data = appData[leagueKey][teamName];
-        if (!data) return;
-
-        document.getElementById('modalTeamName').innerText = teamName;
-
-        // Renderowanie odznak formy
-        let formBadgesHtml = '';
-        if (data.forma[0] !== "" && data.forma[0] !== "Brak") {
-            data.forma.forEach(f => {
-                let fClass = f === 'Z' ? 'f-Z' : (f === 'P' ? 'f-P' : 'f-R');
-                formBadgesHtml += `<span class="form-badge ${fClass}">${f}</span>`;
-            });
-        } else {
-            formBadgesHtml = `<span style="color: #666; font-size: 0.85rem;">Brak danych</span>`;
-        }
-
-        let bodyHtml = `
-            <div class="row g-3 mb-2">
-                <div class="col-6 col-md-3">
-                    <div class="stat-box-profile">
-                        <div class="stat-label-profile">Rozegrane</div>
-                        <div class="stat-value-profile">${data.matches}</div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="stat-box-profile">
-                        <div class="stat-label-profile">Bramki z gry</div>
-                        <div class="stat-value-profile" style="color:#44b1ff;">${data.totalGoals}</div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="stat-box-profile">
-                        <div class="stat-label-profile">Gole / Mecz</div>
-                        <div class="stat-value-profile">${data.avg}</div>
-                    </div>
-                </div>
-                <div class="col-6 col-md-3">
-                    <div class="stat-box-profile">
-                        <div class="stat-label-profile">Czyste Konta</div>
-                        <div class="stat-value-profile">${data.cleanSheets}</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-section">
-                <p class="form-label">FORMA (OSTATNIE 5 MECZÓW):</p>
-                <div class="form-container">
-                    ${formBadgesHtml}
-                </div>
-            </div>
-
-            <h6 class="scorers-title">OFICJALNI STRZELCY ZESPOŁU</h6>
-        `;
-
-        if (data.scorers.length > 0) {
-            bodyHtml += `<table class="scorers-table"><tbody>`;
-            data.scorers.forEach((s, idx) => {
-                bodyHtml += `
-                <tr>
-                    <td class="s-num">${idx + 1}.</td>
-                    <td class="s-name">${s.name}</td>
-                    <td class="s-goals">${s.goals} ⚽</td>
-                </tr>`;
-            });
-            bodyHtml += `</tbody></table>`;
-        } else {
-            bodyHtml += `<div class="text-muted mt-3" style="font-size:0.9rem;">Brak zarejestrowanych strzelców w systemie.</div>`;
-        }
-
-        document.getElementById('modalTeamBody').innerHTML = bodyHtml;
-        var myModal = new bootstrap.Modal(document.getElementById('teamModal'));
-        myModal.show();
-    }
-
-    loadLeagueStats(urlElite, 'elite-data', 'elite');
-    loadLeagueStats(urlChallenge, 'challenge-data', 'challenge');
-    loadLeagueStats(urlAspire, 'aspire-data', 'aspire');
-
-    $('.navbar-toggler').on('click', function() { $('#gflNav').toggleClass('show'); });
-</script>
+<script src="assets/gfl/config.js"></script>
+<script src="assets/gfl/gfl.js"></script>
+<script src="assets/gfl/druzyny.js"></script>
 </body>
 </html>

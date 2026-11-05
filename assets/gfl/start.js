@@ -1,12 +1,51 @@
 /* =====================================================================
    GFL – dodatki strony głównej
-   1) Hall of Fame budowany automatycznie z GFL_HONOURS (assets/gfl/archiwum.js)
-   2) Odliczanie do startu sezonu (SEASON_START z config.js)
+   1) Wideo w tle sekcji powitalnej (assets/video/hero.mp4)
+   2) Hall of Fame budowany automatycznie z GFL_HONOURS (assets/gfl/archiwum.js)
+   3) Odliczanie do startu sezonu (SEASON_START z config.js)
    Wymaga: config.js, gfl.js i archiwum.js załadowanych wcześniej.
    ===================================================================== */
 (() => {
     const esc = GFL.esc;
     const LN = GFL.LEAGUE_NAMES;
+
+    /* ---------- 1. WIDEO W TLE ---------- */
+    const HERO_VIDEO = {
+        mp4:    'assets/video/hero.mp4',          // nagranie z drona (bez dźwięku)
+        poster: 'assets/video/hero-poster.jpg',   // kadr z filmu – tło zanim wideo się wczyta
+        darken: 0.55                              // przyciemnienie 0–1 (żeby napis był czytelny)
+    };
+    (function heroVideo() {
+        const hero = document.querySelector('.hero-section');
+        if (!hero) { console.warn('[GFL] brak .hero-section'); return; }
+
+        // kadr z filmu jako tło (zastępuje brakujący background-gfl.jpg)
+        hero.style.backgroundImage = `linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.7)), url('${HERO_VIDEO.poster}')`;
+        hero.style.backgroundSize = 'cover';
+        hero.style.backgroundPosition = 'center';
+
+        // tryb oszczędzania danych – zostaje sam kadr
+        if (navigator.connection && navigator.connection.saveData) { console.info('[GFL] saveData – bez wideo'); return; }
+        console.info('[GFL] wideo w tle:', HERO_VIDEO.mp4);
+
+        hero.style.position = 'relative';
+        hero.style.overflow = 'hidden';
+        hero.insertAdjacentHTML('afterbegin', `
+            <video class="hero-bg-video" autoplay muted loop playsinline preload="auto"
+                   poster="${HERO_VIDEO.poster}" aria-hidden="true"
+                   style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;transition:opacity 1s;">
+                <source src="${HERO_VIDEO.mp4}" type="video/mp4">
+            </video>
+            <div class="hero-bg-shade" style="position:absolute;inset:0;z-index:1;pointer-events:none;
+                        background:linear-gradient(rgba(0,0,0,${HERO_VIDEO.darken}), rgba(0,0,0,${Math.min(1, HERO_VIDEO.darken + 0.25)}));"></div>`);
+        [...hero.children].forEach(c => {
+            if (!c.matches('.hero-bg-video, .hero-bg-shade')) { c.style.position = 'relative'; c.style.zIndex = 2; }
+        });
+        const v = hero.querySelector('.hero-bg-video');
+        v.muted = true;   // wymagane do autoodtwarzania w Chrome/Safari
+        v.addEventListener('canplay', () => { v.style.opacity = 1; v.play().catch(e => console.warn('[GFL] autoplay zablokowany', e)); }, { once: true });
+        v.addEventListener('error', () => { console.warn('[GFL] nie można wczytać', HERO_VIDEO.mp4); v.remove(); }, true);
+    })();
 
     function golWord(n) {
         const d = n % 10, dd = n % 100;
@@ -14,9 +53,9 @@
         return (d >= 2 && d <= 4 && !(dd >= 12 && dd <= 14)) ? 'GOLE' : 'GOLI';
     }
 
-    /* ---------- 1. HALL OF FAME ---------- */
+    /* ---------- 2. HALL OF FAME ---------- */
     (function buildHallOfFame() {
-        if (typeof GFL_HONOURS === 'undefined' || !GFL_HONOURS.length) return;   // brak danych -> zostaje stary HTML
+        if (typeof GFL_HONOURS === 'undefined' || !GFL_HONOURS.length) return;
         const box = document.querySelector('.hof-section .container');
         if (!box) return;
         const label = id => (GFL.C.SEASONS.find(s => s.id === id) || {}).label || 'SEZON ' + id;
@@ -60,7 +99,7 @@
         });
     })();
 
-    /* ---------- 2. ODLICZANIE DO STARTU SEZONU ---------- */
+    /* ---------- 3. ODLICZANIE DO STARTU SEZONU ---------- */
     (function countdown() {
         if (GFL.isLive()) return;
         const target = document.querySelector('#off-season h2');
@@ -76,7 +115,7 @@
 
         function tick() {
             const ms = start - new Date();
-            if (ms <= 0) { location.reload(); return; }   // start sezonu -> strona sama przełączy się na kolejkę
+            if (ms <= 0) { location.reload(); return; }
             const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60;
             el.innerHTML = cell(d, 'DNI') + cell(h, 'GODZIN') + cell(String(m).padStart(2, '0'), 'MINUT');
         }

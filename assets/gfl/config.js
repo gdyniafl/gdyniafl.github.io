@@ -1,10 +1,17 @@
 /* =====================================================================
    GFL – KONFIGURACJA CAŁEJ STRONY (jedyne miejsce do edycji co sezon)
    ===================================================================== */
+
 /* Pomocnik: buduje link CSV do konkretnej zakładki opublikowanego arkusza */
 function sheet(docId, gid) {
     return 'https://docs.google.com/spreadsheets/d/e/' + docId + '/pub?gid=' + gid + '&single=true&output=csv';
 }
+
+/* ID opublikowanych arkuszy */
+const DOC_ELITE     = '2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r';
+const DOC_CHALLENGE = '2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3';
+const DOC_ASPIRE    = '2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf';
+const DOC_STATY     = '2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb';
 
 const GFL_CONFIG = {
 
@@ -20,50 +27,47 @@ const GFL_CONFIG = {
         { id: 'III', label: 'SEZON III', live: true },
         {
             id: 'II', label: 'SEZON II',
-            /* Archiwum = zakładki "... SEZON II" w tych samych arkuszach.
-               Wpisz numer gid każdej zakładki (widać go w pasku adresu po kliknięciu zakładki: ...#gid=123456). */
             sheets: {
                 elite: {
-                    mecze:   sheet('2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r', 'GID_MECZE_SEZON_II'),
-                    tabela:  sheet('2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r', 'GID_WWW_SEZON_II'),
-                    druzyny: sheet('2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r', 'GID_STATYSTYKI_DRUZYN_SEZON_II')
+                    mecze:   sheet(DOC_ELITE, '1249946220'),      // MECZE SEZON II
+                    tabela:  sheet(DOC_ELITE, '995592118'),       // WWW SEZON II
+                    druzyny: sheet(DOC_ELITE, '1237538842')       // STATYSTYKI_DRUZYN SEZON II
                 },
                 challenge: {
-                    mecze:   sheet('2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3', 'GID_MECZE_SEZON_II'),
-                    tabela:  sheet('2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3', 'GID_WWW_SEZON_II'),
-                    druzyny: sheet('2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3', 'GID_STATYSTYKI_DRUZYN_SEZON_II')
+                    mecze:   sheet(DOC_CHALLENGE, '226118011'),
+                    tabela:  sheet(DOC_CHALLENGE, '1801399538'),
+                    druzyny: sheet(DOC_CHALLENGE, '1889062777')
                 },
                 aspire: {
-                    mecze:   sheet('2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf', 'GID_MECZE_SEZON_II'),
-                    tabela:  sheet('2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf', 'GID_WWW_SEZON_II'),
-                    druzyny: sheet('2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf', 'GID_STATYSTYKI_DRUZYN_SEZON_II')
+                    mecze:   sheet(DOC_ASPIRE, '599934731'),
+                    tabela:  sheet(DOC_ASPIRE, '1607044438'),
+                    druzyny: sheet(DOC_ASPIRE, '432935784')
                 },
-                strzelcy: sheet('2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb', 'GID_STRZELCY_SEZON_II')
+                strzelcy: sheet(DOC_STATY, '419762549')        // RANKING_STRZELCOW SEZON II
             }
         }
-        // { id: 'I', label: 'SEZON I', archive: 'archiwum/s1/' }   // odkomentuj, jeśli wgrasz pliki z sezonu I
     ],
 
     /* Linki do opublikowanych arkuszy (CSV) bieżącego sezonu */
     LIVE: {
         elite: {
-            mecze:   'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=682329859&single=true&output=csv',
-            tabela:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=1101831234&single=true&output=csv',
-            druzyny: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r/pub?gid=2106948188&single=true&output=csv'
+            mecze:   sheet(DOC_ELITE, '682329859'),
+            tabela:  sheet(DOC_ELITE, '1101831234'),
+            druzyny: sheet(DOC_ELITE, '2106948188')
         },
         challenge: {
-            mecze:   'https://docs.google.com/spreadsheets/d/e/2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3/pub?gid=682329859&single=true&output=csv',
-            tabela:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3/pub?gid=1101831234&single=true&output=csv',
-            druzyny: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3/pub?gid=239846389&single=true&output=csv'
+            mecze:   sheet(DOC_CHALLENGE, '682329859'),
+            tabela:  sheet(DOC_CHALLENGE, '1101831234'),
+            druzyny: sheet(DOC_CHALLENGE, '239846389')
         },
         aspire: {
-            mecze:   'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf/pub?gid=682329859&single=true&output=csv',
-            tabela:  'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf/pub?gid=1101831234&single=true&output=csv',
-            druzyny: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf/pub?gid=1718488559&single=true&output=csv'
+            mecze:   sheet(DOC_ASPIRE, '682329859'),
+            tabela:  sheet(DOC_ASPIRE, '1101831234'),
+            druzyny: sheet(DOC_ASPIRE, '1718488559')
         },
-        strzelcy: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb/pub?gid=1372879295&single=true&output=csv',
-        boiska:   'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb/pub?gid=1111531683&single=true&output=csv',
-        aktualnosci: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb/pub?gid=1840446675&single=true&output=csv'
+        strzelcy:    sheet(DOC_STATY, '1372879295'),
+        boiska:      sheet(DOC_STATY, '1111531683'),
+        aktualnosci: sheet(DOC_STATY, '1840446675')
     },
 
     /* Zmiany nazw drużyn między sezonami: 'STARA NAZWA': 'AKTUALNA NAZWA'.

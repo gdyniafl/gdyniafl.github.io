@@ -1,6 +1,11 @@
 /* =====================================================================
    GFL – KONFIGURACJA CAŁEJ STRONY (jedyne miejsce do edycji co sezon)
    ===================================================================== */
+/* Pomocnik: buduje link CSV do konkretnej zakładki opublikowanego arkusza */
+function sheet(docId, gid) {
+    return 'https://docs.google.com/spreadsheets/d/e/' + docId + '/pub?gid=' + gid + '&single=true&output=csv';
+}
+
 const GFL_CONFIG = {
 
     /* Data startu bieżącego sezonu (RRRR-MM-DD).
@@ -10,10 +15,32 @@ const GFL_CONFIG = {
 
     /* Lista sezonów – NAJNOWSZY NA GÓRZE.
        live: true  -> dane z arkuszy Google (sekcja LIVE niżej)
-       archive     -> folder z zamrożonymi plikami CSV (patrz archiwum/README.txt) */
+       sheets      -> archiwum w zakładkach Arkuszy Google (np. "MECZE SEZON II") */
     SEASONS: [
         { id: 'III', label: 'SEZON III', live: true },
-        { id: 'II',  label: 'SEZON II',  archive: 'archiwum/s2/' }
+        {
+            id: 'II', label: 'SEZON II',
+            /* Archiwum = zakładki "... SEZON II" w tych samych arkuszach.
+               Wpisz numer gid każdej zakładki (widać go w pasku adresu po kliknięciu zakładki: ...#gid=123456). */
+            sheets: {
+                elite: {
+                    mecze:   sheet('2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r', 'GID_MECZE_SEZON_II'),
+                    tabela:  sheet('2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r', 'GID_WWW_SEZON_II'),
+                    druzyny: sheet('2PACX-1vS6zRSvbBupxKJZ47n_bC8xS8YeykvK_RDFsLh1_bH86EdlJpiJqHi2UK-CllT9igY0bo82398qTX8r', 'GID_STATYSTYKI_DRUZYN_SEZON_II')
+                },
+                challenge: {
+                    mecze:   sheet('2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3', 'GID_MECZE_SEZON_II'),
+                    tabela:  sheet('2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3', 'GID_WWW_SEZON_II'),
+                    druzyny: sheet('2PACX-1vTA1VRwb5jvsdnc11hxIvTd1rrKLcEhdtjtWTleu7zGUNjFvwtRv4IRP_DCg8-b_q3hkobSid_TkIT3', 'GID_STATYSTYKI_DRUZYN_SEZON_II')
+                },
+                aspire: {
+                    mecze:   sheet('2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf', 'GID_MECZE_SEZON_II'),
+                    tabela:  sheet('2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf', 'GID_WWW_SEZON_II'),
+                    druzyny: sheet('2PACX-1vTXSEavxHPPZc6MvTMg2VIyMyIRMH8UIP2ABPkstooK253hHbW2r8JgK1O-YNHCKFW8_soBcofdVKrf', 'GID_STATYSTYKI_DRUZYN_SEZON_II')
+                },
+                strzelcy: sheet('2PACX-1vSbwIWnrDjc6J9nmHW8vGhMuZqSSr1X0wKPZfQ9UgZ77AM-SU0MW41ajTeEU0_uq9iX1Meg3i3s5Wrb', 'GID_STRZELCY_SEZON_II')
+            }
+        }
         // { id: 'I', label: 'SEZON I', archive: 'archiwum/s1/' }   // odkomentuj, jeśli wgrasz pliki z sezonu I
     ],
 

@@ -65,6 +65,12 @@ const GFL = (() => {
     async function load(season, league, kind) {
         const liveUrl = kind === 'strzelcy' ? C.LIVE.strzelcy : C.LIVE[league][kind];
         if (season.live) return parseCSV(await fetchText(liveUrl));
+        /* Archiwum w zakładkach Arkuszy Google (np. "MECZE SEZON II") */
+        if (season.sheets) {
+            const url = kind === 'strzelcy' ? season.sheets.strzelcy : (season.sheets[league] || {})[kind];
+            if (!url) throw new Error('Brak linku w config.js: sezon ' + season.id + ' / ' + league + ' / ' + kind);
+            return parseCSV(await fetchText(url));
+        }
         const file = season.archive + (kind === 'strzelcy' ? 'strzelcy.csv' : `${league}_${kind}.csv`);
         try {
             return parseCSV(await fetchText(file));
